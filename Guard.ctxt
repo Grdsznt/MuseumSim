@@ -4,6 +4,10 @@ comment0.text=\r\n\ The\ Guard\ will\ have\ a\ detector.\ If\ it\ detects\ any\ 
 comment1.params=
 comment1.target=Guard()
 comment2.params=
+Edwin
+comment2.target=void\ detectRobbers()
+comment2.text=\r\n\ \r\n
+numComments=3
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ loadAnimationImages()
@@ -17,3 +21,4 @@ comment6.params=
 comment6.target=void\ detectRobbers()
 comment6.text=\r\n\ \r\n
 numComments=7
+main
