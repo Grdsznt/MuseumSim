@@ -1,0 +1,8 @@
+#BlueJ class context
+comment0.target=Detector
+comment0.text=\n\ This\ will\ be\ used\ on\ objects\ to\ detect\ if\ they\ are\ touching\ a\ certain\ type\ of\ class.\n\ \n\ @author\ Jean\n\ @version\ Apr\ 2024\n
+comment1.params=
+comment1.target=Detector()
+comment2.params=
+comment2.target=void\ act()
+numComments=3
