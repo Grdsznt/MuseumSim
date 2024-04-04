@@ -22,5 +22,4 @@ public class StartWorld extends World
         super(600, 400, 1); 
         b = new Button();
     }
-     
 }
