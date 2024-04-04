@@ -3,6 +3,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * The Guard will have a detector. If it detects any robber by its detector, it will start to catch the robber.
  * 
+ * Known bugs:
+ * - move method is not working for both int & double
+ * - loadAnimationImages();//!!!!!!!Later put into world
+ * - direction
+ * 
  * @author Jean
  * @version Apr 2024
  */
@@ -27,16 +32,24 @@ public class Guard extends People
     private Detector detector;
     
     public Guard(){
+        
+        loadAnimationImages();//!!!!!!!Later put into world
+        
+        //Get its own detector
         detector = new Detector(this);
     }
     
     public void act()
     {
-        aniCount++;
+        //If it is time to animate, animate it
+        if(aniCount%aniGap==0){
+            animate();
+        }
         
+        //Set its location based on its direction of facing
         switch(direction){
             case 1: {
-                move(speed);
+                setLocation(getX()+speed, getY());
                 break;
             }
             case 2: {
@@ -44,7 +57,7 @@ public class Guard extends People
                 break;
             }
             case 3: {
-                move(-speed);
+                setLocation(getX()-speed, getY());
                 break;
             }
             case 4: {
@@ -56,10 +69,7 @@ public class Guard extends People
         //Reset frame if goes above
         frame%=6;
         
-        if(aniCount%aniGap==0){
-            animate();
-        }
-        
+        aniCount++;
     }
     
     /**
@@ -67,10 +77,10 @@ public class Guard extends People
      */
     public void loadAnimationImages(){
         for(int i=0; i<6; i++){
-            right[i] = new GreenfootImage("right"+i);
-            up[i] = new GreenfootImage("up"+i);
-            left[i] = new GreenfootImage("left"+i);
-            down[i] = new GreenfootImage("down"+i);
+            right[i] = new GreenfootImage("Guard/right"+i+".png");
+            up[i] = new GreenfootImage("Guard/up"+i+".png");
+            left[i] = new GreenfootImage("Guard/left"+i+".png");
+            down[i] = new GreenfootImage("Guard/down"+i+".png");
         }
     }
     
@@ -80,19 +90,19 @@ public class Guard extends People
     public void animate(){
         switch(direction){
             case 1: {
-                setImage(right[frame]);
+                setImage(right[frame++]);
                 break;
             }
             case 2: {
-                setImage(up[frame]);
+                setImage(up[frame++]);
                 break;
             }
             case 3: {
-                setImage(left[frame]);
+                setImage(left[frame++]);
                 break;
             }
             case 4: {
-                setImage(down[frame]);
+                setImage(down[frame++]);
                 break;
             }
         }
