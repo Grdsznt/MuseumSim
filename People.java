@@ -8,7 +8,7 @@ import java.util.Map;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class People extends Actor
+public class People extends SuperSmoothMover
 {
     protected double speed;
     protected double maxSpeed;

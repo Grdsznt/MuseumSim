@@ -3,9 +3,14 @@ comment0.target=People
 comment0.text=\r\n\ Write\ a\ description\ of\ class\ People\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
 comment1.params=
 comment1.target=void\ act()
+<<<<<<< HEAD
 comment2.params=act\ dis
 comment2.target=greenfoot.Actor\ targetActor(greenfoot.Actor,\ int)
 comment3.params=act
 comment3.target=double\ distanceFrom(greenfoot.Actor)
 comment3.text=\r\n\ \ Method\ used\ to\ find\ the\ distance\ between\ two\ actors\ \r\n
 numComments=4
+=======
+comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ People\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+numComments=2
+>>>>>>> main

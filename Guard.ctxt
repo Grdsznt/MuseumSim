@@ -1,9 +1,24 @@
 #BlueJ class context
 comment0.target=Guard
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Guard\ here.\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
+comment0.text=\r\n\ The\ Guard\ will\ have\ a\ detector.\ If\ it\ detects\ any\ robber\ by\ its\ detector,\ it\ will\ start\ to\ catch\ the\ robber.\r\n\ \r\n\ Known\ bugs\:\r\n\ -\ move\ method\ is\ not\ working\ for\ both\ int\ &\ double\r\n\ -\ loadAnimationImages();//\!\!\!\!\!\!\!Later\ put\ into\ world\r\n\ -\ direction\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
 comment1.params=
-comment1.target=void\ act()
+comment1.target=Guard()
 comment2.params=
+Edwin
 comment2.target=void\ detectRobbers()
 comment2.text=\r\n\ \r\n
 numComments=3
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ loadAnimationImages()
+comment3.text=\r\n\ Load\ its\ animation\ images.\r\n
+comment4.params=
+comment4.target=void\ animate()
+comment4.text=\r\n\ Animate\ by\ setting\ its\ image\ based\ on\ its\ direction\ facing.\r\n
+comment5.params=
+comment5.target=void\ rotate()
+comment6.params=
+comment6.target=void\ detectRobbers()
+comment6.text=\r\n\ \r\n
+numComments=7
+main

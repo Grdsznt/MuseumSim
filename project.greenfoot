@@ -1,4 +1,5 @@
 #Greenfoot project file
+<<<<<<< HEAD
 editor.fx.0.height=737
 editor.fx.0.width=814
 editor.fx.0.x=360
@@ -6,6 +7,30 @@ editor.fx.0.y=58
 height=926
 package.numDependencies=0
 package.numTargets=15
+=======
+Edwin
+editor.fx.0.height=739
+editor.fx.0.width=816
+editor.fx.0.x=525
+editor.fx.0.y=97
+height=1096
+package.numDependencies=0
+package.numTargets=16
+dependency1.from=Guard
+dependency1.to=Detector
+dependency1.type=UsesDependency
+dependency2.from=Detector
+dependency2.to=Guard
+dependency2.type=UsesDependency
+editor.fx.0.height=739
+editor.fx.0.width=816
+editor.fx.0.x=1308
+editor.fx.0.y=125
+height=759
+package.numDependencies=2
+package.numTargets=14
+main
+>>>>>>> main
 project.charset=UTF-8
 publish.hasSource=false
 publish.locked=true
@@ -21,47 +46,86 @@ readme.x=10
 readme.y=10
 simulation.speed=50
 target1.height=70
+Edwin
+target1.name=SuperSmoothMover
+target1.showInterface=false
+target1.type=AbstractTarget
+target1.width=130
 target1.name=People
 target1.showInterface=false
 target1.type=AbstractTarget
 target1.width=120
+main
 target1.x=0
 target1.y=0
 target10.height=70
 target10.name=Object
 target10.showInterface=false
+<<<<<<< HEAD
 target10.type=AbstractTarget
+=======
+Edwin
+target10.type=AbstractTarget
+target10.type=ClassTarget
+main
+>>>>>>> main
 target10.width=120
 target10.x=0
 target10.y=0
 target11.height=70
+Edwin
+target11.name=Effect
+target11.showInterface=false
+target11.type=AbstractTarget
 target11.name=SetUp
 target11.showInterface=false
 target11.type=ClassTarget
+main
 target11.width=120
 target11.x=0
 target11.y=0
 target12.height=70
+Edwin
+target12.name=SetUp
 target12.name=Main
+main
 target12.showInterface=false
 target12.type=ClassTarget
 target12.width=120
 target12.x=0
 target12.y=0
 target13.height=70
+<<<<<<< HEAD
 target13.name=Robber
+=======
+Edwin
+target13.name=Main
+target13.name=Room
+main
+>>>>>>> main
 target13.showInterface=false
 target13.type=ClassTarget
 target13.width=120
 target13.x=0
 target13.y=0
 target14.height=70
+<<<<<<< HEAD
 target14.name=Room
+=======
+Edwin
+target14.name=Room
+target14.name=MyWorld
+main
+>>>>>>> main
 target14.showInterface=false
 target14.type=ClassTarget
 target14.width=120
 target14.x=0
 target14.y=0
+<<<<<<< HEAD
+=======
+Edwin
+>>>>>>> main
 target15.height=70
 target15.name=MyWorld
 target15.showInterface=false
@@ -69,22 +133,41 @@ target15.type=ClassTarget
 target15.width=120
 target15.x=0
 target15.y=0
+<<<<<<< HEAD
+=======
+target16.height=70
+target16.name=SuperDisplayLabel
+target16.showInterface=false
+target16.type=ClassTarget
+target16.width=120
+target16.x=0
+target16.y=0
+target2.height=70
+target2.name=People
+>>>>>>> main
 target2.height=70
 target2.name=DisplayResults
+main
 target2.showInterface=false
 target2.type=ClassTarget
 target2.width=120
 target2.x=0
 target2.y=0
 target3.height=70
+Edwin
+target3.name=DisplayResults
 target3.name=StartWorld
+main
 target3.showInterface=false
 target3.type=ClassTarget
 target3.width=120
 target3.x=0
 target3.y=0
 target4.height=70
+Edwin
+target4.name=StartWorld
 target4.name=Effects
+main
 target4.showInterface=false
 target4.type=AbstractTarget
 target4.width=120
@@ -105,16 +188,22 @@ target6.width=120
 target6.x=0
 target6.y=0
 target7.height=70
+Edwin
+target7.name=Button
 target7.name=Objects
+main
 target7.showInterface=false
 target7.type=AbstractTarget
 target7.width=120
 target7.x=0
 target7.y=0
 target8.height=70
+Edwin
+target8.name=Objects
 target8.name=Buttons
+main
 target8.showInterface=false
-target8.type=ClassTarget
+target8.type=AbstractTarget
 target8.width=120
 target8.x=0
 target8.y=0
@@ -126,7 +215,14 @@ target9.width=120
 target9.x=0
 target9.y=0
 version=3.1.0
+<<<<<<< HEAD
 width=1550
+=======
+Edwin
+width=1936
+width=1295
+main
+>>>>>>> main
 world.lastInstantiated=MyWorld
 xPosition=0
 yPosition=0

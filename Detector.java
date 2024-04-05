@@ -8,13 +8,25 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Detector extends Actor
 {
-    int[] xPoints = {0,10,10};
-    int[] yPoints = {3,6,0};
-    GreenfootImage triangle = new GreenfootImage(10,6);
+    //Size
+    private int length = 40;
+    private int width = 20;
+    //Draw the image
+    private int[] xPoints = {0,length,length};
+    private int[] yPoints = {width/2,0,width};
+    private GreenfootImage triangle = new GreenfootImage(length,width);
     
-    public Detector(){
+    //Store its own guard
+    private Guard guard;
+    
+    public Detector(Guard guard){
+        //Draw
         triangle.setColor(Color.GRAY);
         triangle.fillPolygon(xPoints, yPoints,3);
+        //Set image
+        setImage(triangle);
+        //Get its own guard
+        this.guard = guard;
     }
     
     public void act()
