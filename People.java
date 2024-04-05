@@ -17,6 +17,10 @@ public class People extends SuperSmoothMover
         
     }
     
+    
+    /**
+     * Method made to target an actor 
+     */
     public Actor targetActor(Actor act, int dis) 
     {
         int distance = dis;
