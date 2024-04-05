@@ -19,7 +19,6 @@ public abstract class People extends Actor
     
     public Actor targetActor(Actor act, int dis) 
     {
-        Actor a;
         int distance = dis;
         ArrayList<Actor> targets = (ArrayList<Actor>)getObjectsInRange(dis, Actor.class);
         double closestTargetDistance = 0;
@@ -30,10 +29,10 @@ public abstract class People extends Actor
             closest = targets.get(0);
             closestTargetDistance = distanceFrom(closest);
             for(Actor ac: targets) {
-                distanceToActor = distanceFrom(Actor);
+                distanceToActor = distanceFrom(ac);
                 if(distanceToActor < closestTargetDistance)
                 {
-                    closest = a; 
+                    closest = ac; 
                     closestTargetDistance = distanceToActor;
                 }
                 
@@ -41,6 +40,7 @@ public abstract class People extends Actor
         }
         return closest;
     }
+
     /**
      *  Method used to find the distance between two actors 
      */

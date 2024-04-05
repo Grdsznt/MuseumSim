@@ -8,11 +8,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Robber extends People
 {
-    public Robber(int direction) {
+    public Robber() {
         
     }
     public void act()
     {
         // Add your action code here.
     }
+    private void stealObject(){
+        
+    }
+    
+    
 }
