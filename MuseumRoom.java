@@ -8,10 +8,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MuseumRoom extends Room
 {
-    private GreenfootImage background = new GreenfootImage("Museum_Image_1.png");
+    
     public MuseumRoom(int wid, int hei, int aOfO, int inc) {
         super(wid, hei, aOfO, inc);
-        setImage(background);
     }
     
     /**
