@@ -3,8 +3,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
 /**
  * <p>A variation of an actor that maintains a precise location (using doubles for the co-ordinates
  * instead of ints).  This allows small precise movements (e.g. movements of 1 pixel or less)
- * that do not lose precision.</p>
+ * that do not lose precision.0
  * 
+
  * <p>Modified by Jordan Cohen to include a precise rotation variable, as well as turn, setRotation 
  * and turnTowards methods.</p>
  * 
@@ -19,24 +20,35 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, and Greenfoot)
  * <p>Version 3.1 update - Now includes the option to enable static rotation, meaning the Actor will remain
  *    facing the same direction visually even while turning and moving as desired. Call the method enableStaticRotation() 
  *    to try this out</p>
- * <p>Version 3.2 Update - now caches trig ratios, which should dramatically cut down for the need to multiply them 
- *    out. Discovered this flaw while optimising OOPLessonInBugs.</p>
+ * <p>Version 3.2 update (11/23) - Now includes the ability to rotate images manually for SuperSmoothMover objects
+ *    with staticRotation enabled. (Note that these new commands will do nothing if sR is disabled)</p>
+ * <p>Version 1.24 update (1/24) - (Version numbers now match library version numbers) - Some performance optimizations via
+ *     caching common trig ratios and ensuring turnTowards can deal with trying to turn towards same pixel</p>
+ * <p>Version 1.30 update (2/24) - Completed API, added some comments, cleaned up.</p>
+ * <p>Version 1.31 MAJOR FIX (3/24) - Found HUGE bug ... negative values rounding was wrong for setLocation!!! Fixed
  * 
  * @author Poul Henriksen
  * @author Michael Kolling
  * @author Neil Brown
  * 
- * @version 3.2.jc -- Modified by Jordan Cohen
+ * @version 1.30.jc -- Modified by Jordan Cohen
  * 
  */
 public abstract class SuperSmoothMover extends Actor
 {
     private double exactX;
     private double exactY;
-    private double rotation;
+    private double preciseRotation;
     private boolean staticRotation = false;
     private double cosRotation;
     private double sinRotation;
+
+    /**
+     * Default constructor - set staticRotation to false.
+     */
+    public SuperSmoothMover (){
+        staticRotation = false;
+    }
     
     /**
      * Move forward by the specified distance.
@@ -57,12 +69,9 @@ public abstract class SuperSmoothMover extends Actor
      */
     public void move(double distance)
     {
-        /**double radians;
-        if (staticRotation){
-            radians = Math.toRadians(rotation);
-        } else {
-            radians = Math.toRadians(getPreciseRotation());
-        }*/
+        if (cosRotation == 0 && sinRotation == 0){
+            setRotation(0);
+        }
         double dx = cosRotation * distance;
         double dy = sinRotation * distance;
         setLocation(exactX + dx, exactY + dy);
@@ -76,38 +85,53 @@ public abstract class SuperSmoothMover extends Actor
     public void enableStaticRotation (){
         super.setRotation(0);
         staticRotation = true;
-        rotation = 0.0;
+        preciseRotation = 0.0;
     }
-    
+
+    /**
+     * This will turn off static rotation. Note that this will not do anything by default as static rotation
+     * is disabled. 
+     */
     public void disableStaticRotation (){
-        super.setRotation((int)(rotation + 0.5));
+        // Round precise rotation in case use is continued, so that
+        // it matches what happened when disabled
+        preciseRotation = (double)((int)(preciseRotation + 0.5));
+        super.setRotation((int)preciseRotation);
         staticRotation = false;
     }
-    
+
+    /** 
+     * Rotate image, not movement facing angle
+     * 
+     * Needs to be improved / added to.
+     */
+
+    public void rotateImage(int degrees) {
+        if (!staticRotation){return;}
+        turnImage(degrees);
+    }
+
     /**
      * Set the internal rotation value to a new value.
      * 
-     * @param rotation the precise new angle
+     * @param preciseRotation the precise new angle
      */
-    public void setRotation (double rotation){
-        this.rotation = rotation;
+    public void setRotation (double preciseRotation){
+        this.preciseRotation = preciseRotation;
         if(!staticRotation)
-            super.setRotation ((int)(rotation + 0.5));
-        cosRotation = Math.cos(Math.toRadians(rotation));
-        sinRotation = Math.sin(Math.toRadians(rotation));
+            super.setRotation ((int)(preciseRotation + 0.5));
+        cosRotation = Math.cos(Math.toRadians(preciseRotation));
+        sinRotation = Math.sin(Math.toRadians(preciseRotation));
     }
 
     /**
      * Set the internal rotation value to a new value. This will override the method from Actor.
      * 
-     * @param rotation the new angle
+     * @param preciseRotation the new angle
      */
     @Override
-    public void setRotation (int rotation){
-        //this.rotation = rotation;
-        //if(!staticRotation)
-        //    super.setRotation(rotation);
-        setRotation ((double)rotation);
+    public void setRotation (int angle){
+        setRotation ((double)angle);
     }
 
     /**
@@ -139,11 +163,11 @@ public abstract class SuperSmoothMover extends Actor
      */
     @Override
     public void turn (int angle){
-        rotation += angle;
+        preciseRotation += angle;
         if(!staticRotation)
-            super.setRotation ((int)(rotation + 0.5));
-        cosRotation = Math.cos(Math.toRadians(rotation));
-        sinRotation = Math.sin(Math.toRadians(rotation));
+            super.setRotation ((int)(preciseRotation + 0.5));
+        cosRotation = Math.cos(Math.toRadians(preciseRotation));
+        sinRotation = Math.sin(Math.toRadians(preciseRotation));
     }
 
     /**
@@ -152,13 +176,13 @@ public abstract class SuperSmoothMover extends Actor
      * @param angle     the precise number of degrees to turn
      */
     public void turn (double angle){
-        rotation += angle;
+        preciseRotation += angle;
         if(!staticRotation)
-            super.setRotation ((int)(rotation + 0.5));
-        cosRotation = Math.cos(Math.toRadians(rotation));
-        sinRotation = Math.sin(Math.toRadians(rotation));
+            super.setRotation ((int)(preciseRotation + 0.5));
+        cosRotation = Math.cos(Math.toRadians(preciseRotation));
+        sinRotation = Math.sin(Math.toRadians(preciseRotation));
     }
-
+    
     /**
      * Set the location using exact coordinates.
      * 
@@ -169,7 +193,7 @@ public abstract class SuperSmoothMover extends Actor
     {
         exactX = x;
         exactY = y;
-        super.setLocation((int) (x + 0.5), (int) (y + 0.5));
+        super.setLocation((int) (x + (Math.signum(x) * 0.5)), (int) (y + (Math.signum(y) * 0.5)));
     }
 
     /**
@@ -225,17 +249,64 @@ public abstract class SuperSmoothMover extends Actor
         return exactY;
     }
 
-    public double getPreciseRotation (){
-        return rotation;
+    /**
+     * Turn the IMAGE. This will not affect the movement rotation.
+     * 
+     * @param degrees   The delta to be applied to the image's angle
+     */
+    public void turnImage (int degrees){
+        setImageRotation (getImageRotation() + degrees);
     }
-    
+
+    /**
+     * Get the precise movement rotation of this Actor
+     * 
+     * @return double   The precise rotation angle. 
+     */
+    public double getPreciseRotation (){
+        return preciseRotation;
+    }
+
+    /**
+     * Get the current state of the image's rotation. If static rotation is
+     * enabled, this will be different from the movement rotation, otherwise
+     * it is the same (and you probably shouldn't be calling this method if
+     * you are not using static rotation - use getRotation() or getPreciseRotation()
+     * instead.
+     * 
+     * @return int the current rotation of the image
+     */
+    public int getImageRotation() {
+        return super.getRotation();
+    }
+
+    /**
+     * Set the desired angle for the image. Note that if static rotation is not\
+     * enabled, this method will do nothing.
+     */
+    public void setImageRotation (double rotation){
+        if (!staticRotation) return;
+        setImageRotation((int)(rotation + 0.5));
+    }
+
+    public void setImageRotation(int rotation) {
+        if (!staticRotation) return;
+        super.setRotation (rotation);
+    }
+
+    /**
+     * Get the rotation as an integer. If this is a precise value,
+     * it will be rounded. 
+     * 
+     * @return  int     The current angle, rounded to the nearest degree.
+     */
     @Override
     public int getRotation (){
-      if (!staticRotation){
-          return super.getRotation();
-      } else {
-          return (int)(rotation + 0.5);
-      }
+        if (!staticRotation){
+            return super.getRotation();
+        } else {
+            return (int)(preciseRotation + 0.5);
+        }
     }
-    
+
 }
