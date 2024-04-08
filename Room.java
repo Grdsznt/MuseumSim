@@ -6,25 +6,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public abstract class Room extends Actor
+public abstract class Room extends World
 {
-    protected int width;
-    protected int height;
-    protected int amountOfObjects;
-    protected int income;
-    public Room(int wid, int hei, int aOfO, int inc) {
-        width = wid;
-        height = hei;
-        amountOfObjects = aOfO;
-        income = inc;
-    }
-    
+
     /**
-     * Act - do whatever the Room wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * Constructor for objects of class Room.
+     * 
      */
-    public void act()
-    {
-        // Add your action code here.
+    public Room()
+    {    
+        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+        super(600, 400, 1); 
     }
 }
