@@ -37,8 +37,8 @@ public class StartWorld extends World
         //check if a key is clicked
 
         if(actNum > 15){
-            String keyPressed = Greenfoot.getKey();
-            if(Greenfoot.mouseClicked(this) || keyPressed != null){
+            //String keyPressed = Greenfoot.getKey();
+            if(Greenfoot.mouseClicked(this)){
                 music.pause();
                 Greenfoot.setWorld(new SetUp());
             }

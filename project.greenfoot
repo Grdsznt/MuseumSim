@@ -1,17 +1,20 @@
 #Greenfoot project file
 class.StartWorld.image=museumFrontPage1.png
-dependency1.from=Guard
-dependency1.to=Detector
+dependency1.from=StartWorld
+dependency1.to=SetUp
 dependency1.type=UsesDependency
-dependency2.from=Detector
-dependency2.to=Guard
+dependency2.from=Guard
+dependency2.to=Detector
 dependency2.type=UsesDependency
+dependency3.from=Detector
+dependency3.to=Guard
+dependency3.type=UsesDependency
 editor.fx.0.height=686
 editor.fx.0.width=1294
 editor.fx.0.x=-7
 editor.fx.0.y=-7
 height=686
-package.numDependencies=2
+package.numDependencies=3
 package.numTargets=17
 project.charset=UTF-8
 publish.hasSource=false
