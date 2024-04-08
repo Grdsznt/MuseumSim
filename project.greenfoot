@@ -2,6 +2,7 @@
 dependency1.from=StartWorld
 dependency1.to=Button
 dependency1.type=UsesDependency
+<<<<<<< Updated upstream
 dependency2.from=Guard
 dependency2.to=Detector
 dependency2.type=UsesDependency
@@ -15,6 +16,24 @@ editor.fx.0.y=170
 height=759
 package.numDependencies=3
 package.numTargets=15
+=======
+dependency2.from=StartWorld
+dependency2.to=MuseumRoom
+dependency2.type=UsesDependency
+dependency3.from=Guard
+dependency3.to=Detector
+dependency3.type=UsesDependency
+dependency4.from=Detector
+dependency4.to=Guard
+dependency4.type=UsesDependency
+editor.fx.0.height=728
+editor.fx.0.width=800
+editor.fx.0.x=320
+editor.fx.0.y=74
+height=875
+package.numDependencies=4
+package.numTargets=16
+>>>>>>> Stashed changes
 project.charset=UTF-8
 publish.hasSource=false
 publish.locked=true
@@ -44,14 +63,22 @@ target10.width=120
 target10.x=0
 target10.y=0
 target11.height=70
+<<<<<<< Updated upstream
 target11.name=SetUp
+=======
+target11.name=Guard
+>>>>>>> Stashed changes
 target11.showInterface=false
 target11.type=ClassTarget
 target11.width=120
 target11.x=0
 target11.y=0
 target12.height=70
+<<<<<<< Updated upstream
 target12.name=Main
+=======
+target12.name=SetUp
+>>>>>>> Stashed changes
 target12.showInterface=false
 target12.type=ClassTarget
 target12.width=120
@@ -60,24 +87,46 @@ target12.y=0
 target13.height=70
 target13.name=Room
 target13.showInterface=false
+<<<<<<< Updated upstream
 target13.type=ClassTarget
+=======
+target13.type=AbstractTarget
+>>>>>>> Stashed changes
 target13.width=120
 target13.x=0
 target13.y=0
 target14.height=70
+<<<<<<< Updated upstream
 target14.name=MyWorld
+=======
+target14.name=Main
+>>>>>>> Stashed changes
 target14.showInterface=false
 target14.type=ClassTarget
 target14.width=120
 target14.x=0
 target14.y=0
 target15.height=70
+<<<<<<< Updated upstream
 target15.name=SuperDisplayLabel
+=======
+target15.name=MyWorld
+>>>>>>> Stashed changes
 target15.showInterface=false
 target15.type=ClassTarget
 target15.width=130
 target15.x=0
 target15.y=0
+<<<<<<< Updated upstream
+=======
+target16.height=70
+target16.name=SuperDisplayLabel
+target16.showInterface=false
+target16.type=ClassTarget
+target16.width=130
+target16.x=0
+target16.y=0
+>>>>>>> Stashed changes
 target2.height=70
 target2.name=People
 target2.showInterface=false
@@ -128,7 +177,11 @@ target8.width=120
 target8.x=0
 target8.y=0
 target9.height=70
+<<<<<<< Updated upstream
 target9.name=Guard
+=======
+target9.name=Effect
+>>>>>>> Stashed changes
 target9.showInterface=false
 target9.type=ClassTarget
 target9.width=120
