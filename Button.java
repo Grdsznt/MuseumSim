@@ -15,8 +15,7 @@ public class Button extends Actor
     private GreenfootImage imgUp, imgPressed;
     
     public Button() {
-        imgUp = new GreenfootImage("");
-        imgPressed = new GreenfootImage("");
+        
     }
     public void act()
     {
