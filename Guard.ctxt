@@ -1,27 +1,54 @@
 #BlueJ class context
 comment0.target=Guard
-Edwin
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Guard\ here.\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ Guard\ here.\n\ \n\ @author\ Jean\n\ @version\ Apr\ 2024\n
 comment0.text=\r\n\ The\ Guard\ will\ have\ a\ detector.\ If\ it\ detects\ any\ robber\ by\ its\ detector,\ it\ will\ start\ to\ catch\ the\ robber.\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
-main
+9420dd3fd690d94261b56846975723dfaf0583b9
 comment1.params=
 comment1.target=Guard()
 comment2.params=
-Edwin
+comment2.target=void\ detectRobbers()
+comment2.text=\n\ \n
+numComments=3
+comment0.text=\r\n\ The\ Guard\ will\ have\ a\ detector.\ If\ it\ detects\ any\ robber\ by\ its\ detector,\ it\ will\ start\ to\ catch\ the\ robber.\r\n\ \r\n\ Known\ bugs\:\r\n\ -\ move\ method\ is\ not\ working\ for\ both\ int\ &\ double\r\n\ -\ loadAnimationImages();//\!\!\!\!\!\!\!Later\ put\ into\ world\r\n\ -\ direction\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
+comment1.params=
+comment1.target=Guard()
+comment2.params=
 comment2.target=void\ detectRobbers()
 comment2.text=\r\n\ \r\n
 numComments=3
+f898bfe49ef49f94d6af5b526828de3f9a6ab51d
 comment2.target=void\ act()
+comment0.text=\r\n\ The\ Guard\ will\ have\ a\ detector.\ If\ it\ detects\ any\ robber\ by\ its\ detector,\ it\ will\ start\ to\ catch\ the\ robber.\r\n\ \r\n\ Known\ bugs\:\r\n\ -\ move\ method\ is\ not\ working\ for\ both\ int\ &\ double\r\n\ -\ setLocation\ method\ is\ not\ working\ for\ negative\ x\ y\ directions\r\n\ -\ loadAnimationImages();//\!\!\!\!\!\!\!Later\ put\ into\ world\r\n\ -\ direction\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
+comment1.params=direction
+comment1.target=Guard(int)
+comment10.params=
+comment10.target=void\ detectRobbers()
+comment10.text=\n\ \n
+comment2.params=
+comment2.target=void\ addedToWorld()
 comment3.params=
-comment3.target=void\ loadAnimationImages()
-comment3.text=\r\n\ Load\ its\ animation\ images.\r\n
+comment3.target=void\ act()
 comment4.params=
-comment4.target=void\ animate()
-comment4.text=\r\n\ Animate\ by\ setting\ its\ image\ based\ on\ its\ direction\ facing.\r\n
+comment4.target=void\ loadAnimationImages()
+comment4.text=\n\ Load\ its\ animation\ images\ for\ walking\ &\ running.\n
 comment5.params=
-comment5.target=void\ rotate()
+comment5.target=void\ animate()
+comment5.text=\n\ Animate\ by\ setting\ its\ image\ based\ on\ its\ direction\ facing\ &\ its\ catching\ status.\n
 comment6.params=
+
 comment6.target=void\ detectRobbers()
 comment6.text=\r\n\ \r\n
 numComments=7
-main
+
+
+comment6.target=int\ getDirection()
+comment6.text=\n\ Get\ the\ current\ direction.\n
+comment7.params=
+comment7.target=int\ getWidth()
+comment7.text=\n\ Get\ the\ width\ of\ the\ detector.\n
+comment8.params=
+comment8.target=int\ getHeight()
+comment8.text=\n\ Get\ the\ height\ of\ the\ detector.\n
+comment9.params=
+comment9.target=void\ rotate()
+numComments=11

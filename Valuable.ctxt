@@ -1,0 +1,18 @@
+#BlueJ class context
+comment0.target=Valuable
+comment0.text=\n\ Write\ a\ description\ of\ class\ Valuable\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
+comment1.params=price
+comment1.target=Valuable(double)
+comment1.text=\n\ A\ simple\ constructor\ that\ sets\ up\ the\ stolen\ state\ and\ the\ price\ of\ a\ valuable\n\ \n\ @param\ price\ \ \ The\ price\ of\ this\ valuable\n
+comment2.params=
+comment2.target=void\ act()
+comment3.params=
+comment3.target=void\ stealMe()
+comment3.text=\n\ called\ by\ other\ class\ to\ steal\ this\ valuable\n\ \n
+comment4.params=
+comment4.target=boolean\ isStolen()
+comment4.text=\n\ returns\ the\ state\ of\ this\ valuable\n\ \ @return\ true\ if\ is\ stolen,\ false\ if\ it's\ not\n
+comment5.params=
+comment5.target=double\ getPrice()
+comment5.text=\n\ returns\ the\ price\ of\ this\ valuable\n\ \ @return\ double\ price\ of\ this\ valuable\n
+numComments=6
