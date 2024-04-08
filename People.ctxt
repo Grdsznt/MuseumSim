@@ -1,12 +1,7 @@
 #BlueJ class context
 comment0.target=People
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ People\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ People\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=
 comment1.target=void\ act()
-comment2.params=act\ dis
-comment2.target=greenfoot.Actor\ targetActor(greenfoot.Actor,\ int)
-comment2.text=\r\n\ Method\ made\ to\ target\ an\ actor\ \r\n
-comment3.params=act
-comment3.target=double\ distanceFrom(greenfoot.Actor)
-comment3.text=\r\n\ \ Method\ used\ to\ find\ the\ distance\ between\ two\ actors\ \r\n
-numComments=4
+comment1.text=\n\ Act\ -\ do\ whatever\ the\ People\ wants\ to\ do.\ This\ method\ is\ called\ whenever\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\n
+numComments=2
