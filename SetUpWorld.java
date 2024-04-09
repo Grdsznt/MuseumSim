@@ -20,12 +20,14 @@ public class SetUpWorld extends World
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(600, 400, 1);
         
-        String[] tempText = {"Number Of Guards"};
-        SuperTextBox editNumOfGuards = new SuperTextBox(tempText, Color.BLACK, Color.WHITE, boringFont, true, 500, 3, Color.YELLOW);
+        String[] tempTextGuards = {"Number Of Guards"};
+        SuperTextBox editNumOfGuards = new SuperTextBox(tempTextGuards, Color.BLACK, Color.WHITE, boringFont, true, 300, 3, Color.YELLOW);
         
         editNumOfGuards.update();
         int tempY = getHeight() - editNumOfGuards.getImage().getHeight()/2;
         int tempX = editNumOfGuards.getImage().getWidth()/2;
         addObject(editNumOfGuards, tempX, tempY);
+        
+        
     }
 }
