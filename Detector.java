@@ -3,8 +3,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * This will be used on objects to detect if they are touching a certain type of class.
  * 
- * Known bugs:
- * - Not showing up when guard is added to world
+ * //Known bugs:
+ * 
  * 
  * @author Jean
  * @version Apr 2024
@@ -40,8 +40,11 @@ public class Detector extends SuperSmoothMover
     
     public void act()
     {
+        //Let the detector follow its Guard
         double[] coordinate = getCoordinates();
         setLocation(coordinate[0],coordinate[1]);
+        //Adjust the Detector's rotation in case it does not match with the Guard's.
+        setRotation((360-(guard.getDirection()-1)*90)%360);
     }
     
     /** 
@@ -52,23 +55,23 @@ public class Detector extends SuperSmoothMover
         double x, y;
         switch(guard.getDirection()){
             case 1: {
-                x = guard.getX()+xDif;
-                y = guard.getY();
+                x = guard.getPreciseX()+xDif;
+                y = guard.getPreciseY();
                 break;
             }
             case 2: {
-                x = guard.getX();
-                y = guard.getY()-yDif;
+                x = guard.getPreciseX();
+                y = guard.getPreciseY()-yDif;
                 break;
             }
             case 3: {
-                x = guard.getX()-xDif;
-                y = guard.getY();
+                x = guard.getPreciseX()-xDif;
+                y = guard.getPreciseY();
                 break;
             }
             default: {
-                x = guard.getX();
-                y = guard.getY()+yDif;
+                x = guard.getPreciseX();
+                y = guard.getPreciseY()+yDif;
                 break;
             }
         }
