@@ -1,21 +1,17 @@
 #Greenfoot project file
-<<<<<<< HEAD
+ HEAD
 editor.fx.0.height=739
 editor.fx.0.width=816
-<<<<<<< HEAD
 editor.fx.0.x=552
 editor.fx.0.y=114
 height=1096
 package.numDependencies=0
 package.numTargets=2
-=======
 editor.fx.0.x=621
 editor.fx.0.y=97
 height=1096
 package.numDependencies=0
 package.numTargets=14
->>>>>>> 55653046e57ecc9cce7f2dedd2a7aba8774ab236
-=======
 editor.fx.0.height=728
 editor.fx.0.width=800
 editor.fx.0.x=320
@@ -23,7 +19,6 @@ editor.fx.0.y=74
 height=875
 package.numDependencies=0
 package.numTargets=9
->>>>>>> 66193821e52c36e8f0f75e0923b5f5bd812718b4
 project.charset=UTF-8
 publish.hasSource=false
 publish.locked=true
@@ -39,21 +34,14 @@ readme.x=10
 readme.y=10
 simulation.speed=50
 target1.height=70
-<<<<<<< HEAD
 target1.name=StartWorld
-=======
-target1.name=People
->>>>>>> 55653046e57ecc9cce7f2dedd2a7aba8774ab236
 target1.showInterface=false
 target1.type=AbstractTarget
 target1.width=120
 target1.x=0
 target1.y=0
-<<<<<<< HEAD
-<<<<<<< HEAD
 target2.height=70
 target2.name=MyWorld
-=======
 target10.height=70
 target10.name=Guard
 target10.showInterface=false
@@ -101,8 +89,6 @@ target2.type=ClassTarget
 target2.width=120
 target2.x=0
 target2.y=0
-<<<<<<< HEAD
-=======
 target3.height=70
 target3.name=Object
 target3.showInterface=false
@@ -152,7 +138,6 @@ target9.type=ClassTarget
 target9.width=120
 target9.x=0
 target9.y=0
->>>>>>> 55653046e57ecc9cce7f2dedd2a7aba8774ab236
 version=3.1.0
 width=1440
 world.lastInstantiated=MyWorld
