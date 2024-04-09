@@ -2,14 +2,20 @@
 dependency1.from=StartWorld
 dependency1.to=Button
 dependency1.type=UsesDependency
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 dependency2.from=Guard
 dependency2.to=Detector
+=======
+dependency2.from=StartWorld
+dependency2.to=MuseumRoom
+>>>>>>> Stashed changes
 dependency2.type=UsesDependency
-dependency3.from=Detector
-dependency3.to=Guard
+dependency3.from=Guard
+dependency3.to=Detector
 dependency3.type=UsesDependency
+<<<<<<< Updated upstream
 editor.fx.0.height=1096
 editor.fx.0.width=1936
 editor.fx.0.x=-8
@@ -39,6 +45,18 @@ package.numTargets=19
 =======
 package.numTargets=16
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+dependency4.from=Detector
+dependency4.to=Guard
+dependency4.type=UsesDependency
+editor.fx.0.height=739
+editor.fx.0.width=816
+editor.fx.0.x=52
+editor.fx.0.y=170
+height=830
+package.numDependencies=4
+package.numTargets=18
+>>>>>>> Stashed changes
 project.charset=UTF-8
 publish.hasSource=false
 publish.locked=true
@@ -56,6 +74,7 @@ simulation.speed=50
 target1.height=70
 target1.name=MuseumRoom
 target1.showInterface=false
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 target1.type=ClassTarget
 target1.width=120
@@ -63,6 +82,10 @@ target1.width=120
 target1.type=AbstractTarget
 target1.width=130
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+target1.type=ClassTarget
+target1.width=120
+>>>>>>> Stashed changes
 target1.x=0
 target1.y=0
 target10.height=70
@@ -73,6 +96,7 @@ target10.width=120
 target10.x=0
 target10.y=0
 target11.height=70
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 target11.name=SettingsButton
 =======
@@ -80,35 +104,47 @@ target11.name=VolumeButton
 target11.name=SetUp
 >>>>>>> b61c35f3317829e248333d10fb7882700c127a12
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+target11.name=Effect
+>>>>>>> Stashed changes
 target11.showInterface=false
-target11.type=ClassTarget
+target11.type=AbstractTarget
 target11.width=120
 target11.x=0
 target11.y=0
 target12.height=70
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 target12.name=Effect
 =======
 target12.name=SetUp
 target12.name=SetUp
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+target12.name=Guard
+>>>>>>> Stashed changes
 target12.showInterface=false
 target12.type=AbstractTarget
 target12.width=120
 target12.x=0
 target12.y=0
 target13.height=70
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 target13.name=Guard
 =======
 target13.name=Main
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+target13.name=Object
+>>>>>>> Stashed changes
 target13.showInterface=false
-target13.type=ClassTarget
+target13.type=AbstractTarget
 target13.width=120
 target13.x=0
 target13.y=0
 target14.height=70
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 target14.name=Object
 =======
@@ -116,23 +152,31 @@ target14.name=Room
 
 target14.name=MyWorld
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+target14.name=SetUp
+>>>>>>> Stashed changes
 target14.showInterface=false
 target14.type=AbstractTarget
 target14.width=120
 target14.x=0
 target14.y=0
 target15.height=70
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 target15.name=SetUp
 =======
 target15.name=MyWorld
 target15.name=SuperDisplayLabel
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+target15.name=Main
+>>>>>>> Stashed changes
 target15.showInterface=false
 target15.type=ClassTarget
 target15.width=120
 target15.x=0
 target15.y=0
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 =======
 
@@ -149,16 +193,34 @@ target17.height=70
 target17.name=Room
 target17.showInterface=false
 target17.type=AbstractTarget
+=======
+target16.height=70
+target16.name=Room
+target16.showInterface=false
+target16.type=AbstractTarget
+target16.width=120
+target16.x=0
+target16.y=0
+target17.height=70
+target17.name=MyWorld
+target17.showInterface=false
+target17.type=ClassTarget
+>>>>>>> Stashed changes
 target17.width=120
 target17.x=0
 target17.y=0
 target18.height=70
+<<<<<<< Updated upstream
 target18.name=MyWorld
+=======
+target18.name=SuperDisplayLabel
+>>>>>>> Stashed changes
 target18.showInterface=false
 target18.type=ClassTarget
 target18.width=130
 target18.x=0
 target18.y=0
+<<<<<<< Updated upstream
 target19.height=70
 target19.name=SuperDisplayLabel
 target19.showInterface=false
@@ -175,6 +237,8 @@ target16.x=0
 target16.y=0
 
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+>>>>>>> Stashed changes
 target2.height=70
 target2.name=SuperSmoothMover
 target2.showInterface=false
@@ -225,17 +289,22 @@ target8.width=120
 target8.x=0
 target8.y=0
 target9.height=70
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 target9.name=SetUpWorld
 =======
 target9.name=Guard
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+target9.name=SetUpWorld
+>>>>>>> Stashed changes
 target9.showInterface=false
 target9.type=ClassTarget
 target9.width=120
 target9.x=0
 target9.y=0
 version=3.1.0
+<<<<<<< Updated upstream
 <<<<<<< HEAD
 width=1295
 world.lastInstantiated=SetUpWorld
@@ -247,3 +316,9 @@ world.lastInstantiated=StartWorld
 xPosition=0
 yPosition=0
 >>>>>>> aaa0696814ab1243106df083f6851bec6b1125de
+=======
+width=1550
+world.lastInstantiated=SetUpWorld
+xPosition=0
+yPosition=0
+>>>>>>> Stashed changes
