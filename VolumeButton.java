@@ -1,22 +1,21 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class MuseumRoom here.
+ * Write a description of class VolumeButton here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MuseumRoom extends Room
+public class VolumeButton extends Button
 {
-    
-    public MuseumRoom(int wid, int hei, int aOfO, int inc) {
-       // super(wid, hei, aOfO, inc);
-    }
-    
     /**
-     * Act - do whatever the MuseumRoom wants to do. This method is called whenever
+     * Act - do whatever the VolumeButton wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    
+    public VolumeButton() {
+        
+    }
     public void act()
     {
         // Add your action code here.
