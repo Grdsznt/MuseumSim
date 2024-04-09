@@ -1,10 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class DisplayResults here.
- * 
- * @author (your name) 
- * @version (a version number or a date)
+ * World for Displaying Results at End of the Game
  */
 public class DisplayResults extends World
 {
