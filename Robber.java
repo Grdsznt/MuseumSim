@@ -8,6 +8,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Robber extends People
 {
+    private double speed;
+    private int targetRadius;
+    private int xDirection;//+1 right, -1 left
+    private int yDirection;//+1 down, -1 up
+    public Robber(double s, int tR, int xD, int yD){
+        speed = s; 
+        targetRadius = tR;
+        
+    }
     /**
      * Act - do whatever the Robber wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
@@ -15,5 +24,8 @@ public class Robber extends People
     public void act()
     {
         // Add your action code here.
+    }
+    public void targetValuable(){
+        
     }
 }
