@@ -22,7 +22,7 @@ public class StartWorld extends World
     private int actNum;
     private boolean currentBGframe;//true is frame 1, false is frame 2
     public StartWorld(){    
-        super(500,500,1);
+        super(1000,800,1);
         setBackground(backGround1);
         actNum = 0;
         currentBGframe = true;
