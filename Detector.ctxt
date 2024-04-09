@@ -1,26 +1,17 @@
 #BlueJ class context
 comment0.target=Detector
-<<<<<<< HEAD
-comment0.text=\n\ This\ will\ be\ used\ on\ objects\ to\ detect\ if\ they\ are\ touching\ a\ certain\ type\ of\ class.\n\ \n\ @author\ Jean\n\ @version\ Apr\ 2024\n
-comment1.params=
-comment1.target=Detector()
-comment0.text=\r\n\ This\ will\ be\ used\ on\ objects\ to\ detect\ if\ they\ are\ touching\ a\ certain\ type\ of\ class.\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
-comment1.params=
-comment1.target=Detector()
-comment1.params=guard
-comment1.target=Detector(Guard)
-comment0.text=\r\n\ This\ will\ be\ used\ on\ objects\ to\ detect\ if\ they\ are\ touching\ a\ certain\ type\ of\ class.\r\n\ \r\n\ Known\ bugs\:\r\n\ -\ Not\ showing\ up\ when\ guard\ is\ added\ to\ world\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
+comment0.text=\r\n\ This\ will\ be\ used\ on\ objects\ to\ detect\ if\ they\ are\ touching\ a\ certain\ type\ of\ class.\r\n\ \r\n\ //Known\ bugs\:\r\n\ \r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
 comment1.params=guard
 comment1.target=Detector(Guard)
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=double[]\ getCoordinates()
-comment3.text=\ \n\ Get\ the\ updated\ coordinates\ based\ on\ the\ guard's\ direction\ &\ position.\n
+comment3.text=\ \r\n\ Get\ the\ updated\ coordinates\ based\ on\ the\ guard's\ direction\ &\ position.\r\n
 comment4.params=
 comment4.target=int\ getWidth()
-comment4.text=\n\ Get\ the\ width\ of\ the\ detector.\n
+comment4.text=\r\n\ Get\ the\ width\ of\ the\ detector.\r\n
 comment5.params=
 comment5.target=int\ getHeight()
-comment5.text=\n\ Get\ the\ height\ of\ the\ detector.\n
+comment5.text=\r\n\ Get\ the\ height\ of\ the\ detector.\r\n
 numComments=6
