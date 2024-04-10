@@ -26,6 +26,10 @@ public class Robber extends People
         // Add your action code here.
     }
     public void targetValuable(){
-        
+        // get valuable coord
+        // List<Pair> path = bfs(getX()/20, getY()/20, valuablex/20, valuabley/20)
+        // for (Pair p : path) {
+            //setLocation(p.x*20, p.y*20) // tile size is 20
+        // }
     }
 }
