@@ -114,6 +114,7 @@ public class Robber extends Human
         }
         actNum++;
     }
+
     //targeting code taken from bug simulation
     private void getTargetValuable(){
 
@@ -124,12 +125,16 @@ public class Robber extends Human
             //get a random valuable in range and set it as a target
             targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
         }
+	// get valuable coord
+        // List<Pair> path = bfs(getX()/20, getY()/20, valuablex/20, valuabley/20)
+        // for (Pair p : path) {
+            //setLocation(p.x*20, p.y*20) // tile size is 20
+        // }
     }
     
     private void walkRandomly(){
         
-    }
-
+}
     private void enterRoom(){
 
     }
