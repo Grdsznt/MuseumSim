@@ -13,11 +13,11 @@ public class People extends SuperSmoothMover
     private final int R = 67, C = 37;
     
     private boolean vis[][] = new boolean[69][39];
-    private int adj1[][] = new int [69][39];
-    private ArrayList<Pair> adj[] = new ArrayList[2600];
+    private int adj[][] = new int [69][39];
     private int dist[][] = new int[69][39];
     private int mr[] = {0, 1, 0, -1}, mc[] = {1, 0, -1, 0};
-    ArrayList<Pair> invalidPoint = new ArrayList<>();
+    
+    private boolean enteredNewRoom = false;
 
     // based on one node being 20x20 pixels, off of the world size
     public class Pair {
@@ -43,7 +43,11 @@ public class People extends SuperSmoothMover
      */
     public void act()
     {
-        // updGrid();
+        if (enteredNewRoom) {
+            Room r = (Room) getWorld();
+            adj = r.updGrid();
+            enteredNewRoom = false;
+        }
     }
     
     public List<Pair> bfs(int srcr, int srcc, int destr, int destc) {
@@ -65,7 +69,7 @@ public class People extends SuperSmoothMover
             q.remove();
             for (int k = 0;k<4;k++) {
                 int nr = r+mr[k], nc = c+mc[k];
-                if (nr >= 1 && nr < R && nc < C && nc >= 1 && !vis[nr][nc]) {
+                if (nr >= 1 && nr < R && nc < C && nc >= 1 && !vis[nr][nc] && adj[nr][nc] != 1) {
                     vis[nr][nc] = true;
                     dist[nr][nc] = dist[r][c]+1;
                     q.add(new Pair(nr, nc));
