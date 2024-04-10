@@ -15,7 +15,7 @@ public class Valuable extends Object
     private double price;
     private boolean isStolen;
     /**
-     * A simple constructor that sets up the stolen state and the price of a valuable
+     * A simple constructor that sets Right the stolen state and the price of a valuable
      * 
      * @param price   The price of this valuable
      */
