@@ -39,7 +39,7 @@ public class Guard extends Human
     //Store its own detector
     private Detector detector;
     private boolean isCatching = false; //Check if it is catching a robber
-   
+    
     public Guard(int direction){
         
         loadAnimationImages();//!!!!!!!Later put into world
