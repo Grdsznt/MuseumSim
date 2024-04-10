@@ -10,7 +10,7 @@ public class MuseumRoom extends Room
 {
     
     public MuseumRoom(int wid, int hei, int aOfO, int inc) {
-       // super(wid, hei, aOfO, inc);
+       super(wid, hei, aOfO, inc);
     }
     
     /**
