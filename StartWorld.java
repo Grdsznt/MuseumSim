@@ -18,6 +18,9 @@ public class StartWorld extends World
     //private GreenfootImage img = new GreenfootImage("");
 
     private Button b;
+    private Button startGame;
+    private Button settings;
+    private Button story;
     // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
 
     private static GreenfootSound music = new GreenfootSound("startMenuBGM.mp3");
