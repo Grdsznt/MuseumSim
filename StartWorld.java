@@ -14,27 +14,12 @@ public class StartWorld extends World
      * Constructor for objects of class StartWorld.
      * 
      */
-<<<<<<< HEAD
-    
-<<<<<<< HEAD
     // private GreenfootImage img = new GreenfootImage("");
-=======
     //private GreenfootImage img = new GreenfootImage("");
->>>>>>> main
+
     private Button b;
-    public StartWorld()
-    {    
-        // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-<<<<<<< HEAD
-        super(1536, 864, 1); // 1080x1920 80%
-        // b = new Button();
-        
-=======
-        super(600, 400, 1); 
-        b = new Button();
-        addObject(new MuseumRoom(600, 700, 400, 3), 0, 0);
->>>>>>> main
-=======
+    // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
+
     private static GreenfootSound music = new GreenfootSound("startMenuBGM.mp3");
     private static GreenfootImage backGround1 = new GreenfootImage("museumFrontPage1.png");
     private static GreenfootImage backGround2 = new GreenfootImage("museumFrontPage2.png");
@@ -43,11 +28,10 @@ public class StartWorld extends World
     private int actNum;
     private boolean currentBGframe;//true is frame 1, false is frame 2
     public StartWorld(){    
-        super(500,500,1);
+        super(1000,800,1);
         setBackground(backGround1);
         actNum = 0;
         currentBGframe = true;
->>>>>>> main
     }
 
     public void act(){
@@ -75,5 +59,4 @@ public class StartWorld extends World
     public void stopped(){
         music.pause();
     }
-
 }
