@@ -4,21 +4,25 @@ import java.util.*;
  * Human class is a blueprint for all humans that will appear in the world.
  * 
  * @author Jean, Edwin Dong
- * @version Apr 2024
+ * @version Apr 10 2024
  */
 public class Human extends SuperSmoothMover
 {
     
     private final int R = 67, C = 37;
-    
+    // based on one node being 20x20 pixels, off of the world size
     private boolean vis[][] = new boolean[69][39];
     private int adj[][] = new int [69][39];
     private int dist[][] = new int[69][39];
     private int mr[] = {0, 1, 0, -1}, mc[] = {1, 0, -1, 0};
     
     private boolean enteredNewRoom = false;
-
-    // based on one node being 20x20 pixels, off of the world size
+    
+    /**
+     * Pair is a utility class that stores 2 numbers. 
+     * <p>
+     * Used for coordinates in the world's tile system.
+     */
     public class Pair {
         int r, c;
         public Pair(int r, int c) {
@@ -49,6 +53,17 @@ public class Human extends SuperSmoothMover
         }
     }
     
+    /**
+     *  Use Breadth-First-Search to get the shortest distance
+     * From a source to a destination, then return the directions to move
+     * using a tile system
+     *
+     * @param srcr	Source row number
+     * @param srcc	Sourc column number
+     * @param destr	Destination row number
+     * @param destc	Destination column number
+     * @return List<Pair>   List of (r, c) coordinates to be able to move the character
+    */
     public List<Pair> bfs(int srcr, int srcc, int destr, int destc) {
         Map<Pair, Pair> par = new HashMap<>();
         List<Pair> path = new ArrayList<>();
