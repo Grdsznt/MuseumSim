@@ -1,6 +1,9 @@
 #BlueJ class context
 comment0.target=Human
-comment0.text=\r\n\ Human\ class\ is\ a\ blueprint\ for\ all\ humans\ that\ will\ appear\ in\ the\ world.\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
+comment0.text=\r\n\ Human\ class\ is\ a\ blueprint\ for\ all\ humans\ that\ will\ appear\ in\ the\ world.\r\n\ \r\n\ @author\ Jean,\ Edwin\ Dong\r\n\ @version\ Apr\ 2024\r\n
 comment1.params=
 comment1.target=void\ act()
-numComments=2
+comment1.text=\r\n\ Act\ -\ do\ whatever\ the\ Furniture\ wants\ to\ do.\ This\ method\ is\ called\ whenever\r\n\ the\ 'Act'\ or\ 'Run'\ button\ gets\ pressed\ in\ the\ environment.\r\n
+comment2.params=srcr\ srcc\ destr\ destc
+comment2.target=java.util.List\ bfs(int,\ int,\ int,\ int)
+numComments=3

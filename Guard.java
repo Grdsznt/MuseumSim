@@ -9,7 +9,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * 
  * @author Jean
  * @version Apr 2024
- */
+
+   */
+  
 public class Guard extends Human
 {
     //Animation variables
