@@ -38,8 +38,9 @@ public class Robber extends Human
     private int targetRadius;
     private int direction;//1 right, 2 up, 3 left, 4 down
     public Robber(double s, int tR, int D){
-        setImage("Robber/rob.Down0.png");
-        speed = s; targetRadius = tR; direction = D;
+        direction = D;
+        setIdleImage();
+        speed = s; targetRadius = tR;
         hasStolen = false; actNum = 0; frameNum = 0;
         enableStaticRotation(); isMoving = false;
         
@@ -57,24 +58,27 @@ public class Robber extends Human
             setLocation(getX(), getY() - speed); // Move up
             isMoving = true;
         }
-        if (Greenfoot.isKeyDown("down")) {
+        else if (Greenfoot.isKeyDown("down")) {
             setLocation(getX(), getY() + speed); // Move down
             direction = 4;
             isMoving = true;
         }
-        if (Greenfoot.isKeyDown("left")) {
+        else if (Greenfoot.isKeyDown("left")) {
             setLocation(getX() - speed, getY()); // Move left
             direction = 3;
             isMoving = true;
         }
-        if (Greenfoot.isKeyDown("right")) {
+        else if (Greenfoot.isKeyDown("right")) {
             setLocation(getX() + speed, getY()); // Move right
             direction = 1;
             isMoving = true;
         }
+        else{
+            isMoving = false;
+        }
         //animation
         //make sure that character is moving, modifies frame rate with y = mx + b
-        if(isMoving && actNum % (speed !=0 ? (int) (-6 * speed + 24) : 10) == 0){
+        if(isMoving && actNum % (speed !=0 ? (int) (-6 * speed + 20) : 10) == 0){
             
             //changing the frame
             if(frameNum >= 6){
@@ -86,22 +90,26 @@ public class Robber extends Human
             //shows the character facing the direction it should be facing
             switch(direction){
                 case 1:
-                    setImage(FramesRight[frameNum]);
+                    setImage(FramesRight[frameNum]);//face right
                     break;
                 case 2:
-                    setImage(FramesUp[frameNum]);
+                    setImage(FramesUp[frameNum]);//face up
                     break;
                 case 3:
-                    setImage(FramesLeft[frameNum]);
+                    setImage(FramesLeft[frameNum]);//face left
                     break;
                 case 4:
-                    setImage(FramesDown[frameNum]);
+                    setImage(FramesDown[frameNum]);//face down
                     break;
                 default:
-                    setImage(FramesDown[frameNum]);
+                    setImage(FramesDown[frameNum]);//face down defaultly
                     break;
             }
         }
+        //goes back to default frame if not moving
+        if(!isMoving)
+            setIdleImage();
+
         // Add your action code here.
         if (targetValuable != null && targetValuable.getWorld() == null){
                 targetValuable = null;
@@ -111,7 +119,14 @@ public class Robber extends Human
         }
         if(targetValuable != null){
             //move towards it and steal it
+            robThatSh1t();
         }
+        
+        //take the valuable with me
+        if(hasStolen){
+            targetValuable.followRobber(this);
+        }
+        
         actNum++;
     }
 
@@ -125,16 +140,35 @@ public class Robber extends Human
             //get a random valuable in range and set it as a target
             targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
         }
-	// get valuable coord
+        // get valuable coord
         // List<Pair> path = bfs(getX()/20, getY()/20, valuablex/20, valuabley/20)
         // for (Pair p : path) {
             //setLocation(p.x*20, p.y*20) // tile size is 20
         // }
     }
-    
+    //rob the object and take it with oneself
+    private void robThatSh1t(){
+        if(targetValuable != null){
+            
+            if(intersects(targetValuable)){
+                targetValuable.stealMe();
+                hasStolen = true;
+            }
+            /**
+            //do pythagorean theorem to figure out the distance between robber and valuabe
+            double valuableDistance = Math.sqrt(Math.pow(this.getX() - targetValuable.getX(),2) + Math.pow(this.getY() - targetValuable.getY(),2));
+            //replace ten with an apporiate value here!!!
+            if(valuableDistance < 10 && !targetValuable.isStolen()){
+                targetValuable.stealMe();
+                hasStolen = true;
+            }
+            */
+            
+        }
+    }
     private void walkRandomly(){
         
-}
+    }
     private void enterRoom(){
 
     }
@@ -144,7 +178,20 @@ public class Robber extends Human
             direction = D;
         }
     }
+    public int getDirection(){
+        return direction;
+    }
     public boolean robbedSomething(){
         return hasStolen;
+    }
+    public void setIdleImage(){
+        if(direction == 1)
+            setImage("Robber/rob.Right0.png");
+        if(direction == 2)
+            setImage("Robber/rob.Up0.png");
+        if(direction == 3)
+            setImage("Robber/rob.Left0.png");
+        if(direction == 4)
+            setImage("Robber/rob.Down0.png");
     }
 }
