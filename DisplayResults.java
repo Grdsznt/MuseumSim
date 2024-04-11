@@ -5,6 +5,12 @@ import java.util.ArrayList;
  */
 public class DisplayResults extends World
 {
+    //Greenfoot image
+    private GreenfootImage background;
+    //Greenfoot sound
+    private GreenfootSound music; 
+    
+    //For game statistics
     private SuperTextBox endOfGame;
     private Font comic;
     private int []stats;
@@ -40,6 +46,25 @@ public class DisplayResults extends World
         theStatBar.setLabels(labels);
         addObject(theStatBar, getWidth()/2, 0);
     }
+    
+    /**
+     * For user interactions on the end screen
+     */
+    public void act(){
+        if(Greenfoot.mouseClicked(){
+            //music.stop();
+            Greenfoot.setWorld(new StartWorld());
+        }
+    }
+    
+    public void startMusic(){
+        music.playLoop();
+    }
+    
+    public void stopped() {
+        music.pause();
+    }
+    
     public void moneyEarned()
     {
         
