@@ -4,15 +4,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * The Guard will have a detector. If it detects any robber by its detector, it will start to catch the robber.
  * 
  * Known bugs:
- * - move method is not working for both int & double
- * - setLocation method is not working for negative x y directions
  * - loadAnimationImages();//!!!!!!!Later put into world
  * - direction
  * 
  * @author Jean
  * @version Apr 2024
- */
-public class Guard extends People
+
+   */
+  
+public class Guard extends Human
 {
     //Animation variables
     private int aniCount = 0;
@@ -41,7 +41,7 @@ public class Guard extends People
     //Store its own detector
     private Detector detector;
     private boolean isCatching = false; //Check if it is catching a robber
-   
+    
     public Guard(int direction){
         
         loadAnimationImages();//!!!!!!!Later put into world
@@ -53,9 +53,12 @@ public class Guard extends People
         detector = new Detector(this);
     }
     
-    public void addedToWorld(){
+    /**
+     * When the Guard is added to world, add its detector as well.
+     */
+    public void addedToWorld(World w){
         double[] coordinate = detector.getCoordinates();
-        getWorld().addObject(detector, (int)coordinate[0], (int)coordinate[1]);
+        w.addObject(detector, (int)coordinate[0], (int)coordinate[1]);
     }
     
     public void act()
@@ -69,33 +72,33 @@ public class Guard extends People
         switch(direction){
             case 1: {
                 if(isCatching){
-                    setLocation(getX()+runSpeed, getY());
+                    setLocation(getPreciseX()+runSpeed, getPreciseY());
                 } else {
-                    setLocation(getX()+walkSpeed, getY());
+                    setLocation(getPreciseX()+walkSpeed, getPreciseY());
                 }
                 break;
             }
             case 2: {
                 if(isCatching){
-                    setLocation(getX(), getY()-runSpeed);
+                    setLocation(getPreciseX(), getPreciseY()-runSpeed);
                 } else {
-                    setLocation(getX(), getY()-walkSpeed);
+                    setLocation(getPreciseX(), getPreciseY()-walkSpeed);
                 }
                 break;
             }
             case 3: {
                 if(isCatching){
-                    setLocation(getX()-runSpeed, getY());
+                    setLocation(getPreciseX()-runSpeed, getPreciseY());
                 } else {
-                    setLocation(getX()-walkSpeed, getY());
+                    setLocation(getPreciseX()-walkSpeed, getPreciseY());
                 }
                 break;
             }
             case 4: {
                 if(isCatching){
-                    setLocation(getX(), getY()+runSpeed);
+                    setLocation(getPreciseX(), getPreciseY()+runSpeed);
                 } else {
-                    setLocation(getX(), getY()+walkSpeed);
+                    setLocation(getPreciseX(), getPreciseY()+walkSpeed);
                 }
                 break;
             }

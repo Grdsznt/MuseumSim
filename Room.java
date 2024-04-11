@@ -40,4 +40,6 @@ public abstract class Room extends World
     public int getIncome() {
         return income;
     }
+    
+    
 }

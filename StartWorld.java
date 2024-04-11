@@ -18,6 +18,9 @@ public class StartWorld extends World
     //private GreenfootImage img = new GreenfootImage("");
 
     private Button b;
+    private Button startGame;
+    private Button settings;
+    private Button story;
     // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
 
     private static GreenfootSound music = new GreenfootSound("startMenuBGM.mp3");
@@ -28,15 +31,10 @@ public class StartWorld extends World
     private int actNum;
     private boolean currentBGframe;//true is frame 1, false is frame 2
     public StartWorld(){    
-        // // super(500,500,1);
-        // // setBackground(backGround1);
-        // // actNum = 0;
-        // currentBGframe = true;
-        // super(1536, 864, 1); // 1080x1920 80%
-        // // b = new Button();
-        super(600, 400, 1); 
-        b = new Button();
-        // addObject(new MuseumRoom(600, 700, 400, 3), 0, 0);
+        super(1000,800,1);
+        setBackground(backGround1);
+        actNum = 0;
+        currentBGframe = true;
     }
 
     public void act(){

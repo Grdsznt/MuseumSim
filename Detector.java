@@ -3,21 +3,20 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * This will be used on objects to detect if they are touching a certain type of class.
  * 
- * Known bugs:
- * - Not showing up when guard is added to world
+ * //Known bugs:
+ * //Set paint order to put the detector under the guard
  * 
  * @author Jean
  * @version Apr 2024
  */
 public class Detector extends SuperSmoothMover
 {
+    //Set the image
+    private GreenfootImage detectorImage = new GreenfootImage("detector.png");
+    
     //Size
-    private int width = 40;
-    private int height = 20;
-    //Draw the image
-    private int[] xPoints = {0,width,width};
-    private int[] yPoints = {height/2,0,height};
-    private GreenfootImage triangle = new GreenfootImage(width,height);
+    private int width = detectorImage.getWidth();
+    private int height = detectorImage.getHeight();
     
     //Store its own guard
     private Guard guard;
@@ -26,22 +25,23 @@ public class Detector extends SuperSmoothMover
     private int yDif;
     
     public Detector(Guard guard){
-        //Draw
-        triangle.setColor(Color.GRAY);
-        triangle.fillPolygon(xPoints, yPoints,3);
         //Set image
-        setImage(triangle);
+        detectorImage.setTransparency(100); //Set transparency to 100
+        setImage(detectorImage);
         //Get its own guard
         this.guard = guard;
         //Calculate its relative absolute dif in position
         xDif = guard.getWidth()/2 + getWidth()/2;
-        yDif = guard.getHeight()/2 + getHeight()/2;
+        yDif = guard.getHeight()/2;
     }
     
     public void act()
     {
+        //Let the detector follow its Guard
         double[] coordinate = getCoordinates();
         setLocation(coordinate[0],coordinate[1]);
+        //Adjust the Detector's rotation in case it does not match with the Guard's.
+        setRotation((360-(guard.getDirection()-1)*90)%360);
     }
     
     /** 
@@ -52,23 +52,23 @@ public class Detector extends SuperSmoothMover
         double x, y;
         switch(guard.getDirection()){
             case 1: {
-                x = guard.getX()+xDif;
-                y = guard.getY();
+                x = guard.getPreciseX()+xDif;
+                y = guard.getPreciseY()+guard.getWidth();
                 break;
             }
             case 2: {
-                x = guard.getX();
-                y = guard.getY()-yDif;
+                x = guard.getPreciseX();
+                y = guard.getPreciseY()-yDif;
                 break;
             }
             case 3: {
-                x = guard.getX()-xDif;
-                y = guard.getY();
+                x = guard.getPreciseX()-xDif;
+                y = guard.getPreciseY()+guard.getWidth();
                 break;
             }
             default: {
-                x = guard.getX();
-                y = guard.getY()+yDif;
+                x = guard.getPreciseX();
+                y = guard.getPreciseY()+2*yDif;
                 break;
             }
         }
