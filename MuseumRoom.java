@@ -8,6 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MuseumRoom extends Room
 {
+    private GreenfootImage worldImage = new GreenfootImage("room1.png");
     
     public MuseumRoom(int wid, int hei, int aOfO, int inc) {
        super(wid, hei, aOfO, inc);
@@ -22,5 +23,9 @@ public class MuseumRoom extends Room
         // Add your action code here.
     }
     
-    
+    public int[][] updGrid() {
+        int adj[][] = new int[69][39];
+        // room obstacle : adj[r][c] = 1 
+        return adj;
+    }
 }

@@ -41,9 +41,5 @@ public abstract class Room extends World
         return income;
     }
     
-    public int[][] updGrid() {
-        int adj[][] = new int[69][39];
-        // room obstacle : adj[r][c] = 1 
-        return adj;
-    }
+    
 }
