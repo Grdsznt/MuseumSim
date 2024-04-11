@@ -37,12 +37,14 @@ public class Robber extends Human
     private double speed;
     private int targetRadius;
     private int direction;//1 right, 2 up, 3 left, 4 down
+    
+    private List<Pair> path;
+    Pair curValuable;
     public Robber(double s, int tR, int D){
         setImage("Robber/rob.Down0.png");
         speed = s; targetRadius = tR; direction = D;
         hasStolen = false; actNum = 0; frameNum = 0;
         enableStaticRotation(); isMoving = false;
-        
     }
 
     /**
@@ -111,6 +113,31 @@ public class Robber extends Human
         }
         if(targetValuable != null){
             //move towards it and steal it
+            // path = bfs(getX()/20, getY()/20, valuablex/20, valuabley/20);
+            // curValuable = path.remove(0);
+            // int dx = curValuable.c*20 - getX();
+            // int dy = curValuable.r*20 - getY();
+            
+            // if (dx != 0) {
+                // int moveX = speed * (int)Math.signum(dx); // Determine direction
+                // setLocation(getX() + moveX, getY());
+            // }
+            // // Once aligned horizontally, move vertically
+            // else if (dy != 0) {
+                // int moveY = speed * (int)Math.signum(dy); // Determine direction
+                // setLocation(getX(), getY() + moveY);
+            // }
+            // // Check if target is reached (considering possible overshoot)
+            // if (Math.abs(dx) <= speed && Math.abs(dy) <= speed) {
+                // // Target reached
+                // setLocation(curValuable.c*20, curValuable.r*20); // Correct any minor overshoot
+                // if (!path.isEmpty()) {
+                    // curValuable = path.remove(0); // Get and remove the first element
+                // } else {
+                    // curValuable = null;
+                    // targetValuable = null;// No more targets
+                // }
+            // }
         }
         actNum++;
     }
@@ -124,17 +151,13 @@ public class Robber extends Human
         if(valuables.size() > 0){
             //get a random valuable in range and set it as a target
             targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
-        }
-	// get valuable coord
-        // List<Pair> path = bfs(getX()/20, getY()/20, valuablex/20, valuabley/20)
-        // for (Pair p : path) {
-            //setLocation(p.x*20, p.y*20) // tile size is 20
-        // }
+        }        
     }
     
     private void walkRandomly(){
         
-}
+    }
+    
     private void enterRoom(){
 
     }
