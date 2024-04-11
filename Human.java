@@ -47,8 +47,10 @@ public class Human extends SuperSmoothMover
     public void act()
     {
         if (enteredNewRoom) {
-            Room r = (Room) getWorld();
-            adj = r.updGrid();
+            if (getWorld() instanceof MuseumRoom) {
+                MuseumRoom r = (MuseumRoom) getWorld();
+                adj = r.updGrid();
+            }
             enteredNewRoom = false;
         }
     }
@@ -58,10 +60,10 @@ public class Human extends SuperSmoothMover
      * From a source to a destination, then return the directions to move
      * using a tile system
      *
-     * @param srcr	Source row number
-     * @param srcc	Sourc column number
-     * @param destr	Destination row number
-     * @param destc	Destination column number
+     * @param srcr    Source row number
+     * @param srcc    Sourc column number
+     * @param destr    Destination row number
+     * @param destc    Destination column number
      * @return List<Pair>   List of (r, c) coordinates to be able to move the character
     */
     public List<Pair> bfs(int srcr, int srcc, int destr, int destc) {
