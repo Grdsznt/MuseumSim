@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Detector
-comment0.text=\r\n\ This\ will\ be\ used\ on\ objects\ to\ detect\ if\ they\ are\ touching\ a\ certain\ type\ of\ class.\r\n\ \r\n\ //Known\ bugs\:\r\n\ \r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
+comment0.text=\r\n\ This\ will\ be\ used\ on\ objects\ to\ detect\ if\ they\ are\ touching\ a\ certain\ type\ of\ class.\r\n\ \r\n\ //Known\ bugs\:\r\n\ //Set\ paint\ order\ to\ put\ the\ detector\ under\ the\ guard\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n
 comment1.params=guard
 comment1.target=Detector(Guard)
 comment2.params=
