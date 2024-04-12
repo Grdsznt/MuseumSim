@@ -8,6 +8,19 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class SetUp extends World
 {
+    private GreenfootImage background; 
+    
+    
+    // Money 
+    private static int startingMoney = 100;
+    private SettingsButton startingMoneyU;
+    private SettingsButton startingMoneyD;
+    
+    //Guards
+    
+    private static int Guards = 10;
+    private SettingsButton GuardsU;
+    private SettingsButton GuardsD;
 
     /**
      * Constructor for objects of class SetUp.
@@ -16,6 +29,11 @@ public class SetUp extends World
     public SetUp()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(600, 400, 1); 
+        super(800, 600, 1); 
+        if(Greenfoot.mouseClicked(startingMoneyU){
+            
+            set(0);
+        }
+        
     }
 }

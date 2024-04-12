@@ -18,7 +18,7 @@ public class SetUpWorld extends World
     public SetUpWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1000, 700, 1);
+        super(1000, 800, 1);
         
         String[] tempTextGuards = {"Number Of Guards"};
         SuperTextBox editNumOfGuards = new SuperTextBox(tempTextGuards, Color.BLACK, Color.WHITE, boringFont, true, 300, 3, Color.YELLOW);
