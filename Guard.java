@@ -74,47 +74,62 @@ public class Guard extends Human
         if((isCatching && aniCount%runGap==0) || (!isCatching && aniCount%walkGap==0)){
             animate();
         }
-        
+        Double preciseX = getPreciseX(), preciseY = getPreciseY();
         //Set its location based on its direction of facing & its catching status
         switch(direction){
             case 1: {
-                
                 if(isCatching){
-                    if (adj[(getX()+(int)runSpeed)*20][getY()*20] != 1) 
-                        setLocation(getPreciseX()+runSpeed, getPreciseY());
+                    setLocation(preciseX+runSpeed, preciseY);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 } else {
-                    if (adj[(getX()+(int)walkSpeed)*20][getY()*20] != 1) 
-                        setLocation(getPreciseX()+walkSpeed, getPreciseY());
+                    setLocation(preciseX+walkSpeed, preciseY);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 }
                 break;
             }
             case 2: {
                 if(isCatching){
-                    if (adj[getX()*20][(getY()-(int)runSpeed)*20] != 1) 
-                        setLocation(getPreciseX(), getPreciseY()-runSpeed);
+                    setLocation(preciseX, preciseY-runSpeed);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 } else {
-                    if (adj[getX()*20][(getY()-(int)walkSpeed)*20] != 1) 
-                        setLocation(getPreciseX(), getPreciseY()-walkSpeed);
+                    setLocation(preciseX, preciseY-walkSpeed);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 }
                 break;
             }
             case 3: {
                 if(isCatching){
-                    if (adj[(getX()-(int)runSpeed)*20][getY()*20] != 1) 
-                        setLocation(getPreciseX()-runSpeed, getPreciseY());
+                    setLocation(preciseX-runSpeed, preciseY);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 } else {
-                    if (adj[(getX()-(int)walkSpeed)*20][getY()*20] != 1) 
-                        setLocation(getPreciseX()-walkSpeed, getPreciseY());
+                    setLocation(preciseX-walkSpeed, preciseY);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 }
                 break;
             }
             case 4: {
                 if(isCatching){
-                    if (adj[getX()*20][(getY()+(int)runSpeed)*20] != 1)
-                        setLocation(getPreciseX(), getPreciseY()+runSpeed);
+                    setLocation(preciseX, preciseY+runSpeed);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 } else {
-                    if (adj[getX()*20][(getY()+(int)walkSpeed)*20] != 1)
-                        setLocation(getPreciseX(), getPreciseY()+walkSpeed);
+                    setLocation(preciseX, preciseY+walkSpeed);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 }
                 break;
             }
