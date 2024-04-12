@@ -12,7 +12,7 @@ public class Human extends SuperSmoothMover
     private int R,C;
     // based on one node being 20x20 pixels, off of the world size
     private boolean vis[][] = new boolean[70][50];
-    private int adj[][] = new int [70][50];
+    protected int adj[][] = new int [70][50];
     private int dist[][] = new int[70][50];
     private int mr[] = {0, 1, 0, -1}, mc[] = {1, 0, -1, 0};
     

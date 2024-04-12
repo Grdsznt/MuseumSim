@@ -1,6 +1,6 @@
 #BlueJ class context
 comment0.target=Guard
-comment0.text=\r\n\ The\ Guard\ will\ have\ a\ detector.\ If\ it\ detects\ any\ robber\ by\ its\ detector,\ it\ will\ start\ to\ catch\ the\ robber.\r\n\ \r\n\ Known\ bugs\:\r\n\ -\ loadAnimationImages();//\!\!\!\!\!\!\!Later\ put\ into\ world\r\n\ -\ direction\r\n\ \r\n\ @author\ Jean\r\n\ @version\ Apr\ 2024\r\n\r\n
+comment0.text=\r\n\ The\ Guard\ will\ have\ a\ detector.\ If\ it\ detects\ any\ robber\ by\ its\ detector,\ it\ will\ start\ to\ catch\ the\ robber.\r\n\ \r\n\ Known\ bugs\:\r\n\ -\ loadAnimationImages();//\!\!\!\!\!\!\!Later\ put\ into\ world\r\n\ -\ direction\r\n\ \r\n\ @author\ Jean,\ Edwin\r\n\ @version\ Apr\ 2024\r\n\r\n
 comment1.params=direction
 comment1.target=Guard(int)
 comment10.params=

@@ -7,7 +7,7 @@
  * - loadAnimationImages();//!!!!!!!Later put into world
  * - direction
  * 
- * @author Jean
+ * @author Jean, Edwin
  * @version Apr 2024
 
    */
@@ -71,34 +71,43 @@ public class Guard extends Human
         //Set its location based on its direction of facing & its catching status
         switch(direction){
             case 1: {
+                
                 if(isCatching){
-                    setLocation(getPreciseX()+runSpeed, getPreciseY());
+                    if (adj[(getX()+(int)runSpeed)*20][getY()*20] != 1) 
+                        setLocation(getPreciseX()+runSpeed, getPreciseY());
                 } else {
-                    setLocation(getPreciseX()+walkSpeed, getPreciseY());
+                    if (adj[(getX()+(int)walkSpeed)*20][getY()*20] != 1) 
+                        setLocation(getPreciseX()+walkSpeed, getPreciseY());
                 }
                 break;
             }
             case 2: {
                 if(isCatching){
-                    setLocation(getPreciseX(), getPreciseY()-runSpeed);
+                    if (adj[getX()*20][(getY()-(int)runSpeed)*20] != 1) 
+                        setLocation(getPreciseX(), getPreciseY()-runSpeed);
                 } else {
-                    setLocation(getPreciseX(), getPreciseY()-walkSpeed);
+                    if (adj[getX()*20][(getY()-(int)walkSpeed)*20] != 1) 
+                        setLocation(getPreciseX(), getPreciseY()-walkSpeed);
                 }
                 break;
             }
             case 3: {
                 if(isCatching){
-                    setLocation(getPreciseX()-runSpeed, getPreciseY());
+                    if (adj[(getX()-(int)runSpeed)*20][getY()*20] != 1) 
+                        setLocation(getPreciseX()-runSpeed, getPreciseY());
                 } else {
-                    setLocation(getPreciseX()-walkSpeed, getPreciseY());
+                    if (adj[(getX()-(int)walkSpeed)*20][getY()*20] != 1) 
+                        setLocation(getPreciseX()-walkSpeed, getPreciseY());
                 }
                 break;
             }
             case 4: {
                 if(isCatching){
-                    setLocation(getPreciseX(), getPreciseY()+runSpeed);
+                    if (adj[getX()*20][(getY()+(int)runSpeed)*20] != 1)
+                        setLocation(getPreciseX(), getPreciseY()+runSpeed);
                 } else {
-                    setLocation(getPreciseX(), getPreciseY()+walkSpeed);
+                    if (adj[getX()*20][(getY()+(int)walkSpeed)*20] != 1)
+                        setLocation(getPreciseX(), getPreciseY()+walkSpeed);
                 }
                 break;
             }
