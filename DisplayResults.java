@@ -51,10 +51,10 @@ public class DisplayResults extends World
      * For user interactions on the end screen
      */
     public void act(){
-        if(Greenfoot.mouseClicked(){
-            //music.stop();
-            Greenfoot.setWorld(new StartWorld());
-        }
+        // if(Greenfoot.mouseClicked()){
+            // //music.stop();
+            // ==m Greenfoot.setWorld(new StartWorld());
+        // }
     }
     
     public void startMusic(){
