@@ -1,31 +1,38 @@
-    import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import greenfoot.MouseInfo.*;
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+
 /**
- * Write a description of class HomeButton here.
+ * Has the logic to detect the mouse relation to the button
+ * Calls the function in the subclass
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jerry Xing
+ * @version 
  */
 public class HomeButton extends Button
 {
-    private GreenfootImage imageUp;
-    private GreenfootImage imageDown;
-    static int mouseNumber;
-    public HomeButton() {
-        imageUp = new GreenfootImage("homeUp.png");
-        imageDown = new GreenfootImage("homeDown.png");
-    }
     /**
-     * Act - do whatever the HomeButton wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
+     * The construtor for the Button
+     * @param imageStates where the image is located
+     * @param numstates is how many different states there are of that image (at most 3 are used)
+     */
+    public HomeButton(String imagePath, int numStates) {
+        super(imagePath, numStates);
+    }
+    
+    /**
+     * Checks the state of the mouse in relation to the button
+     * If the mouse is hovering
+     * If the mouse is clicked on the button
+     * If the mouse let go after clicking on the button
      */
     public void act()
     {
-        //mouseNumber = MouseInfo.getButton();
-        
-        
-        // Add your action code here.
+        super.act();
     }
     
-    
+    /**
+     * Action does nothing in this class but should be in the subclasses
+     */
+    public void action() {
+        Greenfoot.setWorld(new Main());
+    }
 }
