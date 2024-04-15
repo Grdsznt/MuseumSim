@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * World for Displaying Results at End of the Game
  */
-public class DisplayResults extends World
+public class EndScreen extends World
 {
     //Greenfoot image
     private GreenfootImage background;
@@ -20,7 +20,7 @@ public class DisplayResults extends World
      * Constructor for objects of class DisplayResults.
      * 
      */
-    public DisplayResults()
+    public EndScreen()
     {    
         super(500,500,1);
         
