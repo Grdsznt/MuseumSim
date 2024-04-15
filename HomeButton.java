@@ -21,7 +21,7 @@ public class HomeButton extends Button
      */
     public void act()
     {
-        mouseNumber = MouseInfo.getButton();
+        //mouseNumber = MouseInfo.getButton();
         
         
         // Add your action code here.
