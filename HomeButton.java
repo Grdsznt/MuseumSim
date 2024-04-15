@@ -26,11 +26,13 @@ public class HomeButton extends Button
     public void act()
     {
         //mouseNumber = MouseInfo.getButton();
+
         if(Greenfoot.mouseClicked(this)) {
             setImage(imageDown); //zhen tm fan zao
             Greenfoot.delay(500);
             Greenfoot.setWorld(new Main());
         }        
+
         // Add your action code here.
     }
     
