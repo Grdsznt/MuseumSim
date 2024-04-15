@@ -7,7 +7,9 @@
 public class Spots  
 {
     // instance variables - replace the example below with your own
-    private int x;
+    private static final int numberOfGames = 14;
+    private static Art[] games = new Game[numberOfGames];
+    private static int i=0;
 
     /**
      * Constructor for objects of class Spots
