@@ -48,14 +48,7 @@ dependency8.type=UsesDependency
 dependency9.from=Robber
 dependency9.to=Valuable
 dependency9.type=UsesDependency
-editor.fx.0.height=27
-editor.fx.0.width=159
-editor.fx.0.x=-25600
-editor.fx.0.y=-25600
-height=27
-package.numDependencies=10
 
-package.numTargets=22
 
 project.charset=UTF-8
 publish.hasSource=false
@@ -247,6 +240,8 @@ target6.width=120
 target6.x=0
 target6.y=0
 target7.height=70
+
+
 target7.name=StartWorld
 target7.showInterface=false
 target7.type=ClassTarget
@@ -269,8 +264,10 @@ target9.x=0
 target9.y=0
 version=3.1.0
 
+
 width=159
 world.lastInstantiated=Main
+
 
 
 xPosition=0
