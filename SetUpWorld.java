@@ -11,6 +11,7 @@ public class SetUpWorld extends World
     private Color white = Color.WHITE;
     private Color black = Color.BLACK;
     private Font boringFont = new Font ("Joystix", false, false, 18);
+    private HomeButton homeButton;
     /**
      * Constructor for objects of class SetUpWorld.
      * 
@@ -28,6 +29,7 @@ public class SetUpWorld extends World
         int tempX = editNumOfGuards.getImage().getWidth()/2;
         addObject(editNumOfGuards, tempX, tempY);
         
-        
+        homeButton = new HomeButton("home", 3);
+        addObject(homeButton, 500, 400);
     }
 }

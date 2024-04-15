@@ -1,20 +1,20 @@
 #BlueJ class context
 comment0.target=Valuable
-comment0.text=\r\n\ Write\ a\ description\ of\ class\ Valuable\ here.\r\n\ \r\n\ @author\ (your\ name)\ \r\n\ @version\ (a\ version\ number\ or\ a\ date)\r\n
+comment0.text=\n\ Write\ a\ description\ of\ class\ Valuable\ here.\n\ \n\ @author\ (your\ name)\ \n\ @version\ (a\ version\ number\ or\ a\ date)\n
 comment1.params=price
 comment1.target=Valuable(double)
-comment1.text=\r\n\ A\ simple\ constructor\ that\ sets\ Right\ the\ stolen\ state\ and\ the\ price\ of\ a\ valuable\r\n\ \r\n\ @param\ price\ \ \ The\ price\ of\ this\ valuable\r\n
+comment1.text=\n\ A\ simple\ constructor\ that\ sets\ Right\ the\ stolen\ state\ and\ the\ price\ of\ a\ valuable\n\ \n\ @param\ price\ \ \ The\ price\ of\ this\ valuable\n
 comment2.params=
 comment2.target=void\ act()
 comment3.params=
 comment3.target=void\ stealMe()
-comment3.text=\r\n\ called\ by\ other\ class\ to\ steal\ this\ valuable\r\n\ \r\n
+comment3.text=\n\ called\ by\ other\ class\ to\ steal\ this\ valuable\n\ \n
 comment4.params=robber
 comment4.target=void\ followRobber(Robber)
 comment5.params=
 comment5.target=boolean\ isStolen()
-comment5.text=\r\n\ returns\ the\ state\ of\ this\ valuable\r\n\ \ @return\ true\ if\ is\ stolen,\ false\ if\ it's\ not\r\n
+comment5.text=\n\ returns\ the\ state\ of\ this\ valuable\n\ \ @return\ true\ if\ is\ stolen,\ false\ if\ it's\ not\n
 comment6.params=
 comment6.target=double\ getPrice()
-comment6.text=\r\n\ returns\ the\ price\ of\ this\ valuable\r\n\ \ @return\ double\ price\ of\ this\ valuable\r\n
+comment6.text=\n\ returns\ the\ price\ of\ this\ valuable\n\ \ @return\ double\ price\ of\ this\ valuable\n
 numComments=7
