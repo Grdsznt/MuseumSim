@@ -6,7 +6,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public abstract class Object extends Actor
 {
     private int hitBoxTop, hitBoxBot, hitBoxLeft, hitBoxRight;
-    public Object(){
+    public Object(int width, int height){
+        setHitBox(width, height);
         
     }
     /**
