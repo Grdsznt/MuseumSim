@@ -1,40 +1,69 @@
 #Greenfoot project file
+<<<<<<< HEAD
 dependency1.from=StartWorld
 dependency1.to=Button
 dependency1.type=UsesDependency
-dependency10.from=Valuable
-dependency10.to=Robber
-dependency10.type=UsesDependency
 dependency2.from=StartWorld
 dependency2.to=SetUp
 dependency2.type=UsesDependency
-dependency3.from=EndScreen
+dependency3.from=SetUpWorld
 dependency3.to=SuperTextBox
+=======
+dependency1.from=DisplayResults
+dependency1.to=SuperTextBox
+dependency1.type=UsesDependency
+dependency10.from=Detector
+dependency10.to=Guard
+dependency10.type=UsesDependency
+dependency2.from=DisplayResults
+dependency2.to=SuperDisplayLabel
+dependency2.type=UsesDependency
+dependency3.from=DisplayResults
+dependency3.to=StartWorld
+>>>>>>> main
 dependency3.type=UsesDependency
-dependency4.from=EndScreen
-dependency4.to=SuperDisplayLabel
+dependency4.from=Human
+dependency4.to=MuseumRoom
 dependency4.type=UsesDependency
-dependency5.from=SetUpWorld
-dependency5.to=SuperTextBox
+<<<<<<< HEAD
+dependency5.from=Guard
+dependency5.to=Detector
 dependency5.type=UsesDependency
-dependency6.from=Human
-dependency6.to=MuseumRoom
+dependency6.from=Robber
+dependency6.to=Valuable
 dependency6.type=UsesDependency
-dependency7.from=Guard
-dependency7.to=Detector
+dependency7.from=Detector
+dependency7.to=Guard
 dependency7.type=UsesDependency
-dependency8.from=Robber
-dependency8.to=Valuable
+editor.fx.0.height=739
+editor.fx.0.width=816
+editor.fx.0.x=552
+editor.fx.0.y=114
+height=1096
+package.numDependencies=7
+=======
+dependency5.from=StartWorld
+dependency5.to=SetUp
+dependency5.type=UsesDependency
+dependency6.from=SetUpWorld
+dependency6.to=SuperTextBox
+dependency6.type=UsesDependency
+dependency7.from=Human
+dependency7.to=MuseumRoom
+dependency7.type=UsesDependency
+dependency8.from=Guard
+dependency8.to=Detector
 dependency8.type=UsesDependency
-dependency9.from=Detector
-dependency9.to=Guard
+dependency9.from=Robber
+dependency9.to=Valuable
 dependency9.type=UsesDependency
-editor.fx.0.height=918
-editor.fx.0.width=780
-editor.fx.0.x=-6
-editor.fx.0.y=0
-height=977
+editor.fx.0.height=27
+editor.fx.0.width=159
+editor.fx.0.x=-25600
+editor.fx.0.y=-25600
+height=27
 package.numDependencies=10
+>>>>>>> main
 package.numTargets=22
 project.charset=UTF-8
 publish.hasSource=false
@@ -138,7 +167,7 @@ target20.height=70
 target20.name=Room
 target20.showInterface=false
 target20.type=AbstractTarget
-target20.width=130
+target20.width=120
 target20.x=0
 target20.y=0
 target21.height=70
@@ -166,7 +195,11 @@ target4.height=70
 target4.name=SuperSmoothMover
 target4.showInterface=false
 target4.type=AbstractTarget
+<<<<<<< HEAD
+target4.width=130
+=======
 target4.width=140
+>>>>>>> main
 target4.x=0
 target4.y=0
 target5.height=70
@@ -177,14 +210,14 @@ target5.width=120
 target5.x=0
 target5.y=0
 target6.height=70
-target6.name=StartWorld
+target6.name=DisplayResults
 target6.showInterface=false
 target6.type=ClassTarget
 target6.width=120
 target6.x=0
 target6.y=0
 target7.height=70
-target7.name=EndScreen
+target7.name=StartWorld
 target7.showInterface=false
 target7.type=ClassTarget
 target7.width=120
@@ -205,7 +238,12 @@ target9.width=120
 target9.x=0
 target9.y=0
 version=3.1.0
-width=1553
+<<<<<<< HEAD
+width=1936
+world.lastInstantiated=MuseumRoom
+=======
+width=159
 world.lastInstantiated=Main
+>>>>>>> main
 xPosition=0
-yPosition=52
+yPosition=0

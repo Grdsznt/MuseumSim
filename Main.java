@@ -21,7 +21,7 @@ public class Main extends World
     public Main()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1344, 756, 1); // 1920*1080 * 0.7
+        super(1000, 800, 1); // 1920*1080 * 0.7
         
                 
     }
