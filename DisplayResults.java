@@ -15,7 +15,8 @@ public class DisplayResults extends World
     private Font comic;
     private int []stats;
     private int count; 
-    private SuperDisplayLabel theStatBar;    
+    private SuperDisplayLabel theStatBar;
+    private HomeButton homeButton;
     /**
      * Constructor for objects of class DisplayResults.
      * 
@@ -45,13 +46,19 @@ public class DisplayResults extends World
         theStatBar = new SuperDisplayLabel();
         theStatBar.setLabels(labels);
         addObject(theStatBar, getWidth()/2, 0);
+        homeButton = new HomeButton();
+        addObject(homeButton, homeButton.getWidth()/2, homeButton.getHeight()/2);
     }
     
     /**
      * For user interactions on the end screen
      */
     public void act(){
-        if(Greenfoot.mouseClicked(){
+        // if(Greenfoot.mouseClicked()){
+            // //music.stop();
+            // ==m Greenfoot.setWorld(new StartWorld());
+        // }
+        if(Greenfoot.mouseClicked(this)){
             //music.stop();
             Greenfoot.setWorld(new StartWorld());
         }
