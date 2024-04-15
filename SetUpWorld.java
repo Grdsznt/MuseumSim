@@ -29,7 +29,7 @@ public class SetUpWorld extends World
         int tempX = editNumOfGuards.getImage().getWidth()/2;
         addObject(editNumOfGuards, tempX, tempY);
         
-        homeButton = new HomeButton();
-        addObject(homeButton, homeButton.getWidth()/2, homeButton.getHeight()/2);
+        homeButton = new HomeButton("home", 3);
+        addObject(homeButton, 500, 400);
     }
 }

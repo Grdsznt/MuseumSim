@@ -14,9 +14,8 @@ public class VolumeButton extends Button
      * Act - do whatever the VolumeButton wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    
-    public VolumeButton() {
-        
+    public VolumeButton(String imagePath, int numStates) {
+        super(imagePath, numStates);
     }
     public void act()
     {
