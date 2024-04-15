@@ -56,8 +56,6 @@ public class Robber extends Human
     {
         //testing animation
         
-        // Check the adjacency list if there is obstacle
-        // sample : adj[(getX()*20][(getY()-speed)*20] != 1 (since the tile size is 20)
         if (Greenfoot.isKeyDown("up")) {
             direction = 2;
             setLocation(getX(), getY() - speed); // Move up

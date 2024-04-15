@@ -11,8 +11,7 @@ public class Human extends SuperSmoothMover
     
     private int R,C;
     // based on one node being 20x20 pixels, off of the world size
-    private boolean vis[][] = new boolean[70][50];
-    protected int adj[][] = new int [70][50];   
+    private boolean vis[][] = new boolean[70][50];  
     private int mr[] = {0, 1, 0, -1}, mc[] = {1, 0, -1, 0};
     
     private boolean enteredNewRoom = true;
@@ -48,11 +47,16 @@ public class Human extends SuperSmoothMover
         if (enteredNewRoom) {
             if (getWorld() instanceof MuseumRoom) {
                 MuseumRoom r = (MuseumRoom) getWorld();
-                adj = r.updGrid();
-                R = r.getHeight();
-                C = r.getWidth();
+                R = r.getHeight()/20 + 1;
+                C = r.getWidth()/20 + 1;
             }
             enteredNewRoom = false;
+        }
+    }
+    
+    public void tracePath(List<Pair> path) {
+        for (Pair p : path) {
+            setLocation(p.c*20, p.r*20);
         }
     }
     
@@ -68,9 +72,6 @@ public class Human extends SuperSmoothMover
      * @return List<Pair>   List of (r, c) coordinates to be able to move the character
     */
     public List<Pair> bfs(int srcr, int srcc, int destr, int destc) {
-        // for (obstacle o: obstacleList) {
-            // adj[o.y][o.x] = 1;
-        // }
         Map<Pair, Pair> par = new HashMap<>();
         List<Pair> path = new ArrayList<>();
         Queue<Pair> q = new LinkedList<>();
@@ -89,10 +90,15 @@ public class Human extends SuperSmoothMover
             q.remove();
             for (int k = 0;k<4;k++) {
                 int nr = r+mr[k], nc = c+mc[k];
-                if (nr >= 1 && nr < R && nc < C && nc >= 1 && !vis[nr][nc] && adj[nr][nc] != 1) {
-                    vis[nr][nc] = true;
-                    q.add(new Pair(nr, nc));
-                    par.put(new Pair(nr, nc), p);
+                if (nr >= 1 && nr < R && nc < C && nc >= 1 && !vis[nr][nc]) {
+                    setLocation(nr*20, nc*20);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) setLocation(srcr*20, srcc*20);
+                    else {
+                        setLocation(srcr*20, srcc*20);
+                        vis[nr][nc] = true;
+                        q.add(new Pair(nr, nc));
+                        par.put(new Pair(nr, nc), p);
+                    }
                 }
             }
         }
