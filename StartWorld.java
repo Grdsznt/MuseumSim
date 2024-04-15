@@ -35,6 +35,7 @@ public class StartWorld extends World
         setBackground(backGround1);
         actNum = 0;
         currentBGframe = true;
+        music.playLoop(); //Sometimes music doesn't play when using home button
     }
 
     public void act(){
