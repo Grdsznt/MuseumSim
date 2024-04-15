@@ -9,14 +9,13 @@ import java.util.*;
 public class Human extends SuperSmoothMover
 {
     
-    private final int R = 67, C = 37;
+    private int R,C;
     // based on one node being 20x20 pixels, off of the world size
-    private boolean vis[][] = new boolean[69][39];
-    private int adj[][] = new int [69][39];
-    private int dist[][] = new int[69][39];
+    private boolean vis[][] = new boolean[70][50];
+    protected int adj[][] = new int [70][50];   
     private int mr[] = {0, 1, 0, -1}, mc[] = {1, 0, -1, 0};
     
-    private boolean enteredNewRoom = false;
+    private boolean enteredNewRoom = true;
     
     /**
      * Pair is a utility class that stores 2 numbers. 
@@ -50,6 +49,8 @@ public class Human extends SuperSmoothMover
             if (getWorld() instanceof MuseumRoom) {
                 MuseumRoom r = (MuseumRoom) getWorld();
                 adj = r.updGrid();
+                R = r.getHeight();
+                C = r.getWidth();
             }
             enteredNewRoom = false;
         }
@@ -67,6 +68,9 @@ public class Human extends SuperSmoothMover
      * @return List<Pair>   List of (r, c) coordinates to be able to move the character
     */
     public List<Pair> bfs(int srcr, int srcc, int destr, int destc) {
+        // for (obstacle o: obstacleList) {
+            // adj[o.y][o.x] = 1;
+        // }
         Map<Pair, Pair> par = new HashMap<>();
         List<Pair> path = new ArrayList<>();
         Queue<Pair> q = new LinkedList<>();
@@ -87,7 +91,6 @@ public class Human extends SuperSmoothMover
                 int nr = r+mr[k], nc = c+mc[k];
                 if (nr >= 1 && nr < R && nc < C && nc >= 1 && !vis[nr][nc] && adj[nr][nc] != 1) {
                     vis[nr][nc] = true;
-                    dist[nr][nc] = dist[r][c]+1;
                     q.add(new Pair(nr, nc));
                     par.put(new Pair(nr, nc), p);
                 }

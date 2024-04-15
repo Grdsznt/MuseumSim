@@ -11,6 +11,7 @@ public class SetUpWorld extends World
     private Color white = Color.WHITE;
     private Color black = Color.BLACK;
     private Font boringFont = new Font ("Joystix", false, false, 18);
+    private HomeButton homeButton;
     /**
      * Constructor for objects of class SetUpWorld.
      * 
@@ -18,7 +19,7 @@ public class SetUpWorld extends World
     public SetUpWorld()
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
-        super(1000, 700, 1);
+        super(1000, 800, 1);
         
         String[] tempTextGuards = {"Number Of Guards"};
         SuperTextBox editNumOfGuards = new SuperTextBox(tempTextGuards, Color.BLACK, Color.WHITE, boringFont, true, 300, 3, Color.YELLOW);
@@ -28,6 +29,7 @@ public class SetUpWorld extends World
         int tempX = editNumOfGuards.getImage().getWidth()/2;
         addObject(editNumOfGuards, tempX, tempY);
         
-        
+        homeButton = new HomeButton();
+        addObject(homeButton, homeButton.getWidth()/2, homeButton.getHeight()/2);
     }
 }

@@ -1,19 +1,21 @@
-import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+    import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * The Guard will have a detector. If it detects any robber by its detector, it will start to catch the robber.
  * 
  * Known bugs:
  * - loadAnimationImages();//!!!!!!!Later put into world
- * - direction
+ * - change direction if meet obstacles at the front
  * 
- * @author Jean
+ * @author Jean, Edwin
  * @version Apr 2024
-
-   */
+ */
   
 public class Guard extends Human
 {
+    //Store the world that it is added to
+    World world;
+    
     //Animation variables
     private int aniCount = 0;
     private int walkFrame = 0;
@@ -57,48 +59,77 @@ public class Guard extends Human
      * When the Guard is added to world, add its detector as well.
      */
     public void addedToWorld(World w){
+        world = w;
         double[] coordinate = detector.getCoordinates();
         w.addObject(detector, (int)coordinate[0], (int)coordinate[1]);
     }
     
     public void act()
     {
+        if(detector.detectedRobbers()){
+            catchRobber();
+        }
+        
         //If it is time to animate, animate it
         if((isCatching && aniCount%runGap==0) || (!isCatching && aniCount%walkGap==0)){
             animate();
         }
-        
+        Double preciseX = getPreciseX(), preciseY = getPreciseY();
         //Set its location based on its direction of facing & its catching status
         switch(direction){
             case 1: {
                 if(isCatching){
-                    setLocation(getPreciseX()+runSpeed, getPreciseY());
+                    setLocation(preciseX+runSpeed, preciseY);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 } else {
-                    setLocation(getPreciseX()+walkSpeed, getPreciseY());
+                    setLocation(preciseX+walkSpeed, preciseY);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 }
                 break;
             }
             case 2: {
                 if(isCatching){
-                    setLocation(getPreciseX(), getPreciseY()-runSpeed);
+                    setLocation(preciseX, preciseY-runSpeed);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 } else {
-                    setLocation(getPreciseX(), getPreciseY()-walkSpeed);
+                    setLocation(preciseX, preciseY-walkSpeed);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 }
                 break;
             }
             case 3: {
                 if(isCatching){
-                    setLocation(getPreciseX()-runSpeed, getPreciseY());
+                    setLocation(preciseX-runSpeed, preciseY);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 } else {
-                    setLocation(getPreciseX()-walkSpeed, getPreciseY());
+                    setLocation(preciseX-walkSpeed, preciseY);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 }
                 break;
             }
             case 4: {
                 if(isCatching){
-                    setLocation(getPreciseX(), getPreciseY()+runSpeed);
+                    setLocation(preciseX, preciseY+runSpeed);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 } else {
-                    setLocation(getPreciseX(), getPreciseY()+walkSpeed);
+                    setLocation(preciseX, preciseY+walkSpeed);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) {
+                        setLocation(preciseX, preciseY);
+                    }
                 }
                 break;
             }
@@ -183,27 +214,29 @@ public class Guard extends Human
     }
     
     /**
-     * Get the width of the detector.
+     * Get the width of the Guard.
      */
     public int getWidth(){
         return 32;
     }
     
     /**
-     * Get the height of the detector.
+     * Get the height of the Guard.
      */
     public int getHeight(){
         return 64;
     }
     
-    public void rotate(){
-        
-    }
-    
     /**
-     * 
+     * Catch the robber that is in range.
      */
-    public void detectRobbers(){
-        
+    public void catchRobber(){
+        isCatching = true;
+        //If the Guard touches the Robber, it is catched & removed from the world.
+        if(isTouching(Robber.class)){
+            Robber robber = detector.getRobber();
+            world.removeObject(robber);
+            isCatching = false;
+        }
     }
 }
