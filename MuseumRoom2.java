@@ -24,21 +24,32 @@ public class MuseumRoom2 extends Room
     private Object statue2 = new Object(44, 68); // (513, 414), (556, 346)
     private Object pillar1 = new Object(39, 100); // (69, 665), (108, 566)
     private Object pillar2 = new Object(39, 100); // (536, 665), (574, 566)
-    
+    private Object leftWall = new Object(1, 1);
+    private Object rightWall = new Object(1, 1);
     
     public MuseumRoom2()
     { 
         super(661,816,0, 0);
         setBackground(worldImage);
         addObject(displayTable1, 327, 699);
+        displayTable1.setImage(new GreenfootImage(84, 49));
         addObject(displayTable2, 181, 512);
-        addObject(brokenGlassBox, 326, 213);
+        displayTable2.setImage(new GreenfootImage(73, 64));
+        addObject(brokenGlassBox, 327, 213);
+        brokenGlassBox.setImage(new GreenfootImage(85, 118));
         addObject(littleGlassBox, 92, 119);
-        addObject(largeWoodBox, 327, 374);
-        addObject(mediumGlassBox, 460, 514);
-        addObject(statue1, 156, 380);
+        littleGlassBox.setImage(new GreenfootImage(31, 43));
+        addObject(largeWoodBox, 329, 374);
+        largeWoodBox.setImage(new GreenfootImage(106, 62));
+        addObject(mediumGlassBox, 464, 514);
+        mediumGlassBox.setImage(new GreenfootImage(85, 118));
+        addObject(statue1, 111, 380);
+        statue1.setImage(new GreenfootImage(44, 68));
         addObject(statue2, 535, 380);
+        statue2.setImage(new GreenfootImage(44, 68));
         addObject(pillar1, 89, 616);
+        pillar1.setImage(new GreenfootImage(39, 100));
         addObject(pillar2, 555, 616);
+        pillar2.setImage(new GreenfootImage(39, 100));
     }
 }
