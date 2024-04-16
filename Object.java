@@ -5,9 +5,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Object extends Actor 
 {
-    private int hitBoxTop, hitBoxBot, hitBoxLeft, hitBoxRight;
+    private int hitBoxTop, hitBoxBot, hitBoxLeft, hitBoxRight, width, height;
     public Object(int width, int height){
-        setHitBox(width, height);
+        // setHitBox(width, height);
+        this.width = width; this.height = height;
     }
     /**
      * Act - do whatever the Object wants to do. This method is called whenever
