@@ -16,4 +16,6 @@ public class Visitor extends Human
     {
         // Add your action code here.
     }
+    
+    
 }
