@@ -3,12 +3,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Valuable Objects found in each room 
  */
-public abstract class Object extends Actor
+public class Object extends Actor 
 {
     private int hitBoxTop, hitBoxBot, hitBoxLeft, hitBoxRight;
     public Object(int width, int height){
         setHitBox(width, height);
-        
     }
     /**
      * Act - do whatever the Object wants to do. This method is called whenever
