@@ -46,8 +46,8 @@ public class EndScreen extends World
         theStatBar = new SuperDisplayLabel();
         theStatBar.setLabels(labels);
         addObject(theStatBar, getWidth()/2, 0);
-        homeButton = new HomeButton();
-        addObject(homeButton, homeButton.getWidth()/2, homeButton.getHeight()/2);
+        homeButton = new HomeButton("home", 3);
+        addObject(homeButton, 250, 250);
     }
     
     /**
