@@ -33,6 +33,6 @@ public class HomeButton extends Button
      * Action does nothing in this class but should be in the subclasses
      */
     public void action() {
-        Greenfoot.setWorld(new Main());
+        Greenfoot.setWorld(new StartWorld());
     }
 }

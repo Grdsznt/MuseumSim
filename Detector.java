@@ -4,7 +4,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * This will be used on objects to detect if they are touching a certain type of class.
  * 
  * //Known bugs:
- * - Collision points not detecting robbers effectively
  * //Set paint order to put the detector under the guard
  * 
  * @author Jean
@@ -98,20 +97,20 @@ public class Detector extends SuperSmoothMover
     public int[][] getCollisionPoints(int direction){
         //Collision points 2D array
         int[][] collisionPointsRight = {
-                                            {0, width/2, width/2, width, width, width}, 
-                                            {height/2, height/4, 3*height/4, 0, height, height/2}
+                                            {-width/2, 0, 0, width/2, width/2, width/2}, 
+                                            {0, -height/4, height/4, -height/2, 0, height/2}
                                         };
         int[][] collisionPointsUp = {
-                                            {width/2, width/4, 3*width/4, 0, width, width/2}, 
-                                            {height, height/2, height/2, 0, 0, 0}
+                                            {0, -width/4, width/4, -width/2, 0, width/2}, 
+                                            {height/2, 0, 0, -height/2, -height/2, -height/2}
                                     };
         int[][] collisionPointsLeft = {
-                                            {width, width/2, width/2, 0, 0, 0}, 
-                                            {height/2, height/4, 3*height/4, 0, height, height/2}
+                                            {width/2, 0, 0, -width/2, -width/2, -width/2}, 
+                                            {0, -height/4, height/4, -height/2, 0, height/2}
                                         };
         int[][] collisionPointsDown = {
-                                            {width/2, width/4, 3*width/4, 0, width, width/2}, 
-                                            {0, height/2, height/2, height, height, height}
+                                            {0, -width/4, width/4, -width/2, 0, width/2}, 
+                                            {-height/2, 0, 0, height/2, height/2, height/2}
                                         };
         switch(direction){
             case 1: return collisionPointsRight;
