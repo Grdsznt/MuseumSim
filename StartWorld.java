@@ -23,7 +23,7 @@ public class StartWorld extends World
     private Button story;
     // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
 
-    private static GreenfootSound music = new GreenfootSound("startMenuBGM.mp3");
+    public static GreenfootSound music = new GreenfootSound("startMenuBGM.mp3");
     private static GreenfootImage backGround1 = new GreenfootImage("museumFrontPage1.png");
     private static GreenfootImage backGround2 = new GreenfootImage("museumFrontPage2.png");
 
@@ -35,7 +35,8 @@ public class StartWorld extends World
         setBackground(backGround1);
         actNum = 0;
         currentBGframe = true;
-        music.playLoop(); //Sometimes music doesn't play when using home button
+        startGame = new Button("startButton", 3);
+        addObject(startGame, 500, 400);
     }
 
     public void act(){

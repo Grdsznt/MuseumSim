@@ -7,7 +7,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Jerry Xing
  * @version 
  */
-public abstract class Button extends Actor
+public class Button extends Actor
 {
     protected static GreenfootSound clickEffect = new GreenfootSound("sounds/click_sound.mp3");
     protected boolean hover = false;

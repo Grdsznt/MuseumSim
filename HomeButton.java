@@ -34,5 +34,6 @@ public class HomeButton extends Button
      */
     public void action() {
         Greenfoot.setWorld(new StartWorld());
+        StartWorld.music.playLoop(); //Music doesn't resume when switching to new StartWorld
     }
 }

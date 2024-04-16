@@ -30,6 +30,7 @@ public class SetUpWorld extends World
         addObject(editNumOfGuards, tempX, tempY);
         
         homeButton = new HomeButton("home", 3);
-        addObject(homeButton, 500, 400);
+        homeButton.setScale(130, 75);
+        addObject(homeButton, 75, 50);
     }
 }
