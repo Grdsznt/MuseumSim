@@ -1,13 +1,12 @@
-    import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * The Guard will have a detector. If it detects any robber by its detector, it will start to catch the robber.
  * 
  * Known bugs:
  * - loadAnimationImages();//!!!!!!!Later put into world
- * - change direction if meet obstacles at the front
  * 
- * @author Jean, Edwin
+ * @author Jean
  * @version Apr 2024
  */
   
@@ -44,6 +43,9 @@ public class Guard extends Human
     private Detector detector;
     private boolean isCatching = false; //Check if it is catching a robber
     
+    //Store the robber it trys to catch
+    private Robber robber;
+    
     public Guard(int direction){
         
         loadAnimationImages();//!!!!!!!Later put into world
@@ -66,70 +68,55 @@ public class Guard extends Human
     
     public void act()
     {
+        //Start to catch the robber if is detected by the detector
         if(detector.detectedRobbers()){
-            catchRobber();
+            catchRobber(detector.getRobber());
+        } else {
+            isCatching = false;
+            robber = null;
         }
         
         //If it is time to animate, animate it
         if((isCatching && aniCount%runGap==0) || (!isCatching && aniCount%walkGap==0)){
             animate();
         }
-        Double preciseX = getPreciseX(), preciseY = getPreciseY();
+        
+        //Change to the opposite direction if facing obstacles in front
+        if(detectedObstacles()){
+            direction = (direction+1)%4+1;
+        }
+        
         //Set its location based on its direction of facing & its catching status
         switch(direction){
             case 1: {
                 if(isCatching){
-                    setLocation(preciseX+runSpeed, preciseY);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) {
-                        setLocation(preciseX, preciseY);
-                    }
+                    setLocation(getPreciseX()+runSpeed, getPreciseY());
                 } else {
-                    setLocation(preciseX+walkSpeed, preciseY);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) {
-                        setLocation(preciseX, preciseY);
-                    }
+                    setLocation(getPreciseX()+walkSpeed, getPreciseY());
                 }
                 break;
             }
             case 2: {
                 if(isCatching){
-                    setLocation(preciseX, preciseY-runSpeed);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) {
-                        setLocation(preciseX, preciseY);
-                    }
+                    setLocation(getPreciseX(), getPreciseY()-runSpeed);
                 } else {
-                    setLocation(preciseX, preciseY-walkSpeed);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) {
-                        setLocation(preciseX, preciseY);
-                    }
+                    setLocation(getPreciseX(), getPreciseY()-walkSpeed);
                 }
                 break;
             }
             case 3: {
                 if(isCatching){
-                    setLocation(preciseX-runSpeed, preciseY);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) {
-                        setLocation(preciseX, preciseY);
-                    }
+                    setLocation(getPreciseX()-runSpeed, getPreciseY());
                 } else {
-                    setLocation(preciseX-walkSpeed, preciseY);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) {
-                        setLocation(preciseX, preciseY);
-                    }
+                    setLocation(getPreciseX()-walkSpeed, getPreciseY());
                 }
                 break;
             }
             case 4: {
                 if(isCatching){
-                    setLocation(preciseX, preciseY+runSpeed);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) {
-                        setLocation(preciseX, preciseY);
-                    }
+                    setLocation(getPreciseX(), getPreciseY()+runSpeed);
                 } else {
-                    setLocation(preciseX, preciseY+walkSpeed);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) {
-                        setLocation(preciseX, preciseY);
-                    }
+                    setLocation(getPreciseX(), getPreciseY()+walkSpeed);
                 }
                 break;
             }
@@ -229,14 +216,183 @@ public class Guard extends Human
     
     /**
      * Catch the robber that is in range.
+     * 
+     * @param detectedRobber    The robber that is detected by its detector, but not the guard itself.
      */
-    public void catchRobber(){
+    public void catchRobber(Robber detectedRobber){
         isCatching = true;
-        //If the Guard touches the Robber, it is catched & removed from the world.
-        if(isTouching(Robber.class)){
-            Robber robber = detector.getRobber();
+        //Follow the robber that is detected by the detector.
+        followRobber(detectedRobber);
+        //If the Guard detects a Robber itself, it is catched & removed from the world. Check right & up & left & down in the range of 32 units.
+        switch(direction){
+            case 1: {
+                this.robber = (Robber)getOneObjectAtOffset(32,0,Robber.class);
+                break;
+            }
+            case 2: {
+                this.robber = (Robber)getOneObjectAtOffset(0,-32,Robber.class);
+                break;
+            }
+            case 3: {
+                this.robber = (Robber)getOneObjectAtOffset(-32,0,Robber.class);
+                break;
+            }
+            default: {
+                this.robber = (Robber)getOneObjectAtOffset(0,32,Robber.class);
+            }
+        }
+        
+        //If a robber is detected
+        if(robber!=null){
             world.removeObject(robber);
             isCatching = false;
+            this.robber = null;
+        }
+    }
+    
+    /**
+     * Follow the robber as it runs.
+     * 
+     * @param detectedRobber    The robber object that is detected by the detector.
+     */
+    public void followRobber(Robber detectedRobber){
+        double robberX = detectedRobber.getPreciseX();
+        double robberY = detectedRobber.getPreciseY();
+        double guardX = this.getPreciseX();
+        double guardY = this.getPreciseY();
+        
+        //If they are at the same x (while moving in y) or y position (while moving in x), do not move the guard.
+        if((direction%2==0 && robberX==guardX) || (direction%2==1 && robberY==guardY)) {
+            return;
+        }
+        
+        //Moving vertically
+        if(direction%2==0){
+            if(robberX<guardX){
+                //Check if we can move left
+                if(getOneObjectAtOffset(0,(int)(robberX-guardX),Object.class)==null){
+                    //If there is some objects in front of the Guard, turn to the other direction where the robber could possibly be at.
+                    if(detectedObstacles()){
+                        this.direction = 3;
+                    } else {
+                        //If there is still spaces in front, do not change direction
+                        double xChange = guardX-robberX;
+                        if(xChange>2){
+                            xChange = 2;
+                        }
+                        setLocation(getX()-xChange, getY());
+                    }
+                }
+            } else {
+                //Check if we can move right
+                if(getOneObjectAtOffset(0,(int)(guardX-robberX),Object.class)==null){
+                    //If there is some objects in front of the Guard, turn to the other direction where the robber could possibly be at.
+                    if(detectedObstacles()){
+                        this.direction = 1;
+                    } else {
+                        //If there is still spaces in front, do not change direction
+                        double xChange = robberX-guardX;
+                        if(xChange>2){
+                            xChange = 2;
+                        }
+                        setLocation(getX()+xChange, getY());
+                    }
+                }
+            }
+            //Check if to change to the opposite direction based on the robber's Y position
+            switch(direction){
+                case 2: {
+                    if(robberY>guardY){
+                        direction = 4;
+                    }
+                }
+                case 4: {
+                    if(robberY<guardY){
+                        direction = 2;
+                    }
+                }
+            }
+        } 
+        //Moving horizontally
+        else {
+            if(robberY<guardY){
+                //Check if we can move up
+                if(getOneObjectAtOffset(0,(int)(robberY-guardY),Object.class)==null){
+                    //If there is some objects in front of the Guard, turn to the other direction where the robber could possibly be at.
+                    if(detectedObstacles()){
+                        this.direction = 2;
+                    } else {
+                        //If there is still spaces in front, do not change direction
+                        double yChange = guardY-robberY;
+                        if(yChange>2){
+                            yChange = 2;
+                        }
+                        setLocation(getX(), getY()-yChange);
+                    }
+                }
+            } else {
+                //Check if we can move down
+                if(getOneObjectAtOffset(0,(int)(guardY-robberY),Object.class)==null){
+                    //If there is some objects in front of the Guard, turn to the other direction where the robber could possibly be at.
+                    if(detectedObstacles()){
+                        this.direction = 4;
+                    } else {
+                        //If there is still spaces in front, do not change direction
+                        double yChange = robberY-guardY;
+                        if(yChange>2){
+                            yChange = 2;
+                        }
+                        setLocation(getX(), getY()+yChange);
+                    }
+                }
+            }
+            //Check if to change to the opposite direction based on the robber's X position
+            switch(direction){
+                case 1: {
+                    if(robberX<guardX){
+                        direction = 3;
+                    }
+                }
+                case 3: {
+                    if(robberX>guardX){
+                        direction = 1;
+                    }
+                }
+            }
+        }
+    }
+    
+    /**
+     * Check if there is any obstacles in front of the Guard.
+     * 
+     * @return boolean  True if there is any obstacles. False otherwise.
+     */
+    public boolean detectedObstacles(){
+        switch(direction){
+            case 1: {
+                if(getOneObjectAtOffset(20,0,Object.class)!=null){
+                    return true;
+                } 
+                return false;
+            }
+            case 2: {
+                if(getOneObjectAtOffset(0,-20,Object.class)!=null){
+                    return true;
+                } 
+                return false;
+            }
+            case 3: {
+                if(getOneObjectAtOffset(-20,0,Object.class)!=null){
+                    return true;
+                } 
+                return false;
+            }
+            default: {
+                if(getOneObjectAtOffset(0,20,Object.class)!=null){
+                    return true;
+                } 
+                return false;
+            }
         }
     }
 }

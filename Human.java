@@ -58,6 +58,7 @@ public class Human extends SuperSmoothMover
         for (Pair p : path) {
             setLocation(p.c*20, p.r*20);
         }
+        
     }
     
     /**
