@@ -8,12 +8,55 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class Art extends Actor
 {
+    protected  Visitor[] visitors;
+    private SpotManager.Spot[] spots;
+    private boolean isNew = false;
+    protected int actNumber;
+    private int len;
+    protected int t=0;//transparency
     /**
      * Act - do whatever the Art wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
+    public Art(SpotManager.Spot[] spots){
+        this.spots = spots;
+        len=spots.length;
+        visitors = new Visitor[len];
+        actNumber = 0;
+        visitors=new Visitor[spots.length];
+    }
+    
+    public void addedToWorld(World w){
+        if(!isNew ){
+            isNew = true;
+            SpotManager.addGame(this);
+        }
+    }
+
     public void act()
     {
-        // Add your action code here.
+    
     }
+    
+    public Vistor[] getVisitors(){
+        return visitors;
+    }
+    
+    
+    public SpotManager.Spot[] getSpots(){
+        return spots;
+    }
+    
+    public void placeVisitors(Visitor v, int spotNumber){
+        visitors[spotNumber] = v;
+    }
+    
+    public boolean isSomeonePlaying(int spotNumber){
+        if(visitors[spotNumber]==null)return false;
+        return visitors[spotNumber].isPlaying();
+    }
+    
+    
+
+    
 }

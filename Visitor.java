@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Visitor extends Human
 {
     private static int numberOfVisitors = 0;
+    public boolean playing  = false; 
     private int visitDuration;// in units of acts
     public Visitor(int time){
         visitDuration = time;
