@@ -8,7 +8,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Furniture extends Object
+/**public class Furniture extends Object
 {
     private int width;
     private int height;
@@ -20,8 +20,9 @@ public class Furniture extends Object
      * Act - do whatever the Furniture wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public void act()
+/**    public void act()
     {
         // Add your action code here.
     }
 }
+*/
