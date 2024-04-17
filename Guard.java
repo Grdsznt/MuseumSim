@@ -1,4 +1,4 @@
-    import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
+import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * The Guard will have a detector. If it detects any robber by its detector, it will start to catch the robber.
@@ -223,11 +223,25 @@ public class Guard extends Human
         isCatching = true;
         //Follow the robber that is detected by the detector.
         followRobber(detectedRobber);
-        //If the Guard detects a Robber itself, it is catched & removed from the world. Check up & down in the range of 32 units.
-        this.robber = (Robber)getOneObjectAtOffset(32,32,Robber.class);
-        if(this.robber == null){
-            this.robber = (Robber)getOneObjectAtOffset(32,-32,Robber.class);
+        //If the Guard detects a Robber itself, it is catched & removed from the world. Check right & up & left & down in the range of 32 units.
+        switch(direction){
+            case 1: {
+                this.robber = (Robber)getOneObjectAtOffset(32,0,Robber.class);
+                break;
+            }
+            case 2: {
+                this.robber = (Robber)getOneObjectAtOffset(0,-32,Robber.class);
+                break;
+            }
+            case 3: {
+                this.robber = (Robber)getOneObjectAtOffset(-32,0,Robber.class);
+                break;
+            }
+            default: {
+                this.robber = (Robber)getOneObjectAtOffset(0,32,Robber.class);
+            }
         }
+        
         //If a robber is detected
         if(robber!=null){
             world.removeObject(robber);
@@ -285,6 +299,19 @@ public class Guard extends Human
                     }
                 }
             }
+            //Check if to change to the opposite direction based on the robber's Y position
+            switch(direction){
+                case 2: {
+                    if(robberY>guardY){
+                        direction = 4;
+                    }
+                }
+                case 4: {
+                    if(robberY<guardY){
+                        direction = 2;
+                    }
+                }
+            }
         } 
         //Moving horizontally
         else {
@@ -316,6 +343,19 @@ public class Guard extends Human
                             yChange = 2;
                         }
                         setLocation(getX(), getY()+yChange);
+                    }
+                }
+            }
+            //Check if to change to the opposite direction based on the robber's X position
+            switch(direction){
+                case 1: {
+                    if(robberX<guardX){
+                        direction = 3;
+                    }
+                }
+                case 3: {
+                    if(robberX>guardX){
+                        direction = 1;
                     }
                 }
             }
