@@ -35,8 +35,9 @@ public class StartWorld extends World
         setBackground(backGround1);
         actNum = 0;
         currentBGframe = true;
-        startGame = new Button("startButton", 3);
+        startGame = new StartButton("startButton", 3);
         addObject(startGame, 500, 400);
+        Button.init();
     }
 
     public void act(){

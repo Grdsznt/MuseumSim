@@ -7,9 +7,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Jerry Xing
  * @version 
  */
-public class Button extends Actor
+public abstract class Button extends Actor
 {
-    protected static GreenfootSound clickEffect = new GreenfootSound("sounds/click_sound.mp3");
+    protected static GreenfootSound[] clickEffects;
+    protected static int clickIndex;
     protected boolean hover = false;
     protected boolean mouseDown = false;
     protected GreenfootImage[] imageStates;
@@ -60,7 +61,7 @@ public class Button extends Actor
         }
                                                                                                                                                                                                                                                                        
         if (Greenfoot.mouseClicked(this) && mouseDown) {
-            clickEffect.play();
+            playClickSound();
             action();
             mouseDown = false;
             if (imageStates.length > 2) {
@@ -92,5 +93,23 @@ public class Button extends Actor
      */
     public void action() {
         // Does nothing. Should be added in the subclasses
+    }
+    
+    public static void init() {
+        clickIndex = 0;
+        clickEffects = new GreenfootSound[30];
+        for (int i=0;i<clickEffects.length;i++) {
+            clickEffects[i] = new GreenfootSound("click_sound.mp3");
+            clickEffects[i].setVolume(40);
+        }
+    }
+    
+    //Code from Mr. Cohen
+    public void playClickSound() {
+        clickEffects[clickIndex].play();
+        clickIndex++;
+        if (clickIndex >= clickEffects.length){
+            clickIndex = 0;
+        }
     }
 }

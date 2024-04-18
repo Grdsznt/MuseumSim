@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class HomeButton extends Button
 {
+    
     /**
      * The construtor for the Button
      * @param imageStates where the image is located
@@ -36,4 +37,5 @@ public class HomeButton extends Button
         Greenfoot.setWorld(new StartWorld());
         StartWorld.music.playLoop(); //Music doesn't resume when switching to new StartWorld
     }
+    
 }

@@ -32,5 +32,6 @@ public class SetUpWorld extends World
         homeButton = new HomeButton("home", 3);
         homeButton.setScale(130, 75);
         addObject(homeButton, 75, 50);
+        Button.init();
     }
 }
