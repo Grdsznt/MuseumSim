@@ -9,8 +9,22 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Visitor extends Human
 {
     private static int numberOfVisitors = 0;
-    public boolean playing  = false; 
+    protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false;
     private int visitDuration;// in units of acts
+    private SpotManager.DetailedSpot target;
+    
+    public void addedToWorld(World w){
+        if(!isNew){//prevent z sort problems
+            isNew=true;
+            //attempts to target, if unable then remove as would do nothing
+            target=SpotManager.attemptTarget(this);
+            if(target==null)getWorld().removeObject(this);
+        }
+        
+        MuseumRoom2.income +=100;
+        
+    }
+   
     public Visitor(int time){
         visitDuration = time;
         numberOfVisitors++;
@@ -22,16 +36,22 @@ public class Visitor extends Human
     public void act()
     {
         // Add your action code here.
+        
+        
+        
         if(visitDuration <= 0){
             numberOfVisitors--;
             getWorld().removeObject(this);
         }
         visitDuration--;
     }
+    
+    
     //get the number of visitors
     public static int getNumVisitors(){
         return numberOfVisitors;
     }
+    
     
     
 }

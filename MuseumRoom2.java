@@ -25,7 +25,7 @@ public class MuseumRoom2 extends Room
     private Object pillar1 = new Object(39, 100); // (69, 665), (108, 566)
     private Object pillar2 = new Object(39, 100); // (536, 665), (574, 566)
     
-    
+    public static int income = 0;
     public MuseumRoom2()
     { 
         super(661,816,0, 0);
