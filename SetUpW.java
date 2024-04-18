@@ -1,14 +1,15 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.*;
+import java.lang.Math;
 /**
  * Write a description of class SetUp here.
  * 
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class SetUp extends World
+public class SetUpW extends World
 {
-     // instance variables - replace the example below with your own
+    // instance variables - replace the example below with your ownd
     private int counter = 0;
     private MouseInfo m;
     private Circle[] population, patient_zeros, masked, vaccinated;
@@ -18,7 +19,7 @@ public class SetUp extends World
     /**
      * Constructor for objects of class StartingWorld
      */
-    public SetUp()
+    public SetUpW()
     {
         super(1280, 700, 1);
         population = new Circle[4];

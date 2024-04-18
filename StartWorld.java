@@ -49,7 +49,7 @@ public class StartWorld extends World
             //String keyPressed = Greenfoot.getKey();
             if(Greenfoot.mouseClicked(this)){
                 music.pause();
-                Greenfoot.setWorld(new SetUp());
+                Greenfoot.setWorld(new SetUpW());
             }
         }
         actNum++;
