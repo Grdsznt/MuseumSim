@@ -109,4 +109,5 @@ public class Human extends SuperSmoothMover
         return path;
     }
     
+    
 }
