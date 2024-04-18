@@ -55,7 +55,6 @@ public class Robber extends Human
     public void act()
     {
         //testing animation
-        
         if (Greenfoot.isKeyDown("up")) {
             direction = 2;
             setLocation(getX(), getY() - speed); // Move up
@@ -146,6 +145,23 @@ public class Robber extends Human
                     curValuable = null;
                     targetValuable = null;// No more targets
                 }
+            }
+            switch(direction){
+                case 1:
+                    setImage(FramesRight[frameNum]);//face right
+                    break;
+                case 2:
+                    setImage(FramesUp[frameNum]);//face up
+                    break;
+                case 3:
+                    setImage(FramesLeft[frameNum]);//face left
+                    break;
+                case 4:
+                    setImage(FramesDown[frameNum]);//face down
+                    break;
+                default:
+                    setImage(FramesDown[frameNum]);//face down defaultly
+                    break;
             }
             robThatSh1t();
         }
