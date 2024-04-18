@@ -84,7 +84,7 @@ public class MuseumRoom2 extends Room
         addObject(wallSegRight, 524, 218);
         wallSegRight.setImage(new GreenfootImage(117, 64));
         
-        addObject(rob1, 500, 500);
+        addObject(rob1, 300, 500);
     }
     
     public void act() {

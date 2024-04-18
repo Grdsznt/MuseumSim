@@ -2,6 +2,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
 import java.lang.Math;
 import java.util.Random;
+import java.util.*;
 /**
  * Write a description of class Robber here.
  * 
@@ -56,24 +57,44 @@ public class Robber extends Human
     {
         //testing animation
         if (Greenfoot.isKeyDown("up")) {
-            direction = 2;
-            setLocation(getX(), getY() - speed); // Move up
-            isMoving = true;
+            int curX = getX(), curY = getY();
+            setLocation(curX, curY - speed); // Move up
+            if (!detectedObstacles()) {
+                direction = 2;
+                isMoving = true;
+            } else {
+                setLocation(curX, curY); // Move back if detected obstacle
+            }
         }
         else if (Greenfoot.isKeyDown("down")) {
-            setLocation(getX(), getY() + speed); // Move down
-            direction = 4;
-            isMoving = true;
+            int curX = getX(), curY = getY();
+            setLocation(curX, curY + speed); // Move down
+            if (!detectedObstacles()) {
+                direction = 4;
+                isMoving = true;
+            } else {
+                setLocation(curX, curY); // Move back if detected obstacle
+            }
         }
         else if (Greenfoot.isKeyDown("left")) {
-            setLocation(getX() - speed, getY()); // Move left
-            direction = 3;
-            isMoving = true;
+            int curX = getX(), curY = getY();
+            setLocation(curX-speed, curY); // Move left
+            if (!detectedObstacles()) {
+                direction = 3;
+                isMoving = true;
+            } else {
+                setLocation(curX, curY); // Move back if detected obstacle
+            }
         }
         else if (Greenfoot.isKeyDown("right")) {
-            setLocation(getX() + speed, getY()); // Move right
-            direction = 1;
-            isMoving = true;
+            int curX = getX(), curY = getY();
+            setLocation(curX+speed, curY); // Move right
+            if (!detectedObstacles()) {
+                direction = 1;
+                isMoving = true;
+            } else {
+                setLocation(curX, curY); // Move back if detected obstacle
+            }
         }
         else{
             isMoving = false;
@@ -236,5 +257,34 @@ public class Robber extends Human
             setImage("Robber/rob.Left0.png");
         if(direction == 4)
             setImage("Robber/rob.Down0.png");
+    }
+     
+    public boolean detectedObstacles(){
+        switch(direction){
+            case 1: {
+                if(getOneObjectAtOffset(20,0,Object.class)!=null){
+                    return true;
+                } 
+                return false;
+            }
+            case 2: {
+                if(getOneObjectAtOffset(0,-20,Object.class)!=null){
+                    return true;
+                } 
+                return false;
+            }
+            case 3: {
+                if(getOneObjectAtOffset(-20,0,Object.class)!=null){
+                    return true;
+                } 
+                return false;
+            }
+            default: {
+                if(getOneObjectAtOffset(0,20,Object.class)!=null){
+                    return true;
+                } 
+                return false;
+            }
+        }
     }
 }
