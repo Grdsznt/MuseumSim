@@ -1,7 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-import java.util.ArrayList;
+import java.util.*;
 import java.lang.Math;
-import java.util.Random;
 /**
  * Write a description of class Robber here.
  * 
