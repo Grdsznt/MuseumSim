@@ -42,11 +42,11 @@ public class Robber extends Human
     private List<Pair> path;
     Pair curValuable;
     public Robber(double s, int tR, int D){
-        direction = D;
-        setIdleImage();
+        direction = D; 
         speed = s; targetRadius = tR;
         hasStolen = false; actNum = 0; frameNum = 0;
         enableStaticRotation(); isMoving = false;
+        setIdleImage();
     }
 
     /**
@@ -260,31 +260,33 @@ public class Robber extends Human
     }
      
     public boolean detectedObstacles(){
-        switch(direction){
-            case 1: {
-                if(getOneObjectAtOffset(20,0,Object.class)!=null){
-                    return true;
-                } 
-                return false;
-            }
-            case 2: {
-                if(getOneObjectAtOffset(0,-20,Object.class)!=null){
-                    return true;
-                } 
-                return false;
-            }
-            case 3: {
-                if(getOneObjectAtOffset(-20,0,Object.class)!=null){
-                    return true;
-                } 
-                return false;
-            }
-            default: {
-                if(getOneObjectAtOffset(0,20,Object.class)!=null){
-                    return true;
-                } 
-                return false;
-            }
-        }
+        if (getIntersectingObjects(Object.class).size() != 0) return true;
+        return false;
+        // switch(direction){
+            // case 1: {
+                // if(getOneObjectAtOffset(20,0,Object.class)!=null){
+                    // return true;
+                // } 
+                // return false;
+            // }
+            // case 2: {
+                // if(getOneObjectAtOffset(0,-20,Object.class)!=null){
+                    // return true;
+                // } 
+                // return false;
+            // }
+            // case 3: {
+                // if(getOneObjectAtOffset(-20,0,Object.class)!=null){
+                    // return true;
+                // } 
+                // return false;
+            // }
+            // default: {
+                // if(getOneObjectAtOffset(0,20,Object.class)!=null){
+                    // return true;
+                // } 
+                // return false;
+            // }
+        // }
     }
 }
