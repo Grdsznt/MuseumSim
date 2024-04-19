@@ -13,6 +13,8 @@ public class Visitor extends Human
     private int visitDuration;// in units of acts
     private SpotManager.DetailedSpot target;
     
+    
+    
     public void addedToWorld(World w){
         if(!isNew){//prevent z sort problems
             isNew=true;
@@ -20,6 +22,8 @@ public class Visitor extends Human
             target=SpotManager.attemptTarget(this);
             if(target==null)getWorld().removeObject(this);
         }
+        
+        
         
         MuseumRoom2.income +=100;
         
@@ -35,15 +39,7 @@ public class Visitor extends Human
      */
     public void act()
     {
-        // Add your action code here.
         
-        
-        
-        if(visitDuration <= 0){
-            numberOfVisitors--;
-            getWorld().removeObject(this);
-        }
-        visitDuration--;
     }
     
     

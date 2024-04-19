@@ -20,15 +20,15 @@ import java.util.*;
  */
 public class SpotManager  
 {
-    private static final int numberOfGames = 14;
-    private static Game[] games = new Game[numberOfGames];
+    private static final int numberOfArts = 7;
+    private static Art[] arts = new Art[numberOfArts];
     private static int i=0;
     /**
      * <p><strong>static void resetIndex()</strong> - Resets the condition.</p>
      */
     public static void reset(){
         i=0;
-        games = new Game[numberOfGames];
+        Art = new Game[numberOfGames];
     }
     public static Game[] getGames(){
         return games;

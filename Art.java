@@ -33,9 +33,9 @@ public class Art extends Actor
         }
     }
 
-    public void act()
-    {
-    
+    public void act(){
+        
+        
     }
     
     public Vistor[] getVisitors(){
@@ -50,13 +50,5 @@ public class Art extends Actor
     public void placeVisitors(Visitor v, int spotNumber){
         visitors[spotNumber] = v;
     }
-    
-    public boolean isSomeonePlaying(int spotNumber){
-        if(visitors[spotNumber]==null)return false;
-        return visitors[spotNumber].isPlaying();
-    }
-    
-    
-
     
 }
