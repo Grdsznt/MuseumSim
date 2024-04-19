@@ -60,7 +60,7 @@ public class DisplayResults extends World
         // }
         if(Greenfoot.mouseClicked(this)){
             //music.stop();
-            Greenfoot.setWorld(new StartWorld());
+            Greenfoot.setWorld(new StartWorld(true));
         }
     }
     
