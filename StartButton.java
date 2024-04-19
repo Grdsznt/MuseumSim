@@ -56,5 +56,6 @@ public class StartButton extends Button
     }
     public void action() {
         Greenfoot.setWorld(new Main());
+        StartWorld.music.playLoop();
     }
 }
