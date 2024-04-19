@@ -9,6 +9,10 @@ public class Object extends Actor
     public Object(int width, int height){
         // setHitBox(width, height);
         this.width = width; this.height = height;
+        this.setImage(new GreenfootImage(width, height));
+        
+        GreenfootImage img = this.getImage();
+        img.setColor(new Color(0, 0, 0, 255));
     }
     /**
      * Act - do whatever the Object wants to do. This method is called whenever
@@ -16,7 +20,7 @@ public class Object extends Actor
      */
     public void act()
     {
-        // Add your action code here.
+
     }
     public void setHitBox(int width, int height){
         if(this != null){
