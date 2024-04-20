@@ -169,19 +169,19 @@ public class Robber extends Human
             }
             switch(direction){
                 case 1:
-                    setImage(FramesRight[frameNum]);//face right
+                    setImage(framesRight[frameNum]);//face right
                     break;
                 case 2:
-                    setImage(FramesUp[frameNum]);//face up
+                    setImage(framesUp[frameNum]);//face up
                     break;
                 case 3:
-                    setImage(FramesLeft[frameNum]);//face left
+                    setImage(framesLeft[frameNum]);//face left
                     break;
                 case 4:
-                    setImage(FramesDown[frameNum]);//face down
+                    setImage(framesDown[frameNum]);//face down
                     break;
                 default:
-                    setImage(FramesDown[frameNum]);//face down defaultly
+                    setImage(framesDown[frameNum]);//face down defaultly
                     break;
             }
             robThatSh1t();
