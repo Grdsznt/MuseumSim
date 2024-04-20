@@ -372,27 +372,24 @@ public class Guard extends Human
             case 1: {
                 if(getOneObjectAtOffset(20,0,Object.class)!=null){
                     return true;
-                } 
-                return false;
+                }
             }
             case 2: {
                 if(getOneObjectAtOffset(0,-20,Object.class)!=null){
                     return true;
-                } 
-                return false;
+                }
             }
             case 3: {
                 if(getOneObjectAtOffset(-20,0,Object.class)!=null){
                     return true;
-                } 
-                return false;
+                }
             }
             default: {
                 if(getOneObjectAtOffset(0,20,Object.class)!=null){
                     return true;
-                } 
-                return false;
+                }
             }
         }
+        return false;
     }
 }
