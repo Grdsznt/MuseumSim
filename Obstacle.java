@@ -3,10 +3,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Valuable Objects found in each room 
  */
-public class Object extends Actor 
+public class Obstacle extends Actor 
 {
     private int hitBoxTop, hitBoxBot, hitBoxLeft, hitBoxRight, width, height;
-    public Object(int width, int height){
+    public Obstacle(int width, int height){
         // setHitBox(width, height);
         this.width = width; this.height = height;
         this.setImage(new GreenfootImage(width, height));
