@@ -16,23 +16,23 @@ public class MuseumRoom2 extends Room
     
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
-    private Object displayTable1 = new Object(84, 49); //  (285, 723), (369, 674)
-    private Object displayTable2 = new Object(73, 64); // (144, 544), (217, 480)
-    private Object brokenGlassBox = new Object(85, 118); // (283, 272), (368, 154) //broken glass
-    private Object littleGlassBox = new Object(31, 43); // (76, 140), (107, 97) // little top right box
-    private Object largeWoodBox = new Object(106, 62); // (274, 402), (380, 346) // saturated brown box
-    private Object mediumGlassBox = new Object(71, 61); // (424, 544), (495, 483)
-    private Object statue1 = new Object(44, 68); // (89, 414), (133, 346)
-    private Object statue2 = new Object(44, 68); // (513, 414), (556, 346)
-    private Object pillar1 = new Object(39, 100); // (69, 665), (108, 566)
-    private Object pillar2 = new Object(39, 100); // (536, 665), (574, 566)
-    private Object leftWall = new Object(62, 548);
-    private Object rightWall = new Object(62, 548);
-    private Object topWall = new Object(513, 92);
-    private Object wallSegLeft = new Object(117, 64);
-    private Object wallSegRight = new Object(117, 64);
+    private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
+    private Obstacle displayTable2 = new Obstacle(73, 64); // (144, 544), (217, 480)
+    private Obstacle brokenGlassBox = new Obstacle(85, 118); // (283, 272), (368, 154) //broken glass
+    private Obstacle littleGlassBox = new Obstacle(31, 43); // (76, 140), (107, 97) // little top right box
+    private Obstacle largeWoodBox = new Obstacle(106, 62); // (274, 402), (380, 346) // saturated brown box
+    private Obstacle mediumGlassBox = new Obstacle(71, 61); // (424, 544), (495, 483)
+    private Obstacle statue1 = new Obstacle(44, 68); // (89, 414), (133, 346)
+    private Obstacle statue2 = new Obstacle(44, 68); // (513, 414), (556, 346)
+    private Obstacle pillar1 = new Obstacle(39, 100); // (69, 665), (108, 566)
+    private Obstacle pillar2 = new Obstacle(39, 100); // (536, 665), (574, 566)
+    private Obstacle leftWall = new Obstacle(62, 548);
+    private Obstacle rightWall = new Obstacle(62, 548);
+    private Obstacle topWall = new Obstacle(513, 92);
+    private Obstacle wallSegLeft = new Obstacle(117, 64);
+    private Obstacle wallSegRight = new Obstacle(117, 64);
     
-    private Robber rob1 = new Robber(5, 50, 1);
+    private Robber rob1 = new Robber(5, 800, 1);
     
     public MuseumRoom2()
     { 
@@ -85,6 +85,9 @@ public class MuseumRoom2 extends Room
         // wallSegRight.setImage(new GreenfootImage(117, 64));
         
         addObject(rob1, 300, 500);
+        
+        Valuable v = new Valuable(200.50);
+        addObject(v, 92, 119);
     }
     
     public void act() {

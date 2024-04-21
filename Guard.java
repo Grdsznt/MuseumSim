@@ -270,7 +270,7 @@ public class Guard extends Human
         if(direction%2==0){
             if(robberX<guardX){
                 //Check if we can move left
-                if(getOneObjectAtOffset(0,(int)(robberX-guardX),Object.class)==null){
+                if(getOneObjectAtOffset(0,(int)(robberX-guardX),Obstacle.class)==null){
                     //If there is some objects in front of the Guard, turn to the other direction where the robber could possibly be at.
                     if(detectedObstacles()){
                         this.direction = 3;
@@ -285,7 +285,7 @@ public class Guard extends Human
                 }
             } else {
                 //Check if we can move right
-                if(getOneObjectAtOffset(0,(int)(guardX-robberX),Object.class)==null){
+                if(getOneObjectAtOffset(0,(int)(guardX-robberX),Obstacle.class)==null){
                     //If there is some objects in front of the Guard, turn to the other direction where the robber could possibly be at.
                     if(detectedObstacles()){
                         this.direction = 1;
@@ -317,7 +317,7 @@ public class Guard extends Human
         else {
             if(robberY<guardY){
                 //Check if we can move up
-                if(getOneObjectAtOffset(0,(int)(robberY-guardY),Object.class)==null){
+                if(getOneObjectAtOffset(0,(int)(robberY-guardY),Obstacle.class)==null){
                     //If there is some objects in front of the Guard, turn to the other direction where the robber could possibly be at.
                     if(detectedObstacles()){
                         this.direction = 2;
@@ -332,7 +332,7 @@ public class Guard extends Human
                 }
             } else {
                 //Check if we can move down
-                if(getOneObjectAtOffset(0,(int)(guardY-robberY),Object.class)==null){
+                if(getOneObjectAtOffset(0,(int)(guardY-robberY),Obstacle.class)==null){
                     //If there is some objects in front of the Guard, turn to the other direction where the robber could possibly be at.
                     if(detectedObstacles()){
                         this.direction = 4;
@@ -370,22 +370,22 @@ public class Guard extends Human
     public boolean detectedObstacles(){
         switch(direction){
             case 1: {
-                if(getOneObjectAtOffset(20,0,Object.class)!=null){
+                if(getOneObjectAtOffset(20,0,Obstacle.class)!=null){
                     return true;
                 }
             }
             case 2: {
-                if(getOneObjectAtOffset(0,-20,Object.class)!=null){
+                if(getOneObjectAtOffset(0,-20,Obstacle.class)!=null){
                     return true;
                 }
             }
             case 3: {
-                if(getOneObjectAtOffset(-20,0,Object.class)!=null){
+                if(getOneObjectAtOffset(-20,0,Obstacle.class)!=null){
                     return true;
                 }
             }
             default: {
-                if(getOneObjectAtOffset(0,20,Object.class)!=null){
+                if(getOneObjectAtOffset(0,20,Obstacle.class)!=null){
                     return true;
                 }
             }
