@@ -55,7 +55,25 @@ public class Visitor extends Human
     private int actNum, frameNum, speed;
     private boolean mollyOrAdam;//true is molly, false is adam
     private int direction;//1 right, 2 up, 3 left, 4 down
+    
+    protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false;
+    private SpotManager.DetailedSpot target;
+    
     public Visitor(int time, int speed){
+        
+    }
+    
+    public void addedToWorld(World w){
+        if(!isNew){//prevent z sort problems
+            isNew=true;
+            //attempts to target, if unable then remove as would do nothing
+            target=SpotManager.attemptTarget(this);
+            if(target==null)getWorld().removeObject(this);
+        }
+        MuseumRoom.income +=100;        
+    }
+   
+    public Visitor(int time){
         visitDuration = time;
         numberOfVisitors++;
         willReadBook = false; willLookPhone = false; isMoving = false;
@@ -283,8 +301,13 @@ public class Visitor extends Human
     private void expressEmotion(){
         getWorld().addObject(new Emote(1), getX() + 16, getY() - 24);
     }
+       
+    
     //get the number of visitors
     public static int getNumVisitors(){
         return numberOfVisitors;
     }
+    
+    
+    
 }
