@@ -23,7 +23,6 @@ dependency15.type=UsesDependency
 dependency16.from=Robber
 dependency16.to=Valuable
 dependency16.type=UsesDependency
-<<<<<<< Updated upstream
 dependency17.from=Robber
 dependency17.to=Object
 dependency17.type=UsesDependency
@@ -32,59 +31,27 @@ dependency18.to=Guard
 dependency18.type=UsesDependency
 dependency19.from=Detector
 dependency19.to=Robber
-=======
-dependency17.from=Detector
-dependency17.to=Guard
-dependency17.type=UsesDependency
-dependency18.from=Detector
-dependency18.to=Robber
-dependency18.type=UsesDependency
-dependency19.from=HomeButton
-dependency19.to=StartWorld
->>>>>>> Stashed changes
 dependency19.type=UsesDependency
 dependency2.from=MuseumRoom2
 dependency2.to=Object
 dependency2.type=UsesDependency
-<<<<<<< Updated upstream
 dependency20.from=HomeButton
 dependency20.to=StartWorld
 dependency20.type=UsesDependency
-dependency21.from=StartButton
-dependency21.to=Main
+dependency21.from=Valuable
+dependency21.to=Robber
 dependency21.type=UsesDependency
-dependency22.from=StartButton
-dependency22.to=StartWorld
-dependency22.type=UsesDependency
-dependency23.from=Valuable
-dependency23.to=Robber
-dependency23.type=UsesDependency
-dependency3.from=DisplayResults
-dependency3.to=HomeButton
-=======
-dependency20.from=Valuable
-dependency20.to=Robber
-dependency20.type=UsesDependency
 dependency3.from=EndScreen
 dependency3.to=SuperTextBox
->>>>>>> Stashed changes
 dependency3.type=UsesDependency
 dependency4.from=EndScreen
 dependency4.to=SuperDisplayLabel
 dependency4.type=UsesDependency
-<<<<<<< Updated upstream
-dependency5.from=RuinedMuseum
-dependency5.to=DropDownMenu
-dependency5.type=UsesDependency
-dependency6.from=MuseumRoom2
-dependency6.to=Object
-=======
 dependency5.from=EndScreen
 dependency5.to=HomeButton
 dependency5.type=UsesDependency
 dependency6.from=EndScreen
 dependency6.to=StartWorld
->>>>>>> Stashed changes
 dependency6.type=UsesDependency
 dependency7.from=StartWorld
 dependency7.to=Button
@@ -95,23 +62,13 @@ dependency8.type=UsesDependency
 dependency9.from=SetUpWorld
 dependency9.to=HomeButton
 dependency9.type=UsesDependency
-<<<<<<< Updated upstream
-editor.fx.0.height=686
-editor.fx.0.width=1294
-editor.fx.0.x=-7
-editor.fx.0.y=-7
-height=686
-package.numDependencies=23
-package.numTargets=34
-=======
-editor.fx.0.height=918
-editor.fx.0.width=780
-editor.fx.0.x=-6
-editor.fx.0.y=0
+editor.fx.0.height=27
+editor.fx.0.width=159
+editor.fx.0.x=-25600
+editor.fx.0.y=-25600
 height=926
-package.numDependencies=20
+package.numDependencies=21
 package.numTargets=32
->>>>>>> Stashed changes
 project.charset=UTF-8
 publish.hasSource=false
 publish.locked=true
@@ -122,7 +79,7 @@ publish.title=
 publish.url=
 readme.height=60
 readme.name=@README
-readme.width=48
+readme.width=49
 readme.x=10
 readme.y=10
 simulation.speed=50
@@ -155,56 +112,34 @@ target12.width=120
 target12.x=0
 target12.y=0
 target13.height=70
-<<<<<<< Updated upstream
-target13.name=Spots
-=======
 target13.name=Guard
->>>>>>> Stashed changes
 target13.showInterface=false
 target13.type=ClassTarget
 target13.width=120
 target13.x=0
 target13.y=0
 target14.height=70
-<<<<<<< Updated upstream
-target14.name=SettingsButton
-=======
 target14.name=VolumeButton
->>>>>>> Stashed changes
 target14.showInterface=false
 target14.type=ClassTarget
 target14.width=120
 target14.x=0
 target14.y=0
 target15.height=70
-<<<<<<< Updated upstream
-target15.name=Guard
-=======
 target15.name=RuinedMuseum
->>>>>>> Stashed changes
 target15.showInterface=false
 target15.type=ClassTarget
 target15.width=120
 target15.x=0
 target15.y=0
 target16.height=70
-target16.name=VolumeButton
+target16.name=Room
 target16.showInterface=false
-target16.type=ClassTarget
+target16.type=AbstractTarget
 target16.width=120
 target16.x=0
 target16.y=0
 target17.height=70
-<<<<<<< Updated upstream
-target17.name=RuinedMuseum
-target17.showInterface=false
-target17.type=ClassTarget
-target17.width=120
-target17.x=0
-target17.y=0
-target18.height=70
-target18.name=Room
-=======
 target17.name=SuperDisplayLabel
 target17.showInterface=false
 target17.type=ClassTarget
@@ -213,18 +148,13 @@ target17.x=0
 target17.y=0
 target18.height=70
 target18.name=Human
->>>>>>> Stashed changes
 target18.showInterface=false
-target18.type=AbstractTarget
-target18.width=120
+target18.type=ClassTarget
+target18.width=130
 target18.x=0
 target18.y=0
 target19.height=70
-<<<<<<< Updated upstream
-target19.name=MyWorld
-=======
 target19.name=Valuable
->>>>>>> Stashed changes
 target19.showInterface=false
 target19.type=ClassTarget
 target19.width=120
@@ -238,110 +168,70 @@ target2.width=120
 target2.x=0
 target2.y=0
 target20.height=70
-<<<<<<< Updated upstream
-target20.name=SuperDisplayLabel
-=======
 target20.name=DropDownMenu
->>>>>>> Stashed changes
 target20.showInterface=false
 target20.type=ClassTarget
-target20.width=130
+target20.width=120
 target20.x=0
 target20.y=0
 target21.height=70
-<<<<<<< Updated upstream
-target21.name=Human
-=======
 target21.name=EndScreen
->>>>>>> Stashed changes
 target21.showInterface=false
 target21.type=ClassTarget
-target21.width=130
+target21.width=120
 target21.x=0
 target21.y=0
 target22.height=70
-<<<<<<< Updated upstream
-target22.name=Valuable
-=======
 target22.name=StartWorld
->>>>>>> Stashed changes
 target22.showInterface=false
 target22.type=ClassTarget
 target22.width=120
 target22.x=0
 target22.y=0
 target23.height=70
-<<<<<<< Updated upstream
-target23.name=DropDownMenu
-=======
 target23.name=LoadingScreen
->>>>>>> Stashed changes
 target23.showInterface=false
 target23.type=ClassTarget
 target23.width=120
 target23.x=0
 target23.y=0
 target24.height=70
-<<<<<<< Updated upstream
-target24.name=Emote
-=======
 target24.name=Nighttime
->>>>>>> Stashed changes
 target24.showInterface=false
 target24.type=ClassTarget
 target24.width=120
 target24.x=0
 target24.y=0
 target25.height=70
-<<<<<<< Updated upstream
-target25.name=StartWorld
-=======
 target25.name=Detector
->>>>>>> Stashed changes
 target25.showInterface=false
 target25.type=ClassTarget
 target25.width=120
 target25.x=0
 target25.y=0
 target26.height=70
-<<<<<<< Updated upstream
-target26.name=StartButton
-=======
 target26.name=SetUpWorld
->>>>>>> Stashed changes
 target26.showInterface=false
 target26.type=ClassTarget
 target26.width=120
 target26.x=0
 target26.y=0
 target27.height=70
-<<<<<<< Updated upstream
-target27.name=Detector
-=======
 target27.name=SuperTextBox
->>>>>>> Stashed changes
 target27.showInterface=false
 target27.type=ClassTarget
 target27.width=120
 target27.x=0
 target27.y=0
 target28.height=70
-<<<<<<< Updated upstream
-target28.name=SetUpWorld
-=======
 target28.name=Buttons
->>>>>>> Stashed changes
 target28.showInterface=false
 target28.type=ClassTarget
 target28.width=120
 target28.x=0
 target28.y=0
 target29.height=70
-<<<<<<< Updated upstream
-target29.name=SuperTextBox
-=======
 target29.name=Effect
->>>>>>> Stashed changes
 target29.showInterface=false
 target29.type=AbstractTarget
 target29.width=120
@@ -355,57 +245,26 @@ target3.width=120
 target3.x=0
 target3.y=0
 target30.height=70
-<<<<<<< Updated upstream
-target30.name=Buttons
-=======
 target30.name=Object
->>>>>>> Stashed changes
 target30.showInterface=false
 target30.type=ClassTarget
 target30.width=120
 target30.x=0
 target30.y=0
 target31.height=70
-<<<<<<< Updated upstream
-target31.name=Effect
-target31.showInterface=false
-target31.type=AbstractTarget
-=======
 target31.name=Main
 target31.showInterface=false
 target31.type=ClassTarget
->>>>>>> Stashed changes
 target31.width=120
 target31.x=0
 target31.y=0
 target32.height=70
-<<<<<<< Updated upstream
-target32.name=Object
-=======
 target32.name=Robber
->>>>>>> Stashed changes
 target32.showInterface=false
 target32.type=ClassTarget
 target32.width=120
 target32.x=0
 target32.y=0
-<<<<<<< Updated upstream
-target33.height=70
-target33.name=Main
-target33.showInterface=false
-target33.type=ClassTarget
-target33.width=120
-target33.x=0
-target33.y=0
-target34.height=70
-target34.name=Robber
-target34.showInterface=false
-target34.type=ClassTarget
-target34.width=120
-target34.x=0
-target34.y=0
-=======
->>>>>>> Stashed changes
 target4.height=70
 target4.name=Visitor
 target4.showInterface=false
@@ -449,12 +308,7 @@ target9.width=120
 target9.x=0
 target9.y=0
 version=3.1.0
-<<<<<<< Updated upstream
-width=1294
-world.lastInstantiated=RuinedMuseum
-=======
 width=1550
 world.lastInstantiated=LoadingScreen
->>>>>>> Stashed changes
 xPosition=0
 yPosition=0
