@@ -1,6 +1,8 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 import java.lang.Math;
+import java.util.Random;
+import java.util.*;
 /**
  * Write a description of class Robber here.
  * 
@@ -10,19 +12,19 @@ import java.lang.Math;
 public class Robber extends Human
 {
     //add frames to for the robber character
-    private static GreenfootImage[] FramesRight = {
+    private static GreenfootImage[] framesRight = {
             new GreenfootImage("Robber/rob.Right0.png"),new GreenfootImage("Robber/rob.Right1.png"),new GreenfootImage("Robber/rob.Right2.png"),
             new GreenfootImage("Robber/rob.Right3.png"),new GreenfootImage("Robber/rob.Right4.png"),new GreenfootImage("Robber/rob.Right5.png"),
             new GreenfootImage("Robber/rob.Right6.png")};
-    private static GreenfootImage[] FramesUp = {
+    private static GreenfootImage[] framesUp = {
             new GreenfootImage("Robber/rob.Up0.png"),new GreenfootImage("Robber/rob.Up1.png"),new GreenfootImage("Robber/rob.Up2.png"),
             new GreenfootImage("Robber/rob.Up3.png"),new GreenfootImage("Robber/rob.Up4.png"),new GreenfootImage("Robber/rob.Up5.png"),
             new GreenfootImage("Robber/rob.Up6.png")};
-    private static GreenfootImage[] FramesLeft = {
+    private static GreenfootImage[] framesLeft = {
             new GreenfootImage("Robber/rob.Left0.png"),new GreenfootImage("Robber/rob.Left1.png"),new GreenfootImage("Robber/rob.Left2.png"),
             new GreenfootImage("Robber/rob.Left3.png"),new GreenfootImage("Robber/rob.Left4.png"),new GreenfootImage("Robber/rob.Left5.png"),
             new GreenfootImage("Robber/rob.Left6.png")};
-    private static GreenfootImage[] FramesDown = {
+    private static GreenfootImage[] framesDown = {
             new GreenfootImage("Robber/rob.Down0.png"),new GreenfootImage("Robber/rob.Down1.png"),new GreenfootImage("Robber/rob.Down2.png"),
             new GreenfootImage("Robber/rob.Down3.png"),new GreenfootImage("Robber/rob.Down4.png"),new GreenfootImage("Robber/rob.Down5.png"),
             new GreenfootImage("Robber/rob.Down6.png")};
@@ -39,12 +41,13 @@ public class Robber extends Human
     
     private List<Pair> path;
     Pair curValuable;
+    private int pathfindIndex = 0;
     public Robber(double s, int tR, int D){
-        direction = D;
-        setIdleImage();
+        direction = D; 
         speed = s; targetRadius = tR;
         hasStolen = false; actNum = 0; frameNum = 0;
         enableStaticRotation(); isMoving = false;
+        setIdleImage();
     }
 
     /**
@@ -54,26 +57,45 @@ public class Robber extends Human
     public void act()
     {
         //testing animation
-        
         if (Greenfoot.isKeyDown("up")) {
-            direction = 2;
-            setLocation(getX(), getY() - speed); // Move up
-            isMoving = true;
+            int curX = getX(), curY = getY();
+            setLocation(curX, curY - speed); // Move up
+            if (!detectedObstacles()) {
+                direction = 2;
+                isMoving = true;
+            } else {
+                setLocation(curX, curY); // Move back if detected obstacle
+            }
         }
         else if (Greenfoot.isKeyDown("down")) {
-            setLocation(getX(), getY() + speed); // Move down
-            direction = 4;
-            isMoving = true;
+            int curX = getX(), curY = getY();
+            setLocation(curX, curY + speed); // Move down
+            if (!detectedObstacles()) {
+                direction = 4;
+                isMoving = true;
+            } else {
+                setLocation(curX, curY); // Move back if detected obstacle
+            }
         }
         else if (Greenfoot.isKeyDown("left")) {
-            setLocation(getX() - speed, getY()); // Move left
-            direction = 3;
-            isMoving = true;
+            int curX = getX(), curY = getY();
+            setLocation(curX-speed, curY); // Move left
+            if (!detectedObstacles()) {
+                direction = 3;
+                isMoving = true;
+            } else {
+                setLocation(curX, curY); // Move back if detected obstacle
+            }
         }
         else if (Greenfoot.isKeyDown("right")) {
-            setLocation(getX() + speed, getY()); // Move right
-            direction = 1;
-            isMoving = true;
+            int curX = getX(), curY = getY();
+            setLocation(curX+speed, curY); // Move right
+            if (!detectedObstacles()) {
+                direction = 1;
+                isMoving = true;
+            } else {
+                setLocation(curX, curY); // Move back if detected obstacle
+            }
         }
         else{
             isMoving = false;
@@ -92,19 +114,19 @@ public class Robber extends Human
             //shows the character facing the direction it should be facing
             switch(direction){
                 case 1:
-                    setImage(FramesRight[frameNum]);//face right
+                    setImage(framesRight[frameNum]);//face right
                     break;
                 case 2:
-                    setImage(FramesUp[frameNum]);//face up
+                    setImage(framesUp[frameNum]);//face up
                     break;
                 case 3:
-                    setImage(FramesLeft[frameNum]);//face left
+                    setImage(framesLeft[frameNum]);//face left
                     break;
                 case 4:
-                    setImage(FramesDown[frameNum]);//face down
+                    setImage(framesDown[frameNum]);//face down
                     break;
                 default:
-                    setImage(FramesDown[frameNum]);//face down defaultly
+                    setImage(framesDown[frameNum]);//face down defaultly
                     break;
             }
         }
@@ -121,19 +143,38 @@ public class Robber extends Human
         }
         if(targetValuable != null){
             //move towards it and steal it
-            // path = bfs(getX()/20, getY()/20, targetValuable/20, targetValuableY/20);
-            curValuable = path.remove(0);
-            int dx = curValuable.c*20 - getX();
-            int dy = curValuable.r*20 - getY();
+            if (pathfindIndex % 5 == 0) {
+                path = bfs(getX()/20, getY()/20, targetValuable.getX()/20, targetValuable.getY()/20);
+                curValuable = path.remove(0);
+                pathfindIndex = 1;
+            }
+            pathfindIndex++;
+            System.out.println(curValuable.c*20 + " " + curValuable.r*20);
+            int dx = (curValuable.c*20) - getX();
+            int dy = (curValuable.r*20) - getY();
             
-            if (dx != 0) {
+            if (dx != 0) { 
+                int curX = getX();
                 double moveX = speed * (int)Math.signum(dx); // Determine direction
-                setLocation(getX() + moveX, getY());
+                setLocation(curX + moveX, getY());
+                if (!detectedObstacles()) {
+                    direction = 1;
+                    isMoving = true;
+                } else {
+                    setLocation(curX, getY());
+                }
             }
             // Once aligned horizontally, move vertically
             else if (dy != 0) {
+                int curY = getY();
                 double moveY = speed * (int)Math.signum(dy); // Determine direction
-                setLocation(getX(), getY() + moveY);
+                setLocation(getX(), curY + moveY);
+                if (!detectedObstacles()) {
+                    direction = 1;
+                    isMoving = true;
+                } else {
+                    setLocation(getX(), curY);
+                }
             }
             // Check if target is reached (considering possible overshoot)
             if (Math.abs(dx) <= speed && Math.abs(dy) <= speed) {
@@ -145,6 +186,23 @@ public class Robber extends Human
                     curValuable = null;
                     targetValuable = null;// No more targets
                 }
+            }
+            switch(direction){
+                case 1:
+                    setImage(framesRight[frameNum]);//face right
+                    break;
+                case 2:
+                    setImage(framesUp[frameNum]);//face up
+                    break;
+                case 3:
+                    setImage(framesLeft[frameNum]);//face left
+                    break;
+                case 4:
+                    setImage(framesDown[frameNum]);//face down
+                    break;
+                default:
+                    setImage(framesDown[frameNum]);//face down defaultly
+                    break;
             }
             robThatSh1t();
         }
@@ -219,5 +277,36 @@ public class Robber extends Human
             setImage("Robber/rob.Left0.png");
         if(direction == 4)
             setImage("Robber/rob.Down0.png");
+    }
+     
+    public boolean detectedObstacles(){
+        if (getIntersectingObjects(Object.class).size() != 0) return true;
+        return false;
+        // switch(direction){
+            // case 1: {
+                // if(getOneObjectAtOffset(20,0,Object.class)!=null){
+                    // return true;
+                // } 
+                // return false;
+            // }
+            // case 2: {
+                // if(getOneObjectAtOffset(0,-20,Object.class)!=null){
+                    // return true;
+                // } 
+                // return false;
+            // }
+            // case 3: {
+                // if(getOneObjectAtOffset(-20,0,Object.class)!=null){
+                    // return true;
+                // } 
+                // return false;
+            // }
+            // default: {
+                // if(getOneObjectAtOffset(0,20,Object.class)!=null){
+                    // return true;
+                // } 
+                // return false;
+            // }
+        // }
     }
 }
