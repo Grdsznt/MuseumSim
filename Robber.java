@@ -12,19 +12,19 @@ import java.util.*;
 public class Robber extends Human
 {
     //add frames to for the robber character
-    private static GreenfootImage[] framesRight = {
+    private static GreenfootImage[] FramesRight = {
             new GreenfootImage("Robber/rob.Right0.png"),new GreenfootImage("Robber/rob.Right1.png"),new GreenfootImage("Robber/rob.Right2.png"),
             new GreenfootImage("Robber/rob.Right3.png"),new GreenfootImage("Robber/rob.Right4.png"),new GreenfootImage("Robber/rob.Right5.png"),
             new GreenfootImage("Robber/rob.Right6.png")};
-    private static GreenfootImage[] framesUp = {
+    private static GreenfootImage[] FramesUp = {
             new GreenfootImage("Robber/rob.Up0.png"),new GreenfootImage("Robber/rob.Up1.png"),new GreenfootImage("Robber/rob.Up2.png"),
             new GreenfootImage("Robber/rob.Up3.png"),new GreenfootImage("Robber/rob.Up4.png"),new GreenfootImage("Robber/rob.Up5.png"),
             new GreenfootImage("Robber/rob.Up6.png")};
-    private static GreenfootImage[] framesLeft = {
+    private static GreenfootImage[] FramesLeft = {
             new GreenfootImage("Robber/rob.Left0.png"),new GreenfootImage("Robber/rob.Left1.png"),new GreenfootImage("Robber/rob.Left2.png"),
             new GreenfootImage("Robber/rob.Left3.png"),new GreenfootImage("Robber/rob.Left4.png"),new GreenfootImage("Robber/rob.Left5.png"),
             new GreenfootImage("Robber/rob.Left6.png")};
-    private static GreenfootImage[] framesDown = {
+    private static GreenfootImage[] FramesDown = {
             new GreenfootImage("Robber/rob.Down0.png"),new GreenfootImage("Robber/rob.Down1.png"),new GreenfootImage("Robber/rob.Down2.png"),
             new GreenfootImage("Robber/rob.Down3.png"),new GreenfootImage("Robber/rob.Down4.png"),new GreenfootImage("Robber/rob.Down5.png"),
             new GreenfootImage("Robber/rob.Down6.png")};
@@ -113,19 +113,19 @@ public class Robber extends Human
             //shows the character facing the direction it should be facing
             switch(direction){
                 case 1:
-                    setImage(framesRight[frameNum]);//face right
+                    setImage(FramesRight[frameNum]);//face right
                     break;
                 case 2:
-                    setImage(framesUp[frameNum]);//face up
+                    setImage(FramesUp[frameNum]);//face up
                     break;
                 case 3:
-                    setImage(framesLeft[frameNum]);//face left
+                    setImage(FramesLeft[frameNum]);//face left
                     break;
                 case 4:
-                    setImage(framesDown[frameNum]);//face down
+                    setImage(FramesDown[frameNum]);//face down
                     break;
                 default:
-                    setImage(framesDown[frameNum]);//face down defaultly
+                    setImage(FramesDown[frameNum]);//face down defaultly
                     break;
             }
         }
