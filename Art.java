@@ -38,7 +38,7 @@ public class Art extends Actor
         
     }
     
-    public Vistor[] getVisitors(){
+    public Visitor[] getVisitors(){
         return visitors;
     }
     

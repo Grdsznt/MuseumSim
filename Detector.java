@@ -3,9 +3,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * This will be used on objects to detect if they are touching a certain type of class.
  * 
- * //Known bugs:
- * //Set paint order to put the detector under the guard
- * 
  * @author Jean
  * @version Apr 2024
  */

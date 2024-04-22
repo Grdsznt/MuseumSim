@@ -55,12 +55,13 @@ public class Visitor extends Human
     private int actNum, frameNum, speed;
     private boolean mollyOrAdam;//true is molly, false is adam
     private int direction;//1 right, 2 up, 3 left, 4 down
-    public Visitor(int time, int speed){
+    
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false;
-    private int visitDuration;// in units of acts
     private SpotManager.DetailedSpot target;
     
-    
+    public Visitor(int time, int speed){
+        
+    }
     
     public void addedToWorld(World w){
         if(!isNew){//prevent z sort problems
@@ -69,7 +70,7 @@ public class Visitor extends Human
             target=SpotManager.attemptTarget(this);
             if(target==null)getWorld().removeObject(this);
         }
-        MuseumRoom2.income +=100;        
+        MuseumRoom.income +=100;        
     }
    
     public Visitor(int time){
@@ -94,6 +95,11 @@ public class Visitor extends Human
      */
     public void act()
     {
+        //testing sectoin
+        if(Greenfoot.isKeyDown("a")){
+            expressEmotion();
+        }
+        
         //animation section
         if(mollyOrAdam){
             ///molly animation, second condition controls frame rate
@@ -269,7 +275,6 @@ public class Visitor extends Human
                     }
                 }
             }
-
         }
         //remove visitor when time is up
         if(visitDuration <= 0){
@@ -294,7 +299,7 @@ public class Visitor extends Human
         }
     }
     private void expressEmotion(){
-        
+        getWorld().addObject(new Emote(1), getX() + 16, getY() - 24);
     }
        
     
