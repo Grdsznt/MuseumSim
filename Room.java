@@ -12,7 +12,7 @@ public abstract class Room extends World
     protected int height;
     protected int amountOfObjects;
     protected int income;
-
+    
     /**
      * Constructor for objects of class Room.
      * 
