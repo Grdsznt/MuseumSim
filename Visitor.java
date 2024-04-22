@@ -70,7 +70,7 @@ public class Visitor extends Human
             target=SpotManager.attemptTarget(this);
             if(target==null)getWorld().removeObject(this);
         }
-        MuseumRoom2.income +=100;        
+        MuseumRoom.income +=100;        
     }
    
     public Visitor(int time){
