@@ -34,8 +34,7 @@ public class Art extends Actor
     }
 
     public void act(){
-        
-        
+    
     }
     
     public Vistor[] getVisitors(){
