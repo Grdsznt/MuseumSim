@@ -23,8 +23,8 @@ public abstract class Effect extends Actor
      * @param eventDuration how long the effect lasts.
      * @param fadeInTarget the target transparency to remain in
      */
-    public Effect(int eventDuration, int fadeInTarget) {
-        this.duration = eventDuration;
+    public Effect(int duration, int targetFade) {
+        this.duration = duration;
         this.targetFade = targetFade;
         actsLived = 0;
         startAct = true;
@@ -37,7 +37,7 @@ public abstract class Effect extends Actor
         startAct = false;
     }
     public void act() {
-        if (fadeIn && getImage().getTransparency() < targetFade) { // If currently fading in, and not at target transparency,
+        if (fadeIn && getImage().getTransparency() < targetFade) { 
             fadeIn(1);
         }
         else fadeIn = false; // Done fading in
@@ -45,8 +45,8 @@ public abstract class Effect extends Actor
         // Event has run its course, so time to fade out gracefully.
         if (++actsLived >= duration) {
             fadeOut(1);
-            if (getImage().getTransparency() <= 0) { // Gone completely, so
-                stopEffect(); // Stop the effect.
+            if (getImage().getTransparency() <= 0) { //stop effect when its over
+                stopEffect(); 
                 getWorld().removeObject(this);
             }
         }

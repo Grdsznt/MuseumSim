@@ -17,6 +17,9 @@ public class EndScreen extends World
     private int count; 
     private SuperDisplayLabel theStatBar;
     private HomeButton homeButton;
+    
+    // Restart Button
+    
     /**
      * Constructor for objects of class DisplayResults.
      * 
