@@ -249,13 +249,6 @@ public class Robber extends Human
             
         }
     }
-    private void walkRandomly(){
-        
-    }
-
-    private void enterRoom(){
-
-    }
 
     public void setDirection(int D){
         if(D < 5 && D > 0){
@@ -278,7 +271,7 @@ public class Robber extends Human
         if(direction == 4)
             setImage("Robber/rob.Down0.png");
     }
-     
+
     public boolean detectedObstacles(){
         if (getIntersectingObjects(Object.class).size() != 0) return true;
         return false;
