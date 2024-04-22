@@ -276,6 +276,9 @@ public class Visitor extends Human
             frameNum = 0;
         }
     }
+    private void expressEmotion(){
+        
+    }
     //get the number of visitors
     public static int getNumVisitors(){
         return numberOfVisitors;
