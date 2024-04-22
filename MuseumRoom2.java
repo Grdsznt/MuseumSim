@@ -14,6 +14,9 @@ public class MuseumRoom2 extends Room
      * 
      */
     
+<<<<<<< HEAD
+    public static int income = 0;
+=======
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
@@ -34,6 +37,7 @@ public class MuseumRoom2 extends Room
     
     private Robber rob1 = new Robber(5, 800, 1);
     
+>>>>>>> 97b936dfabca04c9b955c01b00071a8fb8439336
     public MuseumRoom2()
     { 
         super(661,816,0, 0);

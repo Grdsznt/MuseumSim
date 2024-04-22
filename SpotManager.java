@@ -18,21 +18,17 @@ import java.util.*;
  * 
  * 
  */
-//star)_WA)FI_W)FI_)AFWI)_WFI)_AWIF)_IWF)AIWF)_IAF 
-//     <li><strong>numberOfGames</strong> - The total number of games in the casino, synchronized with <code>CasinoWorld.numGames</code>.</li>
 public class SpotManager  
 {
-    
-    // total number of arts 
-    private static final int Numarts = 7;
-    private static Game[] games = new Game[Numarts];
+    private static final int numberOfArts = 7;
+    private static Art[] arts = new Art[numberOfArts];
     private static int i=0;
     /**
      * <p><strong>static void resetIndex()</strong> - Resets the condition.</p>
      */
     public static void reset(){
         i=0;
-        games = new Game[Numarts];
+        Art = new Game[numberOfGames];
     }
     public static Game[] getGames(){
         return games;
@@ -90,7 +86,7 @@ public class SpotManager
         if(gb.getMoney()<=0||Greenfoot.getRandomNumber(5)==0)return null;//leave when no money or 20% chance
         Spot targetSpot=null;
         int targetGameIndex=-1, targetSpotIndex=-1;
-        for (int i = 0; i < Numarts; i++) {
+        for (int i = 0; i < numberOfGames; i++) {
             //if no game in this index dont search
             if(games[i]==null)continue;
             Spot curSpot=null;
