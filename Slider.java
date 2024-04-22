@@ -130,7 +130,7 @@ public class Slider extends Actor
      * Set whether the value should be displayed next to the slider.
      * 
      * If this method is called with false as the parameter then it will
-     * also set {@link shoePercentage(boolean)} will also be set to false.
+     * also set {@link showPercentage(boolean)} will also be set to false.
      * 
      * @see showPercentage(boolean)
      * @param show  true if the value should be displayed as text,
