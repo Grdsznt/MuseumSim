@@ -55,12 +55,13 @@ public class Visitor extends Human
     private int actNum, frameNum, speed;
     private boolean mollyOrAdam;//true is molly, false is adam
     private int direction;//1 right, 2 up, 3 left, 4 down
-    public Visitor(int time, int speed){
+    
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false;
-    private int visitDuration;// in units of acts
     private SpotManager.DetailedSpot target;
     
-    
+    public Visitor(int time, int speed){
+        
+    }
     
     public void addedToWorld(World w){
         if(!isNew){//prevent z sort problems
