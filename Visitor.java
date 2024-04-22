@@ -95,6 +95,11 @@ public class Visitor extends Human
      */
     public void act()
     {
+        //testing sectoin
+        if(Greenfoot.isKeyDown("a")){
+            expressEmotion();
+        }
+        
         //animation section
         if(mollyOrAdam){
             ///molly animation, second condition controls frame rate
@@ -270,7 +275,6 @@ public class Visitor extends Human
                     }
                 }
             }
-
         }
         //remove visitor when time is up
         if(visitDuration <= 0){
@@ -295,7 +299,7 @@ public class Visitor extends Human
         }
     }
     private void expressEmotion(){
-        
+        getWorld().addObject(new Emote(1), getX() + 16, getY() - 24);
     }
        
     
