@@ -9,7 +9,7 @@ import java.util.*;
 public class Human extends SuperSmoothMover
 {
     
-    private int R,C;
+    private int R = 41,C = 31;
     // based on one node being 20x20 pixels, off of the world size
     private boolean vis[][] = new boolean[70][50];  
     private int mr[] = {0, 1, 0, -1}, mc[] = {1, 0, -1, 0};
@@ -26,7 +26,22 @@ public class Human extends SuperSmoothMover
         public Pair(int r, int c) {
             this.r = r; this.c = c;
         }
+        
+        
+        @Override
+        public boolean equals(Object obj) { 
+            if (this == obj) return true;
+            if (obj == null || getClass() != obj.getClass()) return false;
+            Pair pair = (Pair) obj;
+            return r == pair.r && c == pair.c;
+        }
+        
+        @Override
+        public int hashCode() {
+            return Objects.hash(r, c);
+        }
     }
+    
     
     public class Greater implements Comparator<Pair> {
         @Override
@@ -81,19 +96,29 @@ public class Human extends SuperSmoothMover
         while (!q.isEmpty()) {
             Pair p = q.poll();
             int r = p.r, c = p.c;
-            if (r == destr && c == destc) {
-                for (Pair u = new Pair(r, c); u != null; u = par.get(u)) {
-                    path.add(u);
+            if (Math.abs(r-destr) <= 4 && Math.abs(c-destc) <= 4) {
+                for (int i = 0;i<R;i++) {
+                    for (int j = 0;j<C;j++) vis[i][j] = false;
                 }
+                Pair u = new Pair(r, c);
+                while (u != null) {
+                    path.add(u);
+                    //System.out.println(u.r + " " + u.c);
+                    u = par.get(u);
+                }
+                // for (Pair u = new Pair(r, c); u != null; u = par.get(u)) {
+                    // path.add(u);
+                    // System.out.println(u.r + " " + u.c);
+                // }
                 Collections.reverse(path);
                 return path;
             }
-            q.remove();
             for (int k = 0;k<4;k++) {
                 int nr = r+mr[k], nc = c+mc[k];
                 if (nr >= 1 && nr < R && nc < C && nc >= 1 && !vis[nr][nc]) {
                     setLocation(nr*20, nc*20);
                     if (!getIntersectingObjects(Object.class).isEmpty()) setLocation(srcr*20, srcc*20);
+                    // The issue is that it is bumping into the platform. need to set a special command to make sure doesn't happen.
                     else {
                         setLocation(srcr*20, srcc*20);
                         vis[nr][nc] = true;
@@ -108,5 +133,6 @@ public class Human extends SuperSmoothMover
         }
         return path;
     }
+    
     
 }
