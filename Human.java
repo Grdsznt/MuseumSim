@@ -12,7 +12,7 @@ public class Human extends SuperSmoothMover
     private int R = 41,C = 31;
     // based on one node being 20x20 pixels, off of the world size
     private boolean vis[][] = new boolean[70][50];  
-    private int mr[] = {0, 1, 0, -1}, mc[] = {1, 0, -1, 0};
+    private int mx[] = {0, 1, 0, -1}, my[] = {1, 0, -1, 0};
     
     private boolean enteredNewRoom = true;
     
@@ -22,9 +22,9 @@ public class Human extends SuperSmoothMover
      * Used for coordinates in the world's tile system.
      */
     public class Pair {
-        int r, c;
-        public Pair(int r, int c) {
-            this.r = r; this.c = c;
+        int x, y;
+        public Pair(int x, int y) {
+            this.x = x; this.y = y;
         }
         
         
@@ -33,12 +33,12 @@ public class Human extends SuperSmoothMover
             if (this == obj) return true;
             if (obj == null || getClass() != obj.getClass()) return false;
             Pair pair = (Pair) obj;
-            return r == pair.r && c == pair.c;
+            return x == pair.x && y == pair.y;
         }
         
         @Override
         public int hashCode() {
-            return Objects.hash(r, c);
+            return Objects.hash(x, y);
         }
     }
     
@@ -49,7 +49,7 @@ public class Human extends SuperSmoothMover
             // Compare the two pairs based on their 'x' value for ascending order.
             // Returns a negative integer, zero, or a positive integer as the
             // first argument is less than, equal to, or greater than the second.
-            return Integer.compare(a.r, b.c);
+            return Integer.compare(a.x, b.x);
         }
     }
     
@@ -69,12 +69,6 @@ public class Human extends SuperSmoothMover
         }
     }
     
-    public void tracePath(List<Pair> path) {
-        for (Pair p : path) {
-            setLocation(p.c*20, p.r*20);
-        }
-        
-    }
     
     /**
      *  Use Breadth-First-Search to get the shortest distance
@@ -87,43 +81,38 @@ public class Human extends SuperSmoothMover
      * @param destc    Destination column number
      * @return List<Pair>   List of (r, c) coordinates to be able to move the character
     */
-    public List<Pair> bfs(int srcr, int srcc, int destr, int destc) {
+    public List<Pair> bfs(int srcx, int srcy, int destx, int desty) {
         Map<Pair, Pair> par = new HashMap<>();
         List<Pair> path = new ArrayList<>();
         Queue<Pair> q = new LinkedList<>();
-        q.add(new Pair(srcr, srcc));
-        vis[srcr][srcc] = true;
+        q.add(new Pair(srcx, srcy));
+        vis[srcy][srcx] = true;
         while (!q.isEmpty()) {
             Pair p = q.poll();
-            int r = p.r, c = p.c;
-            if (Math.abs(r-destr) <= 4 && Math.abs(c-destc) <= 4) {
+            int x = p.x, y = p.y;
+            if (Math.abs(x-destx) <= 3 && Math.abs(y-desty) <= 3) {
                 for (int i = 0;i<R;i++) {
                     for (int j = 0;j<C;j++) vis[i][j] = false;
                 }
-                Pair u = new Pair(r, c);
+                Pair u = new Pair(x, y);
                 while (u != null) {
                     path.add(u);
-                    //System.out.println(u.r + " " + u.c);
                     u = par.get(u);
                 }
-                // for (Pair u = new Pair(r, c); u != null; u = par.get(u)) {
-                    // path.add(u);
-                    // System.out.println(u.r + " " + u.c);
-                // }
                 Collections.reverse(path);
                 return path;
             }
             for (int k = 0;k<4;k++) {
-                int nr = r+mr[k], nc = c+mc[k];
-                if (nr >= 1 && nr < R && nc < C && nc >= 1 && !vis[nr][nc]) {
-                    setLocation(nr*20, nc*20);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) setLocation(srcr*20, srcc*20);
+                int nx = x+mx[k], ny = y+my[k];
+                if (nx >= 1 && nx < C && ny < R && ny >= 1 && !vis[ny][nx]) {
+                    setLocation(nx*20, ny*20);
+                    if (!getIntersectingObjects(Object.class).isEmpty()) setLocation(srcx*20, srcy*20);
                     // The issue is that it is bumping into the platform. need to set a special command to make sure doesn't happen.
                     else {
-                        setLocation(srcr*20, srcc*20);
-                        vis[nr][nc] = true;
-                        q.add(new Pair(nr, nc));
-                        par.put(new Pair(nr, nc), p);
+                        setLocation(srcx*20, srcy*20);
+                        vis[ny][nx] = true;
+                        q.add(new Pair(nx, ny));
+                        par.put(new Pair(nx, ny), p);
                     }
                 }
             }
