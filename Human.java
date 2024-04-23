@@ -11,8 +11,8 @@ public class Human extends SuperSmoothMover
     
     private int R = 41,C = 31;
     // based on one node being 20x20 pixels, off of the world size
-    private boolean vis[][] = new boolean[70][50];  
-    private int mx[] = {0, 1, 0, -1}, my[] = {1, 0, -1, 0};
+    private boolean vis[][] = new boolean[70][50];  // give it some extra cells
+    private int mx[] = {0, 1, 0, -1}, my[] = {1, 0, -1, 0}; // move in 4 directions: up, down, left, right
     
     private boolean enteredNewRoom = true;
     
