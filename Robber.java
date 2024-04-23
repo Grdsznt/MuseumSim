@@ -157,21 +157,11 @@ public class Robber extends Human
                 if (getX() > curTile.x*20) {
                     int curX = getX();
                     setLocation(curX - speed, getY());
-                    // if (!detectedObstacles()) {
-                        // direction = 1;
-                        // isMoving = true;
-                    // } else {
-                        // setLocation(curX, getY());
-                    // }
+                    direction = 3;
                 } else {
                     int curX = getX();
                     setLocation(curX + speed, getY());
-                    // if (!detectedObstacles()) {
-                        // direction = 1;
-                        // isMoving = true;
-                    // } else {
-                        // setLocation(curX, getY());
-                    // }
+                    direction = 1;
                 }
             }
             // Once aligned horizontally, move vertically
@@ -179,21 +169,11 @@ public class Robber extends Human
                 if (getY() > curTile.y*20) {
                     int curY = getY();
                     setLocation(getX(), curY-speed);
-                    // if (!detectedObstacles()) {
-                        // direction = 1;
-                        // isMoving = true;
-                    // } else {
-                        // setLocation(curX, getY());
-                    // }
+                    direction = 2;
                 } else {
                     int curY = getY();
                     setLocation(getX(), curY+speed);
-                    // if (!detectedObstacles()) {
-                        // direction = 1;
-                        // isMoving = true;
-                    // } else {
-                        // setLocation(curX, getY());
-                    // }
+                    direction = 4;
                 }
             }
             // Check if target is reached (considering possible overshoot)
@@ -225,7 +205,6 @@ public class Robber extends Human
                     setImage(framesDown[frameNum]);//face down defaultly
                     break;
             }
-            robThatSh1t();
         }
         
         //take the valuable with me
