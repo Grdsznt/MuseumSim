@@ -9,7 +9,6 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Art extends Actor
 {
     protected  Visitor[] visitors;
-    private SpotManager.Spot[] spots;
     private boolean isNew = false;
     protected int actNumber;
     private int len;
@@ -18,8 +17,8 @@ public class Art extends Actor
      * Act - do whatever the Art wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Art(SpotManager.Spot[] spots){
-        this.spots = spots;
+    public Art(){
+        
         len=spots.length;
         visitors = new Visitor[len];
         actNumber = 0;
