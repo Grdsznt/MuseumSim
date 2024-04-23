@@ -84,6 +84,7 @@ public class MuseumRoom extends Room
         // wallSegRight.setImage(new GreenfootImage(117, 64));
         
         addObject(rob1, 300, 500);
+        // need to spawn robber in specific locations
         
         Valuable v = new Valuable(200.50);
         addObject(v, 92, 119);
