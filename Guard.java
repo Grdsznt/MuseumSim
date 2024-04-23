@@ -3,13 +3,9 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * The Guard will have a detector. If it detects any robber by its detector, it will start to catch the robber.
  * 
- * Known bugs:
- * - loadAnimationImages();//!!!!!!!Later put into world
- * 
  * @author Jean
  * @version Apr 2024
  */
-  
 public class Guard extends Human
 {
     //Store the world that it is added to
@@ -46,10 +42,7 @@ public class Guard extends Human
     //Store the robber it trys to catch
     private Robber robber;
     
-    public Guard(int direction){
-        
-        loadAnimationImages();//!!!!!!!Later put into world
-        
+    public Guard(int direction){        
         //Set direction
         this.direction = direction;
         
@@ -132,7 +125,7 @@ public class Guard extends Human
     /**
      * Load its animation images for walking & running.
      */
-    public void loadAnimationImages(){
+    public static void loadAnimationImages(){
         for(int i=0; i<6; i++){
             //Running images
             runRight[i] = new GreenfootImage("Guard/run_right"+i+".png");
