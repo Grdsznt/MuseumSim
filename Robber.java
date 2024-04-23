@@ -40,8 +40,8 @@ public class Robber extends Human
     private int direction;//1 right, 2 up, 3 left, 4 down
     
     private List<Pair> path;
-    Pair curValuable;
-    private int pathfindIndex = 0;
+    Pair curTile;
+    private boolean pathFound = false;
     public Robber(double s, int tR, int D){
         direction = D; 
         speed = s; targetRadius = tR;
@@ -143,48 +143,49 @@ public class Robber extends Human
         }
         if(targetValuable != null){
             //move towards it and steal it
-            if (pathfindIndex % 5 == 0) {
+            if (!pathFound) {
                 path = bfs(getX()/20, getY()/20, targetValuable.getX()/20, targetValuable.getY()/20);
-                curValuable = path.remove(0);
-                pathfindIndex = 1;
+                curTile = path.remove(0);
+                pathFound = true;
             }
-            pathfindIndex++;
-            System.out.println(curValuable.c*20 + " " + curValuable.r*20);
-            int dx = (curValuable.c*20) - getX();
-            int dy = (curValuable.r*20) - getY();
+
+            
+            int dx = Math.abs((curTile.x*20) - getX());
+            int dy = Math.abs((curTile.y*20) - getY());
             
             if (dx != 0) { 
-                int curX = getX();
-                double moveX = speed * (int)Math.signum(dx); // Determine direction
-                setLocation(curX + moveX, getY());
-                if (!detectedObstacles()) {
-                    direction = 1;
-                    isMoving = true;
+                if (getX() > curTile.x*20) {
+                    int curX = getX();
+                    setLocation(curX - speed, getY());
+                    direction = 3;
                 } else {
-                    setLocation(curX, getY());
+                    int curX = getX();
+                    setLocation(curX + speed, getY());
+                    direction = 1;
                 }
             }
             // Once aligned horizontally, move vertically
             else if (dy != 0) {
-                int curY = getY();
-                double moveY = speed * (int)Math.signum(dy); // Determine direction
-                setLocation(getX(), curY + moveY);
-                if (!detectedObstacles()) {
-                    direction = 1;
-                    isMoving = true;
+                if (getY() > curTile.y*20) {
+                    int curY = getY();
+                    setLocation(getX(), curY-speed);
+                    direction = 2;
                 } else {
-                    setLocation(getX(), curY);
+                    int curY = getY();
+                    setLocation(getX(), curY+speed);
+                    direction = 4;
                 }
             }
             // Check if target is reached (considering possible overshoot)
             if (Math.abs(dx) <= speed && Math.abs(dy) <= speed) {
                 // Target reached
-                setLocation(curValuable.c*20, curValuable.r*20); // Correct any minor overshoot
+                setLocation(curTile.x*20, curTile.y*20); // Correct any minor overshoot
                 if (!path.isEmpty()) {
-                    curValuable = path.remove(0); // Get and remove the first element
+                    curTile = path.remove(0); // Get and remove the first element
                 } else {
-                    curValuable = null;
+                    curTile = null;
                     targetValuable = null;// No more targets
+                    pathFound = false;
                 }
             }
             switch(direction){
@@ -204,7 +205,6 @@ public class Robber extends Human
                     setImage(framesDown[frameNum]);//face down defaultly
                     break;
             }
-            robThatSh1t();
         }
         
         //take the valuable with me

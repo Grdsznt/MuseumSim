@@ -14,7 +14,9 @@ public class Emote extends SuperSmoothMover
     private Actor targetActor;
     private int actNum;
     public Emote(int emotion){
-        emoteType = emotion;
+        if(emotion < 8 && emotion > 0){
+            emoteType = emotion;
+        }
         actNum = 0;
         setImage(emotionFrames[0]);
     }
