@@ -1,12 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 import java.lang.Math;
-import java.util.Random;
-import java.util.*;
 /**
  * Write a description of class Robber here.
  * 
- * @author Edwin, Nick
+ * @author Edwin, Nick, Jean
  * @version (a version number or a date)
  */
 public class Robber extends Human
@@ -50,10 +48,6 @@ public class Robber extends Human
         setIdleImage();
     }
 
-    /**
-     * Act - do whatever the Robber wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public void act()
     {
         //testing animation
@@ -121,9 +115,6 @@ public class Robber extends Human
                     break;
                 case 3:
                     setImage(framesLeft[frameNum]);//face left
-                    break;
-                case 4:
-                    setImage(framesDown[frameNum]);//face down
                     break;
                 default:
                     setImage(framesDown[frameNum]);//face down defaultly
