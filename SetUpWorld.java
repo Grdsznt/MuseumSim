@@ -13,10 +13,11 @@ public class SetUpWorld extends World
     private Font boringFont = new Font ("Joystix", false, false, 18);
     private HomeButton homeButton;
     
-    private int numberOfRobbers = 1;
-    private int numberOfGuards = 1;
-    private int numberOfValubles = 3;
-    private int startingCurrency = 10;
+    private static int numberOfRobbers;
+    private static int numberOfGuards;
+    private static int numberOfValubles;
+    private static int startingCurrency;
+    private static int museumTarget;
     
     /**
      * Constructor for objects of class SetUpWorld.
@@ -33,13 +34,24 @@ public class SetUpWorld extends World
         int tempX = editNumOfGuards.getImage().getWidth()/2;
         addObject(editNumOfGuards, tempX, tempY);
         
-        Slider numOfGuardsSlider = new Slider();
-        numOfGuardsSlider.setMaximumValue(3);
-        numOfGuardsSlider.showPercentage(false);
-        numOfGuardsSlider.showValue(true);
-        numOfGuardsSlider.setMinorSections(1);
-        addObject(numOfGuardsSlider, 500, 400);
         
+        Slider sliders[] = {
+            new Slider(1, 698, 831, 10000, 1000000, museumTarget),
+            new Slider(2, 698, 831, 1, 25, numberOfRobbers),
+            new Slider(3, 698, 831, 5000, 10000, numberOfGuards),
+            //new Slider(4, 698, 831, 1, 25, cheaterGamblerSpawnRate),
+            new Slider(4, 698, 831, 1, 5000, startingCurrency),
+            //new Slider(6, 698, 831, 1, 99, slotsWinRate),
+            //new Slider(7, 698, 831, 7, 20, numberOfHorses)
+        };
+        
+        addObject(sliders[0], calculateSliderXPosition(sliders[0], museumTarget), 219);
+        addObject(sliders[1], calculateSliderXPosition(sliders[1], numberOfRobbers), 591);
+        addObject(sliders[2], calculateSliderXPosition(sliders[2], numberOfGuards), 549);
+        addObject(sliders[3], calculateSliderXPosition(sliders[3], cheaterGamblerSpawnRate), 637);
+        addObject(sliders[4], calculateSliderXPosition(sliders[4], ), 503);
+        addObject(sliders[5], calculateSliderXPosition(sliders[5], slotsWinRate), 269);
+        addObject(sliders[6], calculateSliderXPosition(sliders[6], numberOfHorses), 312);
         
         
         
