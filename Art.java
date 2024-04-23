@@ -11,6 +11,8 @@ public class Art extends Actor
     protected  Visitor[] visitors;
     private boolean isNew = false;
     protected int actNumber;
+    protected boolean willVibrate;
+    protected int defaultX, defaultY;//store orginial x and y values, used for vibration
     private int len;
     protected int t=0;//transparency
     /**
@@ -18,32 +20,40 @@ public class Art extends Actor
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
     public Art(){
-        
-        len=spots.length;
         visitors = new Visitor[len];
         actNumber = 0;
-        visitors=new Visitor[spots.length];
+        defaultX = getX(); defaultY = getY();
+	      willVibrate = false;
     }
     
     public void addedToWorld(World w){
         if(!isNew ){
             isNew = true;
-            SpotManager.addGame(this);
         }
     }
 
     public void act(){
+        //vibration section
+        if(willVibrate){
+            int strength = 6;//vibration strength
+            int offset = Greenfoot.getRandomNumber(strength + 1);
+            setLocation(defaultX + offset - strength/2, defaultY + offset - strength/2);
+        }
+        else{
+            setLocation(defaultX, defaultY);
+        }
         
-        
+    }
+    //call this method to vibrate the art
+    public void vibrate(){
+        willVibrate = true;
+    }
+    public void stopVibrating(){
+        willVibrate = false;
     }
     
     public Visitor[] getVisitors(){
         return visitors;
-    }
-    
-    
-    public SpotManager.Spot[] getSpots(){
-        return spots;
     }
     
     public void placeVisitors(Visitor v, int spotNumber){
