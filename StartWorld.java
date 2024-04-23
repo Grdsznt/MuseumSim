@@ -1,19 +1,14 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class StartWorld here.
- * 
  * A start image to introduce the game
  * 
- * @author (your name) 
+ * @author Nick, Jean
  * @version (a version number or a date)
  */
 public class StartWorld extends World
 {
-    /**
-     * Constructor for objects of class StartWorld.
-     * 
-     */
+    
     // private GreenfootImage img = new GreenfootImage("");
     //private GreenfootImage img = new GreenfootImage("");
 
@@ -30,6 +25,11 @@ public class StartWorld extends World
     //private GreenfootImage img = new GreenfootImage("");
     private int actNum;
     private boolean currentBGframe;//true is frame 1, false is frame 2
+    
+    /**
+     * Constructor for objects of class StartWorld.
+     * 
+     */
     public StartWorld(){    
         super(1000,800,1);
         setBackground(backGround1);
@@ -40,6 +40,11 @@ public class StartWorld extends World
         settings = new SettingsButton("settingsButton", 3);
         addObject(settings, 500, 600);
         Button.init();
+        
+        //Load the animation images for the Guard
+        Guard.loadAnimationImages();
+        //Set paint order to put the detector under the guard
+        setPaintOrder(Detector.class, Guard.class);
     }
 
     public void act(){
