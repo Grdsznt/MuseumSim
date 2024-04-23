@@ -39,57 +39,40 @@ public class MuseumRoom extends Room
         setBackground(worldImage);
         
         addObject(displayTable1, 327, 699);
-        // displayTable1.setImage(new GreenfootImage(84, 49));
         
         addObject(displayTable2, 181, 512);
-        // displayTable2.setImage(new GreenfootImage(73, 64));
         
         addObject(brokenGlassBox, 327, 213);
-        // brokenGlassBox.setImage(new GreenfootImage(85, 118));
         
         addObject(littleGlassBox, 92, 119);
-        // littleGlassBox.setImage(new GreenfootImage(31, 43));
         
         addObject(largeWoodBox, 329, 374);
-        // largeWoodBox.setImage(new GreenfootImage(106, 62));
         
         addObject(mediumGlassBox, 464, 514);
-        // mediumGlassBox.setImage(new GreenfootImage(85, 118));
         
         addObject(statue1, 111, 380);
-        // statue1.setImage(new GreenfootImage(44, 68));
         
         addObject(statue2, 535, 380);
-        // statue2.setImage(new GreenfootImage(44, 68));
         
         addObject(pillar1, 89, 590);
-        // pillar1.setImage(new GreenfootImage(39, 100));
         
         addObject(pillar2, 555, 590);
-        // pillar2.setImage(new GreenfootImage(39, 100));
         
         addObject(leftWall, 32, 366);
-        // leftWall.setImage(new GreenfootImage(62, 548));
         
         addObject(rightWall, 626, 366);
-        // rightWall.setImage(new GreenfootImage(62, 548));
         
         addObject(topWall, 326, 46);
-        // topWall.setImage(new GreenfootImage(513, 92));
         
         addObject(wallSegLeft, 128, 218);
-        // wallSegLeft.setImage(new GreenfootImage(117, 64));
         
         addObject(wallSegRight, 524, 218);
-        // wallSegRight.setImage(new GreenfootImage(117, 64));
         
         addObject(rob1, 300, 500);
         // need to spawn robber in specific locations
         
         Valuable v = new Valuable(200.50);
         addObject(v, 92, 119);
-        // Valuable v2 = new Valuable(0);
-        // addObject(v2, 650, 675);
     }
     
     public void act() {
