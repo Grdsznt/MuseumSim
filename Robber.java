@@ -39,7 +39,7 @@ public class Robber extends Human
     
     private List<Pair> path;
     Pair curTile;
-    private boolean pathFound = false;
+    private boolean pathFound = false, returning = false;
     public Robber(double s, int tR, int D){
         direction = D; 
         speed = s; targetRadius = tR;
@@ -132,7 +132,7 @@ public class Robber extends Human
         if(targetValuable == null){
             getTargetValuable();
         }
-        if(targetValuable != null){
+        if(targetValuable != null && !returning){
             //move towards it and steal it
             if (!pathFound) {
                 path = bfs(getX()/20, getY()/20, targetValuable.getX()/20, targetValuable.getY()/20);
@@ -140,7 +140,6 @@ public class Robber extends Human
                 pathFound = true;
             }
 
-            
             int dx = Math.abs((curTile.x*20) - getX());
             int dy = Math.abs((curTile.y*20) - getY());
             
@@ -174,9 +173,76 @@ public class Robber extends Human
                 if (!path.isEmpty()) {
                     curTile = path.remove(0); // Get and remove the first element
                 } else {
+                    hasStolen = true;
+                    curTile = null;
+                    pathFound = false;
+                    returning = true;
+                }
+            }
+            switch(direction){
+                case 1:
+                    setImage(framesRight[frameNum]);//face right
+                    break;
+                case 2:
+                    setImage(framesUp[frameNum]);//face up
+                    break;
+                case 3:
+                    setImage(framesLeft[frameNum]);//face left
+                    break;
+                case 4:
+                    setImage(framesDown[frameNum]);//face down
+                    break;
+                default:
+                    setImage(framesDown[frameNum]);//face down defaultly
+                    break;
+            }
+        }
+        
+        if (returning) {
+            if (!pathFound) {
+                path = bfs(getX()/20, getY()/20, 33, 34);
+                curTile = path.remove(0);
+                pathFound = true;
+            }
+
+            int dx = Math.abs((curTile.x*20) - getX());
+            int dy = Math.abs((curTile.y*20) - getY());
+            
+            if (dx != 0) { 
+                if (getX() > curTile.x*20) {
+                    int curX = getX();
+                    setLocation(curX - speed, getY());
+                    direction = 3;
+                } else {
+                    int curX = getX();
+                    setLocation(curX + speed, getY());
+                    direction = 1;
+                }
+            }
+            // Once aligned horizontally, move vertically
+            else if (dy != 0) {
+                if (getY() > curTile.y*20) {
+                    int curY = getY();
+                    setLocation(getX(), curY-speed);
+                    direction = 2;
+                } else {
+                    int curY = getY();
+                    setLocation(getX(), curY+speed);
+                    direction = 4;
+                }
+            }
+            // Check if target is reached (considering possible overshoot)
+            if (Math.abs(dx) <= speed && Math.abs(dy) <= speed) {
+                // Target reached
+                setLocation(curTile.x*20, curTile.y*20); // Correct any minor overshoot
+                if (!path.isEmpty()) {
+                    curTile = path.remove(0); // Get and remove the first element
+                } else {
+                    hasStolen = false;
                     curTile = null;
                     targetValuable = null;// No more targets
                     pathFound = false;
+                    returning = false;
                 }
             }
             switch(direction){
@@ -202,6 +268,7 @@ public class Robber extends Human
         if(hasStolen){
             targetValuable.followRobber(this);
         }
+        
         
         actNum++;
     }

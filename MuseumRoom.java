@@ -87,6 +87,8 @@ public class MuseumRoom extends Room
         
         Valuable v = new Valuable(200.50);
         addObject(v, 92, 119);
+        // Valuable v2 = new Valuable(0);
+        // addObject(v2, 650, 675);
     }
     
     public void act() {
