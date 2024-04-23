@@ -27,7 +27,7 @@ public class MuseumRoom extends Room
     private Obstacle wallSegLeft = new Obstacle(117, 64);
     private Obstacle wallSegRight = new Obstacle(117, 64);
     
-    private Robber rob1 = new Robber(5, 800, 1);
+    private Robber rob1 = new Robber(3, 800, 1);
     
     /**
      * Constructor for objects of class MuseumRoom.
