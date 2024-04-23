@@ -68,11 +68,11 @@ public class EndScreen extends World
     }
     
     public void startMusic(){
-        music.playLoop();
+        //music.playLoop();
     }
     
     public void stopped() {
-        music.pause();
+        //music.pause();
     }
     
     public void moneyEarned()

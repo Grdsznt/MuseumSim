@@ -26,6 +26,7 @@ public abstract class Button extends Actor
         imageStates = new GreenfootImage[numStates];
         imageStates[0] = image;
         
+        
         for (int i = 1; i < numStates; i++) {
             imageStates[i] = new GreenfootImage(imagePath + "_" + (i+1) + ".png");
         }

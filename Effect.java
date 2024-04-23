@@ -16,7 +16,7 @@ public abstract class Effect extends Actor
     private int actsLived, duration, targetFade;
     private boolean fadeIn;
     protected boolean startAct;
-    protected MuseumWorld world;
+    protected MuseumRoom world;
     /**
      * Creates a effect that lasts for a specified amount of acts, and has a target transparency
      * throughout the effect's lifetime.
@@ -32,7 +32,7 @@ public abstract class Effect extends Actor
     }
     public void addedToWorld(World w){
         if (!startAct) return;
-        world = (MuseumWorld) w; 
+        world = (MuseumRoom) w; 
         startEffect(); 
         startAct = false;
     }
