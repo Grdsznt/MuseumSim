@@ -43,9 +43,9 @@ public class SetUpWorld extends World
         
         
         //Set the buttons for guards, robbers, and valuables
-        guardButton = new OptionButton("Number of Guards in World: ", 1, 10);
-        robberButton = new OptionButton("Number of Robbers in World: ", 1, 10);
-        valuableButton = new OptionButton("Number of Valuables in World: ", 5, 20);
+        guardButton = new OptionButton("Number of Guards in World: ", 1, 3);
+        robberButton = new OptionButton("Number of Robbers in World: ", 1, 3);
+        valuableButton = new OptionButton("Number of Valuables in World: ", 2, 7);
         
         //Add these buttons onto the world
         addObject(guardButton, getWidth()/2, getHeight()/8*3);

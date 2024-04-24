@@ -342,7 +342,7 @@ public class Robber extends Human
     }
 
     public boolean detectedObstacles(){
-        if (getIntersectingObjects(Object.class).size() != 0) return true;
+        if (getIntersectingObjects(Obstacle.class).size() != 0) return true;
         return false;
         // switch(direction){
             // case 1: {
