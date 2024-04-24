@@ -125,45 +125,54 @@ public class Robber extends Human
         if(!isMoving)
             setIdleImage();
 
-        // Add your action code here.
+        
         if (targetValuable != null && targetValuable.getWorld() == null){
                 targetValuable = null;
         }
         if(targetValuable == null){
             getTargetValuable();
         }
+        
+        // If the robber has a target valuable and is not returning
         if(targetValuable != null && !returning){
-            //move towards it and steal it
+            // If did not do bfs, do it and get the path.
             if (!pathFound) {
+                // Since the bfs works on 20x20 tiles, divide the x and y values by 20
                 path = bfs(getX()/20, getY()/20, targetValuable.getX()/20, targetValuable.getY()/20);
+                
+                // Get the targeted tile
                 curTile = path.remove(0);
+                
+                // Mark that bfs has already been done
                 pathFound = true;
             }
-
+            
+            // Get the absolute x and y distances between the robber and the current tile
             int dx = Math.abs((curTile.x*20) - getX());
             int dy = Math.abs((curTile.y*20) - getY());
             
+            // If there is a gap, then adjust the x direction
             if (dx != 0) { 
+                // if the robber is to the right of the targeted tile, move him left
                 if (getX() > curTile.x*20) {
-                    int curX = getX();
-                    setLocation(curX - speed, getY());
-                    direction = 3;
+                    setLocation(getX() - speed, getY());
+                    direction = 3; // set the direction to left
                 } else {
-                    int curX = getX();
-                    setLocation(curX + speed, getY());
-                    direction = 1;
+                    // otherwise, move him right
+                    setLocation(getX() + speed, getY());
+                    direction = 1; // set the direction to right
                 }
             }
             // Once aligned horizontally, move vertically
             else if (dy != 0) {
+                // If the robber is below the targeted tile, move him up
                 if (getY() > curTile.y*20) {
-                    int curY = getY();
-                    setLocation(getX(), curY-speed);
-                    direction = 2;
+                    setLocation(getX(), getY()-speed);
+                    direction = 2; // set the direction to up
                 } else {
-                    int curY = getY();
-                    setLocation(getX(), curY+speed);
-                    direction = 4;
+                    // Otherwise, move him down
+                    setLocation(getX(), getY()+speed);
+                    direction = 4; // set the direction to down
                 }
             }
             // Check if target is reached (considering possible overshoot)
@@ -173,12 +182,14 @@ public class Robber extends Human
                 if (!path.isEmpty()) {
                     curTile = path.remove(0); // Get and remove the first element
                 } else {
-                    hasStolen = true;
+                    // Otherwise, reached end of path, set booleans
+                    hasStolen = true; // currently stealing, so set to pick up valuable
                     curTile = null;
-                    pathFound = false;
-                    returning = true;
+                    pathFound = false; 
+                    returning = true; // return to deposit zone
                 }
             }
+            // Animate the robber while moving
             switch(direction){
                 case 1:
                     setImage(framesRight[frameNum]);//face right
@@ -197,10 +208,10 @@ public class Robber extends Human
                     break;
             }
         }
-        
+        // After the robber has gotten to the valuable's location, go to deposit the valuable
         if (returning) {
             if (!pathFound) {
-                path = bfs(getX()/20, getY()/20, 33, 34);
+                path = bfs(getX()/20, getY()/20, 33, 34); // bfs to the deposit area
                 curTile = path.remove(0);
                 pathFound = true;
             }
@@ -238,13 +249,14 @@ public class Robber extends Human
                 if (!path.isEmpty()) {
                     curTile = path.remove(0); // Get and remove the first element
                 } else {
-                    hasStolen = false;
+                    hasStolen = false; // Set up to steal another valuable
                     curTile = null;
                     targetValuable = null;// No more targets
                     pathFound = false;
                     returning = false;
                 }
-            }
+            } 
+            // Animate the robber
             switch(direction){
                 case 1:
                     setImage(framesRight[frameNum]);//face right
@@ -268,7 +280,6 @@ public class Robber extends Human
         if(hasStolen){
             targetValuable.followRobber(this);
         }
-        
         
         actNum++;
     }
@@ -331,7 +342,7 @@ public class Robber extends Human
     }
 
     public boolean detectedObstacles(){
-        if (getIntersectingObjects(Object.class).size() != 0) return true;
+        if (getIntersectingObjects(Obstacle.class).size() != 0) return true;
         return false;
         // switch(direction){
             // case 1: {

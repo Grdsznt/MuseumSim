@@ -54,7 +54,8 @@ public class StartButton extends Button
      * If the user clicks the start button, the world will jump to Museum Room.
      */
     public void action() {
-        Greenfoot.setWorld(new MuseumRoom());
+        StartWorld sw = (StartWorld) getWorld();
+        Greenfoot.setWorld(new MuseumRoom(sw.getSetUp().getNumberOfRobbers(), sw.getSetUp().getNumberOfGuards(), sw.getSetUp().getNumberOfValuables()));
         StartWorld.music.playLoop();
     }
 }
