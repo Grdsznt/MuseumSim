@@ -11,7 +11,6 @@ public class MuseumRoom extends Room
 {
     public static int income = 0;
     
-    // private int robbers = SetUpWorld.getRobbers();
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
@@ -30,15 +29,12 @@ public class MuseumRoom extends Room
     private Obstacle wallSegLeft = new Obstacle(117, 64);
     private Obstacle wallSegRight = new Obstacle(117, 64);
     
-    private Robber rob1 = new Robber(3, 800, 1);
-    private Robber rob2 = new Robber(3, 800, 1);
-    private Robber rob3 = new Robber(3, 800, 1);
-    
-    
     private List<Pair> robberSpawns;
     private List<Pair> guardSpawns;
     
     private int robbers, guards, valuables;
+    
+        
     
     /**
      * Constructor for objects of class MuseumRoom.
@@ -94,12 +90,13 @@ public class MuseumRoom extends Room
         Valuable v = new Valuable(200.50);
         addObject(v, 92, 119);
         
+        
         this.robbers = robbers; this.guards = guards; this.valuables = valuables;
         
         robberSpawns = new ArrayList<Pair>(3);
         guardSpawns = new ArrayList<Pair>(3);
         
-        robberSpawns.add(new Pair(300, 500));
+        robberSpawns.add(new Pair(330, 500));
         robberSpawns.add(new Pair(200, 350));
         robberSpawns.add(new Pair(450, 350));
         
@@ -110,16 +107,16 @@ public class MuseumRoom extends Room
             addObject(new Robber(3, 600, 4), p.x, p.y);
         }
         
-        // guardSpawns.add(new Pair(300, 500));
-        // guardSpawns.add(new Pair(200, 350));
-        // guardSpawns.add(new Pair(450, 350));
+        guardSpawns.add(new Pair(330, 770));
+        guardSpawns.add(new Pair(420, 200));
+        guardSpawns.add(new Pair(240, 200));
         
-        // Collections.shuffle(guardSpawns);
+        Collections.shuffle(guardSpawns);
         
-        // for (int i = 0;i<guards;i++) {
-            // Pair p = guardSpawns.remove(0);
-            // addObject(new Guard(0), p.x, p.y);
-        // }
+        for (int i = 0;i<guards;i++) {
+            Pair p = guardSpawns.remove(0);
+            addObject(new Guard(0), p.x, p.y);
+        }
     }
     
     public void act() {

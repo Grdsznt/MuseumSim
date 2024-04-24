@@ -22,4 +22,11 @@ public class RuinedMuseum extends World
         setBackground(BG);
         addObject(new DropDownMenu(getWidth(), getHeight()), getWidth()/2, 0);
     }
+    
+    public void act() {
+        if (Greenfoot.mouseClicked(this)) {
+            StartWorld sw = new StartWorld();
+            Greenfoot.setWorld(sw);
+        }
+    }
 }
