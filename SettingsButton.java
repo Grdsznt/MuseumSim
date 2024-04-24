@@ -8,12 +8,14 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class SettingsButton extends Button
 {
+    SetUpWorld suw;
     /**
      * Main Constructor for SettingButton
      * @param up Current state of button. True = button points up. False = button points down.
      */
-    public SettingsButton(String imgPath, int numStates){
+    public SettingsButton(String imgPath, int numStates, SetUpWorld suw){
         super(imgPath, numStates);
+        this.suw = suw;
     }
     
     public void act()
@@ -57,6 +59,6 @@ public class SettingsButton extends Button
     }
     
     public void action() {
-        Greenfoot.setWorld(new SetUpWorld());
+        Greenfoot.setWorld(suw);
     }
 }

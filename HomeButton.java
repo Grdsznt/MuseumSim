@@ -9,14 +9,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class HomeButton extends Button
 {
-    
+    private StartWorld temp;
     /**
      * The construtor for the Button
      * @param imageStates where the image is located
      * @param numstates is how many different states there are of that image (at most 3 are used)
      */
-    public HomeButton(String imagePath, int numStates) {
+    public HomeButton(String imagePath, int numStates, StartWorld previousWorld) {
         super(imagePath, numStates);
+        temp = previousWorld;
     }
     
     /**
@@ -34,7 +35,7 @@ public class HomeButton extends Button
      * Action does nothing in this class but should be in the subclasses
      */
     public void action() {
-        Greenfoot.setWorld(new StartWorld());
+        Greenfoot.setWorld(temp);
         StartWorld.music.playLoop(); //Music doesn't resume when switching to new StartWorld
     }
     

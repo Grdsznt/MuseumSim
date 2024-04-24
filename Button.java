@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Has the logic to detect the mouse relation to the button
  * Calls the function in the subclass
  * 
- * @author Jerry Xing
+ * @author Jerry Xing, Jean Pan
  * @version 
  */
 public abstract class Button extends Actor
@@ -14,6 +14,13 @@ public abstract class Button extends Actor
     protected boolean hover = false;
     protected boolean mouseDown = false;
     protected GreenfootImage[] imageStates;
+    
+    /**
+     * The constructor for the Button with no parameters.
+     */
+    public Button(){
+        
+    }
     
     /**
      * The construtor for the Button
@@ -40,6 +47,11 @@ public abstract class Button extends Actor
      */
     public void act()
     {
+        //Do not act if it is an instance of the Option Button!
+        if(this instanceof OptionButton) {
+            return;
+        }
+        
         if (Greenfoot.mouseMoved(this)) {
             hover = true;
             if (imageStates.length > 1) {

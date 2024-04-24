@@ -26,6 +26,8 @@ public class StartWorld extends World
     private int actNum;
     private boolean currentBGframe;//true is frame 1, false is frame 2
     
+    private SetUpWorld setup = new SetUpWorld(this);
+    
     /**
      * Constructor for objects of class StartWorld.
      * 
@@ -37,7 +39,7 @@ public class StartWorld extends World
         currentBGframe = true;
         startGame = new StartButton("startButton", 3);
         addObject(startGame, 500, 400);
-        settings = new SettingsButton("settingsButton", 3);
+        settings = new SettingsButton("settingsButton", 3, setup);
         addObject(settings, 500, 600);
         Button.init();
         
@@ -59,12 +61,15 @@ public class StartWorld extends World
             //String keyPressed = Greenfoot.getKey();
             if(Greenfoot.mouseClicked(this)){
                 music.pause();
-                Greenfoot.setWorld(new SetUpWorld());
+                Greenfoot.setWorld(setup);
             }
         }
         actNum++;
     }
-
+    
+    public SetUpWorld getSetUp() {
+        return setup;
+    }
     public void started(){
         music.playLoop();
     }

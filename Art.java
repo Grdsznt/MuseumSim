@@ -23,7 +23,7 @@ public class Art extends Actor
         visitors = new Visitor[len];
         actNumber = 0;
         defaultX = getX(); defaultY = getY();
-	willVibrate = false;
+	      willVibrate = false;
     }
     
     public void addedToWorld(World w){
