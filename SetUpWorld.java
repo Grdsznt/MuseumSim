@@ -22,7 +22,7 @@ public class SetUpWorld extends World
      * Constructor for objects of class SetUpWorld.
      * 
      */
-    public SetUpWorld()
+    public SetUpWorld(StartWorld sw)
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 800, 1);
@@ -35,7 +35,7 @@ public class SetUpWorld extends World
         int tempX = editNumOfGuards.getImage().getWidth()/2;
         addObject(editNumOfGuards, tempX, tempY);
         
-        homeButton = new HomeButton("home", 3);
+        homeButton = new HomeButton("home", 3, sw);
         homeButton.setScale(130, 75);
         addObject(homeButton, 75, 50);
         Button.init();

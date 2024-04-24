@@ -48,6 +48,10 @@ public class Guard extends Human
         
         //Get its own detector
         detector = new Detector(this);
+        
+        loadAnimationImages();
+        
+        setImage("Guard/run_right1.png");
     }
     
     /**
