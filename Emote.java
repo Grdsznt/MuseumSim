@@ -11,7 +11,6 @@ public class Emote extends SuperSmoothMover
     private static GreenfootImage[] emotionFrames = {new GreenfootImage("Mood0.png"), new GreenfootImage("Mood1.png"), new GreenfootImage("Mood2.png"), new GreenfootImage("Mood3.png"), 
                                                      new GreenfootImage("Mood4.png"), new GreenfootImage("Mood5.png"), new GreenfootImage("Mood6.png"), new GreenfootImage("Mood7.png"), };
     private int emoteType;// 1 :) , 2 :( , 3 >:( , 4 :| , 5 -_- , 6 :O , 7 heart eyes
-    private Actor targetActor;
     private int actNum;
     public Emote(int emotion){
         if(emotion < 8 && emotion > 0){

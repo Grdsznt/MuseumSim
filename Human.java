@@ -106,7 +106,7 @@ public class Human extends SuperSmoothMover
                 int nx = x+mx[k], ny = y+my[k];
                 if (nx >= 1 && nx < C && ny < R && ny >= 1 && !vis[ny][nx]) {
                     setLocation(nx*20, ny*20);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) setLocation(srcx*20, srcy*20);
+                    if (!getIntersectingObjects(Obstacle.class).isEmpty()) setLocation(srcx*20, srcy*20);
                     // The issue is that it is bumping into the platform. need to set a special command to make sure doesn't happen.
                     else {
                         setLocation(srcx*20, srcy*20);

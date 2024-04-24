@@ -3,7 +3,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class StartButton here.
  * 
+<<<<<<< Updated upstream
  * @author (your name) 
+=======
+ * @author Jerry, Jean Pan
+>>>>>>> Stashed changes
  * @version (a version number or a date)
  */
 public class StartButton extends Button
@@ -54,8 +58,17 @@ public class StartButton extends Button
 
         }
     }
+    
+    /**
+     * If the user clicks the start button, the world will jump to Museum Room.
+     */
     public void action() {
+<<<<<<< Updated upstream
         Greenfoot.setWorld(new Main());
+=======
+        StartWorld sw = (StartWorld) getWorld();
+        Greenfoot.setWorld(new MuseumRoom(sw.getSetUp().getNumberOfRobbers(), sw.getSetUp().getNumberOfGuards(), sw.getSetUp().getNumberOfValuables()));
+>>>>>>> Stashed changes
         StartWorld.music.playLoop();
     }
 }
