@@ -1,9 +1,4 @@
 #Greenfoot project file
-<<<<<<< HEAD
-=======
-class.MinusButton.image=minus.png
-class.PlusButton.image=plus.png
->>>>>>> main
 dependency1.from=DisplayResults
 dependency1.to=SuperTextBox
 dependency1.type=UsesDependency
@@ -26,81 +21,95 @@ dependency15.from=SetUpWorld
 dependency15.to=HomeButton
 dependency15.type=UsesDependency
 dependency16.from=SetUpWorld
-dependency16.to=SuperTextBox
+dependency16.to=OptionButton
 dependency16.type=UsesDependency
 dependency17.from=SetUpWorld
-dependency17.to=Button
+dependency17.to=SuperTextBox
 dependency17.type=UsesDependency
-dependency18.from=Art
-dependency18.to=Visitor
+dependency18.from=SetUpWorld
+dependency18.to=Button
 dependency18.type=UsesDependency
-dependency19.from=Human
-dependency19.to=MuseumRoom
+dependency19.from=Art
+dependency19.to=Visitor
 dependency19.type=UsesDependency
 dependency2.from=DisplayResults
 dependency2.to=SuperDisplayLabel
 dependency2.type=UsesDependency
-dependency20.from=Visitor
-dependency20.to=Emote
+dependency20.from=Human
+dependency20.to=MuseumRoom
 dependency20.type=UsesDependency
-dependency21.from=Visitor
-dependency21.to=MuseumRoom
+dependency21.from=Human
+dependency21.to=Obstacle
 dependency21.type=UsesDependency
-dependency22.from=Guard
-dependency22.to=Detector
+dependency22.from=Visitor
+dependency22.to=Emote
 dependency22.type=UsesDependency
-dependency23.from=Guard
-dependency23.to=Robber
+dependency23.from=Visitor
+dependency23.to=MuseumRoom
 dependency23.type=UsesDependency
 dependency24.from=Guard
-dependency24.to=Obstacle
+dependency24.to=Detector
 dependency24.type=UsesDependency
-dependency25.from=Robber
-dependency25.to=Valuable
+dependency25.from=Guard
+dependency25.to=Robber
 dependency25.type=UsesDependency
-dependency26.from=Detector
-dependency26.to=Guard
+dependency26.from=Guard
+dependency26.to=Obstacle
 dependency26.type=UsesDependency
-dependency27.from=Detector
-dependency27.to=Robber
+dependency27.from=Robber
+dependency27.to=Valuable
 dependency27.type=UsesDependency
-dependency28.from=HomeButton
-dependency28.to=StartWorld
+dependency28.from=Robber
+dependency28.to=Obstacle
 dependency28.type=UsesDependency
-dependency29.from=SettingsButton
-dependency29.to=SetUpWorld
+dependency29.from=Detector
+dependency29.to=Guard
 dependency29.type=UsesDependency
 dependency3.from=DisplayResults
 dependency3.to=HomeButton
 dependency3.type=UsesDependency
-dependency30.from=StartButton
-<<<<<<< HEAD
-dependency30.to=Main
-=======
-dependency30.to=MuseumRoom
->>>>>>> main
+dependency30.from=Detector
+dependency30.to=Robber
 dependency30.type=UsesDependency
-dependency31.from=StartButton
-dependency31.to=StartWorld
+dependency31.from=Button
+dependency31.to=OptionButton
 dependency31.type=UsesDependency
-<<<<<<< HEAD
-dependency32.from=Valuable
-dependency32.to=Robber
+dependency32.from=HomeButton
+dependency32.to=StartWorld
 dependency32.type=UsesDependency
-=======
-dependency32.from=OptionButton
-dependency32.to=Label
-dependency32.type=UsesDependency
-dependency33.from=OptionButton
-dependency33.to=SetUpWorld
+dependency33.from=MinusButton
+dependency33.to=OptionButton
 dependency33.type=UsesDependency
-dependency34.from=Valuable
-dependency34.to=Robber
+dependency34.from=SettingsButton
+dependency34.to=SetUpWorld
 dependency34.type=UsesDependency
->>>>>>> main
+dependency35.from=PlusButton
+dependency35.to=OptionButton
+dependency35.type=UsesDependency
+dependency36.from=StartButton
+dependency36.to=StartWorld
+dependency36.type=UsesDependency
+dependency37.from=StartButton
+dependency37.to=MuseumRoom
+dependency37.type=UsesDependency
+dependency38.from=OptionButton
+dependency38.to=SuperTextBox
+dependency38.type=UsesDependency
+dependency39.from=OptionButton
+dependency39.to=SetUpWorld
+dependency39.type=UsesDependency
 dependency4.from=DisplayResults
 dependency4.to=StartWorld
 dependency4.type=UsesDependency
+dependency40.from=OptionButton
+dependency40.to=PlusButton
+dependency40.type=UsesDependency
+dependency41.from=OptionButton
+dependency41.to=MinusButton
+dependency41.type=UsesDependency
+dependency42.from=Valuable
+dependency42.to=Robber
+dependency42.type=UsesDependency
 dependency5.from=RuinedMuseum
 dependency5.to=DropDownMenu
 dependency5.type=UsesDependency
@@ -116,21 +125,13 @@ dependency8.type=UsesDependency
 dependency9.from=StartWorld
 dependency9.to=Button
 dependency9.type=UsesDependency
-editor.fx.0.height=739
-editor.fx.0.width=816
-<<<<<<< HEAD
-editor.fx.0.x=15
-editor.fx.0.y=113
-height=1096
-package.numDependencies=32
-package.numTargets=33
-=======
-editor.fx.0.x=552
-editor.fx.0.y=98
-height=1048
-package.numDependencies=34
-package.numTargets=32
->>>>>>> main
+editor.fx.0.height=0
+editor.fx.0.width=0
+editor.fx.0.x=0
+editor.fx.0.y=0
+height=686
+package.numDependencies=42
+package.numTargets=31
 project.charset=UTF-8
 publish.hasSource=false
 publish.locked=true
@@ -141,7 +142,7 @@ publish.title=
 publish.url=
 readme.height=60
 readme.name=@README
-readme.width=49
+readme.width=48
 readme.x=10
 readme.y=10
 simulation.speed=50
@@ -153,27 +154,23 @@ target1.width=120
 target1.x=0
 target1.y=0
 target10.height=70
-target10.name=ImageManager
+target10.name=MinusButton
 target10.showInterface=false
 target10.type=ClassTarget
 target10.width=120
 target10.x=0
 target10.y=0
 target11.height=70
-<<<<<<< HEAD
-target11.name=Button
-=======
-target11.name=MinusButton
->>>>>>> main
+target11.name=ImageManager
 target11.showInterface=false
 target11.type=ClassTarget
 target11.width=120
 target11.x=0
 target11.y=0
 target12.height=70
-target12.name=Spots
+target12.name=Button
 target12.showInterface=false
-target12.type=ClassTarget
+target12.type=AbstractTarget
 target12.width=120
 target12.x=0
 target12.y=0
@@ -185,62 +182,42 @@ target13.width=120
 target13.x=0
 target13.y=0
 target14.height=70
-<<<<<<< HEAD
 target14.name=Guard
-=======
-target14.name=SettingsButton
->>>>>>> main
 target14.showInterface=false
 target14.type=ClassTarget
 target14.width=120
 target14.x=0
 target14.y=0
 target15.height=70
-<<<<<<< HEAD
 target15.name=VolumeButton
-=======
-target15.name=Guard
->>>>>>> main
 target15.showInterface=false
 target15.type=ClassTarget
 target15.width=120
 target15.x=0
 target15.y=0
 target16.height=70
-<<<<<<< HEAD
 target16.name=RuinedMuseum
-=======
-target16.name=VolumeButton
->>>>>>> main
 target16.showInterface=false
 target16.type=ClassTarget
 target16.width=120
 target16.x=0
 target16.y=0
 target17.height=70
-<<<<<<< HEAD
 target17.name=Room
-=======
-target17.name=RuinedMuseum
->>>>>>> main
 target17.showInterface=false
-target17.type=ClassTarget
+target17.type=AbstractTarget
 target17.width=120
 target17.x=0
 target17.y=0
 target18.height=70
-<<<<<<< HEAD
-target18.name=MyWorld
-=======
-target18.name=Room
->>>>>>> main
+target18.name=SuperDisplayLabel
 target18.showInterface=false
-target18.type=AbstractTarget
-target18.width=120
+target18.type=ClassTarget
+target18.width=130
 target18.x=0
 target18.y=0
 target19.height=70
-target19.name=SuperDisplayLabel
+target19.name=Human
 target19.showInterface=false
 target19.type=ClassTarget
 target19.width=130
@@ -254,106 +231,70 @@ target2.width=120
 target2.x=0
 target2.y=0
 target20.height=70
-target20.name=Human
+target20.name=PlusButton
 target20.showInterface=false
 target20.type=ClassTarget
-target20.width=130
+target20.width=120
 target20.x=0
 target20.y=0
 target21.height=70
-<<<<<<< HEAD
 target21.name=Valuable
-=======
-target21.name=PlusButton
->>>>>>> main
 target21.showInterface=false
 target21.type=ClassTarget
 target21.width=120
 target21.x=0
 target21.y=0
 target22.height=70
-<<<<<<< HEAD
 target22.name=DropDownMenu
-=======
-target22.name=Valuable
->>>>>>> main
 target22.showInterface=false
 target22.type=ClassTarget
 target22.width=120
 target22.x=0
 target22.y=0
 target23.height=70
-<<<<<<< HEAD
 target23.name=Emote
-=======
-target23.name=DropDownMenu
->>>>>>> main
 target23.showInterface=false
 target23.type=ClassTarget
 target23.width=120
 target23.x=0
 target23.y=0
 target24.height=70
-<<<<<<< HEAD
 target24.name=StartWorld
-=======
-target24.name=Emote
->>>>>>> main
 target24.showInterface=false
 target24.type=ClassTarget
 target24.width=120
 target24.x=0
 target24.y=0
 target25.height=70
-<<<<<<< HEAD
 target25.name=StartButton
-=======
-target25.name=StartWorld
->>>>>>> main
 target25.showInterface=false
 target25.type=ClassTarget
 target25.width=120
 target25.x=0
 target25.y=0
 target26.height=70
-<<<<<<< HEAD
 target26.name=Detector
-=======
-target26.name=StartButton
->>>>>>> main
 target26.showInterface=false
 target26.type=ClassTarget
 target26.width=120
 target26.x=0
 target26.y=0
 target27.height=70
-<<<<<<< HEAD
 target27.name=SetUpWorld
-=======
-target27.name=Detector
->>>>>>> main
 target27.showInterface=false
 target27.type=ClassTarget
 target27.width=120
 target27.x=0
 target27.y=0
 target28.height=70
-<<<<<<< HEAD
-target28.name=SuperTextBox
-=======
-target28.name=SetUpWorld
->>>>>>> main
+target28.name=OptionButton
 target28.showInterface=false
 target28.type=ClassTarget
 target28.width=120
 target28.x=0
 target28.y=0
 target29.height=70
-<<<<<<< HEAD
-target29.name=Effect
-=======
-target29.name=OptionButton
->>>>>>> main
+target29.name=SuperTextBox
 target29.showInterface=false
 target29.type=ClassTarget
 target29.width=120
@@ -367,40 +308,19 @@ target3.width=120
 target3.x=0
 target3.y=0
 target30.height=70
-target30.name=Buttons
+target30.name=Effect
 target30.showInterface=false
-target30.type=ClassTarget
+target30.type=AbstractTarget
 target30.width=120
 target30.x=0
 target30.y=0
 target31.height=70
-target31.name=SetUp
+target31.name=Robber
 target31.showInterface=false
 target31.type=ClassTarget
 target31.width=120
 target31.x=0
 target31.y=0
-target32.height=70
-<<<<<<< HEAD
-target32.name=Main
-=======
-target32.name=Robber
->>>>>>> main
-target32.showInterface=false
-target32.type=ClassTarget
-target32.width=120
-target32.x=0
-target32.y=0
-<<<<<<< HEAD
-target33.height=70
-target33.name=Robber
-target33.showInterface=false
-target33.type=ClassTarget
-target33.width=120
-target33.x=0
-target33.y=0
-=======
->>>>>>> main
 target4.height=70
 target4.name=Slider
 target4.showInterface=false
@@ -426,15 +346,11 @@ target7.height=70
 target7.name=SuperSmoothMover
 target7.showInterface=false
 target7.type=AbstractTarget
-target7.width=130
+target7.width=140
 target7.x=0
 target7.y=0
 target8.height=70
-<<<<<<< HEAD
 target8.name=DisplayResults
-=======
-target8.name=Label
->>>>>>> main
 target8.showInterface=false
 target8.type=ClassTarget
 target8.width=120
@@ -448,11 +364,7 @@ target9.width=120
 target9.x=0
 target9.y=0
 version=3.1.0
-width=1936
-<<<<<<< HEAD
-world.lastInstantiated=MuseumRoom
-=======
-world.lastInstantiated=SetUpWorld
->>>>>>> main
+width=1294
+world.lastInstantiated=DisplayResults
 xPosition=0
 yPosition=0
