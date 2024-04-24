@@ -8,7 +8,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class MuseumRoom extends Room
 {
-    public static int income = 0;
+    
+    private static int income = 0;
+    private static int theftsPrevented = 0;
+    private static int furnitureStolen = 0;
+    private static int time = 0;
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
@@ -91,5 +95,29 @@ public class MuseumRoom extends Room
     
     public void act() {
         
+    }
+    
+    public static void incrementIncome()
+    {
+        income+= 100;
+    }
+    public static int incomeEarned()
+    {
+        return income;
+    }
+    
+    public static int theftsPrevented()
+    {
+        return theftsPrevented;
+    }
+    
+    public static int furnitureStolen()
+    {
+        return furnitureStolen;
+    }
+    
+    public static int time()
+    {
+        return time;
     }
 }

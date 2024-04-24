@@ -18,6 +18,8 @@ public class EndScreen extends World
     private SuperDisplayLabel theStatBar;
     private HomeButton homeButton;
     
+    
+    
     // Restart Button
     
     /**
@@ -26,7 +28,7 @@ public class EndScreen extends World
      */
     public EndScreen()
     {    
-        super(500,500,1);
+        super(1200,1000,1);
         
         
         comic = new Font("Comic Sans MS", false, false, 16);
@@ -50,7 +52,15 @@ public class EndScreen extends World
         theStatBar.setLabels(labels);
         addObject(theStatBar, getWidth()/2, 0);
         homeButton = new HomeButton("home", 3);
-        addObject(homeButton, 250, 250);
+        addObject(homeButton, getWidth()/2, getHeight()/2);
+        
+        stats[0] = MuseumRoom.incomeEarned();
+        // stats[1] = MuseumRoom.theftsPrevented();
+        // stats[2] = MuseumRoom.furnitureStolen();
+        // stats[3] = MuseumRoom.time();
+        
+        
+        theStatBar.update(stats);
     }
     
     /**
@@ -74,18 +84,4 @@ public class EndScreen extends World
     public void stopped() {
         //music.pause();
     }
-    
-    public void moneyEarned()
-    {
-        
-    }
-    public void theftsPrevented()
-    {
-        
-    }
-    public void furnitureStolen()
-    {
-        
-    }
-    
 }

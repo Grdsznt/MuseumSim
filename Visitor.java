@@ -66,7 +66,7 @@ public class Visitor extends Human
         if(!isNew){//prevent z sort problems
             isNew=true;
         }
-        MuseumRoom.income +=100;        
+        MuseumRoom.incrementIncome();     
     }
    
     public Visitor(int time){
