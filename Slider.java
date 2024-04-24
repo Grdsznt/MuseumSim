@@ -46,7 +46,7 @@ public class Slider extends Actor {
             int clampedX = Math.min(Math.max(mouse.getX(), sliderMinX), sliderMaxX);
             setLocation(clampedX, getY());
             value = calculateValue(clampedX);
-            ((SettingsWorld)getWorld()).updateVar(sliderID, value);
+            ((SetUpWorld)getWorld()).updateVar(sliderID, value);
         }
     }
 

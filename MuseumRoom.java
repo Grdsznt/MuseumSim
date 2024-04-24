@@ -56,7 +56,7 @@ public class MuseumRoom extends Room
     public MuseumRoom(int robbers, int guards, int valuables)
     { 
         
-        super(661,816,0, 0);
+        super(1000,816,0, 0);
         setBackground(worldImage);
         
         addObject(displayTable1, 327, 699);
