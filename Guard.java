@@ -50,8 +50,9 @@ public class Guard extends Human
         detector = new Detector(this);
         
         loadAnimationImages();
-        
-        setImage("Guard/run_right1.png");
+        GreenfootImage img = new GreenfootImage("Guard/run_right1.png");
+        img.scale(40, 80);
+        setImage(img);
     }
     
     /**
