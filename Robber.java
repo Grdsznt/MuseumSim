@@ -39,7 +39,7 @@ public class Robber extends Human
     
     private List<Pair> path;
     Pair curTile, target = null;
-    private boolean pathFound = false, returning = false, depositing = false;
+    private boolean pathFound = false, returning = false, depositing = false, initial = true;
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0, centerX, centerY;
     public Robber(double s, int tR, int D){
@@ -53,8 +53,9 @@ public class Robber extends Human
             framesLeft[i].scale(40, 55);
             framesUp[i].scale(40, 55);
             framesDown[i].scale(40, 55);
-        }
+        } 
     }
+    
 
     public void act()
     {
@@ -102,6 +103,12 @@ public class Robber extends Human
         // else{
             // isMoving = false;
         // }
+        
+        if (initial) {
+            centerX = getX(); centerY = getY();
+            initial = false; 
+            // isMoving = false;
+        }
         if (actNum % 420 == 0 && targetValuable == null && !returning) {
             target = getRandomPositionWithinRadius(75); 
         }
@@ -145,6 +152,7 @@ public class Robber extends Human
         //take the valuable with me
         if(hasStolen){
             targetValuable.followRobber(this);
+            
         }
         
         actNum++;
@@ -172,7 +180,7 @@ public class Robber extends Human
         int diffX = target.x - currentX;
         int diffY = target.y - currentY;
     
-        if (Math.abs(diffX) > 0) { // Move horizontally if the horizontal distance is greater
+        if (Math.abs(diffX) > 3) { // Move horizontally if the horizontal distance is greater
             if (diffX > 0) {
                 currentX += speed; // Move right
                 direction = 1;
@@ -180,7 +188,7 @@ public class Robber extends Human
                 currentX -= speed; // Move left
                 direction = 3;
             }
-        } else if (Math.abs(diffY) > 0){ // Move vertically otherwise
+        } else if (Math.abs(diffY) > 3){ // Move vertically otherwise
             if (diffY > 0) {
                 currentY += speed; // Move down
                 direction = 4;
@@ -191,13 +199,14 @@ public class Robber extends Human
         }
     
         setLocation(currentX, currentY);
-        isMoving = true;
         
         // Check if target is reached
         if (Math.abs(diffX) <= speed && Math.abs(diffY) <= speed) {
             setLocation(target.x, target.y); // Snap to the target if very close
             isMoving = false;
             target = null;
+        } else {
+            isMoving = true;
         }
     }
     
@@ -235,10 +244,13 @@ public class Robber extends Human
         if(valuables.size() > 0){
             //get a random valuable in range and set it as a target
             targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
-
+            while(targetValuable.isStolen()) {
+                targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
+            }
         }        
-
         
+        if (targetValuable.isStolen()) targetValuable = null;
+        targetValuable.stealMe();
     }
 
     public void setDirection(int D){
@@ -350,6 +362,7 @@ public class Robber extends Human
                 if (depositing) {
                     hasStolen = false; // Set up to steal another valuable
                     getWorld().removeObject(targetValuable);
+                    MuseumRoom mr = (MuseumRoom) getWorld();
                     targetValuable = null;// No more targets
                     returning = true;
                     depositing = false;

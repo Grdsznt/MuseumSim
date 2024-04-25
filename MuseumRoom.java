@@ -33,7 +33,7 @@ public class MuseumRoom extends Room
     private List<Pair> guardSpawns;
     
     private int robbers, guards, valuables;
-    
+    private int actNum = 0;
         
     
     /**
@@ -87,9 +87,8 @@ public class MuseumRoom extends Room
         
         // need to spawn robber in specific locations
         
-        Valuable v = new Valuable(200.50);
-        addObject(v, 92, 119);
-        
+        // Valuable v = new Valuable(200.50);
+        // addObject(v, 92, 119);
         
         this.robbers = robbers; this.guards = guards; this.valuables = valuables;
         
@@ -120,6 +119,10 @@ public class MuseumRoom extends Room
     }
     
     public void act() {
-        
+        if (actNum % 1600 == 0) {
+            Valuable v = new Valuable(200.50);
+            addObject(v, 92, 119);
+        }
+        actNum++;
     }
 }
