@@ -4,7 +4,7 @@ import java.util.*;
 /**
  * Write a description of class MuseumRoom here.
  * 
- * @author (your name) 
+ * @author Edwin, Jean
  * @version (a version number or a date)
  */
 public class MuseumRoom extends Room
@@ -33,14 +33,26 @@ public class MuseumRoom extends Room
     private List<Pair> guardSpawns;
     
     private int robbers, guards, valuables;
+    private int actCount;
+    
+    //Variables
+    private int money = 0;
+    private int valuablesStolenNumber = 0;
+    private int robbersCatchedNumber = 0;
+    //Images
+    private GreenfootImage moneyImage = new GreenfootImage("money.png");
+    private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
+    private GreenfootImage robberImage = new GreenfootImage("robber.png");
+    //Statistics
+    private Statistic moneyEarned = new Statistic(moneyImage, money, "$");
+    private Statistic valuablesStolen = new Statistic(valuableImage, valuablesStolenNumber);
+    private Statistic robbersCatched = new Statistic(robberImage, robbersCatchedNumber);
+    
     private int actNum = 0;
         
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
-    /**
-     * Constructor for objects of class MuseumRoom.
-     * 
-     */
+    
     
     public class Pair {
         int x, y;
@@ -49,7 +61,10 @@ public class MuseumRoom extends Room
         }
         
     }
-
+    /**
+     * Constructor for objects of class MuseumRoom.
+     * 
+     */
     public MuseumRoom(int robbers, int guards, int valuables)
     { 
         
@@ -127,9 +142,56 @@ public class MuseumRoom extends Room
             Pair p = guardSpawns.remove(0);
             addObject(new Guard(0), p.x, p.y);
         }
+        actCount = 1;
+        // Valuable v2 = new Valuable(0);
+        // addObject(v2, 650, 675);
+        
+        
+        
+        
+        //Add the statistics at the top of the world
+        int yPos = 20;
+        addObject(moneyEarned, 200, yPos);
+        addObject(valuablesStolen, 400, yPos);
+        addObject(robbersCatched, 600, yPos);
     }
     
     public void act() {
+        actCount++;
+        if(actCount % 600 == 0) {
+            Nighttime night = new Nighttime();
+            addObject(night, 500, 408);
+        }
+    }
+    
+    /**
+     * Set the new value of money.
+     * 
+     * @param change    The change in the amount of money hold in room.
+     */
+    public void setMoney(int change){
+        money += change;
+        moneyEarned.updateValue(money);
+    }
+    
+    /**
+     * Set the new number of valuables stolen.
+     * 
+     * @param change    The change in the amount of valuables stolen from room.
+     */
+    public void setValuables(int change){
+        valuablesStolenNumber += change;
+        valuablesStolen.updateValue(valuablesStolenNumber);
+    }
+    
+    /**
+     * Set the new value of robbers catched.
+     * 
+     * @param change    The change in the amount of robbers catched in room.
+     */
+    public void setRobbers(int change){
+        robbersCatchedNumber += change;
+        robbersCatched.updateValue(robbersCatchedNumber);
         if (actNum % 1600 == 0) {
             Valuable v = new Valuable(200.50);
             addObject(v, 92, 119);
@@ -149,5 +211,6 @@ public class MuseumRoom extends Room
         } else {
             return 2;
         }
+
     }
 }
