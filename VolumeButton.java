@@ -9,16 +9,23 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class VolumeButton extends Button
 {
     private GreenfootImage image;
-    
+    private static int currentVolume;
+    private boolean type;
     /**
      * Act - do whatever the VolumeButton wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public VolumeButton(String imagePath, int numStates) {
+    public VolumeButton(String imagePath, int numStates, boolean type) {
         super(imagePath, numStates);
     }
     public void act()
     {
-        // Add your action code here.
+        super.act();
+    }
+    public void action() {
+        if(type) {
+            currentVolume-=5;
+            
+        }
     }
 }

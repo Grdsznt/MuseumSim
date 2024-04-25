@@ -46,7 +46,7 @@ public class DisplayResults extends World
         theStatBar = new SuperDisplayLabel();
         theStatBar.setLabels(labels);
         addObject(theStatBar, getWidth()/2, 0);
-        homeButton = new HomeButton("home", 3);
+        homeButton = new HomeButton("home", 3, new StartWorld());
         addObject(homeButton, 250, 250);
     }
     
