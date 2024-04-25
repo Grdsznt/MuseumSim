@@ -57,7 +57,6 @@ public class Visitor extends Human
     private int direction;//1 right, 2 up, 3 left, 4 down
     
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false;
-    private SpotManager.DetailedSpot target;
     
     public Visitor(int time, int speed){
         
@@ -66,9 +65,6 @@ public class Visitor extends Human
     public void addedToWorld(World w){
         if(!isNew){//prevent z sort problems
             isNew=true;
-            //attempts to target, if unable then remove as would do nothing
-            target=SpotManager.attemptTarget(this);
-            if(target==null)getWorld().removeObject(this);
         }
         MuseumRoom.income +=100;        
     }
