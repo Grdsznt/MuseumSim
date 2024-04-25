@@ -38,7 +38,7 @@ public class Robber extends Human
     private int direction;//1 right, 2 up, 3 left, 4 down
     
     private List<Pair> path;
-    Pair curTile, target;
+    Pair curTile, target = null;
     private boolean pathFound = false, returning = false, depositing = false;
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0, centerX, centerY;
@@ -102,8 +102,7 @@ public class Robber extends Human
         // else{
             // isMoving = false;
         // }
-        if (actNum % 300 == 0 && targetValuable == null) {
-            centerX = getX(); centerY = getY();
+        if (actNum % 420 == 0 && targetValuable == null && !returning) {
             target = getRandomPositionWithinRadius(75); 
         }
         
@@ -126,21 +125,21 @@ public class Robber extends Human
         
         // If the robber has a target valuable and is not depositing
         if(targetValuable != null && !depositing && !returning){
-            handleValuable(targetValuable.getX()/20, targetValuable.getY()/20);
+            pathfind(targetValuable.getX()/20, targetValuable.getY()/20);
             animate();
         }
         // After the robber has gotten to the valuable's location, go to deposit the valuable
         if (depositing) {
-            handleValuable(33, 34); // return to deposit zone
+            pathfind(33, 34); // return to deposit zone
             animate();
         }
-        if (returning) {
+        if (returning) {    
             if (!robberLoc[0]) {
-                handleValuable(17, 25);
+                pathfind(13, 22);
             } else if (!robberLoc[1]) {
-                handleValuable(23, 18);
+                pathfind(23, 18);
             } else {
-                handleValuable(10, 18);
+                pathfind(10, 18);
             }
         }
         //take the valuable with me
@@ -151,27 +150,79 @@ public class Robber extends Human
         actNum++;
     }
     
+    // private void moveTowardsTarget() {
+        // if (Math.hypot(target.x - getX(), target.y - getY()) > speed) {
+            // double angle = Math.atan2(target.y - getY(), target.x - getX());
+            // double x = getX() + speed * Math.cos(angle);
+            // double y = getY() + speed * Math.sin(angle);
+            
+            // setLocation((int) x, (int) y);
+            
+            // isMoving = true;
+        // } else {
+            // setLocation(target.x, target.y); // Snap to the target if very close
+            // isMoving = false;
+            // target = null;
+        // }
+    // }
+    
     private void moveTowardsTarget() {
-        if (Math.hypot(target.x - getX(), target.y - getY()) > speed) {
-            double angle = Math.atan2(target.y - getY(), target.x - getX());
-            double x = getX() + speed * Math.cos(angle);
-            double y = getY() + speed * Math.sin(angle);
-            setLocation((int) x, (int) y);
-            isMoving = true;
-        } else {
+        int currentX = getX();
+        int currentY = getY();
+        int diffX = target.x - currentX;
+        int diffY = target.y - currentY;
+    
+        if (Math.abs(diffX) > 0) { // Move horizontally if the horizontal distance is greater
+            if (diffX > 0) {
+                currentX += speed; // Move right
+                direction = 1;
+            } else {
+                currentX -= speed; // Move left
+                direction = 3;
+            }
+        } else if (Math.abs(diffY) > 0){ // Move vertically otherwise
+            if (diffY > 0) {
+                currentY += speed; // Move down
+                direction = 4;
+            } else {
+                currentY -= speed; // Move up
+                direction = 2;
+            }
+        }
+    
+        setLocation(currentX, currentY);
+        isMoving = true;
+        
+        // Check if target is reached
+        if (Math.abs(diffX) <= speed && Math.abs(diffY) <= speed) {
             setLocation(target.x, target.y); // Snap to the target if very close
             isMoving = false;
+            target = null;
         }
     }
     
     private Pair getRandomPositionWithinRadius(double radius) {
         Random random = new Random();
-        double angle = 2 * Math.PI * random.nextDouble(); // Random angle
-        double distance = radius * Math.sqrt(random.nextDouble()); // Random distance within the radius
-
-        int newX = (int) (centerX + distance * Math.cos(angle));
-        int newY = (int) (centerY + distance * Math.sin(angle));
-
+        boolean isValid = false;
+        int curX = getX(), curY = getY();
+        int newX = 0, newY = 0;
+        
+        while (!isValid) {
+            double angle = 2 * Math.PI * random.nextDouble(); // Random angle
+            double distance = radius * Math.sqrt(random.nextDouble()); // Random distance within the radius
+        
+            newX = (int) (centerX + distance * Math.cos(angle));
+            newY = (int) (centerY + distance * Math.sin(angle));
+        
+            setLocation(newX, newY);
+            
+            // Check if the new location intersects with any Obstacles
+            if (getIntersectingObjects(Obstacle.class).isEmpty()) {
+                isValid = true; // If no intersection, mark as valid and break loop
+            }
+        }
+        setLocation(curX, curY);
+        
         return new Pair(newX, newY);
     }
 
@@ -244,14 +295,14 @@ public class Robber extends Human
     }
     // If did not do bfs, do it and get the path.
             
-    public void handleValuable(int destx, int desty) {
+    public void pathfind(int destx, int desty) {
         if (!pathFound) {
             // Since the bfs works on 20x20 tiles, divide the x and y values by 20
             path = bfs(getX()/20, getY()/20, destx, desty);
             
             // Get the targeted tile
             curTile = path.remove(0);
-            
+                        
             // Mark that bfs has already been done
             pathFound = true;
         }
@@ -260,6 +311,8 @@ public class Robber extends Human
         int dx = Math.abs((curTile.x*20) - getX());
         int dy = Math.abs((curTile.y*20) - getY());
         
+        // System.out.println(curTile.x + " " + curTile.y);
+     
         isMoving = true;
         // If there is a gap, then adjust the x direction
         if (dx != 0) { 
@@ -296,14 +349,16 @@ public class Robber extends Human
             } else {
                 if (depositing) {
                     hasStolen = false; // Set up to steal another valuable
+                    getWorld().removeObject(targetValuable);
                     targetValuable = null;// No more targets
                     returning = true;
                     depositing = false;
                 } else if (returning){
                     robberLoc[robIndx] = true;
                     robIndx++;
+                    centerX = getX();
+                    centerY = getY();
                     returning = false;
-                    isMoving = false;
                 }else {
                     hasStolen = true; // currently stealing, so set to pick up valuable
                     depositing = true; // return to deposit zone
@@ -313,6 +368,7 @@ public class Robber extends Human
                 }
                 pathFound = false;
                 curTile = null;
+                isMoving = false;
             }
         } 
     }
