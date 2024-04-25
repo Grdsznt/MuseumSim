@@ -11,8 +11,8 @@ public class Human extends SuperSmoothMover
     
     private int R = 41,C = 31;
     // based on one node being 20x20 pixels, off of the world size
-    private boolean vis[][] = new boolean[70][50];  
-    private int mx[] = {0, 1, 0, -1}, my[] = {1, 0, -1, 0};
+    private boolean vis[][] = new boolean[70][50];  // give it some extra cells
+    private int mx[] = {0, 1, 0, -1}, my[] = {1, 0, -1, 0}; // move in 4 directions: up, down, left, right
     
     private boolean enteredNewRoom = true;
     
@@ -106,7 +106,7 @@ public class Human extends SuperSmoothMover
                 int nx = x+mx[k], ny = y+my[k];
                 if (nx >= 1 && nx < C && ny < R && ny >= 1 && !vis[ny][nx]) {
                     setLocation(nx*20, ny*20);
-                    if (!getIntersectingObjects(Object.class).isEmpty()) setLocation(srcx*20, srcy*20);
+                    if (!getIntersectingObjects(Obstacle.class).isEmpty()) setLocation(srcx*20, srcy*20);
                     // The issue is that it is bumping into the platform. need to set a special command to make sure doesn't happen.
                     else {
                         setLocation(srcx*20, srcy*20);

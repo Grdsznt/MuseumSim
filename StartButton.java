@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class StartButton here.
  * 
- * @author (your name) 
+ * @author Jerry, Jean Pan
  * @version (a version number or a date)
  */
 public class StartButton extends Button
@@ -11,10 +11,7 @@ public class StartButton extends Button
     public StartButton(String imgPath, int numStates) {
         super(imgPath, numStates);
     }
-    /**
-     * Act - do whatever the StartButton wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    
     public void act()
     {
         if (Greenfoot.mouseMoved(this)) {
@@ -25,7 +22,6 @@ public class StartButton extends Button
         } else if (Greenfoot.mouseMoved(null)) {
             hover = false;
             mouseDown = false;
-            
             if (imageStates.length > 2) {
                 setImage(imageStates[0]);
             }
@@ -51,11 +47,15 @@ public class StartButton extends Button
             if (imageStates.length > 2) {
                 setImage(imageStates[0]);
             }
-
         }
     }
+    
+    /**
+     * If the user clicks the start button, the world will jump to Museum Room.
+     */
     public void action() {
-        Greenfoot.setWorld(new Main());
+        StartWorld sw = (StartWorld) getWorld();
+        Greenfoot.setWorld(new MuseumRoom(sw.getSetUp().getNumberOfRobbers(), sw.getSetUp().getNumberOfGuards(), sw.getSetUp().getNumberOfValuables()));
         StartWorld.music.playLoop();
     }
 }

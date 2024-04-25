@@ -1,12 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 import java.lang.Math;
-import java.util.Random;
-import java.util.*;
 /**
  * Write a description of class Robber here.
  * 
- * @author Edwin, Nick
+ * @author Edwin, Nick, Jean
  * @version (a version number or a date)
  */
 public class Robber extends Human
@@ -40,68 +38,184 @@ public class Robber extends Human
     private int direction;//1 right, 2 up, 3 left, 4 down
     
     private List<Pair> path;
-    Pair curTile;
-    private boolean pathFound = false;
+    Pair curTile, target;
+    private boolean pathFound = false, returning = false, depositing = false;
+    private boolean robberLoc[] = new boolean[3];
+    private int robIndx = 0, centerX, centerY;
     public Robber(double s, int tR, int D){
         direction = D; 
         speed = s; targetRadius = tR;
         hasStolen = false; actNum = 0; frameNum = 0;
         enableStaticRotation(); isMoving = false;
         setIdleImage();
+        for (int i = 0;i<7;i++) {
+            framesRight[i].scale(40, 55);
+            framesLeft[i].scale(40, 55);
+            framesUp[i].scale(40, 55);
+            framesDown[i].scale(40, 55);
+        }
     }
 
-    /**
-     * Act - do whatever the Robber wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
     public void act()
     {
         //testing animation
-        if (Greenfoot.isKeyDown("up")) {
-            int curX = getX(), curY = getY();
-            setLocation(curX, curY - speed); // Move up
-            if (!detectedObstacles()) {
-                direction = 2;
-                isMoving = true;
+        // if (Greenfoot.isKeyDown("up")) {
+            // int curX = getX(), curY = getY();
+            // setLocation(curX, curY - speed); // Move up
+            // if (!detectedObstacles()) {
+                // direction = 2;
+                // isMoving = true;
+            // } else {
+                // setLocation(curX, curY); // Move back if detected obstacle
+            // }
+        // }
+        // else if (Greenfoot.isKeyDown("down")) {
+            // int curX = getX(), curY = getY();
+            // setLocation(curX, curY + speed); // Move down
+            // if (!detectedObstacles()) {
+                // direction = 4;
+                // isMoving = true;
+            // } else {
+                // setLocation(curX, curY); // Move back if detected obstacle
+            // }
+        // }
+        // else if (Greenfoot.isKeyDown("left")) {
+            // int curX = getX(), curY = getY();
+            // setLocation(curX-speed, curY); // Move left
+            // if (!detectedObstacles()) {
+                // direction = 3;
+                // isMoving = true;
+            // } else {
+                // setLocation(curX, curY); // Move back if detected obstacle
+            // }
+        // }
+        // else if (Greenfoot.isKeyDown("right")) {
+            // int curX = getX(), curY = getY();
+            // setLocation(curX+speed, curY); // Move right
+            // if (!detectedObstacles()) {
+                // direction = 1;
+                // isMoving = true;
+            // } else {
+                // setLocation(curX, curY); // Move back if detected obstacle
+            // }
+        // }
+        // else{
+            // isMoving = false;
+        // }
+        if (actNum % 300 == 0 && targetValuable == null) {
+            centerX = getX(); centerY = getY();
+            target = getRandomPositionWithinRadius(75); 
+        }
+        
+        if (target != null) {
+            moveTowardsTarget();
+        }
+        
+        animate();
+        //goes back to default frame if not moving
+        if(!isMoving)
+            setIdleImage();
+
+        if (targetValuable != null && targetValuable.getWorld() == null){
+            targetValuable = null;
+        }
+        if(targetValuable == null && actNum % 1600 == 0){
+            getTargetValuable();
+            target = null;
+        }
+        
+        // If the robber has a target valuable and is not depositing
+        if(targetValuable != null && !depositing && !returning){
+            handleValuable(targetValuable.getX()/20, targetValuable.getY()/20);
+            animate();
+        }
+        // After the robber has gotten to the valuable's location, go to deposit the valuable
+        if (depositing) {
+            handleValuable(33, 34); // return to deposit zone
+            animate();
+        }
+        if (returning) {
+            if (!robberLoc[0]) {
+                handleValuable(17, 25);
+            } else if (!robberLoc[1]) {
+                handleValuable(23, 18);
             } else {
-                setLocation(curX, curY); // Move back if detected obstacle
+                handleValuable(10, 18);
             }
         }
-        else if (Greenfoot.isKeyDown("down")) {
-            int curX = getX(), curY = getY();
-            setLocation(curX, curY + speed); // Move down
-            if (!detectedObstacles()) {
-                direction = 4;
-                isMoving = true;
-            } else {
-                setLocation(curX, curY); // Move back if detected obstacle
-            }
+        //take the valuable with me
+        if(hasStolen){
+            targetValuable.followRobber(this);
         }
-        else if (Greenfoot.isKeyDown("left")) {
-            int curX = getX(), curY = getY();
-            setLocation(curX-speed, curY); // Move left
-            if (!detectedObstacles()) {
-                direction = 3;
-                isMoving = true;
-            } else {
-                setLocation(curX, curY); // Move back if detected obstacle
-            }
-        }
-        else if (Greenfoot.isKeyDown("right")) {
-            int curX = getX(), curY = getY();
-            setLocation(curX+speed, curY); // Move right
-            if (!detectedObstacles()) {
-                direction = 1;
-                isMoving = true;
-            } else {
-                setLocation(curX, curY); // Move back if detected obstacle
-            }
-        }
-        else{
+        
+        actNum++;
+    }
+    
+    private void moveTowardsTarget() {
+        if (Math.hypot(target.x - getX(), target.y - getY()) > speed) {
+            double angle = Math.atan2(target.y - getY(), target.x - getX());
+            double x = getX() + speed * Math.cos(angle);
+            double y = getY() + speed * Math.sin(angle);
+            setLocation((int) x, (int) y);
+            isMoving = true;
+        } else {
+            setLocation(target.x, target.y); // Snap to the target if very close
             isMoving = false;
         }
-        //animation
-        //make sure that character is moving, modifies frame rate with y = mx + b
+    }
+    
+    private Pair getRandomPositionWithinRadius(double radius) {
+        Random random = new Random();
+        double angle = 2 * Math.PI * random.nextDouble(); // Random angle
+        double distance = radius * Math.sqrt(random.nextDouble()); // Random distance within the radius
+
+        int newX = (int) (centerX + distance * Math.cos(angle));
+        int newY = (int) (centerY + distance * Math.sin(angle));
+
+        return new Pair(newX, newY);
+    }
+
+    //targeting code taken from bug simulation
+    private void getTargetValuable(){
+
+        //get all the valuables in range
+        valuables = (ArrayList<Valuable>)getObjectsInRange(targetRadius+1,Valuable.class);
+
+        if(valuables.size() > 0){
+            //get a random valuable in range and set it as a target
+            targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
+
+        }        
+
+        
+    }
+
+    public void setDirection(int D){
+        if(D < 5 && D > 0){
+            direction = D;
+        }
+    }
+    public int getDirection(){
+        return direction;
+    }
+    public boolean robbedSomething(){
+        return hasStolen;
+    }
+    public void setIdleImage(){
+        if(direction == 1)
+            setImage(framesRight[0]);
+        if(direction == 2)
+            setImage(framesUp[0]);
+        if(direction == 3)
+            setImage(framesLeft[0]);
+        if(direction == 4)
+            setImage(framesDown[0]);
+    }
+    
+    
+    public void animate() {
+        // Animate the robber while moving
+        // make sure that character is moving, modifies frame rate with y = mx + b
         if(isMoving && actNum % (speed !=0 ? (int) (-6 * speed + 20) : 10) == 0){
             
             //changing the frame
@@ -122,205 +236,88 @@ public class Robber extends Human
                 case 3:
                     setImage(framesLeft[frameNum]);//face left
                     break;
-                case 4:
-                    setImage(framesDown[frameNum]);//face down
-                    break;
                 default:
                     setImage(framesDown[frameNum]);//face down defaultly
                     break;
             }
         }
-        //goes back to default frame if not moving
-        if(!isMoving)
-            setIdleImage();
-
-        // Add your action code here.
-        if (targetValuable != null && targetValuable.getWorld() == null){
-                targetValuable = null;
-        }
-        if(targetValuable == null){
-            getTargetValuable();
-        }
-        if(targetValuable != null){
-            //move towards it and steal it
-            if (!pathFound) {
-                path = bfs(getX()/20, getY()/20, targetValuable.getX()/20, targetValuable.getY()/20);
-                curTile = path.remove(0);
-                pathFound = true;
-            }
-
+    }
+    // If did not do bfs, do it and get the path.
             
-            int dx = Math.abs((curTile.x*20) - getX());
-            int dy = Math.abs((curTile.y*20) - getY());
+    public void handleValuable(int destx, int desty) {
+        if (!pathFound) {
+            // Since the bfs works on 20x20 tiles, divide the x and y values by 20
+            path = bfs(getX()/20, getY()/20, destx, desty);
             
-            if (dx != 0) { 
-                if (getX() > curTile.x*20) {
-                    int curX = getX();
-                    setLocation(curX - speed, getY());
-                    // if (!detectedObstacles()) {
-                        // direction = 1;
-                        // isMoving = true;
-                    // } else {
-                        // setLocation(curX, getY());
-                    // }
-                } else {
-                    int curX = getX();
-                    setLocation(curX + speed, getY());
-                    // if (!detectedObstacles()) {
-                        // direction = 1;
-                        // isMoving = true;
-                    // } else {
-                        // setLocation(curX, getY());
-                    // }
-                }
+            // Get the targeted tile
+            curTile = path.remove(0);
+            
+            // Mark that bfs has already been done
+            pathFound = true;
+        }
+        
+        // Get the absolute x and y distances between the robber and the current tile
+        int dx = Math.abs((curTile.x*20) - getX());
+        int dy = Math.abs((curTile.y*20) - getY());
+        
+        isMoving = true;
+        // If there is a gap, then adjust the x direction
+        if (dx != 0) { 
+            // if the robber is to the right of the targeted tile, move him left
+            if (getX() > curTile.x*20) {
+                setLocation(getX() - speed, getY());
+                direction = 3; // set the direction to left
+            } else {
+                // otherwise, move him right
+                setLocation(getX() + speed, getY());
+                direction = 1; // set the direction to right
             }
-            // Once aligned horizontally, move vertically
-            else if (dy != 0) {
-                if (getY() > curTile.y*20) {
-                    int curY = getY();
-                    setLocation(getX(), curY-speed);
-                    // if (!detectedObstacles()) {
-                        // direction = 1;
-                        // isMoving = true;
-                    // } else {
-                        // setLocation(curX, getY());
-                    // }
-                } else {
-                    int curY = getY();
-                    setLocation(getX(), curY+speed);
-                    // if (!detectedObstacles()) {
-                        // direction = 1;
-                        // isMoving = true;
-                    // } else {
-                        // setLocation(curX, getY());
-                    // }
-                }
+        }
+        // Once aligned horizontally, move vertically
+        else if (dy != 0) {
+            // If the robber is below the targeted tile, move him up
+            if (getY() > curTile.y*20) {
+                setLocation(getX(), getY()-speed);
+                direction = 2; // set the direction to up
+            } else {
+                // Otherwise, move him down
+                setLocation(getX(), getY()+speed);
+                direction = 4; // set the direction to down
             }
-            // Check if target is reached (considering possible overshoot)
-            if (Math.abs(dx) <= speed && Math.abs(dy) <= speed) {
-                // Target reached
-                setLocation(curTile.x*20, curTile.y*20); // Correct any minor overshoot
-                if (!path.isEmpty()) {
-                    curTile = path.remove(0); // Get and remove the first element
-                } else {
-                    curTile = null;
+        }
+        
+    
+        // Check if target is reached (considering possible overshoot)
+        if (Math.abs(dx) <= speed && Math.abs(dy) <= speed) {
+            // Target reached
+            setLocation(curTile.x*20, curTile.y*20); // Correct any minor overshoot
+            if (!path.isEmpty()) {
+                curTile = path.remove(0); // Get and remove the first element
+            } else {
+                if (depositing) {
+                    hasStolen = false; // Set up to steal another valuable
                     targetValuable = null;// No more targets
-                    pathFound = false;
+                    returning = true;
+                    depositing = false;
+                } else if (returning){
+                    robberLoc[robIndx] = true;
+                    robIndx++;
+                    returning = false;
+                    isMoving = false;
+                }else {
+                    hasStolen = true; // currently stealing, so set to pick up valuable
+                    depositing = true; // return to deposit zone
+                    robberLoc[0] = false; robberLoc[1] = false;
+                    robberLoc[2] = false;
+                    robIndx = 0;
                 }
+                pathFound = false;
+                curTile = null;
             }
-            switch(direction){
-                case 1:
-                    setImage(framesRight[frameNum]);//face right
-                    break;
-                case 2:
-                    setImage(framesUp[frameNum]);//face up
-                    break;
-                case 3:
-                    setImage(framesLeft[frameNum]);//face left
-                    break;
-                case 4:
-                    setImage(framesDown[frameNum]);//face down
-                    break;
-                default:
-                    setImage(framesDown[frameNum]);//face down defaultly
-                    break;
-            }
-            robThatSh1t();
-        }
-        
-        //take the valuable with me
-        if(hasStolen){
-            targetValuable.followRobber(this);
-        }
-        
-        actNum++;
+        } 
     }
-
-    //targeting code taken from bug simulation
-    private void getTargetValuable(){
-
-        //get all the valuables in range
-        valuables = (ArrayList<Valuable>)getObjectsInRange(targetRadius+1,Valuable.class);
-
-        if(valuables.size() > 0){
-            //get a random valuable in range and set it as a target
-            targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
-
-        }        
-
-        
-    }
-    //rob the object and take it with oneself
-    private void robThatSh1t(){
-        if(targetValuable != null){
-            
-            if(intersects(targetValuable)){
-                targetValuable.stealMe();
-                hasStolen = true;
-            }
-            /**
-            //do pythagorean theorem to figure out the distance between robber and valuabe
-            double valuableDistance = Math.sqrt(Math.pow(this.getX() - targetValuable.getX(),2) + Math.pow(this.getY() - targetValuable.getY(),2));
-            //replace ten with an apporiate value here!!!
-            if(valuableDistance < 10 && !targetValuable.isStolen()){
-                targetValuable.stealMe();
-                hasStolen = true;
-            }
-            */
-            
-        }
-    }
-
-    public void setDirection(int D){
-        if(D < 5 && D > 0){
-            direction = D;
-        }
-    }
-    public int getDirection(){
-        return direction;
-    }
-    public boolean robbedSomething(){
-        return hasStolen;
-    }
-    public void setIdleImage(){
-        if(direction == 1)
-            setImage("Robber/rob.Right0.png");
-        if(direction == 2)
-            setImage("Robber/rob.Up0.png");
-        if(direction == 3)
-            setImage("Robber/rob.Left0.png");
-        if(direction == 4)
-            setImage("Robber/rob.Down0.png");
-    }
-
     public boolean detectedObstacles(){
-        if (getIntersectingObjects(Object.class).size() != 0) return true;
+        if (getIntersectingObjects(Obstacle.class).size() != 0) return true;
         return false;
-        // switch(direction){
-            // case 1: {
-                // if(getOneObjectAtOffset(20,0,Object.class)!=null){
-                    // return true;
-                // } 
-                // return false;
-            // }
-            // case 2: {
-                // if(getOneObjectAtOffset(0,-20,Object.class)!=null){
-                    // return true;
-                // } 
-                // return false;
-            // }
-            // case 3: {
-                // if(getOneObjectAtOffset(-20,0,Object.class)!=null){
-                    // return true;
-                // } 
-                // return false;
-            // }
-            // default: {
-                // if(getOneObjectAtOffset(0,20,Object.class)!=null){
-                    // return true;
-                // } 
-                // return false;
-            // }
-        // }
     }
 }
