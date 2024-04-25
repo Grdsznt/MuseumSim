@@ -59,7 +59,7 @@ public class StartWorld extends World
 
         if(actNum > 15){
             //String keyPressed = Greenfoot.getKey();
-            if(Greenfoot.mouseClicked(this)){
+            if(Greenfoot.mouseClicked(settings)){
                 music.pause();
                 Greenfoot.setWorld(setup);
             }
