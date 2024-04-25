@@ -35,7 +35,8 @@ public class MuseumRoom extends Room
     private int robbers, guards, valuables;
     private int actNum = 0;
         
-    
+    private boolean robberLoc[] = new boolean[3];
+    private int robIndx = 0;
     /**
      * Constructor for objects of class MuseumRoom.
      * 
@@ -103,7 +104,17 @@ public class MuseumRoom extends Room
         
         for (int i = 0;i<robbers;i++) {
             Pair p = robberSpawns.remove(0);
-            addObject(new Robber(3, 600, 4), p.x, p.y);
+            if (p.x == 330 && p.y == 500) {
+                addObject(new Robber(3, 600, 4, 0), p.x, p.y);
+                robberLoc[0] = true;
+            }
+            else if (p.x == 200 && p.y == 350) {
+                addObject(new Robber(3, 600, 4, 2), p.x, p.y);
+                robberLoc[1] = true;
+            } else  {
+                addObject(new Robber(3, 600, 4, 1), p.x, p.y);
+                robberLoc[2] = true;
+            }
         }
         
         guardSpawns.add(new Pair(330, 770));
@@ -124,5 +135,19 @@ public class MuseumRoom extends Room
             addObject(v, 92, 119);
         }
         actNum++;
+    }
+    
+    public void setStation(int stationNumber, boolean b) {
+        robberLoc[stationNumber] = b;
+    }
+    
+    public int getStation() {
+        if (robberLoc[0] == false) {
+            return 0;
+        } else if (robberLoc[1] == false) {
+            return 1;
+        } else {
+            return 2;
+        }
     }
 }
