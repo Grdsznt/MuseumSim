@@ -117,9 +117,16 @@ public class MuseumRoom extends Room
             Pair p = guardSpawns.remove(0);
             addObject(new Guard(0), p.x, p.y);
         }
+        
+        Greenfoot.setSpeed(50);
     }
     
     public void act() {
         
+    }
+    
+    public static int incomeEarned()
+    {
+        return income;
     }
 }

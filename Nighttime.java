@@ -9,7 +9,7 @@ public class Nighttime extends Effect
      * Creates an effect that lasts for 1200 acts, and targets 100 transparency.
      */
     public Nighttime(){
-        super(1200, 1000);
+        super(1200, 100);
     }
     public void addedToWorld(World w){
         if (!startAct) return;

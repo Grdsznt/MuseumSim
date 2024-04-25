@@ -18,8 +18,8 @@ public abstract class Effect extends Actor
     protected boolean startAct;
     protected MuseumRoom world;
     /**
-     * Creates a effect that lasts for a specified amount of acts, and has a target transparency
-     * throughout the effect's lifetime.
+     * Generates an effect that persists for a defined number of actions, maintaining a consistent level of transparency for the duration of the effect.
+     * 
      * @param eventDuration how long the effect lasts.
      * @param fadeInTarget the target transparency to remain in
      */
@@ -42,7 +42,7 @@ public abstract class Effect extends Actor
         }
         else fadeIn = false; // Done fading in
         
-        // Event has run its course, so time to fade out gracefully.
+        // Halfway through, begin fadiing out
         if (++actsLived >= duration) {
             fadeOut(1);
             if (getImage().getTransparency() <= 0) { //stop effect when its over

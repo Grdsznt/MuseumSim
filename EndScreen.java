@@ -45,7 +45,7 @@ public class EndScreen extends World
             "Total Money Earned:", 
             "Thefts Prevented: ", 
             "Furniture Stolen: ",
-            "Time "
+            "Total Time "
         };
         
         theStatBar = new SuperDisplayLabel();
