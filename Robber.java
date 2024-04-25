@@ -7,6 +7,8 @@ import java.lang.Math;
  * @author Edwin, Nick, Jean
  * @version (a version number or a date)
  */
+
+// Issues: if there are multiple robbers, it will return
 public class Robber extends Human
 {
     //add frames to for the robber character
@@ -39,22 +41,25 @@ public class Robber extends Human
     
     private List<Pair> path;
     Pair curTile, target = null;
-    private boolean pathFound = false, returning = false, depositing = false;
+    private boolean pathFound = false, returning = false, depositing = false, initial = true;
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0, centerX, centerY;
-    public Robber(double s, int tR, int D){
+    private int station;
+    public Robber(double s, int tR, int D, int station){
         direction = D; 
         speed = s; targetRadius = tR;
         hasStolen = false; actNum = 0; frameNum = 0;
         enableStaticRotation(); isMoving = false;
         setIdleImage();
+        this.station = station; // 0, 1, 2
         for (int i = 0;i<7;i++) {
             framesRight[i].scale(40, 55);
             framesLeft[i].scale(40, 55);
             framesUp[i].scale(40, 55);
             framesDown[i].scale(40, 55);
-        }
+        } 
     }
+    
 
     public void act()
     {
@@ -102,6 +107,14 @@ public class Robber extends Human
         // else{
             // isMoving = false;
         // }
+        
+        if (initial) {
+            centerX = getX(); centerY = getY();
+            initial = false; 
+            MuseumRoom mr = (MuseumRoom) getWorld();
+            mr.setStation(station, true);
+            // isMoving = false;
+        }
         if (actNum % 420 == 0 && targetValuable == null && !returning) {
             target = getRandomPositionWithinRadius(75); 
         }
@@ -134,9 +147,9 @@ public class Robber extends Human
             animate();
         }
         if (returning) {    
-            if (!robberLoc[0]) {
+            if (station == 0) {
                 pathfind(13, 22);
-            } else if (!robberLoc[1]) {
+            } else if (station == 1) {
                 pathfind(23, 18);
             } else {
                 pathfind(10, 18);
@@ -145,6 +158,7 @@ public class Robber extends Human
         //take the valuable with me
         if(hasStolen){
             targetValuable.followRobber(this);
+            
         }
         
         actNum++;
@@ -172,7 +186,7 @@ public class Robber extends Human
         int diffX = target.x - currentX;
         int diffY = target.y - currentY;
     
-        if (Math.abs(diffX) > 0) { // Move horizontally if the horizontal distance is greater
+        if (Math.abs(diffX) > 3) { // Move horizontally if the horizontal distance is greater
             if (diffX > 0) {
                 currentX += speed; // Move right
                 direction = 1;
@@ -180,7 +194,7 @@ public class Robber extends Human
                 currentX -= speed; // Move left
                 direction = 3;
             }
-        } else if (Math.abs(diffY) > 0){ // Move vertically otherwise
+        } else if (Math.abs(diffY) > 3){ // Move vertically otherwise
             if (diffY > 0) {
                 currentY += speed; // Move down
                 direction = 4;
@@ -191,13 +205,14 @@ public class Robber extends Human
         }
     
         setLocation(currentX, currentY);
-        isMoving = true;
         
         // Check if target is reached
         if (Math.abs(diffX) <= speed && Math.abs(diffY) <= speed) {
             setLocation(target.x, target.y); // Snap to the target if very close
             isMoving = false;
             target = null;
+        } else {
+            isMoving = true;
         }
     }
     
@@ -217,7 +232,7 @@ public class Robber extends Human
             setLocation(newX, newY);
             
             // Check if the new location intersects with any Obstacles
-            if (getIntersectingObjects(Obstacle.class).isEmpty()) {
+            if (!detectedObstacles()) {
                 isValid = true; // If no intersection, mark as valid and break loop
             }
         }
@@ -234,11 +249,14 @@ public class Robber extends Human
 
         if(valuables.size() > 0){
             //get a random valuable in range and set it as a target
-            targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
-
+            for (Valuable v: valuables) {
+                targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
+                if (!targetValuable.isStolen()) break;
+            }
         }        
-
         
+        if (targetValuable.isStolen()) targetValuable = null;
+        else targetValuable.stealMe();
     }
 
     public void setDirection(int D){
@@ -350,20 +368,22 @@ public class Robber extends Human
                 if (depositing) {
                     hasStolen = false; // Set up to steal another valuable
                     getWorld().removeObject(targetValuable);
+                    MuseumRoom mr = (MuseumRoom) getWorld();
+                    station = mr.getStation();
                     targetValuable = null;// No more targets
                     returning = true;
                     depositing = false;
                 } else if (returning){
-                    robberLoc[robIndx] = true;
-                    robIndx++;
+                    MuseumRoom mr = (MuseumRoom) getWorld();
+                    mr.setStation(station, true);
                     centerX = getX();
                     centerY = getY();
                     returning = false;
                 }else {
                     hasStolen = true; // currently stealing, so set to pick up valuable
                     depositing = true; // return to deposit zone
-                    robberLoc[0] = false; robberLoc[1] = false;
-                    robberLoc[2] = false;
+                    MuseumRoom mr = (MuseumRoom) getWorld();
+                    mr.setStation(station, false);
                     robIndx = 0;
                 }
                 pathFound = false;
