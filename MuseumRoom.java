@@ -33,7 +33,7 @@ public class MuseumRoom extends Room
     private List<Pair> guardSpawns;
     
     private int robbers, guards, valuables;
-    
+    private int actCount;
         
     
     /**
@@ -117,9 +117,14 @@ public class MuseumRoom extends Room
             Pair p = guardSpawns.remove(0);
             addObject(new Guard(0), p.x, p.y);
         }
+        actCount = 1;
     }
     
     public void act() {
-        
+        actCount++;
+        if(actCount % 600 == 0) {
+            Nighttime night = new Nighttime();
+            addObject(night, 500, 408);
+        }
     }
 }
