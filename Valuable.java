@@ -37,7 +37,10 @@ public class Valuable extends Actor
      * 
      */
     public void stealMe(){
+        if(isStolen == true) return; 
         isStolen = true;
+        MuseumRoom.incrementStolen();
+        
     }
     //follow the robber after i have been stolen
     public void followRobber(Robber robber){

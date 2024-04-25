@@ -32,7 +32,7 @@ public class EndScreen extends World
         
         
         comic = new Font("Comic Sans MS", false, false, 16);
-        String[] finalNote = {"GGs... Simulation is over. Here are your Stats"};
+        String[] finalNote = {"End of the simulation. Here are your Stats"};
         endOfGame = new SuperTextBox(finalNote, Color.BLACK, Color.WHITE, comic, true, 375, 3, Color.YELLOW);
         
         endOfGame.update();
@@ -69,7 +69,7 @@ public class EndScreen extends World
     public void act(){
         // if(Greenfoot.mouseClicked()){
             // //music.stop();
-            // ==m Greenfoot.setWorld(new StartWorld());
+            //  Greenfoot.setWorld(new StartWorld());
         // }
         if(Greenfoot.mouseClicked(this)){
             //music.stop();

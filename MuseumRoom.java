@@ -9,6 +9,7 @@ import java.util.*;
  */
 public class MuseumRoom extends Room
 {
+<<<<<<< Updated upstream
     public static int income = 0;
     
     // Obstacle Bounding Boxes
@@ -35,6 +36,17 @@ public class MuseumRoom extends Room
     private int robbers, guards, valuables;
     
         
+=======
+    private GreenfootImage worldImage = new GreenfootImage("room1.png");
+    private static int numStolen = 0;
+    public MuseumRoom(int wid, int hei, int aOfO, int inc) {
+       //super(wid, hei, aOfO, inc);
+       super(1000,800,0, 0);    
+       setBackground(worldImage);
+       // setHeight(hei); setWidth(wid);
+       numStolen = 0;
+    }
+>>>>>>> Stashed changes
     
     /**
      * Constructor for objects of class MuseumRoom.
@@ -128,5 +140,9 @@ public class MuseumRoom extends Room
     public static int incomeEarned()
     {
         return income;
+    }
+    
+    public static void incrementStolen(){
+        numStolen++;
     }
 }
