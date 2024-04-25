@@ -67,13 +67,13 @@ public class MuseumRoom extends Room
         
         addObject(mediumGlassBox, 464, 514);
         
-        addObject(statue1, 111, 380);
+        addObject(statue1, 115, 380);
         
-        addObject(statue2, 535, 380);
+        addObject(statue2, 539, 380);
+    
+        addObject(pillar1, 93, 590);
         
-        addObject(pillar1, 89, 590);
-        
-        addObject(pillar2, 555, 590);
+        addObject(pillar2, 559, 590);
         
         addObject(leftWall, 32, 366);
         
