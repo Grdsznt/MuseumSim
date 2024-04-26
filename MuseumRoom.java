@@ -41,7 +41,7 @@ public class MuseumRoom extends Room
     private int robbersCatchedNumber = 0;
     //Images
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
-    private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
+    private GreenfootImage valuableImage = new GreenfootImage("valuable1.png");
     private GreenfootImage robberImage = new GreenfootImage("robber.png");
     //Statistics
     private Statistic moneyEarned = new Statistic(moneyImage, money, "$");
@@ -53,7 +53,6 @@ public class MuseumRoom extends Room
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
     
-    
     public class Pair {
         int x, y;
         public Pair(int x, int y) {
@@ -63,11 +62,9 @@ public class MuseumRoom extends Room
     }
     /**
      * Constructor for objects of class MuseumRoom.
-     * 
      */
     public MuseumRoom(int robbers, int guards, int valuables)
     { 
-        
         super(1000,816,0, 0);
         setBackground(worldImage);
         
@@ -146,9 +143,6 @@ public class MuseumRoom extends Room
         // Valuable v2 = new Valuable(0);
         // addObject(v2, 650, 675);
         
-        
-        
-        
         //Add the statistics at the top of the world
         int yPos = 20;
         addObject(moneyEarned, 200, yPos);
@@ -161,6 +155,8 @@ public class MuseumRoom extends Room
         if(actCount % 600 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
+            Valuable v = new Valuable(200.50);
+            addObject(v, 92, 119);
         }
     }
     
