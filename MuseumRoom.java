@@ -144,10 +144,10 @@ public class MuseumRoom extends Room
         // addObject(v2, 650, 675);
         
         //Add the statistics at the top of the world
-        int yPos = 20;
-        addObject(moneyEarned, 200, yPos);
-        addObject(valuablesStolen, 400, yPos);
-        addObject(robbersCatched, 600, yPos);
+        int xPos = 780;
+        addObject(moneyEarned, xPos, 100);
+        addObject(valuablesStolen, xPos, 200);
+        addObject(robbersCatched, xPos, 300);
     }
     
     public void act() {
