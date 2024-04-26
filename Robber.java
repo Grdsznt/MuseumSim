@@ -316,6 +316,9 @@ public class Robber extends Human
             // Since the bfs works on 20x20 tiles, divide the x and y values by 20
             path = bfs(getX()/20, getY()/20, destx, desty);
             
+            // If the robber cannot find a path
+            if (path.size() == 0) return;
+            
             // Get the targeted tile
             curTile = path.remove(0);
                         
@@ -369,12 +372,12 @@ public class Robber extends Human
                     MuseumRoom mr = (MuseumRoom) getWorld();
                     station = mr.getStation();
                     mr.setStation(station, true);
+                    mr.setMoney(20);
+                    mr.setValuables(1);
                     targetValuable = null;// No more targets
                     returning = true;
                     depositing = false;
                 } else if (returning){
-                    // MuseumRoom mr = (MuseumRoom) getWorld();
-                    
                     centerX = getX();
                     centerY = getY();
                     returning = false;
