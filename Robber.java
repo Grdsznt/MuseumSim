@@ -115,7 +115,7 @@ public class Robber extends Human
             mr.setStation(station, true);
             // isMoving = false;
         }
-        if (actNum % 420 == 0 && targetValuable == null && !returning) {
+        if (actNum % 360 == 0 && targetValuable == null && !returning) {
             target = getRandomPositionWithinRadius(75); 
         }
         
@@ -150,9 +150,9 @@ public class Robber extends Human
             if (station == 0) {
                 pathfind(13, 22);
             } else if (station == 1) {
-                pathfind(23, 18);
+                pathfind(23, 17);
             } else {
-                pathfind(10, 18);
+                pathfind(10, 17);
             }
         }
         //take the valuable with me
@@ -370,12 +370,13 @@ public class Robber extends Human
                     getWorld().removeObject(targetValuable);
                     MuseumRoom mr = (MuseumRoom) getWorld();
                     station = mr.getStation();
+                    mr.setStation(station, true);
                     targetValuable = null;// No more targets
                     returning = true;
                     depositing = false;
                 } else if (returning){
-                    MuseumRoom mr = (MuseumRoom) getWorld();
-                    mr.setStation(station, true);
+                    // MuseumRoom mr = (MuseumRoom) getWorld();
+                    
                     centerX = getX();
                     centerY = getY();
                     returning = false;
