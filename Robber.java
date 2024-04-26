@@ -42,8 +42,7 @@ public class Robber extends Human
     private List<Pair> path;
     Pair curTile, target = null;
     private boolean pathFound = false, returning = false, depositing = false, initial = true;
-    private boolean robberLoc[] = new boolean[3];
-    private int robIndx = 0, centerX, centerY;
+    private int centerX, centerY;
     private int station;
     public Robber(double s, int tR, int D, int station){
         direction = D; 
@@ -113,7 +112,7 @@ public class Robber extends Human
             initial = false; 
             MuseumRoom mr = (MuseumRoom) getWorld();
             mr.setStation(station, true);
-            // isMoving = false;
+            isMoving = false;
         }
         if (actNum % 360 == 0 && targetValuable == null && !returning) {
             target = getRandomPositionWithinRadius(75); 
@@ -158,7 +157,6 @@ public class Robber extends Human
         //take the valuable with me
         if(hasStolen){
             targetValuable.followRobber(this);
-            
         }
         
         actNum++;
@@ -385,7 +383,6 @@ public class Robber extends Human
                     depositing = true; // return to deposit zone
                     MuseumRoom mr = (MuseumRoom) getWorld();
                     mr.setStation(station, false);
-                    robIndx = 0;
                 }
                 pathFound = false;
                 curTile = null;
