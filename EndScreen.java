@@ -21,7 +21,7 @@ public class EndScreen extends World
     
     
     // Restart Button
-    private StartWorld home = new StartWorld(this);
+    private StartWorld home = new StartWorld();
     /**
      * Constructor for objects of class DisplayResults.
      * 
