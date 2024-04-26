@@ -28,13 +28,12 @@ public class Human extends SuperSmoothMover
         }
         
         
-        @Override
-        public boolean equals(Object obj) { 
+        /*public boolean equals(Object obj) { 
             if (this == obj) return true;
             if (obj == null || getClass() != obj.getClass()) return false;
             Pair pair = (Pair) obj;
             return x == pair.x && y == pair.y;
-        }
+        }*/
         
         @Override
         public int hashCode() {

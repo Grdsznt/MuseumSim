@@ -49,6 +49,7 @@ public class MuseumRoom extends Room
     private Statistic robbersCatched = new Statistic(robberImage, robbersCatchedNumber);
     
     private int actNum = 0;
+    private static int dayCount;
         
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
@@ -154,6 +155,8 @@ public class MuseumRoom extends Room
         addObject(moneyEarned, 200, yPos);
         addObject(valuablesStolen, 400, yPos);
         addObject(robbersCatched, 600, yPos);
+        
+        dayCount = 0;
     }
     
     public void act() {
@@ -162,6 +165,10 @@ public class MuseumRoom extends Room
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
         }
+    }
+    
+    public static void increaseDayCount() {
+        dayCount++;
     }
     
     /**
