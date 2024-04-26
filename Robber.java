@@ -255,8 +255,8 @@ public class Robber extends Human
             }
         }        
         
-        if (targetValuable.isStolen()) targetValuable = null;
-        else targetValuable.stealMe();
+        if (targetValuable != null && targetValuable.isStolen()) targetValuable = null;
+        else if (targetValuable != null) targetValuable.stealMe();
     }
 
     public void setDirection(int D){
