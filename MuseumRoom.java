@@ -119,6 +119,11 @@ public class MuseumRoom extends Room
         }
     }
     
+    //Over all profit Income grow 
+    public void gainIncome(int newIncome){
+        income = income + newIncome;
+    }
+    
     public void act() {
         
     }
