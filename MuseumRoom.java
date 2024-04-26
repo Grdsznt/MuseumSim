@@ -11,6 +11,8 @@ public class MuseumRoom extends Room
 {
     public static int income = 0;
     
+    public static int dayCount = 0;
+    
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
@@ -28,13 +30,15 @@ public class MuseumRoom extends Room
     private Obstacle topWall = new Obstacle(513, 92);
     private Obstacle wallSegLeft = new Obstacle(117, 64);
     private Obstacle wallSegRight = new Obstacle(117, 64);
+    private Font boringFont = new Font ("Roboto", false, false, 18);
     
     private List<Pair> robberSpawns;
     private List<Pair> guardSpawns;
     
     private int robbers, guards, valuables;
     private int actCount;
-        
+    
+    private static SuperTextBox displayDayAndIncome;
     
     /**
      * Constructor for objects of class MuseumRoom.
@@ -117,7 +121,11 @@ public class MuseumRoom extends Room
             Pair p = guardSpawns.remove(0);
             addObject(new Guard(0), p.x, p.y);
         }
-        actCount = 1;
+        actCount = 0;
+        
+        String[] dayAndIncomeText = {"Total Income: " + income + " Day: " + dayCount};
+        displayDayAndIncome = new SuperTextBox(dayAndIncomeText, Color.BLACK, Color.WHITE, boringFont, true, 335, 3, Color.WHITE);
+        addObject(displayDayAndIncome, 830, 20);
     }
     
     public void act() {
@@ -126,5 +134,10 @@ public class MuseumRoom extends Room
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
         }
+    }
+    
+    public static void increaseDayCount() {
+        dayCount++;
+        displayDayAndIncome.update();
     }
 }

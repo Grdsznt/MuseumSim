@@ -11,6 +11,7 @@ public class SetUpWorld extends World
     private Color white = Color.WHITE;
     private Color black = Color.BLACK;
     private Font boringFont = new Font ("Joystix", false, false, 18);
+    private static GreenfootImage backGround1 = new GreenfootImage("museumFrontPage1.png");
     private HomeButton homeButton;
     
     //Set the buttons for guards, robbers, and valuables
@@ -40,7 +41,7 @@ public class SetUpWorld extends World
         addObject(homeButton, 75, 50);
         Button.init();
         
-        
+        setBackground(backGround1);
         
         //Set the buttons for guards, robbers, and valuables
         guardButton = new OptionButton("Number of Guards in World: ", 1, 3);

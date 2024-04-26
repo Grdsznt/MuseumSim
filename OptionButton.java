@@ -9,15 +9,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class OptionButton extends Button
 {
     //Background image
-    private int width = 300;
+    private int width = 350;
     private int height = 30;
-    private Color backgroundColor = Color.LIGHT_GRAY;
+    private Color backgroundColor = Color.BLACK;
     
     //Text label
     private SuperTextBox textLabel; //From Mr.Cohen's Library
     private String text;
     private int fontSize = 20;
-    private Color textColor = Color.BLACK;
+    private Color textColor = Color.WHITE;
     
     //The value
     private final int initialValue;
