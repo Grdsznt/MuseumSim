@@ -21,7 +21,7 @@ public class EndScreen extends World
     
     
     // Restart Button
-    
+    private StartWorld home = new StartWorld(this);
     /**
      * Constructor for objects of class DisplayResults.
      * 
@@ -51,7 +51,7 @@ public class EndScreen extends World
         theStatBar = new SuperDisplayLabel();
         theStatBar.setLabels(labels);
         addObject(theStatBar, getWidth()/2, 0);
-        homeButton = new HomeButton("home", 3);
+        homeButton = new HomeButton("home", 3, home);
         addObject(homeButton, getWidth()/2, getHeight()/2);
         
         stats[0] = MuseumRoom.incomeEarned();

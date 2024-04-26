@@ -9,9 +9,9 @@ import java.util.*;
  */
 public class MuseumRoom extends Room
 {
-<<<<<<< Updated upstream
+    // Variables for stat tracking
     public static int income = 0;
-    
+    private static int numStolen = 0;
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
@@ -36,9 +36,7 @@ public class MuseumRoom extends Room
     private int robbers, guards, valuables;
     
         
-=======
-    private GreenfootImage worldImage = new GreenfootImage("room1.png");
-    private static int numStolen = 0;
+    private GreenfootImage worldImage2 = new GreenfootImage("room1.png");
     public MuseumRoom(int wid, int hei, int aOfO, int inc) {
        //super(wid, hei, aOfO, inc);
        super(1000,800,0, 0);    
@@ -46,7 +44,6 @@ public class MuseumRoom extends Room
        // setHeight(hei); setWidth(wid);
        numStolen = 0;
     }
->>>>>>> Stashed changes
     
     /**
      * Constructor for objects of class MuseumRoom.
@@ -144,5 +141,9 @@ public class MuseumRoom extends Room
     
     public static void incrementStolen(){
         numStolen++;
+    }
+    
+    public static void incrementIncome(){
+        income+=100;
     }
 }
