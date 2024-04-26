@@ -137,7 +137,7 @@ public class MuseumRoom extends Room
         
         for (int i = 0;i<guards;i++) {
             Pair p = guardSpawns.remove(0);
-            addObject(new Guard(0), p.x, p.y);
+            addObject(new Guard(1), p.x, p.y);
         }
         actCount = 1;
         // Valuable v2 = new Valuable(0);
