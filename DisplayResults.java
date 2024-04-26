@@ -17,6 +17,7 @@ public class DisplayResults extends World
     private int count; 
     private SuperDisplayLabel theStatBar;
     private HomeButton homeButton;
+    private StartWorld sw;
     /**
      * Constructor for objects of class DisplayResults.
      * 
@@ -43,10 +44,11 @@ public class DisplayResults extends World
             "Time "
         };
         
+        sw = new StartWorld();
         theStatBar = new SuperDisplayLabel();
         theStatBar.setLabels(labels);
         addObject(theStatBar, getWidth()/2, 0);
-        homeButton = new HomeButton("home", 3, new StartWorld());
+        homeButton = new HomeButton("home", 3, sw);
         addObject(homeButton, 250, 250);
     }
     
