@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Guard extends Human
 {
     //Store the world that it is added to
-    World world;
+    MuseumRoom world;
     
     //Animation variables
     private int aniCount = 0;
@@ -71,7 +71,7 @@ public class Guard extends Human
      * When the Guard is added to world, add its detector as well.
      */
     public void addedToWorld(World w){
-        world = w;
+        world = (MuseumRoom) w;
         double[] coordinate = detector.getCoordinates();
         w.addObject(detector, (int)coordinate[0], (int)coordinate[1]);
     }
@@ -257,6 +257,7 @@ public class Guard extends Human
             world.removeObject(robber);
             isCatching = false;
             this.robber = null;
+            world.setRobbers(1);
         }
     }
     
