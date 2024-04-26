@@ -41,7 +41,7 @@ public class MuseumRoom extends Room
     private int robbersCatchedNumber = 0;
     //Images
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
-    private GreenfootImage valuableImage = new GreenfootImage("valuable1.png");
+    private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
     private GreenfootImage robberImage = new GreenfootImage("robber.png");
     //Statistics
     private Statistic moneyEarned = new Statistic(moneyImage, money, "$");
