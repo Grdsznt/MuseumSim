@@ -34,11 +34,6 @@ public class MuseumRoom extends Room
     
     private int robbers, guards, valuables;
     private int actCount;
-        
-    
-    
-    
-    
     
     //Variables
     private int money = 0;
@@ -53,10 +48,11 @@ public class MuseumRoom extends Room
     private Statistic valuablesStolen = new Statistic(valuableImage, valuablesStolenNumber);
     private Statistic robbersCatched = new Statistic(robberImage, robbersCatchedNumber);
     
-    /**
-     * Constructor for objects of class MuseumRoom.
-     * 
-     */
+    private int actNum = 0;
+        
+    private boolean robberLoc[] = new boolean[3];
+    private int robIndx = 0;
+    
     
     public class Pair {
         int x, y;
@@ -65,7 +61,10 @@ public class MuseumRoom extends Room
         }
         
     }
-
+    /**
+     * Constructor for objects of class MuseumRoom.
+     * 
+     */
     public MuseumRoom(int robbers, int guards, int valuables)
     { 
         
@@ -104,9 +103,8 @@ public class MuseumRoom extends Room
         
         // need to spawn robber in specific locations
         
-        Valuable v = new Valuable(200.50);
-        addObject(v, 92, 119);
-        
+        // Valuable v = new Valuable(200.50);
+        // addObject(v, 92, 119);
         
         this.robbers = robbers; this.guards = guards; this.valuables = valuables;
         
@@ -121,7 +119,17 @@ public class MuseumRoom extends Room
         
         for (int i = 0;i<robbers;i++) {
             Pair p = robberSpawns.remove(0);
-            addObject(new Robber(3, 600, 4), p.x, p.y);
+            if (p.x == 330 && p.y == 500) {
+                addObject(new Robber(3, 600, 4, 0), p.x, p.y);
+                robberLoc[0] = true;
+            }
+            else if (p.x == 200 && p.y == 350) {
+                addObject(new Robber(3, 600, 4, 2), p.x, p.y);
+                robberLoc[1] = true;
+            } else  {
+                addObject(new Robber(3, 600, 4, 1), p.x, p.y);
+                robberLoc[2] = true;
+            }
         }
         
         guardSpawns.add(new Pair(330, 770));
@@ -184,5 +192,25 @@ public class MuseumRoom extends Room
     public void setRobbers(int change){
         robbersCatchedNumber += change;
         robbersCatched.updateValue(robbersCatchedNumber);
+        if (actNum % 1600 == 0) {
+            Valuable v = new Valuable(200.50);
+            addObject(v, 92, 119);
+        }
+        actNum++;
+    }
+    
+    public void setStation(int stationNumber, boolean b) {
+        robberLoc[stationNumber] = b;
+    }
+    
+    public int getStation() {
+        if (robberLoc[0] == false) {
+            return 0;
+        } else if (robberLoc[1] == false) {
+            return 1;
+        } else {
+            return 2;
+        }
+
     }
 }
