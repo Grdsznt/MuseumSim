@@ -151,6 +151,8 @@ public class MuseumRoom extends Room
         actCount = 1;
         // Valuable v2 = new Valuable(0);
         // addObject(v2, 650, 675);
+        Visitor v = new Visitor(1600, 3);
+        addObject(v, 240, 200);
         
         //Add the statistics at the top of the world
         int xPos = 780;
@@ -189,8 +191,6 @@ public class MuseumRoom extends Room
                     robberLoc[2] = true;
                 }
             }
-            
-            
         }
     }
     
