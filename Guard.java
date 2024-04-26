@@ -52,6 +52,18 @@ public class Guard extends Human
         loadAnimationImages();
         GreenfootImage img = new GreenfootImage("Guard/run_right1.png");
         img.scale(40, 80);
+        for (int i = 0;i<3;i++) {
+            walkRight[i].scale(40, 80);
+            walkLeft[i].scale(40, 80);
+            walkUp[i].scale(40, 80);
+            walkDown[i].scale(40, 80);
+        }
+        for (int i = 0;i<6;i++) {
+            runRight[i].scale(40, 80);
+            runLeft[i].scale(40, 80);
+            runUp[i].scale(40, 80);
+            runDown[i].scale(40, 80);
+        }
         setImage(img);
     }
     
