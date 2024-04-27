@@ -26,8 +26,8 @@ public class MuseumRoom extends Room
     private Obstacle leftWall = new Obstacle(62, 548);
     private Obstacle rightWall = new Obstacle(62, 548);
     private Obstacle topWall = new Obstacle(513, 92);
-    private Obstacle wallSegLeft = new Obstacle(117, 64);
-    private Obstacle wallSegRight = new Obstacle(117, 64);
+    private Obstacle wallSegLeft = new Obstacle(125, 64);
+    private Obstacle wallSegRight = new Obstacle(125, 64);
     private Obstacle leftBound = new Obstacle(40, 223);
     private Obstacle rightBound = new Obstacle(10, 223);
     private Obstacle lowerBound = new Obstacle(663, 7);
@@ -97,9 +97,9 @@ public class MuseumRoom extends Room
         
         addObject(topWall, 326, 46);
         
-        addObject(wallSegLeft, 128, 218);
+        addObject(wallSegLeft, 125, 218);
         
-        addObject(wallSegRight, 524, 218);
+        addObject(wallSegRight, 530, 218);
         
         addObject(leftBound, 680, 720);
         
@@ -152,7 +152,7 @@ public class MuseumRoom extends Room
         // Valuable v2 = new Valuable(0);
         // addObject(v2, 650, 675);
         Visitor v = new Visitor(1600, 3);
-        addObject(v, 240, 200);
+        addObject(v, 0, 670);
         
         //Add the statistics at the top of the world
         int xPos = 780;

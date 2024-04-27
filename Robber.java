@@ -47,7 +47,7 @@ public class Robber extends Human
     public Robber(double s, int tR, int D, int station){
         direction = D; 
         speed = s; targetRadius = tR;
-        hasStolen = false; actNum = 0; frameNum = 0;
+        hasStolen = false; actNum = 1; frameNum = 0;
         enableStaticRotation(); isMoving = false;
         setIdleImage();
         this.station = station; // 0, 1, 2
@@ -114,7 +114,7 @@ public class Robber extends Human
             mr.setStation(station, true);
             isMoving = false;
         }
-        if (actNum % 360 == 0 && targetValuable == null && !returning) {
+        if (actNum % 300 == 0 && targetValuable == null && !returning) {
             target = getRandomPositionWithinRadius(75); 
         }
         
