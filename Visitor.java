@@ -59,7 +59,19 @@ public class Visitor extends Human
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false;
     
     public Visitor(int time, int speed){
-        
+        visitDuration = time;
+        numberOfVisitors++;
+        willReadBook = false; willLookPhone = false; isMoving = false;
+        mollyOrAdam = Greenfoot.getRandomNumber(2) == 0;//molly or adam is randomized
+        actNum = 0; frameNum = 0;
+        direction = 4;
+        this.speed = speed;
+        if(mollyOrAdam){
+            setImage(mollyIdleDown[0]);
+        }
+        else{
+            setImage(adamIdleDown[0]);
+        }
     }
     
     public void addedToWorld(World w){
@@ -75,7 +87,7 @@ public class Visitor extends Human
         willReadBook = false; willLookPhone = false; isMoving = false;
         mollyOrAdam = Greenfoot.getRandomNumber(2) == 0;//molly or adam is randomized
         actNum = 0; frameNum = 0;
-        direction =4;
+        direction = 4;
         this.speed = speed;
         if(mollyOrAdam){
             setImage(mollyIdleDown[0]);
@@ -188,8 +200,7 @@ public class Visitor extends Human
                 }
             }
 
-        }
-        else{
+        }else{
             // Adam animation, second condition controls frame rate
             if (isMoving && actNum % (speed !=0 ? (int) (-5 * speed + 25) : 10) == 0) {
                 // Moving animation, set isMoving to true to play this section

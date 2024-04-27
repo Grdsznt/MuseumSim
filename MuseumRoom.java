@@ -28,11 +28,14 @@ public class MuseumRoom extends Room
     private Obstacle topWall = new Obstacle(513, 92);
     private Obstacle wallSegLeft = new Obstacle(117, 64);
     private Obstacle wallSegRight = new Obstacle(117, 64);
+    private Obstacle leftBound = new Obstacle(40, 223);
+    private Obstacle rightBound = new Obstacle(10, 223);
+    private Obstacle lowerBound = new Obstacle(663, 7);
     
     private List<Pair> robberSpawns;
     private List<Pair> guardSpawns;
     
-    private int robbers, guards, valuables;
+    private int robbers, guards, valuables, spawnRate;
     private int actCount;
     
     //Variables
@@ -41,7 +44,7 @@ public class MuseumRoom extends Room
     private int robbersCatchedNumber = 0;
     //Images
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
-    private GreenfootImage valuableImage = new GreenfootImage("valuable1.png");
+    private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
     private GreenfootImage robberImage = new GreenfootImage("robber.png");
     //Statistics
     private Statistic moneyEarned = new Statistic(moneyImage, money, "$");
@@ -49,7 +52,6 @@ public class MuseumRoom extends Room
     private Statistic robbersCatched = new Statistic(robberImage, robbersCatchedNumber);
     
     private int actNum = 0;
-    private static int dayCount;
         
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
@@ -99,6 +101,12 @@ public class MuseumRoom extends Room
         
         addObject(wallSegRight, 524, 218);
         
+        addObject(leftBound, 680, 720);
+        
+        addObject(rightBound, 0, 720);
+        
+        addObject(lowerBound, 330, 850);
+        
         // need to spawn robber in specific locations
         
         // Valuable v = new Valuable(200.50);
@@ -138,33 +146,52 @@ public class MuseumRoom extends Room
         
         for (int i = 0;i<guards;i++) {
             Pair p = guardSpawns.remove(0);
-            addObject(new Guard(0), p.x, p.y);
+            addObject(new Guard(1), p.x, p.y);
         }
         actCount = 1;
         // Valuable v2 = new Valuable(0);
         // addObject(v2, 650, 675);
+        Visitor v = new Visitor(1600, 3);
+        addObject(v, 240, 200);
         
         //Add the statistics at the top of the world
-        int yPos = 20;
-        addObject(moneyEarned, 200, yPos);
-        addObject(valuablesStolen, 400, yPos);
-        addObject(robbersCatched, 600, yPos);
-        
-        dayCount = 0;
+        int xPos = 780;
+        addObject(moneyEarned, xPos, 100);
+        addObject(valuablesStolen, xPos, 200);
+        addObject(robbersCatched, xPos, 300);
     }
     
     public void act() {
         actCount++;
-        if(actCount % 600 == 0) {
+        if(actCount % 1200 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
             Valuable v = new Valuable(200.50);
             addObject(v, 92, 119);
         }
-    }
-    
-    public static void increaseDayCount() {
-        dayCount++;
+        if (actCount % 3000 == 0) {
+            if (robberSpawns.size() == 0) {
+                robberSpawns.add(new Pair(330, 500));
+                robberSpawns.add(new Pair(200, 350));
+                robberSpawns.add(new Pair(450, 350));
+            }
+            Double rand = Math.random();
+            if (rand < spawnRate) {
+                Collections.shuffle(robberSpawns);
+                Pair p = robberSpawns.remove(0);
+                if (p.x == 330 && p.y == 500) {
+                    addObject(new Robber(3, 600, 4, 0), p.x, p.y);
+                    robberLoc[0] = true;
+                }
+                else if (p.x == 200 && p.y == 350) {
+                    addObject(new Robber(3, 600, 4, 2), p.x, p.y);
+                    robberLoc[1] = true;
+                } else  {
+                    addObject(new Robber(3, 600, 4, 1), p.x, p.y);
+                    robberLoc[2] = true;
+                }
+            }
+        }
     }
     
     /**

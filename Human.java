@@ -105,13 +105,23 @@ public class Human extends SuperSmoothMover
                 int nx = x+mx[k], ny = y+my[k];
                 if (nx >= 1 && nx < C && ny < R && ny >= 1 && !vis[ny][nx]) {
                     setLocation(nx*20, ny*20);
-                    if (!getIntersectingObjects(Obstacle.class).isEmpty()) setLocation(srcx*20, srcy*20);
-                    // The issue is that it is bumping into the platform. need to set a special command to make sure doesn't happen.
-                    else {
-                        setLocation(srcx*20, srcy*20);
-                        vis[ny][nx] = true;
-                        q.add(new Pair(nx, ny));
-                        par.put(new Pair(nx, ny), p);
+                    
+                    if (this instanceof Robber) {
+                        if (!getIntersectingObjects(Obstacle.class).isEmpty() || !getIntersectingObjects(Guard.class).isEmpty()) setLocation(srcx*20, srcy*20);
+                        else {
+                            setLocation(srcx*20, srcy*20);
+                            vis[ny][nx] = true;
+                            q.add(new Pair(nx, ny));
+                            par.put(new Pair(nx, ny), p);
+                        }
+                    } else {
+                        if (!getIntersectingObjects(Obstacle.class).isEmpty()) setLocation(srcx*20, srcy*20);
+                        else {
+                            setLocation(srcx*20, srcy*20);
+                            vis[ny][nx] = true;
+                            q.add(new Pair(nx, ny));
+                            par.put(new Pair(nx, ny), p);
+                        }
                     }
                 }
             }

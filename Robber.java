@@ -42,8 +42,7 @@ public class Robber extends Human
     private List<Pair> path;
     Pair curTile, target = null;
     private boolean pathFound = false, returning = false, depositing = false, initial = true;
-    private boolean robberLoc[] = new boolean[3];
-    private int robIndx = 0, centerX, centerY;
+    private int centerX, centerY;
     private int station;
     public Robber(double s, int tR, int D, int station){
         direction = D; 
@@ -113,9 +112,9 @@ public class Robber extends Human
             initial = false; 
             MuseumRoom mr = (MuseumRoom) getWorld();
             mr.setStation(station, true);
-            // isMoving = false;
+            isMoving = false;
         }
-        if (actNum % 420 == 0 && targetValuable == null && !returning) {
+        if (actNum % 360 == 0 && targetValuable == null && !returning) {
             target = getRandomPositionWithinRadius(75); 
         }
         
@@ -150,15 +149,14 @@ public class Robber extends Human
             if (station == 0) {
                 pathfind(13, 22);
             } else if (station == 1) {
-                pathfind(23, 18);
+                pathfind(23, 17);
             } else {
-                pathfind(10, 18);
+                pathfind(10, 17);
             }
         }
         //take the valuable with me
         if(hasStolen){
             targetValuable.followRobber(this);
-            
         }
         
         actNum++;
@@ -318,6 +316,9 @@ public class Robber extends Human
             // Since the bfs works on 20x20 tiles, divide the x and y values by 20
             path = bfs(getX()/20, getY()/20, destx, desty);
             
+            // If the robber cannot find a path
+            if (path.size() == 0) return;
+            
             // Get the targeted tile
             curTile = path.remove(0);
                         
@@ -370,12 +371,13 @@ public class Robber extends Human
                     getWorld().removeObject(targetValuable);
                     MuseumRoom mr = (MuseumRoom) getWorld();
                     station = mr.getStation();
+                    mr.setStation(station, true);
+                    mr.setMoney(20);
+                    mr.setValuables(1);
                     targetValuable = null;// No more targets
                     returning = true;
                     depositing = false;
                 } else if (returning){
-                    MuseumRoom mr = (MuseumRoom) getWorld();
-                    mr.setStation(station, true);
                     centerX = getX();
                     centerY = getY();
                     returning = false;
@@ -384,7 +386,6 @@ public class Robber extends Human
                     depositing = true; // return to deposit zone
                     MuseumRoom mr = (MuseumRoom) getWorld();
                     mr.setStation(station, false);
-                    robIndx = 0;
                 }
                 pathFound = false;
                 curTile = null;
