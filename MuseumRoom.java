@@ -4,14 +4,13 @@ import java.util.*;
 /**
  * Write a description of class MuseumRoom here.
  * 
- * @author (your name) 
+ * @author Edwin, Jean
  * @version (a version number or a date)
  */
 public class MuseumRoom extends Room
 {
-    // Variables for stat tracking
     public static int income = 0;
-    private static int numStolen = 0;
+    
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
@@ -27,28 +26,35 @@ public class MuseumRoom extends Room
     private Obstacle leftWall = new Obstacle(62, 548);
     private Obstacle rightWall = new Obstacle(62, 548);
     private Obstacle topWall = new Obstacle(513, 92);
-    private Obstacle wallSegLeft = new Obstacle(117, 64);
-    private Obstacle wallSegRight = new Obstacle(117, 64);
+    private Obstacle wallSegLeft = new Obstacle(125, 64);
+    private Obstacle wallSegRight = new Obstacle(125, 64);
+    private Obstacle leftBound = new Obstacle(40, 223);
+    private Obstacle rightBound = new Obstacle(10, 223);
+    private Obstacle lowerBound = new Obstacle(663, 7);
     
     private List<Pair> robberSpawns;
     private List<Pair> guardSpawns;
     
-    private int robbers, guards, valuables;
+    private int robbers, guards, valuables, spawnRate;
+    private int actCount;
     
+    //Variables
+    private int money = 0;
+    private int valuablesStolenNumber = 0;
+    private int robbersCatchedNumber = 0;
+    //Images
+    private GreenfootImage moneyImage = new GreenfootImage("money.png");
+    private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
+    private GreenfootImage robberImage = new GreenfootImage("robber.png");
+    //Statistics
+    private Statistic moneyEarned = new Statistic(moneyImage, money, "$");
+    private Statistic valuablesStolen = new Statistic(valuableImage, valuablesStolenNumber);
+    private Statistic robbersCatched = new Statistic(robberImage, robbersCatchedNumber);
+    
+    private int actNum = 0;
         
-    private GreenfootImage worldImage2 = new GreenfootImage("room1.png");
-    public MuseumRoom(int wid, int hei, int aOfO, int inc) {
-       //super(wid, hei, aOfO, inc);
-       super(1000,800,0, 0);    
-       setBackground(worldImage);
-       // setHeight(hei); setWidth(wid);
-       numStolen = 0;
-    }
-    
-    /**
-     * Constructor for objects of class MuseumRoom.
-     * 
-     */
+    private boolean robberLoc[] = new boolean[3];
+    private int robIndx = 0;
     
     public class Pair {
         int x, y;
@@ -57,10 +63,11 @@ public class MuseumRoom extends Room
         }
         
     }
-
+    /**
+     * Constructor for objects of class MuseumRoom.
+     */
     public MuseumRoom(int robbers, int guards, int valuables)
     { 
-        
         super(1000,816,0, 0);
         setBackground(worldImage);
         
@@ -76,13 +83,13 @@ public class MuseumRoom extends Room
         
         addObject(mediumGlassBox, 464, 514);
         
-        addObject(statue1, 111, 380);
+        addObject(statue1, 115, 380);
         
-        addObject(statue2, 535, 380);
+        addObject(statue2, 539, 380);
+    
+        addObject(pillar1, 93, 590);
         
-        addObject(pillar1, 89, 590);
-        
-        addObject(pillar2, 555, 590);
+        addObject(pillar2, 559, 590);
         
         addObject(leftWall, 32, 366);
         
@@ -90,15 +97,20 @@ public class MuseumRoom extends Room
         
         addObject(topWall, 326, 46);
         
-        addObject(wallSegLeft, 128, 218);
+        addObject(wallSegLeft, 125, 218);
         
-        addObject(wallSegRight, 524, 218);
+        addObject(wallSegRight, 530, 218);
+        
+        addObject(leftBound, 680, 720);
+        
+        addObject(rightBound, 0, 720);
+        
+        addObject(lowerBound, 330, 850);
         
         // need to spawn robber in specific locations
         
-        Valuable v = new Valuable(200.50);
-        addObject(v, 92, 119);
-        
+        // Valuable v = new Valuable(200.50);
+        // addObject(v, 92, 119);
         
         this.robbers = robbers; this.guards = guards; this.valuables = valuables;
         
@@ -113,7 +125,17 @@ public class MuseumRoom extends Room
         
         for (int i = 0;i<robbers;i++) {
             Pair p = robberSpawns.remove(0);
-            addObject(new Robber(3, 600, 4), p.x, p.y);
+            if (p.x == 330 && p.y == 500) {
+                addObject(new Robber(3, 600, 4, 0), p.x, p.y);
+                robberLoc[0] = true;
+            }
+            else if (p.x == 200 && p.y == 350) {
+                addObject(new Robber(3, 600, 4, 2), p.x, p.y);
+                robberLoc[1] = true;
+            } else  {
+                addObject(new Robber(3, 600, 4, 1), p.x, p.y);
+                robberLoc[2] = true;
+            }
         }
         
         guardSpawns.add(new Pair(330, 770));
@@ -124,26 +146,101 @@ public class MuseumRoom extends Room
         
         for (int i = 0;i<guards;i++) {
             Pair p = guardSpawns.remove(0);
-            addObject(new Guard(0), p.x, p.y);
+            addObject(new Guard(1), p.x, p.y);
         }
+        actCount = 1;
+        // Valuable v2 = new Valuable(0);
+        // addObject(v2, 650, 675);
+        Visitor v = new Visitor(1600, 3);
+        addObject(v, 0, 670);
         
-        Greenfoot.setSpeed(50);
+        //Add the statistics at the top of the world
+        int xPos = 780;
+        addObject(moneyEarned, xPos, 100);
+        addObject(valuablesStolen, xPos, 200);
+        addObject(robbersCatched, xPos, 300);
     }
     
     public void act() {
-        
+        actCount++;
+        if(actCount % 1200 == 0) {
+            Nighttime night = new Nighttime();
+            addObject(night, 500, 408);
+            Valuable v = new Valuable(200.50);
+            addObject(v, 92, 119);
+        }
+        if (actCount % 3000 == 0) {
+            if (robberSpawns.size() == 0) {
+                robberSpawns.add(new Pair(330, 500));
+                robberSpawns.add(new Pair(200, 350));
+                robberSpawns.add(new Pair(450, 350));
+            }
+            Double rand = Math.random();
+            if (rand < spawnRate) {
+                Collections.shuffle(robberSpawns);
+                Pair p = robberSpawns.remove(0);
+                if (p.x == 330 && p.y == 500) {
+                    addObject(new Robber(3, 600, 4, 0), p.x, p.y);
+                    robberLoc[0] = true;
+                }
+                else if (p.x == 200 && p.y == 350) {
+                    addObject(new Robber(3, 600, 4, 2), p.x, p.y);
+                    robberLoc[1] = true;
+                } else  {
+                    addObject(new Robber(3, 600, 4, 1), p.x, p.y);
+                    robberLoc[2] = true;
+                }
+            }
+        }
     }
     
-    public static int incomeEarned()
-    {
-        return income;
+    /**
+     * Set the new value of money.
+     * 
+     * @param change    The change in the amount of money hold in room.
+     */
+    public void setMoney(int change){
+        money += change;
+        moneyEarned.updateValue(money);
     }
     
-    public static void incrementStolen(){
-        numStolen++;
+    /**
+     * Set the new number of valuables stolen.
+     * 
+     * @param change    The change in the amount of valuables stolen from room.
+     */
+    public void setValuables(int change){
+        valuablesStolenNumber += change;
+        valuablesStolen.updateValue(valuablesStolenNumber);
     }
     
-    public static void incrementIncome(){
-        income+=100;
+    /**
+     * Set the new value of robbers catched.
+     * 
+     * @param change    The change in the amount of robbers catched in room.
+     */
+    public void setRobbers(int change){
+        robbersCatchedNumber += change;
+        robbersCatched.updateValue(robbersCatchedNumber);
+        if (actNum % 1600 == 0) {
+            Valuable v = new Valuable(200.50);
+            addObject(v, 92, 119);
+        }
+        actNum++;
+    }
+    
+    public void setStation(int stationNumber, boolean b) {
+        robberLoc[stationNumber] = b;
+    }
+    
+    public int getStation() {
+        if (robberLoc[0] == false) {
+            return 0;
+        } else if (robberLoc[1] == false) {
+            return 1;
+        } else {
+            return 2;
+        }
+
     }
 }

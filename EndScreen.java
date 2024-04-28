@@ -3,7 +3,7 @@ import java.util.ArrayList;
 /**
  * World for Displaying Results at End of the Game
  */
-public class EndScreen extends World
+public class DisplayResults extends World
 {
     //Greenfoot image
     private GreenfootImage background;
@@ -17,22 +17,18 @@ public class EndScreen extends World
     private int count; 
     private SuperDisplayLabel theStatBar;
     private HomeButton homeButton;
-    
-    
-    
-    // Restart Button
-    private StartWorld home = new StartWorld();
+    private StartWorld sw;
     /**
      * Constructor for objects of class DisplayResults.
      * 
      */
-    public EndScreen()
+    public DisplayResults()
     {    
-        super(1200,1000,1);
+        super(500,500,1);
         
         
         comic = new Font("Comic Sans MS", false, false, 16);
-        String[] finalNote = {"End of the simulation. Here are your Stats"};
+        String[] finalNote = {"GGs... Simulation is over. Here are your Stats"};
         endOfGame = new SuperTextBox(finalNote, Color.BLACK, Color.WHITE, comic, true, 375, 3, Color.YELLOW);
         
         endOfGame.update();
@@ -45,22 +41,15 @@ public class EndScreen extends World
             "Total Money Earned:", 
             "Thefts Prevented: ", 
             "Furniture Stolen: ",
-            "Total Time "
+            "Time "
         };
         
+        sw = new StartWorld();
         theStatBar = new SuperDisplayLabel();
         theStatBar.setLabels(labels);
         addObject(theStatBar, getWidth()/2, 0);
-        homeButton = new HomeButton("home", 3, home);
-        addObject(homeButton, getWidth()/2, getHeight()/2);
-        
-        stats[0] = MuseumRoom.incomeEarned();
-        // stats[1] = MuseumRoom.theftsPrevented();
-        // stats[2] = MuseumRoom.furnitureStolen();
-        // stats[3] = MuseumRoom.time();
-        
-        
-        theStatBar.update(stats);
+        homeButton = new HomeButton("home", 3, sw);
+        addObject(homeButton, 250, 250);
     }
     
     /**
@@ -69,7 +58,7 @@ public class EndScreen extends World
     public void act(){
         // if(Greenfoot.mouseClicked()){
             // //music.stop();
-            //  Greenfoot.setWorld(new StartWorld());
+            // ==m Greenfoot.setWorld(new StartWorld());
         // }
         if(Greenfoot.mouseClicked(this)){
             //music.stop();
@@ -78,10 +67,24 @@ public class EndScreen extends World
     }
     
     public void startMusic(){
-        //music.playLoop();
+        music.playLoop();
     }
     
     public void stopped() {
-        //music.pause();
+        music.pause();
     }
+    
+    public void moneyEarned()
+    {
+        
+    }
+    public void theftsPrevented()
+    {
+        
+    }
+    public void furnitureStolen()
+    {
+        
+    }
+    
 }

@@ -59,7 +59,19 @@ public class Visitor extends Human
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false;
     
     public Visitor(int time, int speed){
-        
+        visitDuration = time;
+        numberOfVisitors++;
+        willReadBook = false; willLookPhone = false; isMoving = false;
+        mollyOrAdam = Greenfoot.getRandomNumber(2) == 0;//molly or adam is randomized
+        actNum = 0; frameNum = 0;
+        direction = 4;
+        this.speed = speed;
+        if(mollyOrAdam){
+            setImage(mollyIdleDown[0]);
+        }
+        else{
+            setImage(adamIdleDown[0]);
+        }
     }
     
     public void addedToWorld(World w){
@@ -75,7 +87,7 @@ public class Visitor extends Human
         willReadBook = false; willLookPhone = false; isMoving = false;
         mollyOrAdam = Greenfoot.getRandomNumber(2) == 0;//molly or adam is randomized
         actNum = 0; frameNum = 0;
-        direction =4;
+        direction = 4;
         this.speed = speed;
         if(mollyOrAdam){
             setImage(mollyIdleDown[0]);
@@ -91,11 +103,42 @@ public class Visitor extends Human
      */
     public void act()
     {
-        //testing sectoin
+        //testing section
         if(Greenfoot.isKeyDown("a")){
             expressEmotion();
         }
+        // int curX = getX(), curY = getY();
+        // int newX = curX + (int) (speed * Math.cos(Math.toRadians(getRotation())));
+        // int newY = curY + (int) (speed * Math.sin(Math.toRadians(getRotation())));
+
+        // // Check if the new position is within the world boundaries
         
+        // setLocation(newX, newY);  // Move to new position
+
+        // // After moving, check for collisions
+        // if (!getIntersectingObjects(Obstacle.class).isEmpty()) {
+            // // Handle collision by moving back and choosing a new direction
+            // setLocation(curX, curY); // Reset to previous position
+            // turn(180);
+            // newX = getX() + (int) (speed * Math.cos(Math.toRadians(getRotation())));
+            // newY = getY() + (int) (speed * Math.sin(Math.toRadians(getRotation())));
+            // setLocation(newX, newY);
+            // setRotation(Greenfoot.getRandomNumber(360)); // Choose a new random direction
+        // }
+    
+
+        // // Optionally, randomly change direction
+        // if (Greenfoot.getRandomNumber(100) < 10) {
+            // setRotation(Greenfoot.getRandomNumber(360));
+        // }
+    
+        // setLocation(getX(), getY());
+            // // If at edge, pick a new random direction
+            // setRotation(Greenfoot.getRandomNumber(360));
+        // } else if (Greenfoot.getRandomNumber(100) < 10) {
+            // // Randomly, 10% of the time, change direction
+            // setRotation(getRotation() + Greenfoot.getRandomNumber(180) - 90);
+        // }
         //animation section
         if(mollyOrAdam){
             ///molly animation, second condition controls frame rate
@@ -188,8 +231,7 @@ public class Visitor extends Human
                 }
             }
 
-        }
-        else{
+        }else{
             // Adam animation, second condition controls frame rate
             if (isMoving && actNum % (speed !=0 ? (int) (-5 * speed + 25) : 10) == 0) {
                 // Moving animation, set isMoving to true to play this section

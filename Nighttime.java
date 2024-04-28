@@ -9,7 +9,7 @@ public class Nighttime extends Effect
      * Creates an effect that lasts for 1200 acts, and targets 100 transparency.
      */
     public Nighttime(){
-        super(1200, 100);
+        super(600, 150);
     }
     public void addedToWorld(World w){
         if (!startAct) return;
@@ -24,6 +24,9 @@ public class Nighttime extends Effect
         
         // Center on screen.
         setLocation(w.getWidth()/2, w.getHeight()/2);
+    }
+    public void act() {
+        super.act();
     }
     /**
      * Starts the effect, increase robber spawn rate + # of robberies
