@@ -80,9 +80,9 @@ public class Human extends SuperSmoothMover
      * @param desty    Destination column number
      * @return List<Pair>   List of (r, c) coordinates to be able to move the character
     */
-    public List<Pair> bfs(int srcx, int srcy, int destx, int desty) {
+    public ArrayList<Pair> bfs(int srcx, int srcy, int destx, int desty) {
         Map<Pair, Pair> par = new HashMap<>();
-        List<Pair> path = new ArrayList<>();
+        ArrayList<Pair> path = new ArrayList<>();
         Queue<Pair> q = new LinkedList<>();
         q.add(new Pair(srcx, srcy));
         vis[srcy][srcx] = true;

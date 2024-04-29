@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Random;
+import java.util.ArrayList;
 /**
  * Write a description of class Visitor here.
  * 
@@ -56,8 +57,12 @@ public class Visitor extends Human
     private boolean mollyOrAdam;//true is molly, false is adam
     private int direction;//1 right, 2 up, 3 left, 4 down
     
-    protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false;
+    protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false, pathFound = false, targeting = false;
     private int targetX, targetY;
+    
+    Pair curTile;
+    private ArrayList<Pair> path;
+
     
     public Visitor(int time, int speed){
         visitDuration = time;
@@ -80,7 +85,6 @@ public class Visitor extends Human
             isNew=true;
         }
         MuseumRoom.income +=100;   
-        pickNewTarget();
     }
    
     public Visitor(int time){
@@ -109,37 +113,72 @@ public class Visitor extends Human
         if(Greenfoot.isKeyDown("a")){
             expressEmotion();
         }
-        int currentX = getX();
-        int currentY = getY();
-        
-        if (currentX != targetX) {
-            int dx = Integer.signum(targetX - currentX) * speed;
-            if (!isPathBlocked(currentX + dx, currentY)) {
-                setLocation(currentX + dx, currentY);
-                if (dx < 0) direction = 3;
-                else direction = 1;
-            } else {
-                pickNewTarget(); // Pick new target if the path is blocked
-            }
-        }
-        
-        // Move vertically if x is aligned and y is not
-        if (currentX == targetX && currentY != targetY) {
-            int dy = Integer.signum(targetY - currentY) * speed;
-            if (!isPathBlocked(currentX, currentY + dy)) {
-                setLocation(currentX, currentY + dy);
-                if (dy < 0) direction = 2;
-                else direction = 4;
-            } else {
-                pickNewTarget(); // Pick new target if the path is blocked
-            }
-        }
-        
-        // Check if target is reached
-        if (currentX == targetX && currentY == targetY) {
+        if (actNum % 900 == 0) {
             pickNewTarget();
+            targeting = true;
         }
+        if (!pathFound && targeting) {
+            // Since the bfs works on 20x20 tiles, divide the x and y values by 20
+            path = bfs(getX()/20, getY()/20, targetX/20, targetY/20);
+            
+            if (path.size() != 0){
+                // Get the targeted tile
+                curTile = path.remove(0);
+                            
+                // Mark that bfs has already been done
+                pathFound = true;
+            }
 
+            
+        }
+        if (targeting){ 
+            // Get the absolute x and y distances between the robber and the current tile
+            int dx = Math.abs((curTile.x*20) - getX());
+            int dy = Math.abs((curTile.y*20) - getY());
+            
+            // System.out.println(curTile.x + " " + curTile.y);
+         
+            isMoving = true;
+            // If there is a gap, then adjust the x direction
+            if (dx != 0) { 
+                // if the visitor is to the right of the targeted tile, move him left
+                if (getX() > curTile.x*20) {
+                    setLocation(getX() - speed, getY());
+                    direction = 3; // set the direction to left
+                } else {
+                    // otherwise, move him right
+                    setLocation(getX() + speed, getY());
+                    direction = 1; // set the direction to right
+                }
+            }
+            // Once aligned horizontally, move vertically
+            else if (dy != 0) {
+                // If the visitor is below the targeted tile, move him up
+                if (getY() > curTile.y*20) {
+                    setLocation(getX(), getY()-speed);
+                    direction = 2; // set the direction to up
+                } else {
+                    // Otherwise, move him down
+                    setLocation(getX(), getY()+speed);
+                    direction = 4; // set the direction to down
+                }
+            }
+            
+            // Check if target is reached
+            if (Math.abs(dx) <= speed && Math.abs(dy) <= speed) {
+                setLocation(curTile.x*20, curTile.y*20);
+                if (!path.isEmpty()) {
+                    curTile = path.remove(0);
+                }
+                else {
+                    pathFound = false;
+                    isMoving = false;
+                    curTile = null;
+                    targeting = false;
+                }
+            }
+        }
+        
         
         //animation section
         if(mollyOrAdam){
