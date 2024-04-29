@@ -78,4 +78,8 @@ public class SetUpWorld extends World
     public int getNumberOfValuables(){
         return valuableButton.getValue();
     }
+    
+    public int getSpawnRate() {
+        return spawnRateRobberButton.getValue();
+    }
 }
