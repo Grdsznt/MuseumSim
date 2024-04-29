@@ -62,6 +62,7 @@ public class StartWorld extends World
             //String keyPressed = Greenfoot.getKey();
             if(Greenfoot.mouseClicked(settings)){
                 music.pause();
+                Button.playClickSound();
                 Greenfoot.setWorld(setup);
             }
         }
