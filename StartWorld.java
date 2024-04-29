@@ -11,6 +11,7 @@ public class StartWorld extends World
     
     // private GreenfootImage img = new GreenfootImage("");
     //private GreenfootImage img = new GreenfootImage("");
+    
 
     private Button b;
     private StartButton startGame;
@@ -38,9 +39,9 @@ public class StartWorld extends World
         actNum = 0;
         currentBGframe = true;
         startGame = new StartButton("startButton", 3);
-        addObject(startGame, 500, 400);
+        addObject(startGame, 500, 600);
         settings = new SettingsButton("settingsButton", 3, setup);
-        addObject(settings, 500, 600);
+        addObject(settings, 500, 700);
         Button.init();
         
         //Load the animation images for the Guard
