@@ -36,9 +36,10 @@ public class Valuable extends Actor
      * called by other class to steal this valuable
      * 
      */
-    public void stealMe(){
-        isStolen = true;
+    public void setStolen(boolean b){
+        isStolen = b;
     }
+    
     //follow the robber after i have been stolen
     public void followRobber(Robber robber){
         int yOffset;

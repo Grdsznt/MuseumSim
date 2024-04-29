@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class Guard extends Human
 {
     //Store the world that it is added to
-    World world;
+    MuseumRoom world;
     
     //Animation variables
     private int aniCount = 0;
@@ -52,6 +52,18 @@ public class Guard extends Human
         loadAnimationImages();
         GreenfootImage img = new GreenfootImage("Guard/run_right1.png");
         img.scale(40, 80);
+        for (int i = 0;i<3;i++) {
+            walkRight[i].scale(40, 80);
+            walkLeft[i].scale(40, 80);
+            walkUp[i].scale(40, 80);
+            walkDown[i].scale(40, 80);
+        }
+        for (int i = 0;i<6;i++) {
+            runRight[i].scale(40, 80);
+            runLeft[i].scale(40, 80);
+            runUp[i].scale(40, 80);
+            runDown[i].scale(40, 80);
+        }
         setImage(img);
     }
     
@@ -59,7 +71,7 @@ public class Guard extends Human
      * When the Guard is added to world, add its detector as well.
      */
     public void addedToWorld(World w){
-        world = w;
+        world = (MuseumRoom) w;
         double[] coordinate = detector.getCoordinates();
         w.addObject(detector, (int)coordinate[0], (int)coordinate[1]);
     }
@@ -242,9 +254,11 @@ public class Guard extends Human
         
         //If a robber is detected
         if(robber!=null){
+            if (robber.getCurValuable() != null) robber.getCurValuable().setStolen(false);
             world.removeObject(robber);
             isCatching = false;
             this.robber = null;
+            world.setRobbers(1);
         }
     }
     
