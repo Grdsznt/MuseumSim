@@ -56,6 +56,8 @@ public class MuseumRoom extends Room
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
     
+    private static int dayCount;
+    
     public class Pair {
         int x, y;
         public Pair(int x, int y) {
@@ -159,6 +161,8 @@ public class MuseumRoom extends Room
         addObject(moneyEarned, xPos, 100);
         addObject(valuablesStolen, xPos, 200);
         addObject(robbersCatched, xPos, 300);
+        
+        dayCount = 0;
     }
     
     //Over all profit Income grow 
@@ -244,5 +248,9 @@ public class MuseumRoom extends Room
             return 2;
         }
 
+    }
+    
+    public static void increaseDayCount() {
+        dayCount++;
     }
 }
