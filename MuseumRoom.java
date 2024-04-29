@@ -161,6 +161,11 @@ public class MuseumRoom extends Room
         addObject(robbersCatched, xPos, 300);
     }
     
+    //Over all profit Income grow 
+    public void gainIncome(int newIncome){
+        income = income + newIncome;
+    }
+    
     public void act() {
         actCount++;
         if(actCount % 1200 == 0) {
