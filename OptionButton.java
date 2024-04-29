@@ -10,14 +10,14 @@ public class OptionButton extends Button
 {
     //Background image
     private int width = 350;
-    private int height = 30;
-    private Color backgroundColor = Color.BLACK;
+    private int height = 40;
+    private Color backgroundColor = Color.LIGHT_GRAY;
     
     //Text label
     private SuperTextBox textLabel; //From Mr.Cohen's Library
     private String text;
     private int fontSize = 20;
-    private Color textColor = Color.WHITE;
+    private Color textColor = Color.BLACK;
     
     //The value
     private final int initialValue;

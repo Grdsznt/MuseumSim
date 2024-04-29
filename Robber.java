@@ -254,7 +254,7 @@ public class Robber extends Human
         }        
         
         if (targetValuable != null && targetValuable.isStolen()) targetValuable = null;
-        else if (targetValuable != null) targetValuable.stealMe();
+        else if (targetValuable != null) targetValuable.setStolen(true);
     }
 
     public void setDirection(int D){
@@ -396,5 +396,9 @@ public class Robber extends Human
     public boolean detectedObstacles(){
         if (getIntersectingObjects(Obstacle.class).size() != 0) return true;
         return false;
+    }
+    
+    public Valuable getCurValuable() {
+        return targetValuable;
     }
 }
