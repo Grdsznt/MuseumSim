@@ -66,7 +66,7 @@ public class MuseumRoom extends Room
     /**
      * Constructor for objects of class MuseumRoom.
      */
-    public MuseumRoom(int robbers, int guards, int valuables)
+    public MuseumRoom(int robbers, int guards, int valuables, int spawnRate)
     { 
         super(1000,816,0, 0);
         setBackground(worldImage);
@@ -112,7 +112,7 @@ public class MuseumRoom extends Room
         // Valuable v = new Valuable(200.50);
         // addObject(v, 92, 119);
         
-        this.robbers = robbers; this.guards = guards; this.valuables = valuables;
+        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.spawnRate = spawnRate;
         
         robberSpawns = new ArrayList<Pair>(3);
         guardSpawns = new ArrayList<Pair>(3);
@@ -169,27 +169,24 @@ public class MuseumRoom extends Room
             Valuable v = new Valuable(200.50);
             addObject(v, 92, 119);
         }
-        if (actCount % 3000 == 0) {
+        if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberSpawns.size() == 0) {
                 robberSpawns.add(new Pair(330, 500));
                 robberSpawns.add(new Pair(200, 350));
                 robberSpawns.add(new Pair(450, 350));
             }
-            Double rand = Math.random();
-            if (rand < spawnRate) {
-                Collections.shuffle(robberSpawns);
-                Pair p = robberSpawns.remove(0);
-                if (p.x == 330 && p.y == 500) {
-                    addObject(new Robber(3, 600, 4, 0), p.x, p.y);
-                    robberLoc[0] = true;
-                }
-                else if (p.x == 200 && p.y == 350) {
-                    addObject(new Robber(3, 600, 4, 2), p.x, p.y);
-                    robberLoc[1] = true;
-                } else  {
-                    addObject(new Robber(3, 600, 4, 1), p.x, p.y);
-                    robberLoc[2] = true;
-                }
+            Collections.shuffle(robberSpawns);
+            Pair p = robberSpawns.remove(0);
+            if (p.x == 330 && p.y == 500) {
+                addObject(new Robber(3, 600, 4, 0), p.x, p.y);
+                robberLoc[0] = true;
+            }
+            else if (p.x == 200 && p.y == 350) {
+                addObject(new Robber(3, 600, 4, 2), p.x, p.y);
+                robberLoc[1] = true;
+            } else  {
+                addObject(new Robber(3, 600, 4, 1), p.x, p.y);
+                robberLoc[2] = true;
             }
         }
     }
