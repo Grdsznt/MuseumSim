@@ -17,6 +17,14 @@ public class VolumeButton extends Button
      */
     public VolumeButton(String imagePath, int numStates, boolean type) {
         super(imagePath, numStates);
+        this.type = type;
+        
+        if(type) {
+            setImage("volumeUp.png");
+        }
+        else {
+            setImage("volumeDown.png");
+        }
     }
     public void act()
     {
@@ -24,8 +32,10 @@ public class VolumeButton extends Button
     }
     public void action() {
         if(type) {
+            currentVolume+=5;
+        }
+        else if (!type) {
             currentVolume-=5;
-            
         }
     }
 }

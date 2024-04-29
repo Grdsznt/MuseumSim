@@ -11,12 +11,15 @@ public class SetUpWorld extends World
     private Color white = Color.WHITE;
     private Color black = Color.BLACK;
     private Font boringFont = new Font ("Joystix", false, false, 18);
+    private static GreenfootImage backGround1 = new GreenfootImage("museumFrontPage1.png");
     private HomeButton homeButton;
     
     //Set the buttons for guards, robbers, and valuables
     private OptionButton guardButton;
     private OptionButton robberButton;
     private OptionButton valuableButton;
+    //Set the button for spawn rate of robber
+    private OptionButton spawnRateRobberButton;
     
     /**
      * Constructor for objects of class SetUpWorld.
@@ -40,17 +43,20 @@ public class SetUpWorld extends World
         addObject(homeButton, 75, 50);
         Button.init();
         
-        
+        setBackground(backGround1);
         
         //Set the buttons for guards, robbers, and valuables
         guardButton = new OptionButton("Number of Guards in World: ", 1, 3);
         robberButton = new OptionButton("Number of Robbers in World: ", 1, 3);
         valuableButton = new OptionButton("Number of Valuables in World: ", 2, 7);
+        //Set the button for spawn rate of robber
+        spawnRateRobberButton = new OptionButton("Spawn Rate of Robbers per 10s: ", 1, 5);
         
         //Add these buttons onto the world
-        addObject(guardButton, getWidth()/2, getHeight()/8*3);
-        addObject(robberButton, getWidth()/2, getHeight()/8*4);
-        addObject(valuableButton, getWidth()/2, getHeight()/8*5);
+        addObject(guardButton, getWidth()/2, getHeight()/9*3);
+        addObject(robberButton, getWidth()/2, getHeight()/9*4);
+        addObject(valuableButton, getWidth()/2, getHeight()/9*5);
+        addObject(spawnRateRobberButton, getWidth()/2, getHeight()/9*6);
     }
     
     /**
@@ -72,5 +78,9 @@ public class SetUpWorld extends World
      */
     public int getNumberOfValuables(){
         return valuableButton.getValue();
+    }
+    
+    public int getSpawnRate() {
+        return spawnRateRobberButton.getValue();
     }
 }

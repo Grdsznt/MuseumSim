@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Has the logic to detect the mouse relation to the button
  * Calls the function in the subclass
  * 
- * @author Jerry Xing, Jean Pan
+ * @author Jerry Xing, Jean Pan, Felix Zhao
  * @version 
  */
 public abstract class Button extends Actor
@@ -118,7 +118,7 @@ public abstract class Button extends Actor
     }
     
     //Code from Mr. Cohen
-    public void playClickSound() {
+    public static void playClickSound() {
         clickEffects[clickIndex].play();
         clickIndex++;
         if (clickIndex >= clickEffects.length){

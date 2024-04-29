@@ -6,32 +6,33 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Art extends Actor
+public abstract class Art extends Actor
 {
     protected  Visitor[] visitors;
     private boolean isNew = false;
+    protected String spawnerType;
+    protected int value;
     protected int actNumber;
     protected boolean willVibrate;
     protected int defaultX, defaultY;//store orginial x and y values, used for vibration
-    private int len;
     protected int t=0;//transparency
     /**
      * Act - do whatever the Art wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Art(){
-        visitors = new Visitor[len];
-        actNumber = 0;
-        defaultX = getX(); defaultY = getY();
-	      willVibrate = false;
+    public Art(String ART_IMAGE, int value, String spawnerType){
+        setImage(ART_IMAGE);
+        this.value=value;
+        this.spawnerType = spawnerType;
     }
     
     public void addedToWorld(World w){
-        if(!isNew ){
-            isNew = true;
-        }
+        actNumber = 0;
+        defaultX = getX(); defaultY = getY();
+        willVibrate = false;
+        
     }
-
+    
     public void act(){
         //vibration section
         if(willVibrate){
@@ -42,7 +43,10 @@ public class Art extends Actor
         else{
             setLocation(defaultX, defaultY);
         }
-        
+        if(actNumber==  60){
+            stopVibrating();
+        }
+        actNumber++;
     }
     //call this method to vibrate the art
     public void vibrate(){
@@ -51,13 +55,7 @@ public class Art extends Actor
     public void stopVibrating(){
         willVibrate = false;
     }
-    
-    public Visitor[] getVisitors(){
-        return visitors;
+    public int getValue() {
+        return value;
     }
-    
-    public void placeVisitors(Visitor v, int spotNumber){
-        visitors[spotNumber] = v;
-    }
-    
 }

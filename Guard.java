@@ -254,6 +254,7 @@ public class Guard extends Human
         
         //If a robber is detected
         if(robber!=null){
+            if (robber.getCurValuable() != null) robber.getCurValuable().setStolen(false);
             world.removeObject(robber);
             isCatching = false;
             this.robber = null;

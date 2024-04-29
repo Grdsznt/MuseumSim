@@ -9,8 +9,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class OptionButton extends Button
 {
     //Background image
-    private int width = 300;
-    private int height = 30;
+    private int width = 350;
+    private int height = 40;
     private Color backgroundColor = Color.LIGHT_GRAY;
     
     //Text label
