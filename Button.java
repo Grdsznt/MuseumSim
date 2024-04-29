@@ -117,7 +117,7 @@ public abstract class Button extends Actor
     }
     
     //Code from Mr. Cohen
-    public void playClickSound() {
+    public static void playClickSound() {
         clickEffects[clickIndex].play();
         clickIndex++;
         if (clickIndex >= clickEffects.length){

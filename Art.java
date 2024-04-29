@@ -10,6 +10,8 @@ public abstract class Art extends Actor
 {
     protected  Visitor[] visitors;
     private boolean isNew = false;
+    protected String spawnerType;
+    protected int value;
     protected int actNumber;
     protected boolean willVibrate;
     protected int defaultX, defaultY;//store orginial x and y values, used for vibration
@@ -18,8 +20,10 @@ public abstract class Art extends Actor
      * Act - do whatever the Art wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Art(String ART_IMAGE){
+    public Art(String ART_IMAGE, int value, String spawnerType){
         setImage(ART_IMAGE);
+        this.value=value;
+        this.spawnerType = spawnerType;
     }
     
     public void addedToWorld(World w){
@@ -51,5 +55,7 @@ public abstract class Art extends Actor
     public void stopVibrating(){
         willVibrate = false;
     }
-    
+    public int getValue() {
+        return value;
+    }
 }
