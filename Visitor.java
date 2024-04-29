@@ -1,5 +1,5 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.Random;
 /**
  * Write a description of class Visitor here.
  * 
@@ -57,6 +57,7 @@ public class Visitor extends Human
     private int direction;//1 right, 2 up, 3 left, 4 down
     
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false;
+    private int targetX, targetY;
     
     public Visitor(int time, int speed){
         visitDuration = time;
@@ -78,7 +79,8 @@ public class Visitor extends Human
         if(!isNew){//prevent z sort problems
             isNew=true;
         }
-        MuseumRoom.income +=100;        
+        MuseumRoom.income +=100;   
+        pickNewTarget();
     }
    
     public Visitor(int time){
@@ -107,38 +109,38 @@ public class Visitor extends Human
         if(Greenfoot.isKeyDown("a")){
             expressEmotion();
         }
-        // int curX = getX(), curY = getY();
-        // int newX = curX + (int) (speed * Math.cos(Math.toRadians(getRotation())));
-        // int newY = curY + (int) (speed * Math.sin(Math.toRadians(getRotation())));
-
-        // // Check if the new position is within the world boundaries
+        int currentX = getX();
+        int currentY = getY();
         
-        // setLocation(newX, newY);  // Move to new position
+        if (currentX != targetX) {
+            int dx = Integer.signum(targetX - currentX) * speed;
+            if (!isPathBlocked(currentX + dx, currentY)) {
+                setLocation(currentX + dx, currentY);
+                if (dx < 0) direction = 3;
+                else direction = 1;
+            } else {
+                pickNewTarget(); // Pick new target if the path is blocked
+            }
+        }
+        
+        // Move vertically if x is aligned and y is not
+        if (currentX == targetX && currentY != targetY) {
+            int dy = Integer.signum(targetY - currentY) * speed;
+            if (!isPathBlocked(currentX, currentY + dy)) {
+                setLocation(currentX, currentY + dy);
+                if (dy < 0) direction = 2;
+                else direction = 4;
+            } else {
+                pickNewTarget(); // Pick new target if the path is blocked
+            }
+        }
+        
+        // Check if target is reached
+        if (currentX == targetX && currentY == targetY) {
+            pickNewTarget();
+        }
 
-        // // After moving, check for collisions
-        // if (!getIntersectingObjects(Obstacle.class).isEmpty()) {
-            // // Handle collision by moving back and choosing a new direction
-            // setLocation(curX, curY); // Reset to previous position
-            // turn(180);
-            // newX = getX() + (int) (speed * Math.cos(Math.toRadians(getRotation())));
-            // newY = getY() + (int) (speed * Math.sin(Math.toRadians(getRotation())));
-            // setLocation(newX, newY);
-            // setRotation(Greenfoot.getRandomNumber(360)); // Choose a new random direction
-        // }
-    
-
-        // // Optionally, randomly change direction
-        // if (Greenfoot.getRandomNumber(100) < 10) {
-            // setRotation(Greenfoot.getRandomNumber(360));
-        // }
-    
-        // setLocation(getX(), getY());
-            // // If at edge, pick a new random direction
-            // setRotation(Greenfoot.getRandomNumber(360));
-        // } else if (Greenfoot.getRandomNumber(100) < 10) {
-            // // Randomly, 10% of the time, change direction
-            // setRotation(getRotation() + Greenfoot.getRandomNumber(180) - 90);
-        // }
+        
         //animation section
         if(mollyOrAdam){
             ///molly animation, second condition controls frame rate
@@ -339,6 +341,37 @@ public class Visitor extends Human
     private void expressEmotion(){
         getWorld().addObject(new Emote(1), getX() + 16, getY() - 24);
     }
+    
+    private void pickNewTarget() {
+        World world = getWorld();
+        Random random = new Random();
+        int curX = getX(), curY = getY();
+        boolean validTarget = false;
+        while (!validTarget) {
+            int x = random.nextInt(661);
+            int y = random.nextInt(881);
+            
+            // Temporarily move to new position to check for collisions
+            setLocation(x, y);
+            if (getIntersectingObjects(Obstacle.class).isEmpty()) {
+                // If no collision, set this as the new target
+                targetX = x;
+                targetY = y;
+                validTarget = true;
+            }
+        }
+        // Reset location after checking
+        setLocation(curX, curY);
+    }
+    
+    private boolean isPathBlocked(int newX, int newY) {
+        int curX = getX(), curY = getY();
+        setLocation(newX, newY);
+        boolean blocked = !getIntersectingObjects(Obstacle.class).isEmpty();
+        setLocation(getX(), getY()); // Reset position after check
+        return blocked;
+    }
+
        
     
     //get the number of visitors
