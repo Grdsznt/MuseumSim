@@ -151,7 +151,7 @@ public class MuseumRoom extends Room
         actCount = 1;
         // Valuable v2 = new Valuable(0);
         // addObject(v2, 650, 675);
-        Visitor v = new Visitor(1600, 3);
+        Visitor v = new Visitor(1600, 1);
         addObject(v, 0, 670);
         
         //Add the statistics at the top of the world
@@ -163,18 +163,47 @@ public class MuseumRoom extends Room
     
     public void act() {
         actCount++;
-        if(actCount % 1200 == 0) {
+        if(actCount % 1600 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
+        }
+        if (actCount % 1200 == 0) {
             Valuable v = new Valuable(200.50);
             addObject(v, 92, 119);
         }
         if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
+            if (robberLoc[0] == true) {
+                int rand = Greenfoot.getRandomNumber(2)+1;
+                if (rand == 1) {
+                    addObject(new Robber(3, 600, 4, rand), 200, 350);
+                } else {
+                    addObject(new Robber(3, 600, 4, rand), 450, 350);
+                }
+                robberLoc[rand] = true;
+            } else if (robberLoc[1] == true) {
+                int rand = Greenfoot.getRandomNumber(2);
+                if (rand == 1) {
+                    addObject(new Robber(3, 600, 4, 2), 450, 350);
+                    robberLoc[2] = true;
+                } else {
+                    addObject(new Robber(3, 600, 4, 0), 330, 500);
+                    robberLoc[0] = true;
+                }
+            } else {
+                int rand = Greenfoot.getRandomNumber(2);
+                if (rand == 1) {
+                    addObject(new Robber(3, 600, 4, rand), 200, 350);
+                    robberLoc[rand] = true;
+                } else {
+                    addObject(new Robber(3, 600, 4, rand), 330, 500);
+                    robberLoc[rand] = true;
+                }
+            }
             if (robberSpawns.size() == 0) {
                 robberSpawns.add(new Pair(330, 500));
                 robberSpawns.add(new Pair(200, 350));
                 robberSpawns.add(new Pair(450, 350));
-            }
+            } 
             Collections.shuffle(robberSpawns);
             Pair p = robberSpawns.remove(0);
             if (p.x == 330 && p.y == 500) {
@@ -238,6 +267,5 @@ public class MuseumRoom extends Room
         } else {
             return 2;
         }
-
     }
 }
