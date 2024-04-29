@@ -43,4 +43,9 @@ public class DropDownMenu extends SuperSmoothMover
         
         actNum++;
     }
+    //check if it is still moving
+    public boolean checkIfMoving(){
+        //if actNum is <= 90 that means dropdownmenu is still moving
+        return actNum <=90;
+    }
 }
