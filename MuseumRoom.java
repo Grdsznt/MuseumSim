@@ -163,6 +163,7 @@ public class MuseumRoom extends Room
         addObject(robbersCatched, xPos, 300);
         
         dayCount = 0;
+        setPaintOrder(Statistic.class, Nighttime.class);
     }
     
     //Over all profit Income grow 
@@ -262,5 +263,13 @@ public class MuseumRoom extends Room
     
     public static void increaseDayCount() {
         dayCount++;
+    }
+    
+    public void started() {
+        StartWorld.music.pause();
+    }
+    
+    public void paused() {
+        StartWorld.music.pause();
     }
 }
