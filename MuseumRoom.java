@@ -163,7 +163,7 @@ public class MuseumRoom extends Room
         addObject(robbersCatched, xPos, 300);
         
         dayCount = 0;
-        setPaintOrder(Statistic.class, Nighttime.class);
+        setPaintOrder(Statistic.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     
     //Over all profit Income grow 
