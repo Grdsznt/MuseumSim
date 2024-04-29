@@ -20,16 +20,31 @@ javadoc
 UTF-8
 -charset
 UTF-8
-/Users/jerryxing/Documents/GitHub/MuseumSim/VolumeButton.java
+/Users/jerryxing/Documents/GitHub/MuseumSim/SuperTextBox.java
 <---- end of javadoc command ---->
-Loading source file /Users/jerryxing/Documents/GitHub/MuseumSim/VolumeButton.java...
+Loading source file /Users/jerryxing/Documents/GitHub/MuseumSim/SuperTextBox.java...
 Constructing Javadoc information...
 warning: unknown enum constant Tag.Any
   reason: class file for threadchecker.Tag not found
 warning: unknown enum constant Tag.Any
 Standard Doclet version 17.0.4.1+1
 Building tree for all the packages and classes...
-Generating /Users/jerryxing/Documents/GitHub/MuseumSim/doc/VolumeButton.html...
+Generating /Users/jerryxing/Documents/GitHub/MuseumSim/doc/SuperTextBox.html...
+/Users/jerryxing/Documents/GitHub/MuseumSim/SuperTextBox.java:56: warning: @param argument "line" is not a parameter name.
+     *  @param line     The line of text to display
+        ^
+/Users/jerryxing/Documents/GitHub/MuseumSim/SuperTextBox.java:68: warning: @param argument "line" is not a parameter name.
+     *  @param line     The line of text to display
+        ^
+/Users/jerryxing/Documents/GitHub/MuseumSim/SuperTextBox.java:166: warning: @param argument "text" is not a parameter name.
+     * @param text the line of text to add. 
+       ^
+/Users/jerryxing/Documents/GitHub/MuseumSim/SuperTextBox.java:320: warning: invalid input: '&'
+     * <h3>Performance & Compatibility:</h3>
+                       ^
+/Users/jerryxing/Documents/GitHub/MuseumSim/SuperTextBox.java:335: warning: Tag @version cannot be used in method documentation.  It can only be used in the following types of documentation: overview, module, package, class/interface.
+     * @version December 2021 - Even more Efficiency Improvement - sub 0.06ms per update on setSpeed(100)!
+       ^
 Generating /Users/jerryxing/Documents/GitHub/MuseumSim/doc/package-summary.html...
 Generating /Users/jerryxing/Documents/GitHub/MuseumSim/doc/index.html...
-2 warnings
+7 warnings

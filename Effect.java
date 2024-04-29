@@ -49,6 +49,7 @@ public abstract class Effect extends Actor
             if (getImage().getTransparency() <= 0) { //stop effect when its over
                 stopEffect(); 
                 getWorld().removeObject(this);
+                MuseumRoom.increaseDayCount();
             }
         }
     }
