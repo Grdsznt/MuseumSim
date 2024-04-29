@@ -113,25 +113,34 @@ public class Visitor extends Human
         int currentY = getY();
         
         if (currentX != targetX) {
-            // Move horizontally towards the target x-coordinate
-            isMoving = true;
-            int dx = targetX > currentX ? speed : -speed;
-            if (Math.abs(targetX - currentX) < speed) dx = targetX - currentX; // Correct overshoot
-            setLocation(currentX + dx, currentY);
-            if (dx < 0) direction = 3;
-            else direction = 1;
-        } else if (currentY != targetY) {
-            // Move vertically towards the target y-coordinate
-            isMoving = true;
-            int dy = targetY > currentY ? speed : -speed;
-            if (Math.abs(targetY - currentY) < speed) dy = targetY - currentY; // Correct overshoot
-            setLocation(currentX, currentY + dy);
-            if (dy < 0) direction = 2;
-            else direction = 4;
-        } else {
-            // Target reached, pick a new target point
+            int dx = Integer.signum(targetX - currentX) * speed;
+            if (!isPathBlocked(currentX + dx, currentY)) {
+                setLocation(currentX + dx, currentY);
+                if (dx < 0) direction = 3;
+                else direction = 1;
+            } else {
+                pickNewTarget(); // Pick new target if the path is blocked
+            }
+        }
+        
+        // Move vertically if x is aligned and y is not
+        if (currentX == targetX && currentY != targetY) {
+            int dy = Integer.signum(targetY - currentY) * speed;
+            if (!isPathBlocked(currentX, currentY + dy)) {
+                setLocation(currentX, currentY + dy);
+                if (dy < 0) direction = 2;
+                else direction = 4;
+            } else {
+                pickNewTarget(); // Pick new target if the path is blocked
+            }
+        }
+        
+        // Check if target is reached
+        if (currentX == targetX && currentY == targetY) {
             pickNewTarget();
         }
+
+        
         //animation section
         if(mollyOrAdam){
             ///molly animation, second condition controls frame rate
