@@ -29,7 +29,7 @@ public class MuseumRoom extends Room
     private Obstacle wallSegLeft = new Obstacle(125, 64);
     private Obstacle wallSegRight = new Obstacle(125, 64);
     private Obstacle leftBound = new Obstacle(40, 223);
-    private Obstacle rightBound = new Obstacle(10, 223);
+    private Obstacle rightBound = new Obstacle(4, 223);
     private Obstacle lowerBound = new Obstacle(663, 7);
     
     private List<Pair> robberSpawns;
@@ -153,8 +153,8 @@ public class MuseumRoom extends Room
         actCount = 1;
         // Valuable v2 = new Valuable(0);
         // addObject(v2, 650, 675);
-        Visitor v = new Visitor(1600, 1);
-        addObject(v, 0, 670);
+        Visitor v = new Visitor(3200, 1);
+        addObject(v, 20, 670);
         
         //Add the statistics at the top of the world
         int xPos = 780;

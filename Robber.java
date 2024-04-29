@@ -162,21 +162,6 @@ public class Robber extends Human
         actNum++;
     }
     
-    // private void moveTowardsTarget() {
-        // if (Math.hypot(target.x - getX(), target.y - getY()) > speed) {
-            // double angle = Math.atan2(target.y - getY(), target.x - getX());
-            // double x = getX() + speed * Math.cos(angle);
-            // double y = getY() + speed * Math.sin(angle);
-            
-            // setLocation((int) x, (int) y);
-            
-            // isMoving = true;
-        // } else {
-            // setLocation(target.x, target.y); // Snap to the target if very close
-            // isMoving = false;
-            // target = null;
-        // }
-    // }
     
     private void moveTowardsTarget() {
         int currentX = getX();
@@ -400,5 +385,9 @@ public class Robber extends Human
     
     public Valuable getCurValuable() {
         return targetValuable;
+    }
+    
+    public int getStation() {
+        return station;
     }
 }
