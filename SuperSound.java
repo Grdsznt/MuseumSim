@@ -1,31 +1,39 @@
 import greenfoot.*;
 import java.util.HashMap;
-public class Sound  
+/**
+ * The SuperSound is basically another way to use GrenfootSounds, as it includes its own array
+ * of GreenfootSounds. Doing so would remove the issue where sounds can only play themselves once at a time
+ * as would be for a normal GreenfootSound.
+ * 
+ * @author Freeman Wang
+ * @version 2024-03-11
+ */
+public class SuperSound  
 {
     private GreenfootSound[] sounds;
     private int index;
     private int volume;
     /**
-     * Creates one sound.
+     * Creates a single SuperSound.
      */
-    public Sound(String filename) {
+    public SuperSound(String filename) {
         this(filename, 1, 100);
     }
     /**
-     * Creates a Sound with normal volume.
+     * Creates a SuperSound with default volume.
      * @param filename The filename for your sound file.
      * @param n The number of instances to create.
      */
-    public Sound(String filename, int n) {
+    public SuperSound(String filename, int n) {
         this(filename, n, 100);
     }
     /**
-     * Creates a Sound with a volume of your choice.
+     * Creates a SuperSound with defined volume.
      * @param filename The filename of your sound file.
      * @param n The number of instances to create.
-     * @param volume The volume to set the sounds to.l
+     * @param volume The volume to set the sounds to.
      */
-    public Sound(String filename, int n, int volume) {
+    public SuperSound(String filename, int n, int volume) {
         sounds = new GreenfootSound[n];
         for (int i = 0; i < sounds.length; i++) {
             sounds[i] = new GreenfootSound(filename);
@@ -34,14 +42,14 @@ public class Sound
         this.volume = volume;
     }
     /**
-     * Plays sound 
+     * Plays the SuperSound.
      */
     public void play() {
         play(volume);
     }
     /**
      * Plays the Sound at the given volume.
-     * @param volume The volume to play the sound at.
+     * @param volume The volume to play the SuperSound at.
      */
     public void play(int volume) {
         sounds[index].setVolume(volume);
@@ -73,13 +81,13 @@ public class Sound
         }
     }
     /**
-     * Returns the volume
+     * Returns the volume of the SuperSound.
      */
     public int getVolume() {
         return volume;
     }
     /**
-     *  Returns if sound is playing
+     * Returns if the SuperSound is currently playing.
      */
     public boolean isPlaying() {
         for (GreenfootSound sound: sounds) {
@@ -88,7 +96,7 @@ public class Sound
         return false;
     }
     /**
-     * Pauses the sound
+     * Pauses all instances of the SuperSound.
      */
     public void pause(){
         for (GreenfootSound sound : sounds) {

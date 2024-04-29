@@ -77,8 +77,7 @@ public class Visitor extends Human
     public void addedToWorld(World w){
         if(!isNew){//prevent z sort problems
             isNew=true;
-        }
-        MuseumRoom.incrementIncome();     
+        }   
     }
    
     public Visitor(int time){
