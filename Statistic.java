@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * It shows the statistics shown in Museum Room.
  * 
- * @author Jean
+ * @author Jean Pan
  * @version Apr 25, 2024
  */
 public class Statistic extends Actor
