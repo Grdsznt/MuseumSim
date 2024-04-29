@@ -17,7 +17,7 @@ public class Pot extends Art
     
     
     public Pot(){
-        super("PinkPot.png");
+        super("PinkPot.png", 500, "pot");
         
     }
     public void act(){
