@@ -1,5 +1,6 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.ArrayList;
+import java.util.List;
 /**
  *
  */
@@ -24,6 +25,7 @@ public class Nighttime extends Effect
         
         // Center on screen.
         setLocation(w.getWidth()/2, w.getHeight()/2);
+        setRobberStats();
     }
     public void act() {
         super.act();
@@ -43,7 +45,10 @@ public class Nighttime extends Effect
     /**
      *  Changes stats for robbers 
      */
-    private void setRobberStats(boolean time) {
-        //robber
+    private void setRobberStats() {
+        List<Robber> robbers = getWorld().getObjects(Robber.class);
+        for (Robber r: robbers) {
+            r.setSpeed(5);
+        }
     }
 }
