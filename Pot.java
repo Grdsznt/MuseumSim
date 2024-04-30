@@ -1,31 +1,19 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class Pot here.
+ * One of the valuables.
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Jean
+ * @version Apr 2024
  */
-public class Pot extends Art
+public class Pot extends Valuable
 {
-    
-    /**
-     * Act - do whatever the Pot wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    
-    
-    
     public Pot(){
-        super("PinkPot.png");
-        
+        //Set the image, and set the price to $100
+        super(new GreenfootImage("PinkPot.png"), 100);
     }
+    
     public void act(){
-        // Add your action code here.   
-    
-        
-    
         
     }
-
 }
