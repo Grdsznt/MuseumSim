@@ -184,7 +184,8 @@ public class Robber extends Human
 
         //get all the valuables in range
         valuables = (ArrayList<Valuable>)getObjectsInRange(targetRadius+1,Valuable.class);
-
+        
+        
         if(valuables.size() > 0){
             //get a random valuable in range and set it as a target
             for (Valuable v: valuables) {
