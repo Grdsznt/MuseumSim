@@ -24,8 +24,6 @@ public class Pot extends Art
         // Add your action code here.   
         
         
-    
-        
     }
 
 }
