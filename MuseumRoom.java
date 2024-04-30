@@ -61,7 +61,7 @@ public class MuseumRoom extends Room
     //Stores the possible locations of valuables
     private static int[][] valuableLocation = new int[6][2];
     //Stores the boolean for each valuable
-    private static boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot} x 6
+    private static boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, AntiquePotTall, AntiquePotShort} x 2
     
     public class Pair {
         int x, y;
@@ -81,32 +81,32 @@ public class MuseumRoom extends Room
         addObject(displayTable1, 327, 699);
         //Add the location to the 2D array
         valuableLocation[0][0] = 331;
-        valuableLocation[0][1] = 696;
+        valuableLocation[0][1] = 682;
         
         addObject(displayTable2, 181, 512);
         //Add the location to the 2D array
         valuableLocation[1][0] = 184;
-        valuableLocation[1][1] = 491;
+        valuableLocation[1][1] = 477;
         
         addObject(brokenGlassBox, 327, 213);
         //Add the location to the 2D array
         valuableLocation[2][0] = 331;
-        valuableLocation[2][1] = 166;
+        valuableLocation[2][1] = 152;
         
         addObject(littleGlassBox, 92, 119);
         //Add the location to the 2D array
         valuableLocation[3][0] = 94;
-        valuableLocation[3][1] = 100;
+        valuableLocation[3][1] = 86;
         
         addObject(largeWoodBox, 329, 374);
         //Add the location to the 2D array
-        valuableLocation[4][0] = 334;
-        valuableLocation[4][1] = 360;
+        valuableLocation[4][0] = 331;
+        valuableLocation[4][1] = 346;
         
         addObject(mediumGlassBox, 464, 514);
         //Add the location to the 2D array
         valuableLocation[5][0] = 466;
-        valuableLocation[5][1] = 500;
+        valuableLocation[5][1] = 486;
         
         addObject(statue1, 115, 380);
         
@@ -201,9 +201,29 @@ public class MuseumRoom extends Room
                 if(valuableInWorld[j]==true){
                     continue;
                 }
+                //Get the valuable
+                Valuable valuable;
+                switch(j){
+                    case 0: {
+                        valuable = new Pot();
+                        break;
+                    }
+                    case 1: {
+                        valuable = new AntiquePotTall();
+                        break;
+                    }
+                    case 2: {
+                        valuable = new AntiquePotShort();
+                        break;
+                    }
+                    default: {
+                        valuable = new Pot();
+                        break;
+                    }
+                }
+                
                 //Spawn the valuable at x & y
-                //Currently, pot is the only valuable
-                addObject(new Pot(), x, y);
+                addObject(valuable, x, y);
                 valuableInWorld[j] = true;
                 //Go to the next location
                 break;

@@ -6,16 +6,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class MonaLisa extends Art
+public class MonaLisa extends Valuable
 {
     
     public MonaLisa() {
-        super("MONALISA", 10000, "frame");
+        super(new GreenfootImage("paintingArt2.png"), 10000);
     }
-    /**
-     * Act - do whatever the MonaLisa wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
+    
     public void act()
     {
         // Add your action code here.
