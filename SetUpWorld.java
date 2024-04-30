@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * A setting screen for the user to adjust some values.
  * 
- * @author Jerry, Jean Pan
+ * @author Jerry, Jean Pan, Edwin
  * @version Apr 2024
  */
 public class SetUpWorld extends World
@@ -55,7 +55,7 @@ public class SetUpWorld extends World
         addObject(robberButton, getWidth()/2, getHeight()/10*4);
         addObject(valuableButton, getWidth()/2, getHeight()/10*5);
         addObject(spawnRateRobberButton, getWidth()/2, getHeight()/10*6);
-        addObject(spawnRateVisitorButton, getWidth()/2, getHeight()/10*7);
+        addObject (spawnRateVisitorButton, getWidth()/2, getHeight()/10*7);
         */
     }
     

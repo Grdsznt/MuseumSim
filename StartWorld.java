@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * A start image to introduce the game
  * 
- * @author Nick, Jean, Jerry
+ * @author Nick, Jean, Jerry, Edwin
  * @version (a version number or a date)
  */
 public class StartWorld extends World

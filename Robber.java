@@ -184,23 +184,17 @@ public class Robber extends Human
 
         //get all the valuables in range
         valuables = (ArrayList<Valuable>)getObjectsInRange(targetRadius+1,Valuable.class);
-        System.out.println(valuables);
-
+                
         if(valuables.size() > 0){
-            // Create an ArrayList to store valid targets that are not stolen
-            ArrayList<Valuable> validTargets = new ArrayList<>();
+            //get a random valuable in range and set it as a target
             for (Valuable v: valuables) {
-                if(!v.isStolen()) {
-                    validTargets.add(v);
-                }
-            }
-            
-            // Select a random valid target if available
-            if (!validTargets.isEmpty()) {
-                targetValuable = validTargets.get(Greenfoot.getRandomNumber(validTargets.size()));
-                targetValuable.setStolen(true);
+                targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
+                if (!targetValuable.isStolen()) break;
             }
         }        
+        
+        if (targetValuable != null && targetValuable.isStolen()) targetValuable = null;
+        else if (targetValuable != null) targetValuable.setStolen(true);
     }
 
     public void setDirection(int D){
@@ -280,8 +274,6 @@ public class Robber extends Human
         int dx = Math.abs((curTile.x*20) - getX());
         int dy = Math.abs((curTile.y*20) - getY());
         
-        // System.out.println(curTile.x + " " + curTile.y);
-     
         isMoving = true;
         // If there is a gap, then adjust the x direction
         if (dx != 0) { 

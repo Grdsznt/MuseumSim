@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class AntiquePotShort extends Valuable
 {
     public AntiquePotShort(){
-        super(new GreenfootImage("valuableArtPot2.png"), 7000);
+        super(new GreenfootImage("GoldPot.png"), 7000);
     }
     
     public void act()
