@@ -27,11 +27,11 @@ public class DropDownMenu extends SuperSmoothMover
      */
     public void act()
     {
+        //set default location to top of the screen
         if(actNum == 0){
             setLocation(width/2, 0);
         }
-        // Add your action code here.
-        //sliding lasts 
+        //sliding lasts 90 acts
         if(actNum <= 90){
             //function for speed f(x) = 1.6^(x+5) - 0.9
             //integral of f(actNum) is around 10 between 0 < actNum < 5, thus it will end up in the middle of the screen
