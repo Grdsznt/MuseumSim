@@ -82,17 +82,17 @@ public class MuseumRoom extends Room
         addObject(displayTable1, 327, 699);
         //Add the location to the 2D array
         valuableLocation[0][0] = 331;
-        valuableLocation[0][1] = 682;
+        valuableLocation[0][1] = 670;
         
         addObject(displayTable2, 181, 512);
         //Add the location to the 2D array
         valuableLocation[1][0] = 184;
-        valuableLocation[1][1] = 477;
+        valuableLocation[1][1] = 483;
         
         addObject(brokenGlassBox, 327, 213);
         //Add the location to the 2D array
         valuableLocation[2][0] = 331;
-        valuableLocation[2][1] = 152;
+        valuableLocation[2][1] = 162;
         
         addObject(littleGlassBox, 92, 119);
         //Add the location to the 2D array
@@ -153,10 +153,10 @@ public class MuseumRoom extends Room
                 robberLoc[0] = true;
             }
             else if (p.x == 200 && p.y == 350) {
-                addObject(new Robber(3, 600, 4, 2), p.x, p.y);
+                addObject(new Robber(3, 600, 4, 1), p.x, p.y);
                 robberLoc[1] = true;
             } else  {
-                addObject(new Robber(3, 600, 4, 1), p.x, p.y);
+                addObject(new Robber(3, 600, 4, 2), p.x, p.y);
                 robberLoc[2] = true;
             }
         }
@@ -172,8 +172,7 @@ public class MuseumRoom extends Room
             addObject(new Guard(1), p.x, p.y);
         }
         actCount = 1;
-        // Valuable v2 = new Valuable(0);
-        // addObject(v2, 650, 675);
+        
         Visitor v = new Visitor(3200, 1);
         addObject(v, 20, 670);
         
@@ -249,31 +248,64 @@ public class MuseumRoom extends Room
         }
         if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
-                int rand = Greenfoot.getRandomNumber(2)+1;
-                if (rand == 1) {
-                    addObject(new Robber(3, 600, 4, rand), 200, 350);
-                } else {
-                    addObject(new Robber(3, 600, 4, rand), 450, 350);
-                }
-                robberLoc[rand] = true;
-            } else if (robberLoc[1] == true) {
-                int rand = Greenfoot.getRandomNumber(2);
-                if (rand == 1) {
+                if (robberLoc[1] == true) {
                     addObject(new Robber(3, 600, 4, 2), 450, 350);
                     robberLoc[2] = true;
+                } else if (robberLoc[2] == true) {
+                    addObject(new Robber(3, 600, 4, 1), 200, 350);
+                    robberLoc[1] = true;
                 } else {
+                    int rand = Greenfoot.getRandomNumber(2)+1;
+                    if (rand == 1) {
+                        addObject(new Robber(3, 600, 4, rand), 200, 350);
+                    } else {
+                        addObject(new Robber(3, 600, 4, rand), 450, 350);
+                    }
+                    robberLoc[rand] = true;
+                }
+            } else if (robberLoc[1] == true) {
+                if (robberLoc[0] == true) {
+                    addObject(new Robber(3, 600, 4, 2), 450, 350);
+                    robberLoc[2] = true;
+                } else if (robberLoc[2] == true) {
                     addObject(new Robber(3, 600, 4, 0), 330, 500);
                     robberLoc[0] = true;
+                } else {
+                    int rand = Greenfoot.getRandomNumber(2);
+                    if (rand == 1) {
+                        addObject(new Robber(3, 600, 4, 2), 450, 350);
+                        robberLoc[2] = true;
+                    } else {
+                        addObject(new Robber(3, 600, 4, 0), 330, 500);
+                        robberLoc[0] = true;
+                    }
+                }
+            } else if (robberLoc[2] == true) {
+                if (robberLoc[0] == true) {
+                    addObject(new Robber(3, 600, 4, 1), 200, 350);
+                    robberLoc[1] = true;
+                } else if (robberLoc[1] == true) {
+                    addObject(new Robber(3, 600, 4, 0), 330, 500);
+                    robberLoc[0] = true;
+                } else {
+                    int rand = Greenfoot.getRandomNumber(2);
+                    if (rand == 1) {
+                        addObject(new Robber(3, 600, 4, rand), 200, 350);
+                    } else {
+                        addObject(new Robber(3, 600, 4, rand), 330, 500);
+                    }
+                    robberLoc[rand] = true;
                 }
             } else {
-                int rand = Greenfoot.getRandomNumber(2);
-                if (rand == 1) {
-                    addObject(new Robber(3, 600, 4, rand), 200, 350);
-                    robberLoc[rand] = true;
-                } else {
+                int rand = Greenfoot.getRandomNumber(3);
+                if (rand == 0) {
                     addObject(new Robber(3, 600, 4, rand), 330, 500);
-                    robberLoc[rand] = true;
+                } else if (rand == 1) {
+                    addObject(new Robber(3, 600, 4, rand), 200, 350);
+                } else {
+                    addObject(new Robber(3, 600, 4, rand), 400, 350);
                 }
+                robberLoc[rand] = true;
             }
         }
     }

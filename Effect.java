@@ -4,7 +4,7 @@ import java.util.List;
 
  * Write a description of class Effects here.
  * 
- * @author (your name) 
+ * @author David
  * @version (a version number or a date)
  */
 public abstract class Effect extends Actor
