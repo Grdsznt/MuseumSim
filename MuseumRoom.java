@@ -29,7 +29,7 @@ public class MuseumRoom extends Room
     private Obstacle wallSegLeft = new Obstacle(125, 64);
     private Obstacle wallSegRight = new Obstacle(125, 64);
     private Obstacle leftBound = new Obstacle(40, 223);
-    private Obstacle rightBound = new Obstacle(10, 223);
+    private Obstacle rightBound = new Obstacle(4, 223);
     private Obstacle lowerBound = new Obstacle(663, 7);
     
     private List<Pair> robberSpawns;
@@ -134,9 +134,6 @@ public class MuseumRoom extends Room
         
         // need to spawn robber in specific locations
         
-        // Valuable v = new Valuable(200.50);
-        // addObject(v, 92, 119);
-        
         this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.spawnRate = spawnRate;
         
         robberSpawns = new ArrayList<Pair>(3);
@@ -176,8 +173,8 @@ public class MuseumRoom extends Room
         actCount = 1;
         // Valuable v2 = new Valuable(0);
         // addObject(v2, 650, 675);
-        Visitor v = new Visitor(1600, 3);
-        addObject(v, 0, 670);
+        Visitor v = new Visitor(3200, 1);
+        addObject(v, 20, 670);
         
         //Add the statistics at the top of the world
         int xPos = 780;
@@ -212,6 +209,7 @@ public class MuseumRoom extends Room
                 break;
             }
         }
+        setPaintOrder(Statistic.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     
     //Over all profit Income grow 
@@ -221,30 +219,39 @@ public class MuseumRoom extends Room
     
     public void act() {
         actCount++;
-        if(actCount % 1200 == 0) {
+        if(actCount % 1600 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
             //Valuable v = new Valuable(200.50);
             //addObject(v, 92, 119);
         }
         if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
-            if (robberSpawns.size() == 0) {
-                robberSpawns.add(new Pair(330, 500));
-                robberSpawns.add(new Pair(200, 350));
-                robberSpawns.add(new Pair(450, 350));
-            }
-            Collections.shuffle(robberSpawns);
-            Pair p = robberSpawns.remove(0);
-            if (p.x == 330 && p.y == 500) {
-                addObject(new Robber(3, 600, 4, 0), p.x, p.y);
-                robberLoc[0] = true;
-            }
-            else if (p.x == 200 && p.y == 350) {
-                addObject(new Robber(3, 600, 4, 2), p.x, p.y);
-                robberLoc[1] = true;
-            } else  {
-                addObject(new Robber(3, 600, 4, 1), p.x, p.y);
-                robberLoc[2] = true;
+            if (robberLoc[0] == true) {
+                int rand = Greenfoot.getRandomNumber(2)+1;
+                if (rand == 1) {
+                    addObject(new Robber(3, 600, 4, rand), 200, 350);
+                } else {
+                    addObject(new Robber(3, 600, 4, rand), 450, 350);
+                }
+                robberLoc[rand] = true;
+            } else if (robberLoc[1] == true) {
+                int rand = Greenfoot.getRandomNumber(2);
+                if (rand == 1) {
+                    addObject(new Robber(3, 600, 4, 2), 450, 350);
+                    robberLoc[2] = true;
+                } else {
+                    addObject(new Robber(3, 600, 4, 0), 330, 500);
+                    robberLoc[0] = true;
+                }
+            } else {
+                int rand = Greenfoot.getRandomNumber(2);
+                if (rand == 1) {
+                    addObject(new Robber(3, 600, 4, rand), 200, 350);
+                    robberLoc[rand] = true;
+                } else {
+                    addObject(new Robber(3, 600, 4, rand), 330, 500);
+                    robberLoc[rand] = true;
+                }
             }
         }
     }
@@ -296,10 +303,17 @@ public class MuseumRoom extends Room
         } else {
             return 2;
         }
-
     }
     
     public static void increaseDayCount() {
         dayCount++;
+    }
+    
+    public void started() {
+        StartWorld.music.pause();
+    }
+    
+    public void paused() {
+        StartWorld.music.pause();
     }
 }

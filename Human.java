@@ -28,12 +28,12 @@ public class Human extends SuperSmoothMover
         }
         
         
-        /*public boolean equals(Object obj) { 
+        public boolean equals(Object obj) { 
             if (this == obj) return true;
             if (obj == null || getClass() != obj.getClass()) return false;
             Pair pair = (Pair) obj;
             return x == pair.x && y == pair.y;
-        }*/
+        }
         
         @Override
         public int hashCode() {
@@ -74,15 +74,15 @@ public class Human extends SuperSmoothMover
      * From a source to a destination, then return the directions to move
      * using a tile system
      *
-     * @param srcr    Source row number
-     * @param srcc    Sourc column number
-     * @param destr    Destination row number
-     * @param destc    Destination column number
+     * @param srcx    Source row number
+     * @param srcy    Sourc column number
+     * @param destx    Destination row number
+     * @param desty    Destination column number
      * @return List<Pair>   List of (r, c) coordinates to be able to move the character
     */
-    public List<Pair> bfs(int srcx, int srcy, int destx, int desty) {
+    public ArrayList<Pair> bfs(int srcx, int srcy, int destx, int desty) {
         Map<Pair, Pair> par = new HashMap<>();
-        List<Pair> path = new ArrayList<>();
+        ArrayList<Pair> path = new ArrayList<>();
         Queue<Pair> q = new LinkedList<>();
         q.add(new Pair(srcx, srcy));
         vis[srcy][srcx] = true;
@@ -105,7 +105,6 @@ public class Human extends SuperSmoothMover
                 int nx = x+mx[k], ny = y+my[k];
                 if (nx >= 1 && nx < C && ny < R && ny >= 1 && !vis[ny][nx]) {
                     setLocation(nx*20, ny*20);
-                    
                     if (this instanceof Robber) {
                         if (!getIntersectingObjects(Obstacle.class).isEmpty() || !getIntersectingObjects(Guard.class).isEmpty()) setLocation(srcx*20, srcy*20);
                         else {

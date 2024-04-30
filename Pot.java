@@ -10,7 +10,7 @@ public class Pot extends Valuable
 {
     public Pot(){
         //Set the image, and set the price to $100
-        super(new GreenfootImage("PinkPot.png"), 100);
+        super(new GreenfootImage("PinkPot.png"), 500);
     }
     
     public void act(){
