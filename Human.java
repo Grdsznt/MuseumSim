@@ -6,7 +6,7 @@ import java.util.*;
  * @author Jean, Edwin Dong
  * @version Apr 10 2024
  */
-public class Human extends SuperSmoothMover
+public abstract class Human extends SuperSmoothMover
 {
     
     private int R = 41,C = 31;
