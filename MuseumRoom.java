@@ -253,9 +253,9 @@ public class MuseumRoom extends Room
         if(actCount % 1600 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
-            //Valuable v = new Valuable(200.50);
-            //addObject(v, 92, 119);
         }
+        
+        // Randomly spawn robber if 2 stations are vacant, spawn robber at specific location if only 1 station is vacant
         if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
                 if (robberLoc[1] == true) {
@@ -353,6 +353,27 @@ public class MuseumRoom extends Room
             //addObject(v, 92, 119);
         }
         actNum++;
+    }
+    
+    /**
+     * Get the current value of money.
+     */
+    public int getMoney(){
+        return money;
+    }
+    
+    /**
+     * Get the current number of valuables stolen.
+     */
+    public int getValuables(){
+        return valuablesStolenNumber;
+    }
+    
+    /**
+     * Get the new value of robbers catched.
+     */
+    public int getRobbers(){
+        return robbersCatchedNumber;
     }
     
     public void setStation(int stationNumber, boolean b) {
