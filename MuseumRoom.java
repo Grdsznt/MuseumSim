@@ -355,6 +355,27 @@ public class MuseumRoom extends Room
         actNum++;
     }
     
+    /**
+     * Get the current value of money.
+     */
+    public int getMoney(){
+        return money;
+    }
+    
+    /**
+     * Get the current number of valuables stolen.
+     */
+    public int getValuables(){
+        return valuablesStolenNumber;
+    }
+    
+    /**
+     * Get the new value of robbers catched.
+     */
+    public int getRobbers(){
+        return robbersCatchedNumber;
+    }
+    
     public void setStation(int stationNumber, boolean b) {
         robberLoc[stationNumber] = b;
     }
