@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class SettingsButton here.
  * 
- * @author (your name) 
+ * @author Jerry
  * @version (a version number or a date)
  */
 public class SettingsButton extends Button
@@ -20,42 +20,7 @@ public class SettingsButton extends Button
     
     public void act()
     {
-        if (Greenfoot.mouseMoved(this)) {
-            hover = true;
-            if (imageStates.length > 1) {
-                setImage(imageStates[1]);
-            }
-        } else if (Greenfoot.mouseMoved(null)) {
-            hover = false;
-            mouseDown = false;
-            
-            if (imageStates.length > 2) {
-                setImage(imageStates[0]);
-            }
-        }
-        
-        if (Greenfoot.mousePressed(this) && !mouseDown) {
-            mouseDown = true;
-            if (imageStates.length > 2) {
-                setImage(imageStates[2]);
-            }
-        }
-                                                                                                                                                                                                                                                                       
-        if (Greenfoot.mouseClicked(this) && mouseDown) {
-            playClickSound();
-            action();
-            mouseDown = false;
-            if (imageStates.length > 2) {
-                setImage(imageStates[1]);
-            }
-
-        } else if (Greenfoot.mouseClicked(null)) {
-            mouseDown = false;
-            if (imageStates.length > 2) {
-                setImage(imageStates[0]);
-            }
-
-        }
+        super.act();
     }
     
     public void action() {

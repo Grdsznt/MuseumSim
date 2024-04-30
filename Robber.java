@@ -4,7 +4,7 @@ import java.lang.Math;
 /**
  * Write a description of class Robber here.
  * 
- * @author Edwin, Nick, Jean
+ * @author Edwin, Nick, Jean, Jerry
  * @version (a version number or a date)
  */
 
@@ -184,18 +184,22 @@ public class Robber extends Human
 
         //get all the valuables in range
         valuables = (ArrayList<Valuable>)getObjectsInRange(targetRadius+1,Valuable.class);
-        
-        
+
         if(valuables.size() > 0){
-            //get a random valuable in range and set it as a target
+            // Create an ArrayList to store valid targets that are not stolen
+            ArrayList<Valuable> validTargets = new ArrayList<>();
             for (Valuable v: valuables) {
-                targetValuable = valuables.get(Greenfoot.getRandomNumber(valuables.size()));
-                if (!targetValuable.isStolen()) break;
+                if(!v.isStolen()) {
+                    validTargets.add(v);
+                }
+            }
+            
+            // Select a random valid target if available
+            if (!validTargets.isEmpty()) {
+                targetValuable = validTargets.get(Greenfoot.getRandomNumber(validTargets.size()));
+                targetValuable.setStolen(true);
             }
         }        
-        
-        if (targetValuable != null && targetValuable.isStolen()) targetValuable = null;
-        else if (targetValuable != null) targetValuable.setStolen(true);
     }
 
     public void setDirection(int D){
@@ -207,7 +211,7 @@ public class Robber extends Human
         return direction;
     }
     public boolean robbedSomething(){
-        return hasStolen;
+        return targetValuable != null && targetValuable.isStolen();
     }
     public void setIdleImage(){
         if(direction == 1)

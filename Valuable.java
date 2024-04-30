@@ -3,32 +3,30 @@ import java.lang.Math;
 /**
  * Write a description of class Valuable here.
  * 
- * @author (your name) 
+ * @author (your name), Jean 
  * @version (a version number or a date)
  */
 public class Valuable extends Actor
 {
-    /**
-     * Act - do whatever the Valuable wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-
+    private GreenfootImage image;
     private double price;
     private boolean isStolen;
+    
     /**
      * A simple constructor that sets Right the stolen state and the price of a valuable
      * 
      * @param price   The price of this valuable
      */
-    public Valuable(double price){
+    public Valuable(GreenfootImage image, double price){
+        this.image = image;
         this.price = price;
         isStolen = false;
-        setImage("plant.gif");
+        
+        setImage(image);
     }
 
     public void act()
     {
-        // Add your action code here.
         
     }
 

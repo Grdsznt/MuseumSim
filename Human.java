@@ -6,7 +6,7 @@ import java.util.*;
  * @author Jean, Edwin Dong
  * @version Apr 10 2024
  */
-public class Human extends SuperSmoothMover
+public abstract class Human extends SuperSmoothMover
 {
     
     private int R = 41,C = 31;
@@ -26,7 +26,6 @@ public class Human extends SuperSmoothMover
         public Pair(int x, int y) {
             this.x = x; this.y = y;
         }
-        
         
         public boolean equals(Object obj) { 
             if (this == obj) return true;
