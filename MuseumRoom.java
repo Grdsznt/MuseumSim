@@ -111,9 +111,6 @@ public class MuseumRoom extends Room
         
         // need to spawn robber in specific locations
         
-        // Valuable v = new Valuable(200.50);
-        // addObject(v, 92, 119);
-        
         this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.spawnRate = spawnRate;
         
         robberSpawns = new ArrayList<Pair>(3);
