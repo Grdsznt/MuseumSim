@@ -52,8 +52,10 @@ public class OptionButton extends Button
             //Add the text label
             world.addObject(textLabel, this.getX(), this.getY());
             //Add the plus & minus buttons beside the text label
+            /*
             world.addObject(new PlusButton(this), this.getX()+width/2+20, this.getY());
             world.addObject(new MinusButton(this), this.getX()-width/2-20, this.getY());
+            */
         }
     }
     

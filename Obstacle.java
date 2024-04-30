@@ -14,7 +14,7 @@ public class Obstacle extends Actor
         // GreenfootImage img = new GreenfootImage(width, height);
         // img.setColor(new Color(0, 0, 0, 255));
         // img.fill();
-        // this.setImage(img);
+        // this.setImage(img); // test and see where bounding box is
     }
     /**
      * Act - do whatever the Object wants to do. This method is called whenever

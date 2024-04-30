@@ -4,7 +4,7 @@ import java.lang.Math;
 /**
  * Write a description of class Robber here.
  * 
- * @author Edwin, Nick, Jean
+ * @author Edwin, Nick, Jean, Jerry
  * @version (a version number or a date)
  */
 
@@ -62,51 +62,6 @@ public class Robber extends Human
 
     public void act()
     {
-        //testing animation
-        // if (Greenfoot.isKeyDown("up")) {
-            // int curX = getX(), curY = getY();
-            // setLocation(curX, curY - speed); // Move up
-            // if (!detectedObstacles()) {
-                // direction = 2;
-                // isMoving = true;
-            // } else {
-                // setLocation(curX, curY); // Move back if detected obstacle
-            // }
-        // }
-        // else if (Greenfoot.isKeyDown("down")) {
-            // int curX = getX(), curY = getY();
-            // setLocation(curX, curY + speed); // Move down
-            // if (!detectedObstacles()) {
-                // direction = 4;
-                // isMoving = true;
-            // } else {
-                // setLocation(curX, curY); // Move back if detected obstacle
-            // }
-        // }
-        // else if (Greenfoot.isKeyDown("left")) {
-            // int curX = getX(), curY = getY();
-            // setLocation(curX-speed, curY); // Move left
-            // if (!detectedObstacles()) {
-                // direction = 3;
-                // isMoving = true;
-            // } else {
-                // setLocation(curX, curY); // Move back if detected obstacle
-            // }
-        // }
-        // else if (Greenfoot.isKeyDown("right")) {
-            // int curX = getX(), curY = getY();
-            // setLocation(curX+speed, curY); // Move right
-            // if (!detectedObstacles()) {
-                // direction = 1;
-                // isMoving = true;
-            // } else {
-                // setLocation(curX, curY); // Move back if detected obstacle
-            // }
-        // }
-        // else{
-            // isMoving = false;
-        // }
-        
         if (initial) {
             centerX = getX(); centerY = getY();
             initial = false; 
@@ -162,21 +117,6 @@ public class Robber extends Human
         actNum++;
     }
     
-    // private void moveTowardsTarget() {
-        // if (Math.hypot(target.x - getX(), target.y - getY()) > speed) {
-            // double angle = Math.atan2(target.y - getY(), target.x - getX());
-            // double x = getX() + speed * Math.cos(angle);
-            // double y = getY() + speed * Math.sin(angle);
-            
-            // setLocation((int) x, (int) y);
-            
-            // isMoving = true;
-        // } else {
-            // setLocation(target.x, target.y); // Snap to the target if very close
-            // isMoving = false;
-            // target = null;
-        // }
-    // }
     
     private void moveTowardsTarget() {
         int currentX = getX();
@@ -244,7 +184,7 @@ public class Robber extends Human
 
         //get all the valuables in range
         valuables = (ArrayList<Valuable>)getObjectsInRange(targetRadius+1,Valuable.class);
-
+                
         if(valuables.size() > 0){
             //get a random valuable in range and set it as a target
             for (Valuable v: valuables) {
@@ -266,7 +206,7 @@ public class Robber extends Human
         return direction;
     }
     public boolean robbedSomething(){
-        return hasStolen;
+        return targetValuable != null && targetValuable.isStolen();
     }
     public void setIdleImage(){
         if(direction == 1)
@@ -277,6 +217,10 @@ public class Robber extends Human
             setImage(framesLeft[0]);
         if(direction == 4)
             setImage(framesDown[0]);
+    }
+    
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
     
     
@@ -330,8 +274,6 @@ public class Robber extends Human
         int dx = Math.abs((curTile.x*20) - getX());
         int dy = Math.abs((curTile.y*20) - getY());
         
-        // System.out.println(curTile.x + " " + curTile.y);
-     
         isMoving = true;
         // If there is a gap, then adjust the x direction
         if (dx != 0) { 
@@ -400,5 +342,9 @@ public class Robber extends Human
     
     public Valuable getCurValuable() {
         return targetValuable;
+    }
+    
+    public int getStation() {
+        return station;
     }
 }
