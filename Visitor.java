@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Write a description of class Visitor here.
  * 
- * @author (your name) 
+ * @author Edwin, Felix
  * @version (a version number or a date)
  */
 public class Visitor extends Human

@@ -62,51 +62,6 @@ public class Robber extends Human
 
     public void act()
     {
-        //testing animation
-        // if (Greenfoot.isKeyDown("up")) {
-            // int curX = getX(), curY = getY();
-            // setLocation(curX, curY - speed); // Move up
-            // if (!detectedObstacles()) {
-                // direction = 2;
-                // isMoving = true;
-            // } else {
-                // setLocation(curX, curY); // Move back if detected obstacle
-            // }
-        // }
-        // else if (Greenfoot.isKeyDown("down")) {
-            // int curX = getX(), curY = getY();
-            // setLocation(curX, curY + speed); // Move down
-            // if (!detectedObstacles()) {
-                // direction = 4;
-                // isMoving = true;
-            // } else {
-                // setLocation(curX, curY); // Move back if detected obstacle
-            // }
-        // }
-        // else if (Greenfoot.isKeyDown("left")) {
-            // int curX = getX(), curY = getY();
-            // setLocation(curX-speed, curY); // Move left
-            // if (!detectedObstacles()) {
-                // direction = 3;
-                // isMoving = true;
-            // } else {
-                // setLocation(curX, curY); // Move back if detected obstacle
-            // }
-        // }
-        // else if (Greenfoot.isKeyDown("right")) {
-            // int curX = getX(), curY = getY();
-            // setLocation(curX+speed, curY); // Move right
-            // if (!detectedObstacles()) {
-                // direction = 1;
-                // isMoving = true;
-            // } else {
-                // setLocation(curX, curY); // Move back if detected obstacle
-            // }
-        // }
-        // else{
-            // isMoving = false;
-        // }
-        
         if (initial) {
             centerX = getX(); centerY = getY();
             initial = false; 
@@ -262,6 +217,10 @@ public class Robber extends Human
             setImage(framesLeft[0]);
         if(direction == 4)
             setImage(framesDown[0]);
+    }
+    
+    public void setSpeed(int speed) {
+        this.speed = speed;
     }
     
     
