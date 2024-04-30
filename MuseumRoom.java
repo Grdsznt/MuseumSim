@@ -38,6 +38,8 @@ public class MuseumRoom extends Room
     private int robbers, guards, valuables, spawnRate;
     private int actCount;
     
+    private static DayCounter dayCounter;
+    
     //Variables
     private int money = 0;
     private int valuablesStolenNumber = 0;
@@ -56,7 +58,6 @@ public class MuseumRoom extends Room
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
     
-    private static int dayCount;
     
     public class Pair {
         int x, y;
@@ -162,7 +163,8 @@ public class MuseumRoom extends Room
         addObject(valuablesStolen, xPos, 200);
         addObject(robbersCatched, xPos, 300);
         
-        dayCount = 0;
+        dayCounter = new DayCounter();
+        addObject(dayCounter, 830, 50);
         setPaintOrder(Statistic.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     
@@ -262,7 +264,7 @@ public class MuseumRoom extends Room
     }
     
     public static void increaseDayCount() {
-        dayCount++;
+        dayCounter.incrementDayCount();
     }
     
     public void started() {
