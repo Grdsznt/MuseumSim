@@ -62,7 +62,7 @@ public class MuseumRoom extends Room
     //Stores the possible locations of valuables
     private static int[][] valuableLocation = new int[6][2];
     //Stores the boolean for each valuable
-    private static boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, AntiquePotTall, AntiquePotShort} x 2
+    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, AntiquePotTall, AntiquePotShort} x 2
     
     public class Pair {
         int x, y;
@@ -197,14 +197,22 @@ public class MuseumRoom extends Room
             }
             
             //For this location, find a valuable to be spawned
-            for(int j=0; j<valuableInWorld.length; j++){
-                //Do not spawn if the object is already in world
-                if(valuableInWorld[j]==true){
+            boolean hasFalse = false;
+            for(boolean value : valuableInWorld) {
+                if(!value) {
+                    hasFalse = true;
+                    break;
+                }
+            }
+            while(hasFalse){
+                //If something is false in the array, still ramdomly get number
+                int random = Greenfoot.getRandomNumber(valuableInWorld.length);
+                if(valuableInWorld[random]==true){
                     continue;
                 }
-                //Get the valuable
+                //If this object at this index 'random' is not currently in world, then get the valuable coresponding to this index
                 Valuable valuable;
-                switch(j){
+                switch(random){
                     case 0: {
                         valuable = new Pot();
                         break;
@@ -225,11 +233,13 @@ public class MuseumRoom extends Room
                 
                 //Spawn the valuable at x & y
                 addObject(valuable, x, y);
-                valuableInWorld[j] = true;
+                valuableInWorld[random] = true;
                 //Go to the next location
                 break;
             }
         }
+        
+        
         setPaintOrder(Statistic.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     
