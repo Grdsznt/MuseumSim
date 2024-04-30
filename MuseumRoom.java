@@ -59,6 +59,11 @@ public class MuseumRoom extends Room
     private int robIndx = 0;
     
     
+    //Stores the possible locations of valuables
+    private static int[][] valuableLocation = new int[6][2];
+    //Stores the boolean for each valuable
+    private static boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot} x 6
+    
     public class Pair {
         int x, y;
         public Pair(int x, int y) {
@@ -75,16 +80,34 @@ public class MuseumRoom extends Room
         setBackground(worldImage);
         
         addObject(displayTable1, 327, 699);
+        //Add the location to the 2D array
+        valuableLocation[0][0] = 331;
+        valuableLocation[0][1] = 696;
         
         addObject(displayTable2, 181, 512);
+        //Add the location to the 2D array
+        valuableLocation[1][0] = 184;
+        valuableLocation[1][1] = 491;
         
         addObject(brokenGlassBox, 327, 213);
+        //Add the location to the 2D array
+        valuableLocation[2][0] = 331;
+        valuableLocation[2][1] = 166;
         
         addObject(littleGlassBox, 92, 119);
+        //Add the location to the 2D array
+        valuableLocation[3][0] = 94;
+        valuableLocation[3][1] = 100;
         
         addObject(largeWoodBox, 329, 374);
+        //Add the location to the 2D array
+        valuableLocation[4][0] = 334;
+        valuableLocation[4][1] = 360;
         
         addObject(mediumGlassBox, 464, 514);
+        //Add the location to the 2D array
+        valuableLocation[5][0] = 466;
+        valuableLocation[5][1] = 500;
         
         addObject(statue1, 115, 380);
         
@@ -111,9 +134,6 @@ public class MuseumRoom extends Room
         addObject(lowerBound, 330, 850);
         
         // need to spawn robber in specific locations
-        
-        // Valuable v = new Valuable(200.50);
-        // addObject(v, 92, 119);
         
         this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.spawnRate = spawnRate;
         
@@ -165,6 +185,33 @@ public class MuseumRoom extends Room
         
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
+        dayCount = 0;
+        
+        
+        
+        //Randomly spawn different valuables at different locations
+        for(int i=0; i<valuableLocation.length; i++){
+            int x = valuableLocation[i][0];
+            int y = valuableLocation[i][1];
+            //If something is there, do not spawn any
+            if(getObjectsAt(x, y, Valuable.class).size()!=0){
+                continue;
+            }
+            
+            //For this location, find a valuable to be spawned
+            for(int j=0; j<valuableInWorld.length; j++){
+                //Do not spawn if the object is already in world
+                if(valuableInWorld[j]==true){
+                    continue;
+                }
+                //Spawn the valuable at x & y
+                //Currently, pot is the only valuable
+                addObject(new Pot(), x, y);
+                valuableInWorld[j] = true;
+                //Go to the next location
+                break;
+            }
+        }
         setPaintOrder(Statistic.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     
@@ -178,10 +225,8 @@ public class MuseumRoom extends Room
         if(actCount % 1600 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
-        }
-        if (actCount % 1200 == 0) {
-            Valuable v = new Valuable(200.50);
-            addObject(v, 92, 119);
+            //Valuable v = new Valuable(200.50);
+            //addObject(v, 92, 119);
         }
         if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
@@ -243,8 +288,8 @@ public class MuseumRoom extends Room
         robbersCatchedNumber += change;
         robbersCatched.updateValue(robbersCatchedNumber);
         if (actNum % 1600 == 0) {
-            Valuable v = new Valuable(200.50);
-            addObject(v, 92, 119);
+            //Valuable v = new Valuable(200.50);
+            //addObject(v, 92, 119);
         }
         actNum++;
     }

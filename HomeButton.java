@@ -38,5 +38,13 @@ public class HomeButton extends Button
         Greenfoot.setWorld(temp);
         StartWorld.music.playLoop(); //Music doesn't resume when switching to new StartWorld
     }
-    
+    /**
+     * follows an actor
+     * @param a actor to follow
+     * @param offsetX x coord if want to follows at an offset
+     * @param offsetY y coord if want to follows at an offset
+     */
+    public void followActor(Actor a, int offsetX, int offsetY){
+        setLocation(a.getX() + offsetX, a.getY() + offsetY);
+    }
 }

@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class SetUpWorld here.
+ * A setting screen for the user to adjust some values.
  * 
  * @author Jerry, Jean Pan
- * @version (a version number or a date)
+ * @version Apr 2024
  */
 public class SetUpWorld extends World
 {
@@ -20,6 +20,8 @@ public class SetUpWorld extends World
     private OptionButton valuableButton;
     //Set the button for spawn rate of robber
     private OptionButton spawnRateRobberButton;
+    //Set the button for spawn rate of visitor
+    private OptionButton spawnRateVisitorButton;
     
     /**
      * Constructor for objects of class SetUpWorld.
@@ -51,12 +53,15 @@ public class SetUpWorld extends World
         valuableButton = new OptionButton("Number of Valuables in World: ", 2, 7);
         //Set the button for spawn rate of robber
         spawnRateRobberButton = new OptionButton("Spawn Rate of Robbers per 10s: ", 1, 5);
+        //Set the button for spawn rate of visitor
+        spawnRateVisitorButton = new OptionButton("Spawn Rate of Visitors per 10s: ", 3, 10);
         
         //Add these buttons onto the world
-        addObject(guardButton, getWidth()/2, getHeight()/9*3);
-        addObject(robberButton, getWidth()/2, getHeight()/9*4);
-        addObject(valuableButton, getWidth()/2, getHeight()/9*5);
-        addObject(spawnRateRobberButton, getWidth()/2, getHeight()/9*6);
+        addObject(guardButton, getWidth()/2, getHeight()/10*3);
+        addObject(robberButton, getWidth()/2, getHeight()/10*4);
+        addObject(valuableButton, getWidth()/2, getHeight()/10*5);
+        addObject(spawnRateRobberButton, getWidth()/2, getHeight()/10*6);
+        addObject(spawnRateVisitorButton, getWidth()/2, getHeight()/10*7);
     }
     
     /**
