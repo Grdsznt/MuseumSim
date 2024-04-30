@@ -185,7 +185,6 @@ public class MuseumRoom extends Room
         
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
-        dayCount = 0;
         
         
         
