@@ -3,13 +3,16 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Art here.
  * 
- * @author (your name) 
+ * @author Felix, Jerry
  * @version (a version number or a date)
  */
-public abstract class Art extends Actor
+public abstract class Art extends Valuable
 {
     protected  Visitor[] visitors;
     private boolean isNew = false;
+    protected String spawnerType;
+    protected GreenfootImage image;
+    protected double price;
     protected int actNumber;
     protected boolean willVibrate;
     protected int defaultX, defaultY;//store orginial x and y values, used for vibration
@@ -18,8 +21,11 @@ public abstract class Art extends Actor
      * Act - do whatever the Art wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Art(String ART_IMAGE){
-        setImage(ART_IMAGE);
+    public Art(GreenfootImage ART_IMAGE, double price){
+        super(ART_IMAGE, price);
+        image = ART_IMAGE;
+        this.price = price;
+        this.spawnerType = spawnerType;
     }
     
     public void addedToWorld(World w){
@@ -51,5 +57,4 @@ public abstract class Art extends Actor
     public void stopVibrating(){
         willVibrate = false;
     }
-    
 }

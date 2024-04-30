@@ -56,6 +56,6 @@ public class StartButton extends Button
     public void action() {
         StartWorld sw = (StartWorld) getWorld();
         Greenfoot.setWorld(new MuseumRoom(sw.getSetUp().getNumberOfRobbers(), sw.getSetUp().getNumberOfGuards(), sw.getSetUp().getNumberOfValuables(), sw.getSetUp().getSpawnRate()));
-        StartWorld.music.playLoop();
+        StartWorld.music.pause();
     }
 }

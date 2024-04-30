@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * Write a description of class SetUpWorld here.
+ * A setting screen for the user to adjust some values.
  * 
- * @author Jerry, Jean Pan
- * @version (a version number or a date)
+ * @author Jerry, Jean Pan, Edwin
+ * @version Apr 2024
  */
 public class SetUpWorld extends World
 {
@@ -18,8 +18,11 @@ public class SetUpWorld extends World
     private OptionButton guardButton;
     private OptionButton robberButton;
     private OptionButton valuableButton;
+    private Slider guardSlider;
     //Set the button for spawn rate of robber
     private OptionButton spawnRateRobberButton;
+    //Set the button for spawn rate of visitor
+    private OptionButton spawnRateVisitorButton;
     
     /**
      * Constructor for objects of class SetUpWorld.
@@ -29,15 +32,6 @@ public class SetUpWorld extends World
     {    
         // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
         super(1000, 800, 1);
-        
-        String[] tempTextGuards = {"Number Of Guards"};
-        SuperTextBox editNumOfGuards = new SuperTextBox(tempTextGuards, Color.BLACK, Color.WHITE, boringFont, true, 300, 3, Color.YELLOW);
-        
-        editNumOfGuards.update();
-        int tempY = getHeight() - editNumOfGuards.getImage().getHeight()/2;
-        int tempX = editNumOfGuards.getImage().getWidth()/2;
-        addObject(editNumOfGuards, tempX, tempY);
-        
         homeButton = new HomeButton("home", 3, sw);
         homeButton.setScale(130, 75);
         addObject(homeButton, 75, 50);
@@ -47,16 +41,22 @@ public class SetUpWorld extends World
         
         //Set the buttons for guards, robbers, and valuables
         guardButton = new OptionButton("Number of Guards in World: ", 1, 3);
+        guardSlider = new Slider(125, 500, 1, 3, true);
+        addObject(guardSlider, getWidth()/2, getHeight()/10*3);
         robberButton = new OptionButton("Number of Robbers in World: ", 1, 3);
         valuableButton = new OptionButton("Number of Valuables in World: ", 2, 7);
         //Set the button for spawn rate of robber
         spawnRateRobberButton = new OptionButton("Spawn Rate of Robbers per 10s: ", 1, 5);
-        
+        //Set the button for spawn rate of visitor
+        spawnRateVisitorButton = new OptionButton("Spawn Rate of Visitors per 10s: ", 3, 10);
+        /*
         //Add these buttons onto the world
-        addObject(guardButton, getWidth()/2, getHeight()/9*3);
-        addObject(robberButton, getWidth()/2, getHeight()/9*4);
-        addObject(valuableButton, getWidth()/2, getHeight()/9*5);
-        addObject(spawnRateRobberButton, getWidth()/2, getHeight()/9*6);
+        addObject(guardButton, getWidth()/2, getHeight()/10*3);
+        addObject(robberButton, getWidth()/2, getHeight()/10*4);
+        addObject(valuableButton, getWidth()/2, getHeight()/10*5);
+        addObject(spawnRateRobberButton, getWidth()/2, getHeight()/10*6);
+        addObject (spawnRateVisitorButton, getWidth()/2, getHeight()/10*7);
+        */
     }
     
     /**
