@@ -29,7 +29,7 @@ public class MuseumRoom extends Room
     private Obstacle wallSegLeft = new Obstacle(125, 64);
     private Obstacle wallSegRight = new Obstacle(125, 64);
     private Obstacle leftBound = new Obstacle(40, 223);
-    private Obstacle rightBound = new Obstacle(10, 223);
+    private Obstacle rightBound = new Obstacle(4, 223);
     private Obstacle lowerBound = new Obstacle(663, 7);
     
     private List<Pair> robberSpawns;
@@ -37,6 +37,8 @@ public class MuseumRoom extends Room
     
     private int robbers, guards, valuables, spawnRate;
     private int actCount;
+    
+    private static DayCounter dayCounter;
     
     //Variables
     private int money = 0;
@@ -56,7 +58,11 @@ public class MuseumRoom extends Room
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
     
-    private static int dayCount;
+    
+    //Stores the possible locations of valuables
+    private static int[][] valuableLocation = new int[6][2];
+    //Stores the boolean for each valuable
+    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, AntiquePotTall, AntiquePotShort} x 2
     
     public class Pair {
         int x, y;
@@ -74,16 +80,34 @@ public class MuseumRoom extends Room
         setBackground(worldImage);
         
         addObject(displayTable1, 327, 699);
+        //Add the location to the 2D array
+        valuableLocation[0][0] = 331;
+        valuableLocation[0][1] = 670;
         
         addObject(displayTable2, 181, 512);
+        //Add the location to the 2D array
+        valuableLocation[1][0] = 184;
+        valuableLocation[1][1] = 483;
         
         addObject(brokenGlassBox, 327, 213);
+        //Add the location to the 2D array
+        valuableLocation[2][0] = 331;
+        valuableLocation[2][1] = 162;
         
         addObject(littleGlassBox, 92, 119);
+        //Add the location to the 2D array
+        valuableLocation[3][0] = 94;
+        valuableLocation[3][1] = 86;
         
         addObject(largeWoodBox, 329, 374);
+        //Add the location to the 2D array
+        valuableLocation[4][0] = 331;
+        valuableLocation[4][1] = 346;
         
         addObject(mediumGlassBox, 464, 514);
+        //Add the location to the 2D array
+        valuableLocation[5][0] = 466;
+        valuableLocation[5][1] = 486;
         
         addObject(statue1, 115, 380);
         
@@ -111,9 +135,6 @@ public class MuseumRoom extends Room
         
         // need to spawn robber in specific locations
         
-        // Valuable v = new Valuable(200.50);
-        // addObject(v, 92, 119);
-        
         this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.spawnRate = spawnRate;
         
         robberSpawns = new ArrayList<Pair>(3);
@@ -132,10 +153,10 @@ public class MuseumRoom extends Room
                 robberLoc[0] = true;
             }
             else if (p.x == 200 && p.y == 350) {
-                addObject(new Robber(3, 600, 4, 2), p.x, p.y);
+                addObject(new Robber(3, 600, 4, 1), p.x, p.y);
                 robberLoc[1] = true;
             } else  {
-                addObject(new Robber(3, 600, 4, 1), p.x, p.y);
+                addObject(new Robber(3, 600, 4, 2), p.x, p.y);
                 robberLoc[2] = true;
             }
         }
@@ -151,10 +172,9 @@ public class MuseumRoom extends Room
             addObject(new Guard(1), p.x, p.y);
         }
         actCount = 1;
-        // Valuable v2 = new Valuable(0);
-        // addObject(v2, 650, 675);
-        Visitor v = new Visitor(1600, 1);
-        addObject(v, 0, 670);
+        
+        Visitor v = new Visitor(3200, 1);
+        addObject(v, 20, 670);
         
         //Add the statistics at the top of the world
         int xPos = 780;
@@ -162,7 +182,64 @@ public class MuseumRoom extends Room
         addObject(valuablesStolen, xPos, 200);
         addObject(robbersCatched, xPos, 300);
         
-        dayCount = 0;
+        dayCounter = new DayCounter();
+        addObject(dayCounter, 830, 50);
+        
+        
+        
+        //Randomly spawn different valuables at different locations
+        for(int i=0; i<valuableLocation.length; i++){
+            int x = valuableLocation[i][0];
+            int y = valuableLocation[i][1];
+            //If something is there, do not spawn any
+            if(getObjectsAt(x, y, Valuable.class).size()!=0){
+                continue;
+            }
+            
+            //For this location, find a valuable to be spawned
+            boolean hasFalse = false;
+            for(boolean value : valuableInWorld) {
+                if(!value) {
+                    hasFalse = true;
+                    break;
+                }
+            }
+            while(hasFalse){
+                //If something is false in the array, still ramdomly get number
+                int random = Greenfoot.getRandomNumber(valuableInWorld.length);
+                if(valuableInWorld[random]==true){
+                    continue;
+                }
+                //If this object at this index 'random' is not currently in world, then get the valuable coresponding to this index
+                Valuable valuable;
+                switch(random){
+                    case 0: {
+                        valuable = new Pot();
+                        break;
+                    }
+                    case 1: {
+                        valuable = new AntiquePotTall();
+                        break;
+                    }
+                    case 2: {
+                        valuable = new AntiquePotShort();
+                        break;
+                    }
+                    default: {
+                        valuable = new Pot();
+                        break;
+                    }
+                }
+                
+                //Spawn the valuable at x & y
+                addObject(valuable, x, y);
+                valuableInWorld[random] = true;
+                //Go to the next location
+                break;
+            }
+        }
+        
+        
         setPaintOrder(Statistic.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     
@@ -176,38 +253,69 @@ public class MuseumRoom extends Room
         if(actCount % 1600 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
-        }
-        if (actCount % 1200 == 0) {
-            Valuable v = new Valuable(200.50);
-            addObject(v, 92, 119);
+            //Valuable v = new Valuable(200.50);
+            //addObject(v, 92, 119);
         }
         if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
-                int rand = Greenfoot.getRandomNumber(2)+1;
-                if (rand == 1) {
-                    addObject(new Robber(3, 600, 4, rand), 200, 350);
-                } else {
-                    addObject(new Robber(3, 600, 4, rand), 450, 350);
-                }
-                robberLoc[rand] = true;
-            } else if (robberLoc[1] == true) {
-                int rand = Greenfoot.getRandomNumber(2);
-                if (rand == 1) {
+                if (robberLoc[1] == true) {
                     addObject(new Robber(3, 600, 4, 2), 450, 350);
                     robberLoc[2] = true;
+                } else if (robberLoc[2] == true) {
+                    addObject(new Robber(3, 600, 4, 1), 200, 350);
+                    robberLoc[1] = true;
                 } else {
+                    int rand = Greenfoot.getRandomNumber(2)+1;
+                    if (rand == 1) {
+                        addObject(new Robber(3, 600, 4, rand), 200, 350);
+                    } else {
+                        addObject(new Robber(3, 600, 4, rand), 450, 350);
+                    }
+                    robberLoc[rand] = true;
+                }
+            } else if (robberLoc[1] == true) {
+                if (robberLoc[0] == true) {
+                    addObject(new Robber(3, 600, 4, 2), 450, 350);
+                    robberLoc[2] = true;
+                } else if (robberLoc[2] == true) {
                     addObject(new Robber(3, 600, 4, 0), 330, 500);
                     robberLoc[0] = true;
+                } else {
+                    int rand = Greenfoot.getRandomNumber(2);
+                    if (rand == 1) {
+                        addObject(new Robber(3, 600, 4, 2), 450, 350);
+                        robberLoc[2] = true;
+                    } else {
+                        addObject(new Robber(3, 600, 4, 0), 330, 500);
+                        robberLoc[0] = true;
+                    }
+                }
+            } else if (robberLoc[2] == true) {
+                if (robberLoc[0] == true) {
+                    addObject(new Robber(3, 600, 4, 1), 200, 350);
+                    robberLoc[1] = true;
+                } else if (robberLoc[1] == true) {
+                    addObject(new Robber(3, 600, 4, 0), 330, 500);
+                    robberLoc[0] = true;
+                } else {
+                    int rand = Greenfoot.getRandomNumber(2);
+                    if (rand == 1) {
+                        addObject(new Robber(3, 600, 4, rand), 200, 350);
+                    } else {
+                        addObject(new Robber(3, 600, 4, rand), 330, 500);
+                    }
+                    robberLoc[rand] = true;
                 }
             } else {
-                int rand = Greenfoot.getRandomNumber(2);
-                if (rand == 1) {
-                    addObject(new Robber(3, 600, 4, rand), 200, 350);
-                    robberLoc[rand] = true;
-                } else {
+                int rand = Greenfoot.getRandomNumber(3);
+                if (rand == 0) {
                     addObject(new Robber(3, 600, 4, rand), 330, 500);
-                    robberLoc[rand] = true;
+                } else if (rand == 1) {
+                    addObject(new Robber(3, 600, 4, rand), 200, 350);
+                } else {
+                    addObject(new Robber(3, 600, 4, rand), 400, 350);
                 }
+                robberLoc[rand] = true;
             }
         }
     }
@@ -241,8 +349,8 @@ public class MuseumRoom extends Room
         robbersCatchedNumber += change;
         robbersCatched.updateValue(robbersCatchedNumber);
         if (actNum % 1600 == 0) {
-            Valuable v = new Valuable(200.50);
-            addObject(v, 92, 119);
+            //Valuable v = new Valuable(200.50);
+            //addObject(v, 92, 119);
         }
         actNum++;
     }
@@ -262,7 +370,7 @@ public class MuseumRoom extends Room
     }
     
     public static void increaseDayCount() {
-        dayCount++;
+        dayCounter.incrementDayCount();
     }
     
     public void started() {

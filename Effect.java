@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
-
+import java.util.List;
 /**
 
  * Write a description of class Effects here.
  * 
- * @author (your name) 
+ * @author David
  * @version (a version number or a date)
  */
 public abstract class Effect extends Actor
@@ -48,6 +48,10 @@ public abstract class Effect extends Actor
             fadeOut(3);
             if (getImage().getTransparency() <= 0) { //stop effect when its over
                 stopEffect(); 
+                List<Robber> robbers = getWorld().getObjects(Robber.class);
+                for (Robber r: robbers) {
+                    r.setSpeed(3); // set speed back
+                }
                 getWorld().removeObject(this);
                 MuseumRoom.increaseDayCount();
             }

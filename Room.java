@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Room here.
  * 
- * @author (your name) 
+ * @author Jerry
  * @version (a version number or a date)
  */
 public abstract class Room extends World

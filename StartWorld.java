@@ -3,17 +3,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * A start image to introduce the game
  * 
- * @author Nick, Jean
+ * @author Nick, Jean, Jerry, Edwin
  * @version (a version number or a date)
  */
 public class StartWorld extends World
-{
-    
-    // private GreenfootImage img = new GreenfootImage("");
-    //private GreenfootImage img = new GreenfootImage("");
-    
-
-    private Button b;
+{    
     private StartButton startGame;
     private SettingsButton settings;
     private Button story;
