@@ -9,11 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class AntiquePotShort extends Valuable
 {
     public AntiquePotShort(){
-        super(new GreenfootImage("GoldPot.png"), 7000);
-    }
-    
-    public void act()
-    {
-        // Add your action code here.
+        //Set the image, and set the price to $7000
+        super(new GreenfootImage("valuableArtPot2.png"), 7000);
     }
 }
