@@ -13,7 +13,8 @@ public class GoodEnd extends EndWorld
      * Constructor for objects of class GoodEnd.
      * 
      */
-    public GoodEnd()
+    public GoodEnd(MuseumRoom room)
     {
+        super(room);
     }
 }
