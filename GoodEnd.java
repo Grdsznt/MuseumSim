@@ -19,7 +19,7 @@ public class GoodEnd extends EndWorld
      */
     public GoodEnd()
     {
-        super(new MuseumRoom(1,1,1,1));
+        super(new MuseumRoom(1,1,1,1,1));
         actNum = 0;
         GreenfootImage image = new GreenfootImage("Robber/genshin.png");
         image.scale(1200,800);
