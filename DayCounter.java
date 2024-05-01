@@ -20,5 +20,4 @@ public class DayCounter extends Actor
     public void incrementDayCount() {
         dayCount++;
     }
-    
 }
