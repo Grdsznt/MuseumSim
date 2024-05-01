@@ -12,7 +12,7 @@ public abstract class Art extends Valuable
     private boolean isNew = false;
     protected String spawnerType;
     protected GreenfootImage image;
-    protected double price;
+    protected int price;
     protected int actNumber;
     protected boolean willVibrate;
     protected int defaultX, defaultY;//store orginial x and y values, used for vibration
@@ -21,7 +21,7 @@ public abstract class Art extends Valuable
      * Act - do whatever the Art wants to do. This method is called whenever
      * the 'Act' or 'Run' button gets pressed in the environment.
      */
-    public Art(GreenfootImage ART_IMAGE, double price){
+    public Art(GreenfootImage ART_IMAGE, int price){
         super(ART_IMAGE, price);
         image = ART_IMAGE;
         this.price = price;

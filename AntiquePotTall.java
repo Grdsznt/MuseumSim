@@ -9,6 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class AntiquePotTall extends Valuable
 {
     public AntiquePotTall(){
-        super(new GreenfootImage("SilverPot.png"), 5000);
+        //Set the image, and set the price to $5000
+        super(new GreenfootImage("valuableArtPot.png"), 5000);
     }
 }

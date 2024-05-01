@@ -62,7 +62,7 @@ public class MuseumRoom extends Room
     //Stores the possible locations of valuables
     private static int[][] valuableLocation = new int[6][2];
     //Stores the boolean for each valuable
-    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, AntiquePotTall, AntiquePotShort} x 2
+    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot}
     
     public class Pair {
         int x, y;
@@ -218,10 +218,18 @@ public class MuseumRoom extends Room
                         break;
                     }
                     case 1: {
-                        valuable = new AntiquePotTall();
+                        valuable = new SilverPot();
                         break;
                     }
                     case 2: {
+                        valuable = new GoldPot();
+                        break;
+                    }
+                    case 3: {
+                        valuable = new AntiquePotTall();
+                        break;
+                    }
+                    case 4: {
                         valuable = new AntiquePotShort();
                         break;
                     }

@@ -314,7 +314,7 @@ public class Robber extends Human
                     MuseumRoom mr = (MuseumRoom) getWorld();
                     station = mr.getStation();
                     mr.setStation(station, true);
-                    mr.setMoney(20);
+                    mr.setMoney(targetValuable.getPrice());
                     mr.setValuables(1);
                     targetValuable = null;// No more targets
                     returning = true;
