@@ -54,6 +54,21 @@ public class MuseumRoom extends Room
     private Statistic robbersCatched = new Statistic(robberImage, robbersCatchedNumber);
     private Statistic museumIncome = new Statistic(moneyImage, income, "$");
     
+    //Images
+    private GreenfootImage potImage = new GreenfootImage("PinkPot.png");
+    private GreenfootImage silverPotImage = new GreenfootImage("SilverPot.png");
+    private GreenfootImage GoldPotImage = new GreenfootImage("GoldPot.png");
+    private GreenfootImage TallPotImage = new GreenfootImage("valuableArtPot.png");
+    private GreenfootImage ShortPotImage = new GreenfootImage("valuableArtPot2.png");
+    //Price List
+    private ValueList potPriceLabel = new ValueList(potImage, "$"+Pot.price);
+    private ValueList silverPotPriceLabel = new ValueList(silverPotImage, "$"+SilverPot.price);
+    private ValueList goldPotPriceLabel = new ValueList(GoldPotImage, "$"+GoldPot.price);
+    private ValueList tallPotPriceLabel = new ValueList(TallPotImage, "$"+AntiquePotTall.price);
+    private ValueList shortPotPriceLabel = new ValueList(ShortPotImage, "$"+AntiquePotShort.price);
+    
+    
+    
     private int actNum = 0;
         
     private boolean robberLoc[] = new boolean[3];
@@ -63,7 +78,7 @@ public class MuseumRoom extends Room
     //Stores the possible locations of valuables
     private static int[][] valuableLocation = new int[6][2];
     //Stores the boolean for each valuable
-    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, AntiquePotTall, AntiquePotShort} x 2
+    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot}
     
     public class Pair {
         int x, y;
@@ -176,11 +191,20 @@ public class MuseumRoom extends Room
         Visitor v = new Visitor(3200, 1);
         addObject(v, 20, 670);
         
-        //Add the statistics at the top of the world
+        //Add the statistics at the top right of the world
         int xPos = 780;
         addObject(moneyEarned, xPos, 100);
         addObject(valuablesStolen, xPos, 200);
         addObject(robbersCatched, xPos, 300);
+        
+        //Add the price list at the bottom right of the world
+        getBackground().drawImage(new GreenfootImage("Current Price", 24, Color.BLACK, Color.WHITE), xPos-5, 450);
+        addObject(potPriceLabel, xPos, 505);
+        addObject(silverPotPriceLabel, xPos, 565);
+        addObject(goldPotPriceLabel, xPos, 625);
+        addObject(tallPotPriceLabel, xPos, 685);
+        addObject(shortPotPriceLabel, xPos, 745);
+        
         
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
@@ -216,10 +240,18 @@ public class MuseumRoom extends Room
                         break;
                     }
                     case 1: {
-                        valuable = new AntiquePotTall();
+                        valuable = new SilverPot();
                         break;
                     }
                     case 2: {
+                        valuable = new GoldPot();
+                        break;
+                    }
+                    case 3: {
+                        valuable = new AntiquePotTall();
+                        break;
+                    }
+                    case 4: {
                         valuable = new AntiquePotShort();
                         break;
                     }
@@ -238,7 +270,7 @@ public class MuseumRoom extends Room
         }
         
         
-        setPaintOrder(Statistic.class, SuperTextBox.class, Nighttime.class, Robber.class);
+        setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     
     //Over all profit Income grow 
@@ -351,6 +383,27 @@ public class MuseumRoom extends Room
             //addObject(v, 92, 119);
         }
         actNum++;
+    }
+    
+    /**
+     * Get the current value of money.
+     */
+    public int getMoney(){
+        return money;
+    }
+    
+    /**
+     * Get the current number of valuables stolen.
+     */
+    public int getValuables(){
+        return valuablesStolenNumber;
+    }
+    
+    /**
+     * Get the new value of robbers catched.
+     */
+    public int getRobbers(){
+        return robbersCatchedNumber;
     }
     
     public void setStation(int stationNumber, boolean b) {
