@@ -209,6 +209,26 @@ public class MuseumRoom extends Room
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
         
+        
+        setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
+    }
+    
+    /**
+     * If a valuable is stolen by the robber and put to the deposit position, it is considered "gone".
+     * If this is the case, clear out the position to spawn the next valuable.
+     * 
+     * @param index     The index indicated which specific Valuable needs to clear out.
+     */
+    public void clearValuablePosition(int index){
+        valuableInWorld[index] = false;
+    }
+    
+    //Over all profit Income grow 
+    public void gainIncome(int newIncome){
+        income = income + newIncome;
+    }
+    
+    public void act() {
         //Randomly spawn different valuables at different locations
         for(int i=0; i<valuableLocation.length; i++){
             int x = valuableLocation[i][0];
@@ -236,27 +256,27 @@ public class MuseumRoom extends Room
                 Valuable valuable;
                 switch(random){
                     case 0: {
-                        valuable = new Pot();
+                        valuable = new Pot(x,y);
                         break;
                     }
                     case 1: {
-                        valuable = new SilverPot();
+                        valuable = new SilverPot(x,y);
                         break;
                     }
                     case 2: {
-                        valuable = new GoldPot();
+                        valuable = new GoldPot(x,y);
                         break;
                     }
                     case 3: {
-                        valuable = new AntiquePotTall();
+                        valuable = new AntiquePotTall(x,y);
                         break;
                     }
                     case 4: {
-                        valuable = new AntiquePotShort();
+                        valuable = new AntiquePotShort(x,y);
                         break;
                     }
                     default: {
-                        valuable = new Pot();
+                        valuable = new Pot(x,y);
                         break;
                     }
                 }
@@ -269,16 +289,6 @@ public class MuseumRoom extends Room
             }
         }
         
-        
-        setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
-    }
-    
-    //Over all profit Income grow 
-    public void gainIncome(int newIncome){
-        income = income + newIncome;
-    }
-    
-    public void act() {
         actCount++;
         if(actCount % 1600 == 0) {
             Nighttime night = new Nighttime();

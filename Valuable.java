@@ -3,31 +3,59 @@ import java.lang.Math;
 /**
  * Write a description of class Valuable here.
  * 
- * @author (your name), Jean 
- * @version (a version number or a date)
+ * @author Jean, (your name)
+ * @version May 2024
  */
-public class Valuable extends Actor
+public abstract class Valuable extends Actor
 {
+    private int actCount;
+    
     private GreenfootImage image;
+    private int indexInList;
     private int price;
     private boolean isStolen;
+    private int x;
+    private int y;
+    private boolean needsReturn;
     
     /**
      * A simple constructor that sets Right the stolen state and the price of a valuable
      * 
-     * @param price   The price of this valuable
+     * @param image     The image of this valuable
+     * @param price     The price of this valuable
+     * @param x         The x position of this valuable
+     * @param y         The y position of this valuable
      */
-    public Valuable(GreenfootImage image, int price){
+    public Valuable(GreenfootImage image, int index, int price, int x, int y){
+        this.actCount = 0;
         this.image = image;
+        this.indexInList = index;
         this.price = price;
+        this.x = x;
+        this.y = y;
         isStolen = false;
+        needsReturn = false;
         
         setImage(image);
     }
 
     public void act()
     {
+        //If it is stolen by the robber and the robber is catched in the middle, go back to its original position.
+        if(isStolen && (getX()!=x || getY()!=y)){
+            isStolen = false;
+            needsReturn = true;
+        }
         
+        //Return to its original position after 2 seconds.
+        if(needsReturn){
+            actCount++;
+            //If 2s is past, put it back.
+            if(actCount==120){
+                setLocation(x,y);
+                actCount = 0;
+            }
+        }
     }
 
     /**
