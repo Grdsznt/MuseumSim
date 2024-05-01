@@ -8,8 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class AntiquePotShort extends Valuable
 {
+    public final static int price = 7000;
+    
     public AntiquePotShort(){
         //Set the image, and set the price to $7000
-        super(new GreenfootImage("valuableArtPot2.png"), 7000);
+        super(new GreenfootImage("valuableArtPot2.png"), price);
     }
 }
