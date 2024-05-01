@@ -67,7 +67,7 @@ public class MuseumRoom extends Room
     private ValueList tallPotPriceLabel = new ValueList(TallPotImage, "$"+AntiquePotTall.price);
     private ValueList shortPotPriceLabel = new ValueList(ShortPotImage, "$"+AntiquePotShort.price);
     
-    
+    private boolean isNight = false;
     
     private int actNum = 0;
         
@@ -278,11 +278,12 @@ public class MuseumRoom extends Room
     
     public void act() {
         actCount++;
+        isNight = (actCount % 1600) < 600;
         if(actCount % 1600 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
         }
-        if (actCount % (600/visitorSpawnRate) == 0) {
+        if (actCount % (600/visitorSpawnRate) == 0 && !isNight) {
             addObject(new Visitor(1000, 1), 20, 670);
         }
         // Randomly spawn robber if 2 stations are vacant, spawn robber at specific location if only 1 station is vacant
