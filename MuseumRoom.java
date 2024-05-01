@@ -52,6 +52,7 @@ public class MuseumRoom extends Room
     private Statistic moneyEarned = new Statistic(moneyImage, money, "$");
     private Statistic valuablesStolen = new Statistic(valuableImage, valuablesStolenNumber);
     private Statistic robbersCatched = new Statistic(robberImage, robbersCatchedNumber);
+    private Statistic museumIncome = new Statistic(moneyImage, income, "$");
     
     private int actNum = 0;
         
@@ -69,7 +70,6 @@ public class MuseumRoom extends Room
         public Pair(int x, int y) {
             this.x = x; this.y = y;
         }
-        
     }
     /**
      * Constructor for objects of class MuseumRoom.
@@ -184,8 +184,6 @@ public class MuseumRoom extends Room
         
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
-        
-        
         
         //Randomly spawn different valuables at different locations
         for(int i=0; i<valuableLocation.length; i++){
