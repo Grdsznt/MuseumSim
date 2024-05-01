@@ -8,8 +8,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  */
 public class GoldPot extends Valuable
 {
+    public final static int price = 900;
+    
     public GoldPot(){
         //Set the image, and set the price to $900
-        super(new GreenfootImage("GoldPot.png"), 900);
+        super(new GreenfootImage("GoldPot.png"), price);
     }
 }
