@@ -11,7 +11,7 @@ public class EndWorld extends World
     private MuseumRoom room;
     
     private HomeButton homeButton;
-    private DropDownMenu dropDownMenu;
+    protected DropDownMenu dropDownMenu;
     private Image moneySymbol, moneyText, valuableSymbol, valuableText, robber, robberText;
     private int moneyMade, robbersCatched, valuablesStolen;//there are the stats needed to be displayed
     /**
