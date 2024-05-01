@@ -17,44 +17,52 @@ public class GoodEnd extends EndWorld
      * Constructor for objects of class SurpriseEnd.
      * 
      */
-    public GoodEnd()
+    public GoodEnd(MuseumRoom room)
     {
-        super(new MuseumRoom(1,1,1,1,1));
+        super(room);
         actNum = 0;
         GreenfootImage image = new GreenfootImage("Robber/genshin.png");
-        image.scale(1200,800);
+        image.scale(1150,800);
         genshin = new Image (image);
         white = new Image (new GreenfootImage("Robber/white.png"));
         addObject(white, getWidth()/2, getHeight()/2);
     }
 
     public void act(){
-
-        if(actNum == 740){
+        super.act();
+        if(actNum ==0){
+            yuanshen.play();
+        }
+        if(actNum == 420){
             addObject(genshin, getWidth()/2, getHeight()/2);
         }
-        if(actNum > 740 && actNum < 840){
-            int transparency = (int) (255 * ((double) (actNum - 740) /100));
+        if(actNum > 420 && actNum < 520){
+            int transparency = (int) (255 * ((double) (actNum - 420) /100));
             if(transparency < 256){
                 genshin.getImage().setTransparency(transparency);
             }
         }
-        if (actNum > 1240 && actNum < 1340) {
-            int transparency = (int) (255 * (1 - ((double)(actNum - 1240) / (1340 - 1240))));
-            genshin.getImage().setTransparency(transparency);
+        if (actNum > 650 && actNum < 750) {
+            int transparency = (int) (255 * (1 - ((double)(actNum - 650) / 100)));
+            if(transparency < 256){
+                genshin.getImage().setTransparency(transparency);
+            }
         }
-        if(actNum == 1340){
+        if(actNum == 750){
             removeObject(genshin);
             removeObject(white);
         }
-        if(actNum > 1440){
+        if(actNum > 750){
             dropDownMenu.moveNow();
             if(Greenfoot.getRandomNumber (10) == 0){
                 int numParticles = Greenfoot.getRandomNumber(8) + 2;
                 firework(Greenfoot.getRandomNumber(getWidth()), Greenfoot.getRandomNumber(getWidth()),numParticles , 2);
             }
         }
-
+        if(actNum == 820){
+            GEBGM.play();
+        }
+        //System.out.println(actNum);
         actNum++;
     }
 
@@ -64,16 +72,26 @@ public class GoodEnd extends EndWorld
             double angle = i*2*Math.PI/numPart;
             double xVel = (Math.cos(angle)*partSpeed);
             double yVel = (Math.sin(angle)*partSpeed);
-            Image image = new Image(new GreenfootImage("Robber/mora.png"), "1");
-            addObject(image, x, y);
-            image.turnTowards(x,y);
-            image.turn(90);
-            image.setVel(xVel, yVel);
+            if(Greenfoot.getRandomNumber(3) == 0){
+                Image image = new Image(new GreenfootImage("Robber/primogem.png"), "1");
+                addObject(image, x, y);
+                image.turnTowards(x,y);
+                image.turn(90);
+                image.setVel(xVel, yVel);
+            }
+            else{
+                Image image = new Image(new GreenfootImage("Robber/mora.png"), "1");
+                addObject(image, x, y);
+                image.turnTowards(x,y);
+                image.turn(90);
+                image.setVel(xVel, yVel);
+            }
             //angleChange += Math.PI/5;
         }
     }
 
-    public void started(){
-        yuanshen.play();
+    public void stopped(){
+        GEBGM.stop();
+        yuanshen.stop();
     }
 }
