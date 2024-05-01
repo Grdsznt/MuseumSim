@@ -15,6 +15,7 @@ public class Valuable extends Actor
     /**
      * A simple constructor that sets Right the stolen state and the price of a valuable
      * 
+     * @param image   The image of this valuable 
      * @param price   The price of this valuable
      */
     public Valuable(GreenfootImage image, int price){
@@ -31,14 +32,19 @@ public class Valuable extends Actor
     }
 
     /**
-     * called by other class to steal this valuable
+     * Called by other class to steal this valuable
      * 
+     * @param b     Sets whether this valuable is stolen or not
      */
     public void setStolen(boolean b){
         isStolen = b;
     }
     
-    //follow the robber after i have been stolen
+    /** 
+     * followRobber is a method that is used to make this valuable follow the robbers movements when a valuable is being stolen
+     * 
+     * @param robber    The robber that this valuable will follow around
+     */
     public void followRobber(Robber robber){
         int yOffset;
         int xOffset;
@@ -71,7 +77,7 @@ public class Valuable extends Actor
     }
 
     /**
-     * returns the state of this valuable
+     * Returns the state of this valuable
      *  @return true if is stolen, false if it's not
      */
     public boolean isStolen(){
@@ -79,7 +85,7 @@ public class Valuable extends Actor
     }
 
     /**
-     * returns the price of this valuable
+     * Returns the price of this valuable
      *  @return int price of this valuable
      */
     public int getPrice(){

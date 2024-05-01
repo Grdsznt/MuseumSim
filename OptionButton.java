@@ -26,6 +26,10 @@ public class OptionButton extends Button
     
     /**
      * Constructor of the Option Button.
+     * 
+     * @param text      The text that you want the button to display
+     * @param initialValue      The minimum value that the button can be toggled
+     * @param maxValue      The maximum value that the button can be toggled
      */
     public OptionButton(String text, int initialValue, int maxValue){
         this.text = text;
