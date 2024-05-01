@@ -18,7 +18,7 @@ public class SetUpWorld extends World
     private OptionButton guardButton;
     private OptionButton robberButton;
     private OptionButton valuableButton;
-    private Slider guardSlider;
+    //private Slider guardSlider;
     //Set the button for spawn rate of robber
     private OptionButton spawnRateRobberButton;
     //Set the button for spawn rate of visitor
@@ -41,8 +41,8 @@ public class SetUpWorld extends World
         
         //Set the buttons for guards, robbers, and valuables
         guardButton = new OptionButton("Number of Guards in World: ", 1, 3);
-        guardSlider = new Slider(125, 500, 1, 3, true);
-        addObject(guardSlider, getWidth()/2, getHeight()/10*3);
+        //guardSlider = new Slider(125, 500, 1, 3, true);
+        //addObject(guardSlider, getWidth()/2, getHeight()/10*3);
         robberButton = new OptionButton("Number of Robbers in World: ", 1, 3);
         valuableButton = new OptionButton("Number of Valuables in World: ", 2, 7);
         //Set the button for spawn rate of robber
@@ -56,7 +56,6 @@ public class SetUpWorld extends World
         addObject(valuableButton, getWidth()/2, getHeight()/10*5);
         addObject(spawnRateRobberButton, getWidth()/2, getHeight()/10*6);
         addObject (spawnRateVisitorButton, getWidth()/2, getHeight()/10*7);
-        
     }
     
     /**
@@ -80,7 +79,11 @@ public class SetUpWorld extends World
         return valuableButton.getValue();
     }
     
-    public int getSpawnRate() {
+    public int getRobberSpawnRate() {
         return spawnRateRobberButton.getValue();
+    }
+    
+    public int getVisitorSpawnRate() {
+        return spawnRateVisitorButton.getValue();
     }
 }
