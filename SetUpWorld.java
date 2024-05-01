@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * A setting screen for the user to adjust some values.
  * 
- * @author Jerry, Jean Pan, Edwin
+ * @author Jerry, Jean Pan, Edwin，Nick
  * @version Apr 2024
  */
 public class SetUpWorld extends World

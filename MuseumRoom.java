@@ -10,7 +10,7 @@ import java.util.*;
 public class MuseumRoom extends Room
 {
     public static int income = 0;
-    
+    private static GreenfootSound roomBGM = new GreenfootSound("Sneaky-Snitch.mp3");
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
@@ -269,6 +269,7 @@ public class MuseumRoom extends Room
         
         
         setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
+        roomBGM.playLoop();
     }
     
     //Over all profit Income grow 
@@ -426,10 +427,9 @@ public class MuseumRoom extends Room
     }
     
     public void started() {
-        StartWorld.music.pause();
+        roomBGM.playLoop();
     }
-    
-    public void paused() {
-        StartWorld.music.pause();
+    public void stopped(){
+        roomBGM.stop();
     }
 }
