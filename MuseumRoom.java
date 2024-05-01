@@ -8,8 +8,10 @@ import java.util.*;
  * @version (a version number or a date)
  */
 public class MuseumRoom extends Room
-{   
-    // Obstacle Bounding Boxes for pathfinding
+{
+    public static int income = 0;
+    
+    // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
     private Obstacle displayTable2 = new Obstacle(73, 64); // (144, 544), (217, 480)
@@ -29,21 +31,19 @@ public class MuseumRoom extends Room
     private Obstacle leftBound = new Obstacle(40, 223);
     private Obstacle rightBound = new Obstacle(4, 223);
     private Obstacle lowerBound = new Obstacle(663, 7);
-
+    
     private List<Pair> robberSpawns;
     private List<Pair> guardSpawns;
-
-    private int robbers, guards, valuables, spawnRate;
+    
+    private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate;
     private int actCount;
-
+    
     private static DayCounter dayCounter;
-    private boolean daytime;
-
+    
     //Variables
     private int money = 0;
     private int valuablesStolenNumber = 0;
     private int robbersCatchedNumber = 0;
-
     //Images
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
     private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
@@ -53,7 +53,7 @@ public class MuseumRoom extends Room
     private Statistic valuablesStolen = new Statistic(valuableImage, valuablesStolenNumber);
     private Statistic robbersCatched = new Statistic(robberImage, robbersCatchedNumber);
     private Statistic museumIncome = new Statistic(moneyImage, income, "$");
-
+    
     //Images
     private GreenfootImage potImage = new GreenfootImage("PinkPot.png");
     private GreenfootImage silverPotImage = new GreenfootImage("SilverPot.png");
@@ -66,20 +66,20 @@ public class MuseumRoom extends Room
     private ValueList goldPotPriceLabel = new ValueList(GoldPotImage, "$"+GoldPot.price);
     private ValueList tallPotPriceLabel = new ValueList(TallPotImage, "$"+AntiquePotTall.price);
     private ValueList shortPotPriceLabel = new ValueList(ShortPotImage, "$"+AntiquePotShort.price);
-
+    
+    
     
     private int actNum = 0;
-
+        
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
-
+    
+    
     //Stores the possible locations of valuables
     private static int[][] valuableLocation = new int[6][2];
     //Stores the boolean for each valuable
     private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot}
-
-    //Music
-    private static SuperSound museumMusic;
+    
     public class Pair {
         int x, y;
         public Pair(int x, int y) {
@@ -89,81 +89,78 @@ public class MuseumRoom extends Room
     /**
      * Constructor for objects of class MuseumRoom.
      */
-    public MuseumRoom(int robbers, int guards, int valuables, int spawnRate)
+    public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate)
     { 
         super(1000,816,0, 0);
         setBackground(worldImage);
-        daytime = true;
-
-        museumMusic = new SuperSound("MuseumClassical.mp3", 1, 50);
-
+        
         addObject(displayTable1, 327, 699);
         //Add the location to the 2D array
         valuableLocation[0][0] = 331;
         valuableLocation[0][1] = 670;
-
+        
         addObject(displayTable2, 181, 512);
         //Add the location to the 2D array
         valuableLocation[1][0] = 184;
         valuableLocation[1][1] = 483;
-
+        
         addObject(brokenGlassBox, 327, 213);
         //Add the location to the 2D array
         valuableLocation[2][0] = 331;
         valuableLocation[2][1] = 162;
-
+        
         addObject(littleGlassBox, 92, 119);
         //Add the location to the 2D array
         valuableLocation[3][0] = 94;
         valuableLocation[3][1] = 86;
-
+        
         addObject(largeWoodBox, 329, 374);
         //Add the location to the 2D array
         valuableLocation[4][0] = 331;
         valuableLocation[4][1] = 346;
-
+        
         addObject(mediumGlassBox, 464, 514);
         //Add the location to the 2D array
         valuableLocation[5][0] = 466;
         valuableLocation[5][1] = 486;
-
+        
         addObject(statue1, 115, 380);
-
+        
         addObject(statue2, 539, 380);
-
+    
         addObject(pillar1, 93, 590);
-
+        
         addObject(pillar2, 559, 590);
-
+        
         addObject(leftWall, 32, 366);
-
+        
         addObject(rightWall, 626, 366);
-
+        
         addObject(topWall, 326, 46);
-
+        
         addObject(wallSegLeft, 125, 218);
-
+        
         addObject(wallSegRight, 530, 218);
-
+        
         addObject(leftBound, 680, 720);
-
+        
         addObject(rightBound, 0, 720);
-
+        
         addObject(lowerBound, 330, 850);
-
+        
         // need to spawn robber in specific locations
-
-        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.spawnRate = spawnRate;
-
+        
+        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate;
+        
         robberSpawns = new ArrayList<Pair>(3);
         guardSpawns = new ArrayList<Pair>(3);
-
+        
         robberSpawns.add(new Pair(330, 500));
         robberSpawns.add(new Pair(200, 350));
         robberSpawns.add(new Pair(450, 350));
-
+        
         Collections.shuffle(robberSpawns);
-
+        
         for (int i = 0;i<robbers;i++) {
             Pair p = robberSpawns.remove(0);
             if (p.x == 330 && p.y == 500) {
@@ -178,28 +175,26 @@ public class MuseumRoom extends Room
                 robberLoc[2] = true;
             }
         }
-
+        
         guardSpawns.add(new Pair(330, 770));
         guardSpawns.add(new Pair(420, 200));
         guardSpawns.add(new Pair(240, 200));
-
+        
         Collections.shuffle(guardSpawns);
-
+        
         for (int i = 0;i<guards;i++) {
             Pair p = guardSpawns.remove(0);
             addObject(new Guard(1), p.x, p.y);
         }
         actCount = 1;
-
-        Visitor v = new Visitor(3200, 1);
-        addObject(v, 20, 670);
-
+        
+        
         //Add the statistics at the top right of the world
         int xPos = 780;
         addObject(moneyEarned, xPos, 100);
         addObject(valuablesStolen, xPos, 200);
         addObject(robbersCatched, xPos, 300);
-
+        
         //Add the price list at the bottom right of the world
         getBackground().drawImage(new GreenfootImage("Current Price", 24, Color.BLACK, Color.WHITE), xPos-5, 450);
         addObject(potPriceLabel, xPos, 505);
@@ -207,10 +202,11 @@ public class MuseumRoom extends Room
         addObject(goldPotPriceLabel, xPos, 625);
         addObject(tallPotPriceLabel, xPos, 685);
         addObject(shortPotPriceLabel, xPos, 745);
-
+        
+        
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
-
+        
         //Randomly spawn different valuables at different locations
         for(int i=0; i<valuableLocation.length; i++){
             int x = valuableLocation[i][0];
@@ -219,7 +215,7 @@ public class MuseumRoom extends Room
             if(getObjectsAt(x, y, Valuable.class).size()!=0){
                 continue;
             }
-
+            
             //For this location, find a valuable to be spawned
             boolean hasFalse = false;
             for(boolean value : valuableInWorld) {
@@ -238,31 +234,31 @@ public class MuseumRoom extends Room
                 Valuable valuable;
                 switch(random){
                     case 0: {
-                            valuable = new Pot();
-                            break;
-                        }
+                        valuable = new Pot();
+                        break;
+                    }
                     case 1: {
-                            valuable = new SilverPot();
-                            break;
-                        }
+                        valuable = new SilverPot();
+                        break;
+                    }
                     case 2: {
-                            valuable = new GoldPot();
-                            break;
-                        }
+                        valuable = new GoldPot();
+                        break;
+                    }
                     case 3: {
-                            valuable = new AntiquePotTall();
-                            break;
-                        }
+                        valuable = new AntiquePotTall();
+                        break;
+                    }
                     case 4: {
-                            valuable = new AntiquePotShort();
-                            break;
-                        }
+                        valuable = new AntiquePotShort();
+                        break;
+                    }
                     default: {
-                            valuable = new Pot();
-                            break;
-                        }
+                        valuable = new Pot();
+                        break;
+                    }
                 }
-
+                
                 //Spawn the valuable at x & y
                 addObject(valuable, x, y);
                 valuableInWorld[random] = true;
@@ -270,35 +266,27 @@ public class MuseumRoom extends Room
                 break;
             }
         }
-
+        
+        
         setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
-
-    public void started() {
-        StartWorld.music.pause();
-        museumMusic.playLoop();
-        if(!daytime);
-    }
-
-    public void stopped() {
-        StartWorld.music.pause();
-        museumMusic.pause();
-        if(!daytime);
-    }
+    
     //Over all profit Income grow 
     public void gainIncome(int newIncome){
         income = income + newIncome;
     }
-
+    
     public void act() {
         actCount++;
         if(actCount % 1600 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
         }
-
+        if (actCount % (600/visitorSpawnRate) == 0) {
+            addObject(new Visitor(1000, 1), 20, 670);
+        }
         // Randomly spawn robber if 2 stations are vacant, spawn robber at specific location if only 1 station is vacant
-        if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
+        if (actCount % (600/robberSpawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
                 if (robberLoc[1] == true) {
                     addObject(new Robber(3, 600, 4, 2), 450, 350);
@@ -361,16 +349,7 @@ public class MuseumRoom extends Room
             }
         }
     }
-
-    /**
-     * Sets the world's time to day or not day
-     * 
-     * @param daytime   Sets if it is daytime or not
-     */
-    public void setTime(boolean daytime){
-        this.daytime = daytime;
-    }
-
+    
     /**
      * Set the new value of money.
      * 
@@ -380,7 +359,7 @@ public class MuseumRoom extends Room
         money += change;
         moneyEarned.updateValue(money);
     }
-
+    
     /**
      * Set the new number of valuables stolen.
      * 
@@ -390,7 +369,7 @@ public class MuseumRoom extends Room
         valuablesStolenNumber += change;
         valuablesStolen.updateValue(valuablesStolenNumber);
     }
-
+    
     /**
      * Set the new value of robbers catched.
      * 
@@ -405,32 +384,32 @@ public class MuseumRoom extends Room
         }
         actNum++;
     }
-
+    
     /**
      * Get the current value of money.
      */
     public int getMoney(){
         return money;
     }
-
+    
     /**
      * Get the current number of valuables stolen.
      */
     public int getValuables(){
         return valuablesStolenNumber;
     }
-
+    
     /**
      * Get the new value of robbers catched.
      */
     public int getRobbers(){
         return robbersCatchedNumber;
     }
-
+    
     public void setStation(int stationNumber, boolean b) {
         robberLoc[stationNumber] = b;
     }
-
+    
     public int getStation() {
         if (robberLoc[0] == false) {
             return 0;
@@ -440,18 +419,16 @@ public class MuseumRoom extends Room
             return 2;
         }
     }
-
-    /**
-     * Increments the number of days
-     */
+    
     public static void increaseDayCount() {
         dayCounter.incrementDayCount();
     }
-
-    /**
-     * Returns if it is daytime 
-     */
-    public boolean isDaytime(){
-        return daytime;
+    
+    public void started() {
+        StartWorld.music.pause();
+    }
+    
+    public void paused() {
+        StartWorld.music.pause();
     }
 }
