@@ -11,6 +11,7 @@ public class GoodEnd extends EndWorld
     private int actNum;
     private static GreenfootSound yuanshen = new GreenfootSound("yuanshen.mp3");
     private static GreenfootSound GEBGM = new GreenfootSound("shed a light.mp3");
+    private static GreenfootSound kaching = new GreenfootSound("kaching.mp3");
     private Image white;
     private Image genshin;
     /**
@@ -57,6 +58,7 @@ public class GoodEnd extends EndWorld
             if(Greenfoot.getRandomNumber (10) == 0){
                 int numParticles = Greenfoot.getRandomNumber(8) + 2;
                 firework(Greenfoot.getRandomNumber(getWidth()), Greenfoot.getRandomNumber(getWidth()),numParticles , 2);
+                kaching.play();
             }
         }
         if(actNum == 820){
