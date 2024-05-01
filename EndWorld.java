@@ -51,7 +51,7 @@ public class EndWorld extends World
             Greenfoot.setWorld(sw);
         }
         //let content inside menu follow the menu when dropping down
-        if(dropDownMenu.checkIfMoving()){
+        
             homeButton.followActor(dropDownMenu, 0,100);
             moneySymbol.followActor(dropDownMenu, -170, 30);
             moneyText.followActor(dropDownMenu, 0, 30);
@@ -59,6 +59,6 @@ public class EndWorld extends World
             valuableText.followActor(dropDownMenu, 0, -20);
             robber.followActor(dropDownMenu, -170, -70);
             robberText.followActor(dropDownMenu, 0, -70);
-        }
+        
     }
 }
