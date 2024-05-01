@@ -77,10 +77,12 @@ public class Robber extends Human
             moveTowardsTarget();
         }
         
-        animate();
-        //goes back to default frame if not moving
         if(!isMoving)
             setIdleImage();
+            
+        animate();
+        //goes back to default frame if not moving
+        
 
         if (targetValuable != null && targetValuable.getWorld() == null){
             targetValuable = null;
