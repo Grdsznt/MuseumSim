@@ -6,17 +6,28 @@ import java.util.Random;
  * @author (your name) 
  * @version (a version number or a date)
  */
-public class Image extends Actor
+public class Image extends SuperSmoothMover
 {
     private String text;
     private boolean randomizeText;
     private int fontSize;
     private int actNum;
     private GreenfootImage image;
+    private boolean firework;
+    private double xVel, yVel;
     public Image(GreenfootImage image){
         this.image = image;
         setImage(image);
         actNum = 0;
+        firework = false;
+    }
+    public Image(GreenfootImage image, String text){
+        this.image = image;
+        int a = Greenfoot.getRandomNumber(20) + 20;
+        image.scale(a, a);
+        setImage(image);
+        actNum = 0;
+        firework = true; xVel = 0; yVel = 0;
     }
     public Image(String text){
         fontSize = 40;
@@ -26,6 +37,7 @@ public class Image extends Actor
         this.image = image;
         setImage(image);
         actNum = 0;
+        firework = false;
     }
     /**
      * Act - do whatever the Image wants to do. This method is called whenever
@@ -58,9 +70,29 @@ public class Image extends Actor
             }
             
         }
+        if(firework){
+            if(isAtEdge()){
+            getWorld().removeObject(this);
+        }
+        else{
+            setLocation(getX() + xVel, getY() - yVel);
+            int rate = 90;//decay rate
+            if(xVel > 0){
+                xVel -= xVel/rate;
+            }
+            else if(xVel < 0){
+                xVel += xVel/rate;
+            }
+            yVel -= 0.5;//change in velocity applied
+            
+        }
+        }
         actNum++;
     }
     public void followActor(Actor a, int offsetX, int offsetY){
         setLocation(a.getX() + offsetX, a.getY() + offsetY);
+    }
+    public void setVel(double xVel, double yVel){
+        this.xVel = xVel; this.yVel = yVel;
     }
 }

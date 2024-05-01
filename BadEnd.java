@@ -13,13 +13,14 @@ public class BadEnd extends EndWorld
      * Constructor for objects of class BadEnd.
      * 
      */
-    public BadEnd()
+    public BadEnd(MuseumRoom room)
     {
-        super();
+        super(room);
         BG.scale(1000,800);
         setBackground(BG);
     }
     public void act(){
         super.act();
+        dropDownMenu.moveNow();
     }
 }

@@ -77,10 +77,12 @@ public class Robber extends Human
             moveTowardsTarget();
         }
         
-        animate();
-        //goes back to default frame if not moving
         if(!isMoving)
             setIdleImage();
+            
+        animate();
+        //goes back to default frame if not moving
+        
 
         if (targetValuable != null && targetValuable.getWorld() == null){
             targetValuable = null;
@@ -314,7 +316,7 @@ public class Robber extends Human
                     MuseumRoom mr = (MuseumRoom) getWorld();
                     station = mr.getStation();
                     mr.setStation(station, true);
-                    mr.setMoney(20);
+                    mr.setMoney(targetValuable.getPrice());
                     mr.setValuables(1);
                     targetValuable = null;// No more targets
                     returning = true;
