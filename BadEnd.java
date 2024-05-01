@@ -21,5 +21,6 @@ public class BadEnd extends EndWorld
     }
     public void act(){
         super.act();
+        dropDownMenu.moveNow();
     }
 }
