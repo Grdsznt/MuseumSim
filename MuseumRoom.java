@@ -35,7 +35,7 @@ public class MuseumRoom extends Room
     private List<Pair> robberSpawns;
     private List<Pair> guardSpawns;
     
-    private int robbers, guards, valuables, spawnRate;
+    private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate;
     private int actCount;
     
     private static DayCounter dayCounter;
@@ -89,7 +89,7 @@ public class MuseumRoom extends Room
     /**
      * Constructor for objects of class MuseumRoom.
      */
-    public MuseumRoom(int robbers, int guards, int valuables, int spawnRate)
+    public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate)
     { 
         super(1000,816,0, 0);
         setBackground(worldImage);
@@ -150,7 +150,7 @@ public class MuseumRoom extends Room
         
         // need to spawn robber in specific locations
         
-        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.spawnRate = spawnRate;
+        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate;
         
         robberSpawns = new ArrayList<Pair>(3);
         guardSpawns = new ArrayList<Pair>(3);
@@ -188,8 +188,6 @@ public class MuseumRoom extends Room
         }
         actCount = 1;
         
-        Visitor v = new Visitor(3200, 1);
-        addObject(v, 20, 670);
         
         //Add the statistics at the top right of the world
         int xPos = 780;
@@ -284,9 +282,11 @@ public class MuseumRoom extends Room
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
         }
-        
+        if (actCount % (600/visitorSpawnRate) == 0) {
+            addObject(new Visitor(1000, 1), 20, 670);
+        }
         // Randomly spawn robber if 2 stations are vacant, spawn robber at specific location if only 1 station is vacant
-        if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
+        if (actCount % (600/robberSpawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
                 if (robberLoc[1] == true) {
                     addObject(new Robber(3, 600, 4, 2), 450, 350);
