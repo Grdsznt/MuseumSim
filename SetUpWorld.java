@@ -49,14 +49,14 @@ public class SetUpWorld extends World
         spawnRateRobberButton = new OptionButton("Spawn Rate of Robbers per 10s: ", 1, 5);
         //Set the button for spawn rate of visitor
         spawnRateVisitorButton = new OptionButton("Spawn Rate of Visitors per 10s: ", 3, 10);
-        /*
+        
         //Add these buttons onto the world
         addObject(guardButton, getWidth()/2, getHeight()/10*3);
         addObject(robberButton, getWidth()/2, getHeight()/10*4);
         addObject(valuableButton, getWidth()/2, getHeight()/10*5);
         addObject(spawnRateRobberButton, getWidth()/2, getHeight()/10*6);
         addObject (spawnRateVisitorButton, getWidth()/2, getHeight()/10*7);
-        */
+        
     }
     
     /**
