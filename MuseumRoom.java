@@ -8,10 +8,8 @@ import java.util.*;
  * @version (a version number or a date)
  */
 public class MuseumRoom extends Room
-{
-    public static int income = 0;
-    
-    // Obstacle Bounding Boxes
+{   
+    // Obstacle Bounding Boxes for pathfinding
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
     private Obstacle displayTable2 = new Obstacle(73, 64); // (144, 544), (217, 480)
@@ -39,11 +37,13 @@ public class MuseumRoom extends Room
     private int actCount;
     
     private static DayCounter dayCounter;
+    private boolean daytime;
     
     //Variables
     private int money = 0;
     private int valuablesStolenNumber = 0;
     private int robbersCatchedNumber = 0;
+    
     //Images
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
     private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
@@ -64,6 +64,8 @@ public class MuseumRoom extends Room
     //Stores the boolean for each valuable
     private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, AntiquePotTall, AntiquePotShort} x 2
     
+    //Music
+    private static SuperSound museumMusic;
     public class Pair {
         int x, y;
         public Pair(int x, int y) {
@@ -78,6 +80,9 @@ public class MuseumRoom extends Room
     { 
         super(1000,816,0, 0);
         setBackground(worldImage);
+        daytime = true;
+        
+        museumMusic = new SuperSound("MuseumClassical.mp3", 1, 50);
         
         addObject(displayTable1, 327, 699);
         //Add the location to the 2D array
@@ -243,6 +248,17 @@ public class MuseumRoom extends Room
         setPaintOrder(Statistic.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     
+    public void started() {
+        StartWorld.music.pause();
+        museumMusic.playLoop();
+        if(!daytime);
+    }
+    
+    public void stopped() {
+        StartWorld.music.pause();
+        museumMusic.pause();
+        if(!daytime);
+    }
     //Over all profit Income grow 
     public void gainIncome(int newIncome){
         income = income + newIncome;
@@ -321,6 +337,13 @@ public class MuseumRoom extends Room
     }
     
     /**
+     * Sets the world's time to day or not day
+     */
+    public void setTime(boolean daytime){
+        this.daytime = daytime;
+    }
+    
+    /**
      * Set the new value of money.
      * 
      * @param change    The change in the amount of money hold in room.
@@ -369,15 +392,17 @@ public class MuseumRoom extends Room
         }
     }
     
+    /**
+     * Increments the number of days
+     */
     public static void increaseDayCount() {
         dayCounter.incrementDayCount();
     }
     
-    public void started() {
-        StartWorld.music.pause();
-    }
-    
-    public void paused() {
-        StartWorld.music.pause();
+    /**
+     * Returns if it is daytime 
+     */
+    public boolean isDaytime(){
+        return daytime;
     }
 }
