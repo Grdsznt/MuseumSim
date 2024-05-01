@@ -9,7 +9,7 @@ import java.lang.Math;
 public class Valuable extends Actor
 {
     private GreenfootImage image;
-    private double price;
+    private int price;
     private boolean isStolen;
     
     /**
@@ -17,7 +17,7 @@ public class Valuable extends Actor
      * 
      * @param price   The price of this valuable
      */
-    public Valuable(GreenfootImage image, double price){
+    public Valuable(GreenfootImage image, int price){
         this.image = image;
         this.price = price;
         isStolen = false;
@@ -80,9 +80,9 @@ public class Valuable extends Actor
 
     /**
      * returns the price of this valuable
-     *  @return double price of this valuable
+     *  @return int price of this valuable
      */
-    public double getPrice(){
+    public int getPrice(){
         return this.price;
     }
 

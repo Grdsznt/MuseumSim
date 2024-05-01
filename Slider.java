@@ -30,20 +30,25 @@ public class Slider extends Actor {
     
     public void act() {
         MouseInfo mouse = Greenfoot.getMouseInfo();
+        double percent = 0;
         if (mouse != null && (Greenfoot.mousePressed(this) || Greenfoot.mouseDragged(this))) {
             if (isHorizontal) {
                 int mouseX = mouse.getX();
-                currentValue = mapValue(mouseX, 0, width, minValue, maxValue);
+                percent = ((double)mouseX-(getX()-getImage().getWidth()/2.0))/getImage().getWidth();
+                currentValue = (int)((minValue*(1-percent))+(maxValue*percent));
+                currentValue = Math.max(currentValue, minValue);
+                currentValue = Math.min(currentValue, maxValue);
+                System.out.println("Current: "+ currentValue + " Min: " + minValue + "Max: " + maxValue + " mouseX: " + percent);
             } else {
                 int mouseY = mouse.getY();
-                currentValue = mapValue(mouseY, height, 0, minValue, maxValue);
+                currentValue = (int)mapValue(mouseY, height, 0, minValue, maxValue);
             }
             updateImage(); // Update slider appearance
             notifyListener(); // Notify listener of value change
     
             // Debug output
-            System.out.println("Mouse X: " + mouse.getX() + ", Mouse Y: " + mouse.getY());
-            System.out.println("Current Value: " + currentValue);
+            //System.out.println("Mouse X: " + mouse.getX() + ", Mouse Y: " + mouse.getY());
+            //System.out.println("Current Value: " + currentValue);
         }
     }
 
@@ -67,27 +72,29 @@ public class Slider extends Actor {
     
     // In your Slider class or wherever the button is created
     private void drawSliderButton(GreenfootImage image) {
-        int buttonSize = 20; // Size of the slider button
+        int buttonSize = 10; // Size of the slider button
         int buttonX, buttonY;
     
         if (isHorizontal) {
-            buttonX = mapValue(currentValue, minValue, maxValue, 0, width - buttonSize);
+            buttonX = (int)((mapValue(currentValue, minValue, maxValue, 0, width - buttonSize)*getImage().getWidth()));
             buttonY = height / 2 - buttonSize / 2;
         } else {
             buttonX = width / 2 - buttonSize / 2;
-            buttonY = mapValue(currentValue, minValue, maxValue, height - buttonSize, 0);
+            buttonY = (int)mapValue(currentValue, minValue, maxValue, height - buttonSize, 0);
         }
-    
+        System.out.println("X: " + buttonX);
+        System.out.println("Y: " + buttonY);
         // Draw the slider button on top of the track
         image.setColor(Color.BLUE);
-        image.fillOval(buttonX, buttonY, buttonSize, buttonSize);
+        image.fillOval(buttonX-buttonSize/2, buttonY, buttonSize, buttonSize);
     }
 
 
 
 
-    private int mapValue(int value, int minValue, int maxValue, int minRange, int maxRange) {
-        return minRange + (maxRange - minRange) * (value - minValue) / (maxValue - minValue);
+    private double mapValue(int value, int minValue, int maxValue, int minRange, int maxRange) {
+        System.out.println(((value-minValue)/(double)(maxValue-minValue)));
+        return ((value-minValue)/(double)(maxValue-minValue));
     }
 
     public interface SliderListener {
