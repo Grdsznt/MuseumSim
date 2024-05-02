@@ -45,6 +45,8 @@ public class SetUpWorld extends World
         guardSlider = new Slider();
         guardSlider.showPercentage(false);
         guardSlider.setMaximumValue(3);
+        guardSlider.setMinimumValue(1);
+        addObject(guardSlider, getWidth()/2, getHeight()/10*3);
         
         
         //addObject(guardSlider, getWidth()/2, getHeight()/10*3);
@@ -56,11 +58,11 @@ public class SetUpWorld extends World
         spawnRateVisitorButton = new OptionButton("Spawn Rate of Visitors per 10s: ", 3, 10);
         
         //Add these buttons onto the world
-        addObject(guardButton, getWidth()/2, getHeight()/10*3);
-        addObject(robberButton, getWidth()/2, getHeight()/10*4);
-        addObject(valuableButton, getWidth()/2, getHeight()/10*5);
-        addObject(spawnRateRobberButton, getWidth()/2, getHeight()/10*6);
-        addObject (spawnRateVisitorButton, getWidth()/2, getHeight()/10*7);
+        //addObject(guardButton, getWidth()/2, getHeight()/10*3);
+        //addObject(robberButton, getWidth()/2, getHeight()/10*4);
+        //addObject(valuableButton, getWidth()/2, getHeight()/10*5);
+        //addObject(spawnRateRobberButton, getWidth()/2, getHeight()/10*6);
+        //addObject (spawnRateVisitorButton, getWidth()/2, getHeight()/10*7);
     }
     
     /**
