@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * A start image to introduce the game
  * 
  * @author Nick, Jean, Jerry, Edwin
- * @version (a version number or a date)
+ * @version May 2 2024
  */
 public class StartWorld extends World
 {    
@@ -13,7 +13,7 @@ public class StartWorld extends World
     private Button story;
     // Create a new world with 600x400 cells with a cell size of 1x1 pixels.
 
-    public static GreenfootSound music = new GreenfootSound("startMenuBGM.mp3");
+    public static SuperSound music = new SuperSound("startMenuBGM.mp3");
     private static GreenfootImage backGround1 = new GreenfootImage("museumFrontPage1.png");
     private static GreenfootImage backGround2 = new GreenfootImage("museumFrontPage2.png");
 
