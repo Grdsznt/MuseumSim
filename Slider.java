@@ -34,8 +34,6 @@ public class Slider extends Actor
     private float pixelsPerValue;
     //The current value is
     private int value;
-    //The minimum value is
-    private int minValue;
     
     /**
      * Create a new slider with the default size. It will be 200 pixels wide by
@@ -107,12 +105,11 @@ public class Slider extends Actor
      * 
      * @param value The new value
      */
-    public void setValue(int value) {
-        if (value < minValue) {
-            value = minValue; // Ensure value is not below minimum
-        }
-        if (value > maxValue) {
-            value = maxValue; // Ensure value is not above maximum
+    public void setValue(int value){
+        if(value < 0){
+            value = 0;
+        }if(value > maxValue){
+            value = maxValue;
         }
         this.value = value;
         imagesInvalid = true;
@@ -255,32 +252,12 @@ public class Slider extends Actor
     }
     
     /**
-     * Set the minimum value that the user can select.
-     * 
-     * @param value The new minimum value
-     */
-    public void setMinimumValue(int value) {
-        if (value >= maxValue) return; // Ensure minimum value is less than maximum value
-        minValue = value;
-        setValue(value); // Set value to the minimum value if it's currently below the minimum
-    }
-    
-    /**
      * Get the current maximum value which the user can select
      * 
      * @return The maximum value
      */
     public int getMaximumValue(){
         return maxValue;
-    }
-    
-    /**
-     * Get the current minimum value which the user can select
-     * 
-     * @return The minimum value
-     */
-    public int getMinimumValue() {
-        return minValue;
     }
     
     /**
