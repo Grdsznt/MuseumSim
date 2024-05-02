@@ -66,7 +66,11 @@ public abstract class Valuable extends Actor
         isStolen = b;
     }
     
-    //follow the robber after i have been stolen
+    /**
+     * When robber has stolen valuable. The valuable follows the robber.
+     * 
+     * @param robber    The robber that has stolen this valuable
+     */
     public void followRobber(Robber robber){
         int yOffset;
         int xOffset;
