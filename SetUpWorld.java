@@ -39,16 +39,17 @@ public class SetUpWorld extends World
         
         setBackground(backGround1);
         
-        
-        //Set up the guard slider
-        guardSlider = new Slider();
+        guardSlider = new Slider("Number of Guards in World: ", guardText);
         guardSlider.showPercentage(false);
         guardSlider.setMaximumValue(2);
         guardSlider.setValue(0);
         guardSlider.setMinorSections(0);
-        addObject(guardSlider, getWidth()/2+100, getHeight()/10*3);
         
-        guardText = new SuperTextBox(
+        String[] guardTextBox = {"Number of Guards in World: " + guardSlider.getValue()};
+        //Set up the guard slider
+        
+        addObject(guardSlider, getWidth()/2+100, getHeight()/10*3);
+        guardText = new SuperTextBox(guardTextBox, Color.BLACK, Color.WHITE, boringFont, true, 300, 5, Color.WHITE);
         
         //Set the buttons for guards, robbers, and valuables
         //guardButton = new OptionButton("Number of Guards in World: ", guardSlider);
@@ -62,7 +63,7 @@ public class SetUpWorld extends World
         //spawnRateVisitorButton = new OptionButton("Spawn Rate of Visitors per 10s: ", 3, 10);
         
         //Add these buttons onto the world
-        //addObject(guardButton, getWidth()/2-200, getHeight()/10*3);
+        addObject(guardText, getWidth()/2-200, getHeight()/10*3);
         //addObject(robberButton, getWidth()/2, getHeight()/10*4);
         //addObject(valuableButton, getWidth()/2, getHeight()/10*5);
         //addObject(spawnRateRobberButton, getWidth()/2, getHeight()/10*6);
@@ -73,7 +74,7 @@ public class SetUpWorld extends World
      * Return the number of guards set by the user.
      */
     public int getNumberOfGuards(){
-        return guardButton.getValue();
+        return guardSlider.getValue();
     }
     
     /**
