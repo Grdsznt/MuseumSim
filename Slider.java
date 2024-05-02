@@ -34,13 +34,17 @@ public class Slider extends Actor
     private float pixelsPerValue;
     //The current value is
     private int value;
+    //The SuperTextBox this changes is
+    private SuperTextBox textBox;
+    //The text that this changes is
+    private String text;
     
     /**
      * Create a new slider with the default size. It will be 200 pixels wide by
      * 20 pixels high.
      */
-    public Slider(){
-        this(200, 20);
+    public Slider(String text, SuperTextBox textBox){
+        this(200, 20, text, textBox);
     }
     
     /**
@@ -49,7 +53,7 @@ public class Slider extends Actor
      * @param width The width of the slider in pixels
      * @param height The height of th slider in pixels
      */
-    public Slider(int width, int height){
+    public Slider(int width, int height, String text, SuperTextBox textBox){
         majorSections = 2;
         minorSections = 2;
         
@@ -61,7 +65,8 @@ public class Slider extends Actor
         if(fgWidth % 2 == 0){
             fgWidth--;
         }
-        
+        this.text=text;
+        this.textBox = textBox;
         setImage( new GreenfootImage(actualWidth, height) );
     }
     
@@ -90,6 +95,11 @@ public class Slider extends Actor
             x -= valueX;
             x = Math.min(x, valueRight);
             setValue(posToValue(x));
+            String[] updated = {text + value};
+            if(textBox!=null) {
+                textBox.update(updated);
+                System.out.println("updated");
+            }
             imagesInvalid = true;
         }
         if(imagesInvalid){
@@ -114,7 +124,6 @@ public class Slider extends Actor
         this.value = value;
         imagesInvalid = true;
     }
-    
     /**
      * Get the current value.
      * 
