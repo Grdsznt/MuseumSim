@@ -41,7 +41,6 @@ public class SetUpWorld extends World
         
         //Set the buttons for guards, robbers, and valuables
         guardButton = new OptionButton("Number of Guards in World: ", 1, 3);
-<<<<<<< HEAD
         
         guardSlider = new Slider();
         guardSlider.showPercentage(false);
@@ -50,8 +49,6 @@ public class SetUpWorld extends World
         addObject(guardSlider, getWidth()/2, getHeight()/10*3);
         
         
-=======
->>>>>>> parent of 97f18b9 (minimum value for slider)
         //guardSlider = new Slider(125, 500, 1, 3, true);
         //addObject(guardSlider, getWidth()/2, getHeight()/10*3);
         robberButton = new OptionButton("Number of Robbers in World: ", 1, 3);
