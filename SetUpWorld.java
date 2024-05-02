@@ -18,7 +18,7 @@ public class SetUpWorld extends World
     private OptionButton guardButton;
     private OptionButton robberButton;
     private OptionButton valuableButton;
-    //private Slider guardSlider;
+    private Slider guardSlider;
     //Set the button for spawn rate of robber
     private OptionButton spawnRateRobberButton;
     //Set the button for spawn rate of visitor
@@ -41,7 +41,12 @@ public class SetUpWorld extends World
         
         //Set the buttons for guards, robbers, and valuables
         guardButton = new OptionButton("Number of Guards in World: ", 1, 3);
-        //guardSlider = new Slider(125, 500, 1, 3, true);
+        
+        guardSlider = new Slider();
+        guardSlider.showPercentage(false);
+        guardSlider.setMaximumValue(3);
+        
+        
         //addObject(guardSlider, getWidth()/2, getHeight()/10*3);
         robberButton = new OptionButton("Number of Robbers in World: ", 1, 3);
         valuableButton = new OptionButton("Number of Valuables in World: ", 2, 7);
