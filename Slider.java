@@ -34,6 +34,8 @@ public class Slider extends Actor
     private float pixelsPerValue;
     //The current value is
     private int value;
+    //The SuperTextBox that it changes is
+    private SuperTextBox textBox;
     
     /**
      * Create a new slider with the default size. It will be 200 pixels wide by
@@ -113,6 +115,12 @@ public class Slider extends Actor
         }
         this.value = value;
         imagesInvalid = true;
+        if (textBox != null) {
+            textBox.update("Value: " + value);
+        }
+    }
+    public void setLabel(SuperTextBox label) {
+        this.textBox = label;
     }
     
     /**

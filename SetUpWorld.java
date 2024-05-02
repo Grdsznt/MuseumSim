@@ -15,7 +15,7 @@ public class SetUpWorld extends World
     private HomeButton homeButton;
     
     //Set the buttons for guards, robbers, and valuables
-    private OptionButton guardButton;
+    private SuperTextBox guardText;
     private OptionButton robberButton;
     private OptionButton valuableButton;
     private Slider guardSlider;
@@ -39,26 +39,30 @@ public class SetUpWorld extends World
         
         setBackground(backGround1);
         
-        //Set the buttons for guards, robbers, and valuables
-        guardButton = new OptionButton("Number of Guards in World: ", 1, 3);
         
+        //Set up the guard slider
         guardSlider = new Slider();
         guardSlider.showPercentage(false);
         guardSlider.setMaximumValue(2);
-        addObject(guardSlider, getWidth()/2, getHeight()/10*3);
+        guardSlider.setValue(0);
+        guardSlider.setMinorSections(0);
+        addObject(guardSlider, getWidth()/2+100, getHeight()/10*3);
         
+        guardText = new SuperTextBox(
         
+        //Set the buttons for guards, robbers, and valuables
+        //guardButton = new OptionButton("Number of Guards in World: ", guardSlider);
         //guardSlider = new Slider(125, 500, 1, 3, true);
         //addObject(guardSlider, getWidth()/2, getHeight()/10*3);
-        robberButton = new OptionButton("Number of Robbers in World: ", 1, 3);
-        valuableButton = new OptionButton("Number of Valuables in World: ", 2, 7);
+        //robberButton = new OptionButton("Number of Robbers in World: ", 1, 3);
+        //valuableButton = new OptionButton("Number of Valuables in World: ", 2, 7);
         //Set the button for spawn rate of robber
-        spawnRateRobberButton = new OptionButton("Spawn Rate of Robbers per 10s: ", 1, 5);
+        //spawnRateRobberButton = new OptionButton("Spawn Rate of Robbers per 10s: ", 1, 5);
         //Set the button for spawn rate of visitor
-        spawnRateVisitorButton = new OptionButton("Spawn Rate of Visitors per 10s: ", 3, 10);
+        //spawnRateVisitorButton = new OptionButton("Spawn Rate of Visitors per 10s: ", 3, 10);
         
         //Add these buttons onto the world
-        //addObject(guardButton, getWidth()/2, getHeight()/10*3);
+        //addObject(guardButton, getWidth()/2-200, getHeight()/10*3);
         //addObject(robberButton, getWidth()/2, getHeight()/10*4);
         //addObject(valuableButton, getWidth()/2, getHeight()/10*5);
         //addObject(spawnRateRobberButton, getWidth()/2, getHeight()/10*6);
