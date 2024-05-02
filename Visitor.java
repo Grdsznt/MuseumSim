@@ -392,7 +392,7 @@ public class Visitor extends Human
             
             // Temporarily move to new position to check for collisions
             setLocation(x, y);
-            if (getIntersectingObjects(Obstacle.class).isEmpty()) {
+            if (getIntersectingObjects(Obstacle.class).isEmpty() && (Math.abs(x-curX) > 20) && (Math.abs(y-curY) > 20)) {
                 // If no collision, set this as the new target
                 targetX = x;
                 targetY = y;

@@ -17,12 +17,9 @@ public abstract class Art extends Valuable
     protected boolean willVibrate;
     protected int defaultX, defaultY;//store orginial x and y values, used for vibration
     protected int t=0;//transparency
-    /**
-     * Act - do whatever the Art wants to do. This method is called whenever
-     * the 'Act' or 'Run' button gets pressed in the environment.
-     */
-    public Art(GreenfootImage ART_IMAGE, int price){
-        super(ART_IMAGE, price);
+    
+    public Art(GreenfootImage ART_IMAGE, int price, int x, int y){
+        super(ART_IMAGE, price, -1, x, y);
         image = ART_IMAGE;
         this.price = price;
         this.spawnerType = spawnerType;
