@@ -20,9 +20,9 @@ public class OptionButton extends Button
     private Color textColor = Color.BLACK;
     
     //The value
-    private final int initialValue;
-    private final int maxValue;
     private int value;
+    
+    private Slider slider;
     
     /**
      * Constructor of the Option Button.
@@ -31,12 +31,10 @@ public class OptionButton extends Button
      * @param initialValue      The minimum value that the button can be toggled
      * @param maxValue      The maximum value that the button can be toggled
      */
-    public OptionButton(String text, int initialValue, int maxValue){
+    public OptionButton(String text, Slider slider){
         this.text = text;
-        this.initialValue = initialValue;
-        this.maxValue = maxValue;
-        this.value = initialValue;
-        
+        this.slider = slider;
+        value=slider.getValue();
         //Set background image
         GreenfootImage backgroundImage = new GreenfootImage(width, height);
         backgroundImage.setColor(backgroundColor);
@@ -55,12 +53,11 @@ public class OptionButton extends Button
         if(world instanceof SetUpWorld){
             //Add the text label
             world.addObject(textLabel, this.getX(), this.getY());
-            //Add the plus & minus buttons beside the text label
-            /*
-            world.addObject(new PlusButton(this), this.getX()+width/2+20, this.getY());
-            world.addObject(new MinusButton(this), this.getX()-width/2-20, this.getY());
-            */
         }
+    }
+    
+    public void act() {
+        changeValue();
     }
     
     /**
@@ -68,22 +65,10 @@ public class OptionButton extends Button
      * 
      * @param changeInValue either 1 or -1
      */
-    public void changeValue(int changeInValue){
+    public void changeValue(){
         //Some errors might happen if the change in value is not 1 or -1, so just return it and do not make any changes to the value.
-        if(Math.abs(changeInValue)!=1){
-            return;
-        }
-        
-        //If the value becomes less than the initial value or exceeds the maximum acceptable value, do not change
-        if(value+changeInValue<initialValue || value+changeInValue>maxValue){
-            return;
-        }
-        
-        //Update the value
-        value+=changeInValue;
-        
-        //Update the text label with the new value
-        textLabel.update(text+value);
+        value = slider.getValue();
+        textLabel = new SuperTextBox(text+value, backgroundColor, textColor, new Font("Kalam", false, false, fontSize), true, width, 0, null);
     }
     
     /**
