@@ -26,7 +26,7 @@ public class MuseumRoom extends Room
     private Obstacle pillar2 = new Obstacle(39, 100); // (536, 665), (574, 566)
     private Obstacle leftWall = new Obstacle(62, 548);
     private Obstacle rightWall = new Obstacle(62, 548);
-    private Obstacle topWall = new Obstacle(513, 92);
+    private Obstacle topWall = new Obstacle(635, 92);
     private Obstacle wallSegLeft = new Obstacle(125, 64);
     private Obstacle wallSegRight = new Obstacle(125, 64);
     private Obstacle leftBound = new Obstacle(40, 223);
@@ -149,6 +149,8 @@ public class MuseumRoom extends Room
         
         addObject(lowerBound, 330, 850);
         
+        
+        
         // need to spawn robber in specific locations
         
         this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate;
@@ -203,7 +205,6 @@ public class MuseumRoom extends Room
         addObject(goldPotPriceLabel, xPos, 625);
         addObject(tallPotPriceLabel, xPos, 685);
         addObject(shortPotPriceLabel, xPos, 745);
-        
         
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
