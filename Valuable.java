@@ -97,7 +97,7 @@ public abstract class Valuable extends Actor
                 break;
             case 4:
                 //facing down
-                yOffset = robber.getY() + robber.getImage().getHeight()/2 - 10;
+                yOffset = robber.getY() + robber.getImage().getHeight()/2 - 5;
                 xOffset = robber.getX();
                 setLocation(xOffset, yOffset);
                 break;
