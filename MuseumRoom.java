@@ -206,9 +206,6 @@ public class MuseumRoom extends Room
         addObject(tallPotPriceLabel, xPos, 685);
         addObject(shortPotPriceLabel, xPos, 745);
         
-        SilverPot valuable = new SilverPot(661,45);
-        addObject(valuable, 663, 45);
-        
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
         
