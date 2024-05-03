@@ -174,6 +174,13 @@ public class Visitor extends Human
                     isMoving = false;
                     curTile = null;
                     targeting = false;
+                    //play some other animation when idling
+                    if(Greenfoot.getRandomNumber(2) == 0){
+                        readBook();
+                    }
+                    else{
+                        lookAtPhone();
+                    }
                 }
             }
         }
@@ -354,6 +361,10 @@ public class Visitor extends Human
                 }
             }
         }
+        //randomly express some emotion when visiting
+        if(Greenfoot.getRandomNumber(900) ==0){
+            expressEmotion();
+        }
         //remove visitor when time is up
         if(visitDuration <= 0){
             numberOfVisitors--;
@@ -377,7 +388,7 @@ public class Visitor extends Human
         }
     }
     private void expressEmotion(){
-        getWorld().addObject(new Emote(1), getX() + 16, getY() - 24);
+        getWorld().addObject(new Emote(Greenfoot.getRandomNumber(7)+1), getX() + 16, getY() - 24);
     }
     
     private void pickNewTarget() {
