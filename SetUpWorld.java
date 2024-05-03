@@ -50,15 +50,15 @@ public class SetUpWorld extends World
         String[] spawnRateRobberTextContent = {"Spawn Rate of Robbers per 10s: " + 1};
         String[] spawnRateVisitorTextContent = {"Spawn Rate of Visitors per 10s: " + 3};
         
-        guardText = new SuperTextBox(guardTextContent, Color.BLACK, Color.WHITE, boringFont, true, 300, 5, Color.WHITE);
+        guardText = new SuperTextBox(guardTextContent, Color.BLACK, Color.WHITE, boringFont, true, 350, 5, Color.WHITE);
         
-        robberText = new SuperTextBox(robberTextContent, Color.BLACK, Color.WHITE, boringFont, true, 300, 5, Color.WHITE);
+        robberText = new SuperTextBox(robberTextContent, Color.BLACK, Color.WHITE, boringFont, true, 350, 5, Color.WHITE);
         
-        valuableText = new SuperTextBox(valuableTextContent, Color.BLACK, Color.WHITE, boringFont, true, 300, 5, Color.WHITE);
+        valuableText = new SuperTextBox(valuableTextContent, Color.BLACK, Color.WHITE, boringFont, true, 350, 5, Color.WHITE);
         
-        spawnRateRobberText = new SuperTextBox(spawnRateRobberTextContent, Color.BLACK, Color.WHITE, boringFont, true, 300, 5, Color.WHITE);
+        spawnRateRobberText = new SuperTextBox(spawnRateRobberTextContent, Color.BLACK, Color.WHITE, boringFont, true, 350, 5, Color.WHITE);
         
-        spawnRateVisitorText = new SuperTextBox(spawnRateVisitorTextContent, Color.BLACK, Color.WHITE, boringFont, true, 300, 5, Color.WHITE);
+        spawnRateVisitorText = new SuperTextBox(spawnRateVisitorTextContent, Color.BLACK, Color.WHITE, boringFont, true, 350, 5, Color.WHITE);
         //Set up all the sliders
         
         //Set up the guard slider
