@@ -56,6 +56,7 @@ public class Visitor extends Human
     private int actNum, frameNum, speed;
     private boolean mollyOrAdam;//true is molly, false is adam
     private int direction;//1 right, 2 up, 3 left, 4 down
+    private Emote emote;
     
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false, pathFound = false, targeting = false;
     private int targetX, targetY;
@@ -132,8 +133,12 @@ public class Visitor extends Human
         }
         if (targeting){ 
             // Get the absolute x and y distances between the robber and the current tile
-            int dx = Math.abs((curTile.x*20) - getX());
-            int dy = Math.abs((curTile.y*20) - getY());
+            int dx = 0;
+            int dy = 0;
+            if(this.curTile != null){
+                 dx = Math.abs((curTile.x*20) - getX());
+                 dy = Math.abs((curTile.y*20) - getY());
+            }
             
             // System.out.println(curTile.x + " " + curTile.y);
          
@@ -164,7 +169,7 @@ public class Visitor extends Human
             }
             
             // Check if target is reached
-            if (Math.abs(dx) <= speed && Math.abs(dy) <= speed) {
+            if (Math.abs(dx) <= speed && Math.abs(dy) <= speed && curTile != null) {
                 setLocation(curTile.x*20, curTile.y*20);
                 if (!path.isEmpty()) {
                     curTile = path.remove(0);
@@ -174,6 +179,13 @@ public class Visitor extends Human
                     isMoving = false;
                     curTile = null;
                     targeting = false;
+                    //play some other animation when idling
+                    if(Greenfoot.getRandomNumber(2) == 0){
+                        readBook();
+                    }
+                    else{
+                        lookAtPhone();
+                    }
                 }
             }
         }
@@ -354,8 +366,12 @@ public class Visitor extends Human
                 }
             }
         }
-        if (!isMoving && actNum % 500 == 0) {
-            readBook();
+        //randomly express some emotion when visiting
+        if(Greenfoot.getRandomNumber(1800) ==0){
+            expressEmotion();
+        }
+        if(emote != null){
+            emote.followActor(this, 16, -24);
         }
         //remove visitor when time is up
         if(visitDuration <= 0){
@@ -380,7 +396,8 @@ public class Visitor extends Human
         }
     }
     private void expressEmotion(){
-        getWorld().addObject(new Emote(1), getX() + 16, getY() - 24);
+        emote = new Emote(Greenfoot.getRandomNumber(7)+1);
+        getWorld().addObject(emote, getX() + 16, getY() - 24);
     }
     
     private void pickNewTarget() {

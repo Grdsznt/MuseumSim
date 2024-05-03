@@ -1,10 +1,10 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Random;
 /**
- * the actor will only be a image and nothing else
+ * this class is to make images into actors so images can move, like setLocation()
  * 
- * @author (your name) 
- * @version (a version number or a date)
+ * @author Nick
+ * @version Apr 31 2024
  */
 public class Image extends SuperSmoothMover
 {
