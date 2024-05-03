@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.Random;
 import java.util.ArrayList;
 /**
- * Write a description of class Visitor here.
+ * Just an ordinary visitor
  * 
  * @author Edwin, Felix
- * @version (a version number or a date)
+ * @version May 2 2024
  */
 public class Visitor extends Human
 {

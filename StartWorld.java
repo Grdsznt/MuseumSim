@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
- * A start image to introduce the game
+ * The start screen that introduces us to the simulation
  * 
  * @author Nick, Jean, Jerry, Edwin
  * @version May 2 2024
