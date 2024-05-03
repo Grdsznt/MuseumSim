@@ -38,18 +38,19 @@ public class SetUpWorld extends World
         Button.init();
         
         setBackground(backGround1);
+        String[] guardTextBox = {"Number of Guards in World: " + 0};
         
+        guardText = new SuperTextBox(guardTextBox, Color.BLACK, Color.WHITE, boringFont, true, 300, 5, Color.WHITE);
+        guardText.update();
         guardSlider = new Slider("Number of Guards in World: ", guardText);
         guardSlider.showPercentage(false);
         guardSlider.setMaximumValue(2);
         guardSlider.setValue(0);
         guardSlider.setMinorSections(0);
         
-        String[] guardTextBox = {"Number of Guards in World: " + guardSlider.getValue()};
         //Set up the guard slider
         
         addObject(guardSlider, getWidth()/2+100, getHeight()/10*3);
-        guardText = new SuperTextBox(guardTextBox, Color.BLACK, Color.WHITE, boringFont, true, 300, 5, Color.WHITE);
         
         //Set the buttons for guards, robbers, and valuables
         //guardButton = new OptionButton("Number of Guards in World: ", guardSlider);
