@@ -8,6 +8,7 @@ import java.lang.Math;
  */
 public abstract class Valuable extends Actor
 {
+    private MuseumRoom room;
     private int actCount;
     
     private GreenfootImage image;
@@ -17,6 +18,10 @@ public abstract class Valuable extends Actor
     private int x;
     private int y;
     private boolean needsReturn;
+
+    //After 5s, spawn a new one if it is stolen and does not need to be returned.
+    private final int actRefreshGap = 300;
+    private boolean isWaiting = false;
     
     /**
      * A simple constructor that sets Right the stolen state and the price of a valuable
@@ -38,6 +43,12 @@ public abstract class Valuable extends Actor
         
         setImage(image);
     }
+    
+    public void addedToWorld(World w){
+        if(w instanceof MuseumRoom){
+            this.room = (MuseumRoom) w;
+        }
+    }
 
     public void act()
     {
@@ -54,6 +65,23 @@ public abstract class Valuable extends Actor
             if(actCount==120){
                 setLocation(x,y);
                 actCount = 0;
+                needsReturn = false;
+            }
+        }
+        
+        //Wait to spawn the next
+        if(isStolen && !needsReturn){
+            isWaiting = true;
+        }
+        
+        if(isWaiting){
+            actCount++;
+            //If 5s is past, spawn a new one.
+            if(actCount==actRefreshGap){
+                room.addObject(this, x, y);
+                actCount = 0;
+                isStolen = false;
+                isWaiting = false;
             }
         }
     }
@@ -97,7 +125,7 @@ public abstract class Valuable extends Actor
                 break;
             case 4:
                 //facing down
-                yOffset = robber.getY() + robber.getImage().getHeight()/2;
+                yOffset = robber.getY() + robber.getImage().getHeight()/2 - 10;
                 xOffset = robber.getX();
                 setLocation(xOffset, yOffset);
                 break;

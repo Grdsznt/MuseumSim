@@ -132,8 +132,12 @@ public class Visitor extends Human
         }
         if (targeting){ 
             // Get the absolute x and y distances between the robber and the current tile
-            int dx = Math.abs((curTile.x*20) - getX());
-            int dy = Math.abs((curTile.y*20) - getY());
+            int dx = 0;
+            int dy = 0;
+            if(this.curTile != null){
+                 dx = Math.abs((curTile.x*20) - getX());
+                 dy = Math.abs((curTile.y*20) - getY());
+            }
             
             // System.out.println(curTile.x + " " + curTile.y);
          
@@ -164,7 +168,7 @@ public class Visitor extends Human
             }
             
             // Check if target is reached
-            if (Math.abs(dx) <= speed && Math.abs(dy) <= speed) {
+            if (Math.abs(dx) <= speed && Math.abs(dy) <= speed && curTile != null) {
                 setLocation(curTile.x*20, curTile.y*20);
                 if (!path.isEmpty()) {
                     curTile = path.remove(0);
@@ -362,7 +366,7 @@ public class Visitor extends Human
             }
         }
         //randomly express some emotion when visiting
-        if(Greenfoot.getRandomNumber(900) ==0){
+        if(Greenfoot.getRandomNumber(1800) ==0){
             expressEmotion();
         }
         //remove visitor when time is up
