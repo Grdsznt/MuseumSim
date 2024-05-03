@@ -41,7 +41,11 @@ public class Guard extends Human
     
     //Store the robber it trys to catch
     private Robber robber;
-    
+    /**
+     * The constructor for the guard
+     * 
+     * @param direction     The initial direction of the guard
+     */
     public Guard(int direction){        
         //Set direction
         this.direction = direction;

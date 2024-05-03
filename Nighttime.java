@@ -59,7 +59,9 @@ public class Nighttime extends Effect
         ambience.pause();
     }
     /**
-     *  Changes stats for robbers 
+     *  Changes stats for robbers based on the time of day
+     *  
+     *  @param isNight  Input for whether it is night time or not
      */
     private void setRobberStats(boolean isNight) {
         world.setTime(isNight); 

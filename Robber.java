@@ -5,7 +5,7 @@ import java.lang.Math;
  * Robber, the one who steals
  * 
  * @author Edwin, Nick, Jean, Jerry
- * @version May 2 2024
+ * @version May 2024
  */
 
 // Issues: if there are multiple robbers, it will return
@@ -44,6 +44,14 @@ public class Robber extends Human
     private boolean pathFound = false, returning = false, depositing = false, initial = true;
     private int centerX, centerY;
     private int station;
+    /** 
+     * Constructor for robber class
+     * 
+     * @param s     The speed of the robber
+     * @param tR    The target radius of the robber
+     * @param D     The initial direction of the robber
+     * @param station   The position that the robber will go to
+     */
     public Robber(double s, int tR, int D, int station){
         direction = D; 
         speed = s; targetRadius = tR;
@@ -156,6 +164,11 @@ public class Robber extends Human
         }
     }
     
+    /**
+     * Randomizes the position of the robber
+     * 
+     * @param radius    The radius sets the maximum distance the robber can move 
+     */
     private Pair getRandomPositionWithinRadius(double radius) {
         Random random = new Random();
         boolean isValid = false;
@@ -198,7 +211,12 @@ public class Robber extends Human
         if (targetValuable != null && targetValuable.isStolen()) targetValuable = null;
         else if (targetValuable != null) targetValuable.setStolen(true);
     }
-
+    
+    /**
+     * Sets the robbers direction
+     * 
+     * @param D     The integer corresponding with the direction of the robber
+     */
     public void setDirection(int D){
         if(D < 5 && D > 0){
             direction = D;
@@ -221,6 +239,11 @@ public class Robber extends Human
             setImage(framesDown[0]);
     }
     
+    /**
+     * Sets the speed of the robber
+     * 
+     * @param speed     The integer corresponding to how fast the robber can move
+     */
     public void setSpeed(int speed) {
         this.speed = speed;
     }
@@ -345,7 +368,9 @@ public class Robber extends Human
     public Valuable getCurValuable() {
         return targetValuable;
     }
-    
+    /**
+     * returns the station of the robber
+     */
     public int getStation() {
         return station;
     }
