@@ -85,6 +85,8 @@ public class Visitor extends Human
         if(!isNew){//prevent z sort problems
             isNew=true;
         }
+        MuseumRoom mr = (MuseumRoom) getWorld();
+        mr.setIncome(100);
     }
    
     public Visitor(int time){
