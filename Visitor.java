@@ -354,6 +354,9 @@ public class Visitor extends Human
                 }
             }
         }
+        if (!isMoving && actNum % 500 == 0) {
+            readBook();
+        }
         //remove visitor when time is up
         if(visitDuration <= 0){
             numberOfVisitors--;
@@ -387,11 +390,11 @@ public class Visitor extends Human
         boolean validTarget = false;
         while (!validTarget) {
             int x = random.nextInt(661);
-            int y = random.nextInt(881);
+            int y = random.nextInt(816);
             
             // Temporarily move to new position to check for collisions
             setLocation(x, y);
-            if (getIntersectingObjects(Obstacle.class).isEmpty() && (Math.abs(x-curX) > 20) && (Math.abs(y-curY) > 20)) {
+            if (getIntersectingObjects(Obstacle.class).isEmpty() && ((Math.abs(x-curX) > 20) || (Math.abs(y-curY) > 20))) {
                 // If no collision, set this as the new target
                 targetX = x;
                 targetY = y;
