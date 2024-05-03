@@ -39,6 +39,7 @@ public class MuseumRoom extends Room
     private int actCount;
     
     private static DayCounter dayCounter;
+    private static Text museumText; 
     
     //Variables
     private int money = 0;
@@ -207,6 +208,9 @@ public class MuseumRoom extends Room
         
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
+        
+        museumText = new Text("Museum Stats");
+        addObject(museumText, 830, 300);
         
         //Spawn all valuables randomly
         spawnValuables();
