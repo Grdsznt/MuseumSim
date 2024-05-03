@@ -133,7 +133,7 @@ public class Slider extends Actor
      * @return The current selected value
      */
     public int getValue(){
-        return value;
+        return value + increment;
     }
     
     /**
