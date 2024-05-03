@@ -2,10 +2,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class MuseumRoom here.
+ * MuseumRoom is the room where all the action takes place. It is utter chaos in this newly opened museum
+ * and thus highly suspectible to robbery despite the museums dreams to become one of the biggst.
  * 
  * @author Edwin, Jean
- * @version (a version number or a date)
+ * @version May 2 2024
  */
 public class MuseumRoom extends Room
 {
@@ -211,7 +212,21 @@ public class MuseumRoom extends Room
         setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
         roomBGM.playLoop();
     }
+    public void started() {
+        roomBGM.playLoop();
+        if(isNight) Nighttime.resumeAmbience();
+    }
+    public void stopped(){
+        roomBGM.stop();
+        if(isNight) Nighttime.pauseAmbience();
+    }
     
+    /**
+     * Setter for if the world is night or not 
+     */
+    public void setTime(boolean isNight){
+        this.isNight = isNight;
+    }
     /**
      * If a valuable is stolen by the robber and put to the deposit position, it is considered "gone".
      * If this is the case, clear out the position to spawn the next valuable.
@@ -431,15 +446,16 @@ public class MuseumRoom extends Room
             return 2;
         }
     }
-    
+    /**
+     * Increases the day count
+     */
     public static void increaseDayCount() {
         dayCounter.incrementDayCount();
     }
-    
-    public void started() {
-        roomBGM.playLoop();
-    }
-    public void stopped(){
-        roomBGM.stop();
+    /**
+     * Returns whether it is currently night time.
+     */
+    public boolean isNighttime(){
+        return isNight;
     }
 }
