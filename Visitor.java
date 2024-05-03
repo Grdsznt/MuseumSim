@@ -116,7 +116,7 @@ public class Visitor extends Human
             pickNewTarget();
             targeting = true;
         }
-        if (!pathFound && targeting) {
+        if (!pathFound && targeting && visitDuration>=0) {
             // Since the bfs works on 20x20 tiles, divide the x and y values by 20
             path = bfs(getX()/20, getY()/20, targetX/20, targetY/20);
             
@@ -371,8 +371,10 @@ public class Visitor extends Human
         }
         //remove visitor when time is up
         if(visitDuration <= 0){
-            numberOfVisitors--;
+            /*numberOfVisitors--;
             getWorld().removeObject(this);
+            */
+           leaveMuseum();
         }
         actNum++;
         visitDuration--;
@@ -417,6 +419,26 @@ public class Visitor extends Human
         setLocation(curX, curY);
     }
     
+    private void pickNewTarget(int x, int y) {
+        World world = getWorld();
+        Random random = new Random();
+        int curX = getX(), curY = getY();
+        boolean validTarget = false;
+        while (!validTarget) {
+            
+            // Temporarily move to new position to check for collisions
+            setLocation(x, y);
+            if (getIntersectingObjects(Obstacle.class).isEmpty() && (Math.abs(x-curX) > 20) && (Math.abs(y-curY) > 20)) {
+                // If no collision, set this as the new target
+                targetX = x;
+                targetY = y;
+                validTarget = true;
+            }
+        }
+        // Reset location after checking
+        setLocation(curX, curY);
+    }
+    
     private boolean isPathBlocked(int newX, int newY) {
         int curX = getX(), curY = getY();
         setLocation(newX, newY);
@@ -432,6 +454,13 @@ public class Visitor extends Human
         return numberOfVisitors;
     }
     
-    
-    
+    private void leaveMuseum() {
+        pickNewTarget(20, 670);
+        int curX = getX(), curY = getY();
+        if(curX==20 && curY==670) {
+            numberOfVisitors--;
+            getWorld().removeObject(this);
+        }
+        //20, 670
+    }
 }
