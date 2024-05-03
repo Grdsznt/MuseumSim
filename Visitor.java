@@ -56,6 +56,7 @@ public class Visitor extends Human
     private int actNum, frameNum, speed;
     private boolean mollyOrAdam;//true is molly, false is adam
     private int direction;//1 right, 2 up, 3 left, 4 down
+    private Emote emote;
     
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false, pathFound = false, targeting = false;
     private int targetX, targetY;
@@ -369,6 +370,9 @@ public class Visitor extends Human
         if(Greenfoot.getRandomNumber(1800) ==0){
             expressEmotion();
         }
+        if(emote != null){
+            emote.followActor(this, 16, -24);
+        }
         //remove visitor when time is up
         if(visitDuration <= 0){
             numberOfVisitors--;
@@ -392,7 +396,8 @@ public class Visitor extends Human
         }
     }
     private void expressEmotion(){
-        getWorld().addObject(new Emote(Greenfoot.getRandomNumber(7)+1), getX() + 16, getY() - 24);
+        emote = new Emote(Greenfoot.getRandomNumber(7)+1);
+        getWorld().addObject(emote, getX() + 16, getY() - 24);
     }
     
     private void pickNewTarget() {
