@@ -60,6 +60,7 @@ public class Visitor extends Human
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false, pathFound = false, targeting = false;
     private int targetX, targetY;
     
+    
     Pair curTile;
     private ArrayList<Pair> path;
 
@@ -112,11 +113,11 @@ public class Visitor extends Human
         if(Greenfoot.isKeyDown("a")){
             expressEmotion();
         }
-        if (actNum % 900 == 0) {
+        if (actNum % 900 == 0 && !leaving) {
             pickNewTarget();
             targeting = true;
         }
-        if (!pathFound && targeting && visitDuration>=0) {
+        if (!pathFound && targeting) {
             // Since the bfs works on 20x20 tiles, divide the x and y values by 20
             path = bfs(getX()/20, getY()/20, targetX/20, targetY/20);
             
@@ -130,7 +131,56 @@ public class Visitor extends Human
 
             
         }
-        if (targeting){ 
+        if(leaving) {
+            // Get the absolute x and y distances between the robber and the current tile
+            int dx = 0;
+            int dy = 0;
+            if(this.curTile != null){
+                 dx = Math.abs((curTile.x*20) - getX());
+                 dy = Math.abs((curTile.y*20) - getY());
+            }
+            
+            // System.out.println(curTile.x + " " + curTile.y);
+         
+            isMoving = true;
+            // If there is a gap, then adjust the x direction
+            if (dx != 0) { 
+                // if the visitor is to the right of the targeted tile, move him left
+                if (getX() > curTile.x*20) {
+                    setLocation(getX() - speed, getY());
+                    direction = 3; // set the direction to left
+                } else {
+                    // otherwise, move him right
+                    setLocation(getX() + speed, getY());
+                    direction = 1; // set the direction to right
+                }
+            }
+            // Once aligned horizontally, move vertically
+            else if (dy != 0) {
+                // If the visitor is below the targeted tile, move him up
+                if (getY() > curTile.y*20) {
+                    setLocation(getX(), getY()-speed);
+                    direction = 2; // set the direction to up
+                } else {
+                    // Otherwise, move him down
+                    setLocation(getX(), getY()+speed);
+                    direction = 4; // set the direction to down
+                }
+            }
+            
+            // Check if target is reached
+            if (Math.abs(dx) <= speed && Math.abs(dy) <= speed && curTile != null) {
+                setLocation(curTile.x*20, curTile.y*20);
+                if (!path.isEmpty()) {
+                    curTile = path.remove(0);
+                }
+                else {
+                    getWorld().removeObject(this);
+                    numberOfVisitors--;
+                }
+            }
+        }
+        else if (targeting){ 
             // Get the absolute x and y distances between the robber and the current tile
             int dx = 0;
             int dy = 0;
@@ -374,10 +424,15 @@ public class Visitor extends Human
             /*numberOfVisitors--;
             getWorld().removeObject(this);
             */
-           leaveMuseum();
+           if(!leaving) {
+               leaveMuseum();
+            }
+           
         }
         actNum++;
-        visitDuration--;
+        if(visitDuration >0 ) {
+            visitDuration--;
+        }
     }
 
     public void readBook(){
@@ -419,26 +474,6 @@ public class Visitor extends Human
         setLocation(curX, curY);
     }
     
-    private void pickNewTarget(int x, int y) {
-        World world = getWorld();
-        Random random = new Random();
-        int curX = getX(), curY = getY();
-        boolean validTarget = false;
-        while (!validTarget) {
-            
-            // Temporarily move to new position to check for collisions
-            setLocation(x, y);
-            if (getIntersectingObjects(Obstacle.class).isEmpty() && (Math.abs(x-curX) > 20) && (Math.abs(y-curY) > 20)) {
-                // If no collision, set this as the new target
-                targetX = x;
-                targetY = y;
-                validTarget = true;
-            }
-        }
-        // Reset location after checking
-        setLocation(curX, curY);
-    }
-    
     private boolean isPathBlocked(int newX, int newY) {
         int curX = getX(), curY = getY();
         setLocation(newX, newY);
@@ -455,12 +490,10 @@ public class Visitor extends Human
     }
     
     private void leaveMuseum() {
-        pickNewTarget(20, 670);
+        targetX = 20; targetY = 670;
         int curX = getX(), curY = getY();
-        if(curX==20 && curY==670) {
-            numberOfVisitors--;
-            getWorld().removeObject(this);
-        }
+        leaving = true;
+        targeting= true;
         //20, 670
     }
 }
