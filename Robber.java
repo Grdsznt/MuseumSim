@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 import java.lang.Math;
 /**
- * Write a description of class Robber here.
+ * Robber, the one who steals
  * 
  * @author Edwin, Nick, Jean, Jerry
- * @version (a version number or a date)
+ * @version May 2 2024
  */
 
 // Issues: if there are multiple robbers, it will return
