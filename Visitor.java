@@ -56,6 +56,7 @@ public class Visitor extends Human
     private int actNum, frameNum, speed;
     private boolean mollyOrAdam;//true is molly, false is adam
     private int direction;//1 right, 2 up, 3 left, 4 down
+    private Emote emote;
     
     protected boolean playing = false, flag = false, toSpot = false, isNew=false, leaving=false, insane=false, pathFound = false, targeting = false;
     private int targetX, targetY;
@@ -85,6 +86,8 @@ public class Visitor extends Human
         if(!isNew){//prevent z sort problems
             isNew=true;
         }
+        MuseumRoom mr = (MuseumRoom) getWorld();
+        mr.setIncome(100);
     }
    
     public Visitor(int time){
@@ -419,6 +422,9 @@ public class Visitor extends Human
         if(Greenfoot.getRandomNumber(1800) ==0){
             expressEmotion();
         }
+        if(emote != null){
+            emote.followActor(this, 16, -24);
+        }
         //remove visitor when time is up
         if(visitDuration <= 0){
             /*numberOfVisitors--;
@@ -449,7 +455,8 @@ public class Visitor extends Human
         }
     }
     private void expressEmotion(){
-        getWorld().addObject(new Emote(Greenfoot.getRandomNumber(7)+1), getX() + 16, getY() - 24);
+        emote = new Emote(Greenfoot.getRandomNumber(7)+1);
+        getWorld().addObject(emote, getX() + 16, getY() - 24);
     }
     
     private void pickNewTarget() {
@@ -459,11 +466,11 @@ public class Visitor extends Human
         boolean validTarget = false;
         while (!validTarget) {
             int x = random.nextInt(661);
-            int y = random.nextInt(881);
+            int y = random.nextInt(816);
             
             // Temporarily move to new position to check for collisions
             setLocation(x, y);
-            if (getIntersectingObjects(Obstacle.class).isEmpty() && (Math.abs(x-curX) > 20) && (Math.abs(y-curY) > 20)) {
+            if (getIntersectingObjects(Obstacle.class).isEmpty() && ((Math.abs(x-curX) > 20) || (Math.abs(y-curY) > 20))) {
                 // If no collision, set this as the new target
                 targetX = x;
                 targetY = y;

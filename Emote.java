@@ -34,4 +34,7 @@ public class Emote extends SuperSmoothMover
         }
         actNum++;
     }
+    public void followActor(Actor a, int offsetX, int offsetY){
+        setLocation(a.getX() + offsetX, a.getY() + offsetY);
+    }
 }
