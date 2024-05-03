@@ -10,8 +10,9 @@ import java.util.*;
  */
 public class MuseumRoom extends Room
 {
-    public static int income = 0;
-    private static GreenfootSound roomBGM = new GreenfootSound("Sneaky Snitch.mp3");
+
+    private static GreenfootSound roomBGM = new GreenfootSound("Sneaky-Snitch.mp3");
+
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
@@ -40,11 +41,14 @@ public class MuseumRoom extends Room
     private int actCount;
     
     private static DayCounter dayCounter;
+    private static Text museumText; 
     
     //Variables
     private int money = 0;
     private int valuablesStolenNumber = 0;
     private int robbersCatchedNumber = 0;
+    private int income = 0;
+    
     //Images
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
     private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
@@ -66,7 +70,7 @@ public class MuseumRoom extends Room
     private ValueList silverPotPriceLabel = new ValueList(silverPotImage, "$"+SilverPot.price);
     private ValueList goldPotPriceLabel = new ValueList(GoldPotImage, "$"+GoldPot.price);
     private ValueList tallPotPriceLabel = new ValueList(TallPotImage, "$"+AntiquePotTall.price);
-    private ValueList shortPotPriceLabel = new ValueList(ShortPotImage, "$"+AntiquePotShort.price);
+    private ValueList shortPotPriceLabel = new ValueList(ShortPotImage, "$"+AntiquePotShort.price); 
     
     private boolean isNight = false;
     
@@ -74,7 +78,6 @@ public class MuseumRoom extends Room
         
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
-    
     
     //Stores the possible locations of valuables
     private static int[][] valuableLocation = new int[6][2];
@@ -148,9 +151,7 @@ public class MuseumRoom extends Room
         addObject(rightBound, 0, 720);
         
         addObject(lowerBound, 330, 850);
-        
-        
-        
+                
         // need to spawn robber in specific locations
         
         this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate;
@@ -195,8 +196,9 @@ public class MuseumRoom extends Room
         //Add the statistics at the top right of the world
         int xPos = 780;
         addObject(moneyEarned, xPos, 100);
-        addObject(valuablesStolen, xPos, 200);
-        addObject(robbersCatched, xPos, 300);
+        addObject(valuablesStolen, xPos, 175);
+        addObject(robbersCatched, xPos, 250);
+        addObject(museumIncome, xPos, 350);
         
         //Add the price list at the bottom right of the world
         getBackground().drawImage(new GreenfootImage("Current Price", 24, Color.BLACK, Color.WHITE), xPos-5, 450);
@@ -208,6 +210,9 @@ public class MuseumRoom extends Room
         
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
+        
+        museumText = new Text("Museum Stats");
+        addObject(museumText, 830, 300);
         
         //Spawn all valuables randomly
         spawnValuables();
@@ -242,7 +247,7 @@ public class MuseumRoom extends Room
     
     //Over all profit Income grow 
     public void gainIncome(int newIncome){
-        income = income + newIncome;
+        this.income += newIncome;
     }
     
     public void act() {        
@@ -392,6 +397,11 @@ public class MuseumRoom extends Room
     public void setMoney(int change){
         money += change;
         moneyEarned.updateValue(money);
+    }
+    
+    public void setIncome(int change){
+        income += change;
+        museumIncome.updateValue(income);
     }
     
     /**
