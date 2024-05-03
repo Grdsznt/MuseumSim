@@ -3,7 +3,8 @@ import java.util.ArrayList;
 import java.util.List;
 /**
  * An effect that turns the world to night
- * 
+ * @author David
+ * @version May 2 2024
  */
 public class Nighttime extends Effect
 {

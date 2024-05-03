@@ -4,7 +4,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * Write a description of class Art here.
  * 
  * @author Felix, Jerry
- * @version (a version number or a date)
+ * @version May 2 2024
  */
 public abstract class Art extends Valuable
 {
@@ -18,6 +18,14 @@ public abstract class Art extends Valuable
     protected int defaultX, defaultY;//store orginial x and y values, used for vibration
     protected int t=0;//transparency
     
+    /** 
+     * Constructor for art
+     * 
+     * @param ART_IMAGE       The image of the art piece
+     * @param price     The value of the art piece
+     * @param x     The x-coordinate 
+     * @param y     The y-coordinate 
+     */
     public Art(GreenfootImage ART_IMAGE, int price, int x, int y){
         super(ART_IMAGE, price, -1, x, y);
         image = ART_IMAGE;

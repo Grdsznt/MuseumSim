@@ -16,7 +16,9 @@ public class DayCounter extends Actor
     public void act() {
         setImage(new GreenfootImage("Day: " + dayCount, 24, Color.BLACK, Color.WHITE));
     }
-    
+    /**
+     * Increases the number of days passed
+     */
     public void incrementDayCount() {
         dayCount++;
     }

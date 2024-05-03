@@ -73,18 +73,4 @@ public class DisplayResults extends World
     public void stopped() {
         music.pause();
     }
-    
-    public void moneyEarned()
-    {
-        
-    }
-    public void theftsPrevented()
-    {
-        
-    }
-    public void furnitureStolen()
-    {
-        
-    }
-    
 }
