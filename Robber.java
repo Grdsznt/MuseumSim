@@ -2,10 +2,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 import java.lang.Math;
 /**
- * Write a description of class Robber here.
+ * Robber, the one who steals
  * 
  * @author Edwin, Nick, Jean, Jerry
- * @version (a version number or a date)
+ * @version May 2 2024
  */
 
 // Issues: if there are multiple robbers, it will return
@@ -98,7 +98,7 @@ public class Robber extends Human
             animate();
         }
         // After the robber has gotten to the valuable's location, go to deposit the valuable
-        if (depositing) {
+        if (depositing && targetValuable != null) {
             pathfind(33, 34); // return to deposit zone
             animate();
         }
@@ -112,7 +112,7 @@ public class Robber extends Human
             }
         }
         //take the valuable with me
-        if(hasStolen){
+        if(hasStolen && targetValuable != null){
             targetValuable.followRobber(this);
         }
         
@@ -316,7 +316,10 @@ public class Robber extends Human
                     MuseumRoom mr = (MuseumRoom) getWorld();
                     station = mr.getStation();
                     mr.setStation(station, true);
-                    mr.setMoney(targetValuable.getPrice());
+                    if(targetValuable != null){
+                        mr.setMoney(targetValuable.getPrice());
+                    }
+                    
                     mr.setValuables(1);
                     targetValuable = null;// No more targets
                     returning = true;

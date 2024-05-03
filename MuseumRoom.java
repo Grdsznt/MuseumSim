@@ -2,10 +2,11 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class MuseumRoom here.
+ * MuseumRoom is the room where all the action takes place. It is utter chaos in this newly opened museum
+ * and thus highly suspectible to robbery despite the museums dreams to become one of the biggst.
  * 
  * @author Edwin, Jean
- * @version (a version number or a date)
+ * @version May 2 2024
  */
 public class MuseumRoom extends Room
 {

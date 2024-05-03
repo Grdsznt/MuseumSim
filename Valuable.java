@@ -3,7 +3,7 @@ import java.lang.Math;
 /**
  * Write a description of class Valuable here.
  * 
- * @author Jean, (your name)
+ * @author Jean, Nick
  * @version May 2024
  */
 public abstract class Valuable extends Actor
@@ -87,7 +87,9 @@ public abstract class Valuable extends Actor
     }
 
     /**
-     * called by other class to steal this valuable
+     * Sets this valuable's state as stolen or not
+     * 
+     * @param b     Used to change the state of isStolen
      * 
      */
     public void setStolen(boolean b){
@@ -123,7 +125,7 @@ public abstract class Valuable extends Actor
                 break;
             case 4:
                 //facing down
-                yOffset = robber.getY() + robber.getImage().getHeight()/2;
+                yOffset = robber.getY() + robber.getImage().getHeight()/2 - 10;
                 xOffset = robber.getX();
                 setLocation(xOffset, yOffset);
                 break;

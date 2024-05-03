@@ -34,6 +34,8 @@ public class Slider extends Actor
     private float pixelsPerValue;
     //The current value is
     private int value;
+    //The integer to change value by is
+    private int increment;
     //The SuperTextBox this changes is
     private SuperTextBox textBox;
     //The text that this changes is
@@ -43,8 +45,8 @@ public class Slider extends Actor
      * Create a new slider with the default size. It will be 200 pixels wide by
      * 20 pixels high.
      */
-    public Slider(String text, SuperTextBox textBox){
-        this(200, 20, text, textBox);
+    public Slider(String text, SuperTextBox textBox, int increment){
+        this(200, 20, text, textBox, increment);
     }
     
     /**
@@ -53,7 +55,7 @@ public class Slider extends Actor
      * @param width The width of the slider in pixels
      * @param height The height of th slider in pixels
      */
-    public Slider(int width, int height, String text, SuperTextBox textBox){
+    public Slider(int width, int height, String text, SuperTextBox textBox, int increment){
         majorSections = 2;
         minorSections = 2;
         
@@ -67,6 +69,7 @@ public class Slider extends Actor
         }
         this.text=text;
         this.textBox = textBox;
+        this.increment = increment;
         setImage( new GreenfootImage(actualWidth, height) );
     }
     
@@ -95,10 +98,10 @@ public class Slider extends Actor
             x -= valueX;
             x = Math.min(x, valueRight);
             setValue(posToValue(x));
-            String[] updated = {text + value};
+            String[] updated = {text + (value+increment)};
             if(textBox!=null) {
                 textBox.update(updated);
-                System.out.println("updated");
+                //System.out.println("updated");
             }
             imagesInvalid = true;
         }
@@ -130,7 +133,17 @@ public class Slider extends Actor
      * @return The current selected value
      */
     public int getValue(){
-        return value;
+        return value + increment;
+    }
+    
+    /**
+     * Set the current increment for the slider
+     * 
+     * @param delta The value you want to set the increment to
+     */
+    
+    public void setIncrement(int delta) {
+        increment = delta;
     }
     
     /**
