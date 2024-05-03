@@ -2,18 +2,18 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class ruinedMuseum here.
- * 
- * @author (your name) 
+ * abstract class for ending screen, includes a drop down menu that display the statistics
+ * @author (your name) Nick
  * @version (a version number or a date)
  */
-public class EndWorld extends World
+public abstract class  EndWorld extends World
 {
-    private MuseumRoom room;
+    protected MuseumRoom room;
     
-    private HomeButton homeButton;
+    protected HomeButton homeButton;
     protected DropDownMenu dropDownMenu;
-    private Image moneySymbol, moneyText, valuableSymbol, valuableText, robber, robberText;
-    private int moneyMade, robbersCatched, valuablesStolen;//there are the stats needed to be displayed
+    protected Image moneySymbol, moneyText, valuableSymbol, valuableText, robber, robberText;
+    protected int moneyMade, robbersCatched, valuablesStolen;//there are the stats needed to be displayed
     /**
      * Constructor for objects of class ruinedMuseum.
      * 

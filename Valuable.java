@@ -3,7 +3,7 @@ import java.lang.Math;
 /**
  * Write a description of class Valuable here.
  * 
- * @author Jean, (your name)
+ * @author Jean, Nick
  * @version May 2024
  */
 public abstract class Valuable extends Actor
