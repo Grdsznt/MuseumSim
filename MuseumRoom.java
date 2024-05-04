@@ -82,7 +82,9 @@ public class MuseumRoom extends Room
     //Stores the possible locations of valuables
     private static int[][] valuableLocation = new int[6][2];
     //Stores the boolean for each valuable
-    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot}
+    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot
+    //List of valuables that needs to be acted because it is removed from the world & needs to be spawned again
+    ArrayList<Valuable> roomValuables = new ArrayList<Valuable>();
     
     public class Pair {
         int x, y;
@@ -323,6 +325,13 @@ public class MuseumRoom extends Room
                 robberLoc[rand] = true;
             }
         }
+        
+        //Prepare to spawn each Valuable
+        for(Valuable v : roomValuables){
+            if(v.getWaiting()){
+                v.prepareToSpawn();
+            }
+        }
     }
     
     /**
@@ -428,6 +437,24 @@ public class MuseumRoom extends Room
         }
         actNum++;
     }
+    
+    /**
+     * Add the Valuable to the ArrayList.
+     * 
+     * @param v     The Valuable that needs to be added.
+     */
+    public void addValuables(Valuable v){
+        roomValuables.add(v);
+    }
+    
+    /*
+     * Remove the Valuable from the ArrayList.
+     * 
+     * @param v     The Valuable that needs to be removed.
+     */
+    /*public void removeValuables(Valuable v){
+        roomValuables.remove(v);
+    }*/
     
     /**
      * Get the current value of money.
