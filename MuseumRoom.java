@@ -220,7 +220,6 @@ public class MuseumRoom extends Room
         spawnValuables();
         
         setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
-        roomBGM.playLoop();
     }
     public void started() {
         roomBGM.playLoop();
@@ -252,7 +251,10 @@ public class MuseumRoom extends Room
         this.income += newIncome;
     }
     
-    public void act() {        
+    public void act() {  
+        if(actCount == 0){
+            roomBGM.playLoop();
+        }
         actCount++;
         isNight = (actCount % 1600) < 600;
         if(actCount % 1600 == 0) {
