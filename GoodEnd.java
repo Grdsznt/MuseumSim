@@ -60,7 +60,7 @@ public class GoodEnd extends EndWorld
         if(actNum > 750){
             dropDownMenu.moveNow();
             if(Greenfoot.getRandomNumber (10) == 0){
-                int numParticles = Greenfoot.getRandomNumber(8) + 2;
+                int numParticles = Greenfoot.getRandomNumber(4)+2;
                 firework(Greenfoot.getRandomNumber(getWidth()), Greenfoot.getRandomNumber(getWidth()),numParticles , 2);
                 kaching.play();
             }
