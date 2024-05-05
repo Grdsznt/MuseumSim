@@ -47,14 +47,14 @@ public abstract class Valuable extends Actor
     public void addedToWorld(World w){
         if(w instanceof MuseumRoom){
             this.room = (MuseumRoom) w;
+            room.addValuables(this);
         }
     }
 
     public void act()
     {
         //If it is stolen by the robber and the robber is catched in the middle, go back to its original position.
-        if(isStolen && (getX()!=x || getY()!=y)){
-            isStolen = false;
+        if(!isStolen && (getX()!=x || getY()!=y)){
             needsReturn = true;
         }
         
@@ -68,21 +68,19 @@ public abstract class Valuable extends Actor
                 needsReturn = false;
             }
         }
-        
-        //Wait to spawn the next
-        if(isStolen && !needsReturn){
-            isWaiting = true;
-        }
-        
-        if(isWaiting){
-            actCount++;
-            //If 5s is past, spawn a new one.
-            if(actCount==actRefreshGap){
-                room.addObject(this, x, y);
-                actCount = 0;
-                isStolen = false;
-                isWaiting = false;
-            }
+    }
+    
+    /**
+     * Prepare the Valuable to be spawned.
+     */
+    public void prepareToSpawn(){
+        actCount++;
+        //If 5s is past, spawn a new one.
+        if(actCount==actRefreshGap){
+            //room.addObject(this, x, y); //java.util.ConcurrentModificationException
+            actCount = 0;
+            isStolen = false;
+            isWaiting = false;
         }
     }
 
@@ -94,6 +92,16 @@ public abstract class Valuable extends Actor
      */
     public void setStolen(boolean b){
         isStolen = b;
+    }
+    
+    /**
+     * Set this valuable's waiting state.
+     * 
+     * @param value     The value that should be setting to
+     * 
+     */
+    public void setWaiting(boolean value){
+        isWaiting = value;
     }
     
     /**
@@ -148,4 +156,12 @@ public abstract class Valuable extends Actor
         return this.price;
     }
 
+    /**
+     * Returns if this is waiting to be spawned.
+     * 
+     * @return boolean      True if it is waiting to be spawned, false otherwise.
+     */
+    public boolean getWaiting(){
+        return this.isWaiting;
+    }
 }
