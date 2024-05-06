@@ -20,5 +20,13 @@ public class Pot extends Valuable
     public Pot(int x, int y){
         //Set the image, and set the price to $100, and give the x and y positions
         super(new GreenfootImage("PinkPot.png"), indexInList, 500, x, y);
+    public Pot(){
+        super("PinkPot.png");
     }
+    public void act(){
+        // Add your action code here.
+        //Set the image, and set the price to $100
+        super(new GreenfootImage("PinkPot.png"), 500);
+    }
+
 }
