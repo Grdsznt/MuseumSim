@@ -419,7 +419,7 @@ public class Visitor extends Human
             }
         }
         //randomly express some emotion when visiting
-        if(Greenfoot.getRandomNumber(1800) ==0){
+        if(Greenfoot.getRandomNumber(1800) ==0 && !leaving){
             expressEmotion();
         }
         if(emote != null){
