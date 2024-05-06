@@ -419,10 +419,10 @@ public class Visitor extends Human
             }
         }
         //randomly express some emotion when visiting
-        if(Greenfoot.getRandomNumber(1800) ==0){
+        if(Greenfoot.getRandomNumber(1800) ==0 && getWorld() instanceof MuseumRoom){
             expressEmotion();
         }
-        if(emote != null){
+        if(emote != null && getWorld() instanceof MuseumRoom){
             emote.followActor(this, 16, -24);
         }
         //remove visitor when time is up
