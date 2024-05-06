@@ -142,9 +142,7 @@ public class Visitor extends Human
                  dx = Math.abs((curTile.x*20) - getX());
                  dy = Math.abs((curTile.y*20) - getY());
             }
-            
-            // System.out.println(curTile.x + " " + curTile.y);
-         
+                     
             isMoving = true;
             // If there is a gap, then adjust the x direction
             if (dx != 0) { 
@@ -231,13 +229,6 @@ public class Visitor extends Human
                     isMoving = false;
                     curTile = null;
                     targeting = false;
-                    //play some other animation when idling
-                    if(Greenfoot.getRandomNumber(2) == 0){
-                        readBook();
-                    }
-                    else{
-                        lookAtPhone();
-                    }
                 }
             }
         }
