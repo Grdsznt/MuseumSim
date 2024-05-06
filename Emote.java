@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Emote here.
  * emote that character can make
- * @author (your name) 
+ * @author Nick
  * @version (a version number or a date)
  */
 public class Emote extends SuperSmoothMover
@@ -33,5 +33,8 @@ public class Emote extends SuperSmoothMover
             getWorld().removeObject(this);
         }
         actNum++;
+    }
+    public void followActor(Actor a, int offsetX, int offsetY){
+        setLocation(a.getX() + offsetX, a.getY() + offsetY);
     }
 }

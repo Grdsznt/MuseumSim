@@ -2,15 +2,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.*;
 
 /**
- * Write a description of class MuseumRoom here.
+ * MuseumRoom is the room where all the action takes place. It is utter chaos in this newly opened museum
+ * and thus highly suspectible to robbery despite the museums dreams to become one of the biggst.
  * 
  * @author Edwin, Jean
- * @version (a version number or a date)
+ * @version May 2 2024
  */
 public class MuseumRoom extends Room
 {
-    public static int income = 0;
-    
+
+    private static GreenfootSound roomBGM = new GreenfootSound("Sneaky-Snitch.mp3");
+
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
     private Obstacle displayTable1 = new Obstacle(84, 49); //  (285, 723), (369, 674)
@@ -25,7 +27,7 @@ public class MuseumRoom extends Room
     private Obstacle pillar2 = new Obstacle(39, 100); // (536, 665), (574, 566)
     private Obstacle leftWall = new Obstacle(62, 548);
     private Obstacle rightWall = new Obstacle(62, 548);
-    private Obstacle topWall = new Obstacle(513, 92);
+    private Obstacle topWall = new Obstacle(635, 92);
     private Obstacle wallSegLeft = new Obstacle(125, 64);
     private Obstacle wallSegRight = new Obstacle(125, 64);
     private Obstacle leftBound = new Obstacle(40, 223);
@@ -35,15 +37,18 @@ public class MuseumRoom extends Room
     private List<Pair> robberSpawns;
     private List<Pair> guardSpawns;
     
-    private int robbers, guards, valuables, spawnRate;
+    private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate;
     private int actCount;
     
     private static DayCounter dayCounter;
+    private static Text museumText; 
     
     //Variables
     private int money = 0;
     private int valuablesStolenNumber = 0;
     private int robbersCatchedNumber = 0;
+    private int income = 0;
+    
     //Images
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
     private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
@@ -65,20 +70,21 @@ public class MuseumRoom extends Room
     private ValueList silverPotPriceLabel = new ValueList(silverPotImage, "$"+SilverPot.price);
     private ValueList goldPotPriceLabel = new ValueList(GoldPotImage, "$"+GoldPot.price);
     private ValueList tallPotPriceLabel = new ValueList(TallPotImage, "$"+AntiquePotTall.price);
-    private ValueList shortPotPriceLabel = new ValueList(ShortPotImage, "$"+AntiquePotShort.price);
+    private ValueList shortPotPriceLabel = new ValueList(ShortPotImage, "$"+AntiquePotShort.price); 
     
-    
+    private boolean isNight = false;
     
     private int actNum = 0;
         
     private boolean robberLoc[] = new boolean[3];
     private int robIndx = 0;
     
-    
     //Stores the possible locations of valuables
     private static int[][] valuableLocation = new int[6][2];
     //Stores the boolean for each valuable
-    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot}
+    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot
+    //List of valuables that needs to be acted because it is removed from the world & needs to be spawned again
+    ArrayList<Valuable> roomValuables = new ArrayList<Valuable>();
     
     public class Pair {
         int x, y;
@@ -89,7 +95,7 @@ public class MuseumRoom extends Room
     /**
      * Constructor for objects of class MuseumRoom.
      */
-    public MuseumRoom(int robbers, int guards, int valuables, int spawnRate)
+    public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate)
     { 
         super(1000,816,0, 0);
         setBackground(worldImage);
@@ -147,10 +153,10 @@ public class MuseumRoom extends Room
         addObject(rightBound, 0, 720);
         
         addObject(lowerBound, 330, 850);
-        
+                
         // need to spawn robber in specific locations
         
-        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.spawnRate = spawnRate;
+        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate;
         
         robberSpawns = new ArrayList<Pair>(3);
         guardSpawns = new ArrayList<Pair>(3);
@@ -188,14 +194,13 @@ public class MuseumRoom extends Room
         }
         actCount = 1;
         
-        Visitor v = new Visitor(3200, 1);
-        addObject(v, 20, 670);
         
         //Add the statistics at the top right of the world
         int xPos = 780;
         addObject(moneyEarned, xPos, 100);
-        addObject(valuablesStolen, xPos, 200);
-        addObject(robbersCatched, xPos, 300);
+        addObject(valuablesStolen, xPos, 175);
+        addObject(robbersCatched, xPos, 250);
+        addObject(museumIncome, xPos, 350);
         
         //Add the price list at the bottom right of the world
         getBackground().drawImage(new GreenfootImage("Current Price", 24, Color.BLACK, Color.WHITE), xPos-5, 450);
@@ -205,88 +210,62 @@ public class MuseumRoom extends Room
         addObject(tallPotPriceLabel, xPos, 685);
         addObject(shortPotPriceLabel, xPos, 745);
         
-        
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
         
-        //Randomly spawn different valuables at different locations
-        for(int i=0; i<valuableLocation.length; i++){
-            int x = valuableLocation[i][0];
-            int y = valuableLocation[i][1];
-            //If something is there, do not spawn any
-            if(getObjectsAt(x, y, Valuable.class).size()!=0){
-                continue;
-            }
-            
-            //For this location, find a valuable to be spawned
-            boolean hasFalse = false;
-            for(boolean value : valuableInWorld) {
-                if(!value) {
-                    hasFalse = true;
-                    break;
-                }
-            }
-            while(hasFalse){
-                //If something is false in the array, still ramdomly get number
-                int random = Greenfoot.getRandomNumber(valuableInWorld.length);
-                if(valuableInWorld[random]==true){
-                    continue;
-                }
-                //If this object at this index 'random' is not currently in world, then get the valuable coresponding to this index
-                Valuable valuable;
-                switch(random){
-                    case 0: {
-                        valuable = new Pot();
-                        break;
-                    }
-                    case 1: {
-                        valuable = new SilverPot();
-                        break;
-                    }
-                    case 2: {
-                        valuable = new GoldPot();
-                        break;
-                    }
-                    case 3: {
-                        valuable = new AntiquePotTall();
-                        break;
-                    }
-                    case 4: {
-                        valuable = new AntiquePotShort();
-                        break;
-                    }
-                    default: {
-                        valuable = new Pot();
-                        break;
-                    }
-                }
-                
-                //Spawn the valuable at x & y
-                addObject(valuable, x, y);
-                valuableInWorld[random] = true;
-                //Go to the next location
-                break;
-            }
-        }
+        museumText = new Text("Museum Stats");
+        addObject(museumText, 830, 300);
         
+        //Spawn all valuables randomly
+        spawnValuables();
         
         setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
+    }
+    public void started() {
+        roomBGM.playLoop();
+        if(isNight) Nighttime.resumeAmbience();
+    }
+    public void stopped(){
+        roomBGM.stop();
+        if(isNight) Nighttime.pauseAmbience();
+    }
+    
+    /**
+     * Setter for if the world is night or not 
+     */
+    public void setTime(boolean isNight){
+        this.isNight = isNight;
+    }
+    /**
+     * If a valuable is stolen by the robber and put to the deposit position, it is considered "gone".
+     * If this is the case, clear out the position to spawn the next valuable.
+     * 
+     * @param index     The index indicated which specific Valuable needs to clear out.
+     */
+    public void clearValuablePosition(int index){
+        valuableInWorld[index] = false;
     }
     
     //Over all profit Income grow 
     public void gainIncome(int newIncome){
-        income = income + newIncome;
+        this.income += newIncome;
     }
     
-    public void act() {
+    public void act() {  
+        if(actCount == 0){
+            roomBGM.playLoop();
+        }
         actCount++;
+        isNight = (actCount % 1600) < 600;
         if(actCount % 1600 == 0) {
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
         }
-        
+        if (actCount % (600/visitorSpawnRate) == 0 && !isNight) {
+            addObject(new Visitor(1000, 1), 20, 670);
+        }
         // Randomly spawn robber if 2 stations are vacant, spawn robber at specific location if only 1 station is vacant
-        if (actCount % (600/spawnRate) == 0 && getObjects(Robber.class).size() < 3) {
+        if (actCount % (600/robberSpawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
                 if (robberLoc[1] == true) {
                     addObject(new Robber(3, 600, 4, 2), 450, 350);
@@ -348,6 +327,77 @@ public class MuseumRoom extends Room
                 robberLoc[rand] = true;
             }
         }
+        
+        //Prepare to spawn each Valuable
+        for(Valuable v : roomValuables){
+            if(v.getWaiting()){
+                v.prepareToSpawn();
+            }
+        }
+    }
+    
+    /**
+     * Randomly spawn different valuables at different locations.
+     */
+    public void spawnValuables(){
+        for(int i=0; i<valuableLocation.length; i++){
+            int x = valuableLocation[i][0];
+            int y = valuableLocation[i][1];
+            //If something is there, do not spawn any
+            if(getObjectsAt(x, y, Valuable.class).size()!=0){
+                continue;
+            }
+            
+            //For this location, find a valuable to be spawned
+            boolean hasFalse = false;
+            for(boolean value : valuableInWorld) {
+                if(!value) {
+                    hasFalse = true;
+                    break;
+                }
+            }
+            while(hasFalse){
+                //If something is false in the array, still ramdomly get number
+                int random = Greenfoot.getRandomNumber(valuableInWorld.length);
+                if(valuableInWorld[random]==true){
+                    continue;
+                }
+                //If this object at this index 'random' is not currently in world, then get the valuable coresponding to this index
+                Valuable valuable;
+                switch(random){
+                    case 0: {
+                        valuable = new Pot(x,y);
+                        break;
+                    }
+                    case 1: {
+                        valuable = new SilverPot(x,y);
+                        break;
+                    }
+                    case 2: {
+                        valuable = new GoldPot(x,y);
+                        break;
+                    }
+                    case 3: {
+                        valuable = new AntiquePotTall(x,y);
+                        break;
+                    }
+                    case 4: {
+                        valuable = new AntiquePotShort(x,y);
+                        break;
+                    }
+                    default: {
+                        valuable = new Pot(x,y);
+                        break;
+                    }
+                }
+                
+                //Spawn the valuable at x & y
+                addObject(valuable, x, y);
+                valuableInWorld[random] = true;
+                //Go to the next location
+                break;
+            }
+        }
     }
     
     /**
@@ -358,6 +408,11 @@ public class MuseumRoom extends Room
     public void setMoney(int change){
         money += change;
         moneyEarned.updateValue(money);
+    }
+    
+    public void setIncome(int change){
+        income += change;
+        museumIncome.updateValue(income);
     }
     
     /**
@@ -384,6 +439,24 @@ public class MuseumRoom extends Room
         }
         actNum++;
     }
+    
+    /**
+     * Add the Valuable to the ArrayList.
+     * 
+     * @param v     The Valuable that needs to be added.
+     */
+    public void addValuables(Valuable v){
+        roomValuables.add(v);
+    }
+    
+    /*
+     * Remove the Valuable from the ArrayList.
+     * 
+     * @param v     The Valuable that needs to be removed.
+     */
+    /*public void removeValuables(Valuable v){
+        roomValuables.remove(v);
+    }*/
     
     /**
      * Get the current value of money.
@@ -419,16 +492,16 @@ public class MuseumRoom extends Room
             return 2;
         }
     }
-    
+    /**
+     * Increases the day count
+     */
     public static void increaseDayCount() {
         dayCounter.incrementDayCount();
     }
-    
-    public void started() {
-        StartWorld.music.pause();
-    }
-    
-    public void paused() {
-        StartWorld.music.pause();
+    /**
+     * Returns whether it is currently night time.
+     */
+    public boolean isNighttime(){
+        return isNight;
     }
 }

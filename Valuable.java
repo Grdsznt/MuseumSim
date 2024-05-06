@@ -3,42 +3,112 @@ import java.lang.Math;
 /**
  * Write a description of class Valuable here.
  * 
- * @author (your name), Jean 
- * @version (a version number or a date)
+ * @author Jean, Nick
+ * @version May 2024
  */
-public class Valuable extends Actor
+public abstract class Valuable extends Actor
 {
+    private MuseumRoom room;
+    private int actCount;
+    
     private GreenfootImage image;
+    private int indexInList;
     private int price;
     private boolean isStolen;
+    private int x;
+    private int y;
+    private boolean needsReturn;
+
+    //After 5s, spawn a new one if it is stolen and does not need to be returned.
+    private final int actRefreshGap = 300;
+    private boolean isWaiting = false;
     
     /**
      * A simple constructor that sets Right the stolen state and the price of a valuable
      * 
-     * @param price   The price of this valuable
+     * @param image     The image of this valuable
+     * @param price     The price of this valuable
+     * @param x         The x position of this valuable
+     * @param y         The y position of this valuable
      */
-    public Valuable(GreenfootImage image, int price){
+    public Valuable(GreenfootImage image, int index, int price, int x, int y){
+        this.actCount = 0;
         this.image = image;
+        this.indexInList = index;
         this.price = price;
+        this.x = x;
+        this.y = y;
         isStolen = false;
+        needsReturn = false;
         
         setImage(image);
+    }
+    
+    public void addedToWorld(World w){
+        if(w instanceof MuseumRoom){
+            this.room = (MuseumRoom) w;
+            room.addValuables(this);
+        }
     }
 
     public void act()
     {
+        //If it is stolen by the robber and the robber is catched in the middle, go back to its original position.
+        if(!isStolen && (getX()!=x || getY()!=y)){
+            needsReturn = true;
+        }
         
+        //Return to its original position after 2 seconds.
+        if(needsReturn){
+            actCount++;
+            //If 2s is past, put it back.
+            if(actCount==120){
+                setLocation(x,y);
+                actCount = 0;
+                needsReturn = false;
+            }
+        }
+    }
+    
+    /**
+     * Prepare the Valuable to be spawned.
+     */
+    public void prepareToSpawn(){
+        actCount++;
+        //If 5s is past, spawn a new one.
+        if(actCount==actRefreshGap){
+            //room.addObject(this, x, y); //java.util.ConcurrentModificationException
+            actCount = 0;
+            isStolen = false;
+            isWaiting = false;
+        }
     }
 
     /**
-     * called by other class to steal this valuable
+     * Sets this valuable's state as stolen or not
+     * 
+     * @param b     Used to change the state of isStolen
      * 
      */
     public void setStolen(boolean b){
         isStolen = b;
     }
     
-    //follow the robber after i have been stolen
+    /**
+     * Set this valuable's waiting state.
+     * 
+     * @param value     The value that should be setting to
+     * 
+     */
+    public void setWaiting(boolean value){
+        isWaiting = value;
+    }
+    
+    /**
+     * When robber has stolen valuable. The valuable follows the robber.
+     * 
+     * @param robber    The robber that has stolen this valuable
+     */
     public void followRobber(Robber robber){
         int yOffset;
         int xOffset;
@@ -63,7 +133,7 @@ public class Valuable extends Actor
                 break;
             case 4:
                 //facing down
-                yOffset = robber.getY() + robber.getImage().getHeight()/2;
+                yOffset = robber.getY() + robber.getImage().getHeight()/2 - 5;
                 xOffset = robber.getX();
                 setLocation(xOffset, yOffset);
                 break;
@@ -86,4 +156,12 @@ public class Valuable extends Actor
         return this.price;
     }
 
+    /**
+     * Returns if this is waiting to be spawned.
+     * 
+     * @return boolean      True if it is waiting to be spawned, false otherwise.
+     */
+    public boolean getWaiting(){
+        return this.isWaiting;
+    }
 }

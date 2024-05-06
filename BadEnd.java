@@ -2,8 +2,8 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * Write a description of class BadEnd here.
- * 
- * @author (your name) 
+ * bad ending for the game
+ * @author (your name) Nick
  * @version (a version number or a date)
  */
 public class BadEnd extends EndWorld
