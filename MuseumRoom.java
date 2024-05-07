@@ -40,7 +40,7 @@ public class MuseumRoom extends Room
     private List<Pair> guardSpawns;
     
     // instance variables
-    private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate;
+    private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate, dayLimit;
     private int actCount;
     
     // To count the days, and to display some text
@@ -104,8 +104,9 @@ public class MuseumRoom extends Room
      * @param valuables     The number of valuables in the museum room
      * @param robberSpawnRate    The spawn rate of robbers
      * @param visitorSpawnRate   The spawn rate of visitors
+     * @param dayLimit  The limit of the amount of days that the museum is active
      */
-    public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate)
+    public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate, int dayLimit)
     { 
         super(1000,816,0, 0);
         setBackground(worldImage);
@@ -166,7 +167,7 @@ public class MuseumRoom extends Room
                 
         
         // set instance variables
-        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate;
+        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate; this.dayLimit = dayLimit;
         
         // initialize robber and guard spawns
         robberSpawns = new ArrayList<Pair>(3);
@@ -239,7 +240,7 @@ public class MuseumRoom extends Room
         spawnValuables();
         
         // Set the paint order (for Nighttime class)
-        setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
+        setPaintOrder(Statistic.class, Text.class, DayCounter.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     /**
      *  Start music
@@ -283,6 +284,9 @@ public class MuseumRoom extends Room
             roomBGM.playLoop();
         }
         actCount++;
+        if(dayCounter.getDayCount() > dayLimit) {
+            calculateEnding();
+        }
         // get if it is night or not (every 1600 acts, night will activate, and the night duration is 600)
         isNight = (actCount % 1600) < 600;
         if(actCount % 1600 == 0) { // spawn new night effect every 1600 acts
@@ -540,5 +544,17 @@ public class MuseumRoom extends Room
      */
     public boolean isNighttime(){
         return isNight;
+    }
+    
+    public void calculateEnding() {
+        if(income < 2500) {
+            Greenfoot.setWorld(new BadEnd(this));
+        }
+        else if(income > 2500 && income < 5000) {
+            Greenfoot.setWorld(new MidEnd(this));
+        }
+        else if (income > 5000) {
+            Greenfoot.setWorld(new GoodEnd(this));
+        }
     }
 }
