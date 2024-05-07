@@ -1,7 +1,7 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.lang.Math;
 /**
- * Write a description of class Valuable here.
+ * Valuables spawned in place in the Museum Room.
  * 
  * @author Jean, Nick
  * @version May 2024
@@ -47,7 +47,7 @@ public abstract class Valuable extends Actor
     public void addedToWorld(World w){
         if(w instanceof MuseumRoom){
             this.room = (MuseumRoom) w;
-            room.addValuables(this);
+            //room.addValuables(this, indexInList);
         }
     }
 
@@ -77,7 +77,7 @@ public abstract class Valuable extends Actor
         actCount++;
         //If 5s is past, spawn a new one.
         if(actCount==actRefreshGap){
-            //room.addObject(this, x, y); //java.util.ConcurrentModificationException
+            room.addObject(this, x, y); //java.util.ConcurrentModificationException
             actCount = 0;
             isStolen = false;
             isWaiting = false;

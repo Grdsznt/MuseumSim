@@ -81,12 +81,13 @@ public class MuseumRoom extends Room
     // For robber location
     private boolean robberLoc[] = new boolean[3];
     
+    private static final int valuableCount = 6;
     //Stores the possible locations of valuables
-    private static int[][] valuableLocation = new int[6][2];
+    private static int[][] valuableLocation = new int[valuableCount][2];
     //Stores the boolean for each valuable
-    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot
-    //List of valuables that needs to be acted because it is removed from the world & needs to be spawned again
-    ArrayList<Valuable> roomValuables = new ArrayList<Valuable>();
+    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, AntiqueTeaPot}
+    //Array of valuables that are in the world
+    private Valuable[] roomValuables = new Valuable[valuableCount];
     
     // Utility Pair class -- See Class "Human" for more info
     public class Pair {
@@ -357,9 +358,9 @@ public class MuseumRoom extends Room
         }
         
         //Prepare to spawn each Valuable
-        for(Valuable v : roomValuables){
-            if(v.getWaiting()){
-                v.prepareToSpawn();
+        for(int i=0; i<roomValuables.length; i++){
+            if(roomValuables[i].getWaiting()){
+                roomValuables[i].prepareToSpawn();
             }
         }
     }
@@ -395,26 +396,32 @@ public class MuseumRoom extends Room
                 switch(random){
                     case 0: {
                         valuable = new Pot(x,y);
+                        roomValuables[0] = valuable;
                         break;
                     }
                     case 1: {
                         valuable = new SilverPot(x,y);
+                        roomValuables[1] = valuable;
                         break;
                     }
                     case 2: {
                         valuable = new GoldPot(x,y);
+                        roomValuables[2] = valuable;
                         break;
                     }
                     case 3: {
                         valuable = new AntiquePotTall(x,y);
+                        roomValuables[3] = valuable;
                         break;
                     }
                     case 4: {
                         valuable = new AntiquePotShort(x,y);
+                        roomValuables[4] = valuable;
                         break;
                     }
                     default: {
-                        valuable = new Pot(x,y);
+                        valuable = new AntiqueTeaPot(x,y);
+                        roomValuables[5] = valuable;
                         break;
                     }
                 }
@@ -463,14 +470,14 @@ public class MuseumRoom extends Room
         robbersCatched.updateValue(robbersCatchedNumber);
     }
     
-    /**
-     * Add the Valuable to the ArrayList.
+    /*
+     * Add the Valuable to the Array.
      * 
      * @param v     The Valuable that needs to be added.
      */
-    public void addValuables(Valuable v){
-        roomValuables.add(v);
-    }
+    /*public void addValuables(Valuable v, int index){
+        roomValuables[index] = v;
+    }*/
     
     /*
      * Remove the Valuable from the ArrayList.
