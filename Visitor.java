@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Just an ordinary visitor
  * 
- * @author Edwin, Felix
+ * @author Edwin, Felix, Jerry
  * @version May 2 2024
  */
 public class Visitor extends Human
