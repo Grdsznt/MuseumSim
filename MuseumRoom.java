@@ -241,6 +241,7 @@ public class MuseumRoom extends Room
         
         // Set the paint order (for Nighttime class)
         setPaintOrder(Statistic.class, Text.class, DayCounter.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
+        Robber.init();
     }
     /**
      *  Start music

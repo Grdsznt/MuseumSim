@@ -44,6 +44,9 @@ public class Robber extends Human
     private boolean pathFound = false, returning = false, depositing = false, initial = true;
     private int centerX, centerY;
     private int station;
+    
+    private static GreenfootSound[] cashSounds;
+    private static int cashSoundsIndex;
     /** 
      * Constructor for robber class
      * 
@@ -348,6 +351,7 @@ public class Robber extends Human
                     targetValuable = null;// No more targets
                     returning = true;
                     depositing = false;
+                    playCashSound();
                 } else if (returning){
                     centerX = getX();
                     centerY = getY();
@@ -377,5 +381,26 @@ public class Robber extends Human
      */
     public int getStation() {
         return station;
+    }
+    
+    /**
+     * Method to initialize the sounds for this class
+     */
+    public static void init() {
+        cashSoundsIndex = 0;
+        cashSounds = new GreenfootSound[10];
+        for (int i=0;i<cashSounds.length;i++) {
+            cashSounds[i] = new GreenfootSound("cash.mp3");
+            cashSounds[i].setVolume(30);
+        }
+    }
+    
+    //Code from Mr. Cohen
+    public void playCashSound() {
+        cashSounds[cashSoundsIndex].play();
+        cashSoundsIndex++;
+        if (cashSoundsIndex >= cashSounds.length){
+            cashSoundsIndex = 0;
+        }
     }
 }
