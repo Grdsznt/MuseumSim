@@ -4,7 +4,7 @@ import java.util.ArrayList;
 /**
  * Just an ordinary visitor
  * 
- * @author Edwin, Felix
+ * @author Edwin, Felix, Jerry
  * @version May 2 2024
  */
 public class Visitor extends Human
@@ -65,7 +65,12 @@ public class Visitor extends Human
     Pair curTile;
     private ArrayList<Pair> path;
 
-    
+    /**
+     * Constructor for the visitor
+     * 
+     * @param time   The length of time the visitor stays in the world
+     * @param speed     How fast the visitor moves
+     */
     public Visitor(int time, int speed){
         visitDuration = time;
         numberOfVisitors++;
@@ -89,7 +94,11 @@ public class Visitor extends Human
         MuseumRoom mr = (MuseumRoom) getWorld();
         mr.setIncome(25);
     }
-   
+    /** 
+     * Constructor for visitor
+     * 
+     * @param time The length of time the visitor stays in the world
+     */
     public Visitor(int time){
         visitDuration = time;
         numberOfVisitors++;

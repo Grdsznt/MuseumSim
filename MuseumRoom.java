@@ -40,7 +40,7 @@ public class MuseumRoom extends Room
     private List<Pair> guardSpawns;
     
     // instance variables
-    private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate;
+    private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate, dayLimit;
     private int actCount;
     
     // To count the days, and to display some text
@@ -81,13 +81,14 @@ public class MuseumRoom extends Room
     // For robber location
     private boolean robberLoc[] = new boolean[3];
     
+    private static final int valuableCount = 6;
     //Stores the possible locations of valuables
-    private static int[][] valuableLocation = new int[6][2];
+    private static int[][] valuableLocation = new int[valuableCount][2];
     //Stores the boolean for each valuable
-    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot
+    private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, AntiqueTeaPot}
+    //Array of valuables that are in the world
+    private Valuable[] roomValuables = new Valuable[valuableCount];
     private boolean artInWorld = false;
-    //List of valuables that needs to be acted because it is removed from the world & needs to be spawned again
-    ArrayList<Valuable> roomValuables = new ArrayList<Valuable>();
     
     // Utility Pair class -- See Class "Human" for more info
     public class Pair {
@@ -98,8 +99,15 @@ public class MuseumRoom extends Room
     }
     /**
      * Constructor for objects of class MuseumRoom.
+     * 
+     * @param robbers   The maximum number of robbers in the museum room
+     * @param guards    The maximum number of guards in the museum room
+     * @param valuables     The number of valuables in the museum room
+     * @param robberSpawnRate    The spawn rate of robbers
+     * @param visitorSpawnRate   The spawn rate of visitors
+     * @param dayLimit  The limit of the amount of days that the museum is active
      */
-    public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate)
+    public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate, int dayLimit)
     { 
         super(1000,816,0, 0);
         setBackground(worldImage);
@@ -160,7 +168,7 @@ public class MuseumRoom extends Room
                 
         
         // set instance variables
-        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate;
+        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate; this.dayLimit = dayLimit;
         
         // initialize robber and guard spawns
         robberSpawns = new ArrayList<Pair>(3);
@@ -233,7 +241,7 @@ public class MuseumRoom extends Room
         spawnValuables();
         
         // Set the paint order (for Nighttime class)
-        setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
+        setPaintOrder(Statistic.class, Text.class, DayCounter.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
     /**
      *  Start music
@@ -277,6 +285,9 @@ public class MuseumRoom extends Room
             roomBGM.playLoop();
         }
         actCount++;
+        if(dayCounter.getDayCount() > dayLimit) {
+            calculateEnding();
+        }
         // get if it is night or not (every 1600 acts, night will activate, and the night duration is 600)
         isNight = (actCount % 1600) < 600;
         if(actCount % 1600 == 0) { // spawn new night effect every 1600 acts
@@ -352,9 +363,9 @@ public class MuseumRoom extends Room
         }
         
         //Prepare to spawn each Valuable
-        for(Valuable v : roomValuables){
-            if(v.getWaiting()){
-                v.prepareToSpawn();
+        for(int i=0; i<roomValuables.length; i++){
+            if(roomValuables[i].getWaiting()){
+                roomValuables[i].prepareToSpawn();
             }
         }
     }
@@ -378,9 +389,8 @@ public class MuseumRoom extends Room
                 for(boolean value : valuableInWorld) {
                     if(!value) {
                         hasFalse = true;
-                        break;
-                    }
-                }
+                //If this object at this index 'random' is not currently in world, then get the valuable coresponding to this index
+                
                 while(hasFalse){
                     //If something is false in the array, still ramdomly get number
                     int random = Greenfoot.getRandomNumber(valuableInWorld.length);
@@ -392,30 +402,35 @@ public class MuseumRoom extends Room
                     switch(random){
                         case 0: {
                             valuable = new Pot(x,y);
+                            roomValuables[0] = valuable;
                             break;
                         }
                         case 1: {
                             valuable = new SilverPot(x,y);
+                            roomValuables[1] = valuable;
                             break;
                         }
                         case 2: {
                             valuable = new GoldPot(x,y);
+                            roomValuables[2] = valuable;
                             break;
                         }
                         case 3: {
                             valuable = new AntiquePotTall(x,y);
+                            roomValuables[3] = valuable;
                             break;
                         }
                         case 4: {
                             valuable = new AntiquePotShort(x,y);
+                            roomValuables[4] = valuable;
                             break;
                         }
                         default: {
-                            valuable = new Pot(x,y);
+                            valuable = new AntiqueTeaPot(x,y);
+                            roomValuables[5] = valuable;
                             break;
                         }
                     }
-                    
                     //Spawn the valuable at x & y
                     addObject(valuable, x, y);
                     valuableInWorld[random] = true;
@@ -431,9 +446,9 @@ public class MuseumRoom extends Room
     }
     
     /**
-     * Set the new value of money.
+     * Set the new value of money stolen.
      * 
-     * @param change    The change in the amount of money hold in room.
+     * @param change    The change in the amount of money stolen by Robber.
      */
     public void setMoney(int change){
         money += change;
@@ -465,14 +480,14 @@ public class MuseumRoom extends Room
         robbersCatched.updateValue(robbersCatchedNumber);
     }
     
-    /**
-     * Add the Valuable to the ArrayList.
+    /*
+     * Add the Valuable to the Array.
      * 
      * @param v     The Valuable that needs to be added.
      */
-    public void addValuables(Valuable v){
-        roomValuables.add(v);
-    }
+    /*public void addValuables(Valuable v, int index){
+        roomValuables[index] = v;
+    }*/
     
     /*
      * Remove the Valuable from the ArrayList.
@@ -484,10 +499,17 @@ public class MuseumRoom extends Room
     }*/
     
     /**
-     * Get the current value of money.
+     * Get the current value of money stolen.
      */
     public int getMoney(){
         return money;
+    }
+    
+    /**
+     * Get the current income.
+     */
+    public int getIncome(){
+        return income;
     }
     
     /**
@@ -528,5 +550,17 @@ public class MuseumRoom extends Room
      */
     public boolean isNighttime(){
         return isNight;
+    }
+    
+    public void calculateEnding() {
+        if(income < 2500) {
+            Greenfoot.setWorld(new BadEnd(this));
+        }
+        else if(income > 2500 && income < 5000) {
+            Greenfoot.setWorld(new MidEnd(this));
+        }
+        else if (income > 5000) {
+            Greenfoot.setWorld(new GoodEnd(this));
+        }
     }
 }
