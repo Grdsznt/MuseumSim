@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Felix, Jerry
  * @version May 2 2024
  */
-public abstract class Art extends Valuable
+public class Art extends Valuable
 {
     protected  Visitor[] visitors;
     private boolean isNew = false;
@@ -26,9 +26,11 @@ public abstract class Art extends Valuable
      * @param x     The x-coordinate 
      * @param y     The y-coordinate 
      */
-    public Art(GreenfootImage ART_IMAGE, int price, int x, int y){
-        super(ART_IMAGE, price, -1, x, y);
-        image = ART_IMAGE;
+    
+    public final static int indexInList = 4;
+    public Art(int x, int y){ 
+        super(new GreenfootImage("MonaLisa.png"), 10000, 6, x, y);
+        image = new GreenfootImage("MonaLisa.png");
         this.price = price;
         this.spawnerType = spawnerType;
     }
@@ -37,7 +39,6 @@ public abstract class Art extends Valuable
         actNumber = 0;
         defaultX = getX(); defaultY = getY();
         willVibrate = false;
-        
     }
     
     public void act(){

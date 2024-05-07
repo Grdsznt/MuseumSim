@@ -85,6 +85,7 @@ public class MuseumRoom extends Room
     private static int[][] valuableLocation = new int[6][2];
     //Stores the boolean for each valuable
     private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, Pot
+    private boolean artInWorld = false;
     //List of valuables that needs to be acted because it is removed from the world & needs to be spawned again
     ArrayList<Valuable> roomValuables = new ArrayList<Valuable>();
     
@@ -362,63 +363,70 @@ public class MuseumRoom extends Room
      * Randomly spawn different valuables at different locations.
      */
     public void spawnValuables(){
-        for(int i=0; i<valuableLocation.length; i++){
-            int x = valuableLocation[i][0];
-            int y = valuableLocation[i][1];
-            //If something is there, do not spawn any
-            if(getObjectsAt(x, y, Valuable.class).size()!=0){
-                continue;
-            }
-            
-            //For this location, find a valuable to be spawned
-            boolean hasFalse = false;
-            for(boolean value : valuableInWorld) {
-                if(!value) {
-                    hasFalse = true;
-                    break;
-                }
-            }
-            while(hasFalse){
-                //If something is false in the array, still ramdomly get number
-                int random = Greenfoot.getRandomNumber(valuableInWorld.length);
-                if(valuableInWorld[random]==true){
+        for(int i=0; i<valuables; i++){
+            if (i < 6) {
+                int x = valuableLocation[i][0];
+                int y = valuableLocation[i][1];
+                
+                //If something is there, do not spawn any
+                if(getObjectsAt(x, y, Valuable.class).size()!=0){
                     continue;
                 }
-                //If this object at this index 'random' is not currently in world, then get the valuable coresponding to this index
-                Valuable valuable;
-                switch(random){
-                    case 0: {
-                        valuable = new Pot(x,y);
-                        break;
-                    }
-                    case 1: {
-                        valuable = new SilverPot(x,y);
-                        break;
-                    }
-                    case 2: {
-                        valuable = new GoldPot(x,y);
-                        break;
-                    }
-                    case 3: {
-                        valuable = new AntiquePotTall(x,y);
-                        break;
-                    }
-                    case 4: {
-                        valuable = new AntiquePotShort(x,y);
-                        break;
-                    }
-                    default: {
-                        valuable = new Pot(x,y);
+                
+                //For this location, find a valuable to be spawned
+                boolean hasFalse = false;
+                for(boolean value : valuableInWorld) {
+                    if(!value) {
+                        hasFalse = true;
                         break;
                     }
                 }
-                
-                //Spawn the valuable at x & y
-                addObject(valuable, x, y);
-                valuableInWorld[random] = true;
-                //Go to the next location
-                break;
-            }
+                while(hasFalse){
+                    //If something is false in the array, still ramdomly get number
+                    int random = Greenfoot.getRandomNumber(valuableInWorld.length);
+                    if(valuableInWorld[random]==true){
+                        continue;
+                    }
+                    //If this object at this index 'random' is not currently in world, then get the valuable coresponding to this index
+                    Valuable valuable;
+                    switch(random){
+                        case 0: {
+                            valuable = new Pot(x,y);
+                            break;
+                        }
+                        case 1: {
+                            valuable = new SilverPot(x,y);
+                            break;
+                        }
+                        case 2: {
+                            valuable = new GoldPot(x,y);
+                            break;
+                        }
+                        case 3: {
+                            valuable = new AntiquePotTall(x,y);
+                            break;
+                        }
+                        case 4: {
+                            valuable = new AntiquePotShort(x,y);
+                            break;
+                        }
+                        default: {
+                            valuable = new Pot(x,y);
+                            break;
+                        }
+                    }
+                    
+                    //Spawn the valuable at x & y
+                    addObject(valuable, x, y);
+                    valuableInWorld[random] = true;
+                    //Go to the next location
+                    break;
+                }
+            } else {
+                Valuable valuable = new Art(520, 60);
+                addObject(valuable, 520, 60);
+                artInWorld = true;
+            }            
         }
     }
     
