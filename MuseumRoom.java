@@ -436,9 +436,9 @@ public class MuseumRoom extends Room
     }
     
     /**
-     * Set the new value of money.
+     * Set the new value of money stolen.
      * 
-     * @param change    The change in the amount of money hold in room.
+     * @param change    The change in the amount of money stolen by Robber.
      */
     public void setMoney(int change){
         money += change;
@@ -489,10 +489,17 @@ public class MuseumRoom extends Room
     }*/
     
     /**
-     * Get the current value of money.
+     * Get the current value of money stolen.
      */
     public int getMoney(){
         return money;
+    }
+    
+    /**
+     * Get the current income.
+     */
+    public int getIncome(){
+        return income;
     }
     
     /**

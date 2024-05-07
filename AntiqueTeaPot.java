@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class AntiqueTeaPot extends Valuable
 {
     public final static int indexInList = 5;
-    public final static int price = 10000;
+    public final static int price = 5000;
     
     /**
      * A constructor.
