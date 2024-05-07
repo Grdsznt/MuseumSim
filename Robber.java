@@ -85,17 +85,16 @@ public class Robber extends Human
             moveTowardsTarget();
         }
         
+        animate();      //goes back to default frame if not moving
+        
         if(!isMoving)
             setIdleImage();
             
-        animate();
-        //goes back to default frame if not moving
         
-
         if (targetValuable != null && targetValuable.getWorld() == null){
             targetValuable = null;
         }
-        if(targetValuable == null && actNum % 1600 == 0){
+        if(targetValuable == null && actNum % 1600 == 0 && getWorld().getObjects(Valuable.class).size() != 0){
             getTargetValuable();
             target = null;
         }
@@ -199,7 +198,7 @@ public class Robber extends Human
 
         //get all the valuables in range
         valuables = (ArrayList<Valuable>)getObjectsInRange(targetRadius+1,Valuable.class);
-                
+        
         if(valuables.size() > 0){
             //get a random valuable in range and set it as a target
             for (Valuable v: valuables) {
@@ -207,9 +206,10 @@ public class Robber extends Human
                 if (!targetValuable.isStolen()) break;
             }
         }        
-        
-        if (targetValuable != null && targetValuable.isStolen()) targetValuable = null;
-        else if (targetValuable != null) targetValuable.setStolen(true);
+        if (targetValuable != null) {
+            if (targetValuable.isStolen()) targetValuable = null;
+            else targetValuable.setStolen(true);
+        }
     }
     
     /**
@@ -335,14 +335,15 @@ public class Robber extends Human
             } else {
                 if (depositing) {
                     hasStolen = false; // Set up to steal another valuable
-                    getWorld().removeObject(targetValuable);
                     MuseumRoom mr = (MuseumRoom) getWorld();
+                    //Set it to waiting -- wait to spawn the next if it is removed from the world (i.e. being stolen & deposited by the Robber)
+                    targetValuable.setWaiting(true);
+                    mr.removeObject(targetValuable);
                     station = mr.getStation();
                     mr.setStation(station, true);
                     if(targetValuable != null){
                         mr.setMoney(targetValuable.getPrice());
                     }
-                    
                     mr.setValuables(1);
                     targetValuable = null;// No more targets
                     returning = true;
@@ -351,7 +352,7 @@ public class Robber extends Human
                     centerX = getX();
                     centerY = getY();
                     returning = false;
-                }else {
+                } else {
                     hasStolen = true; // currently stealing, so set to pick up valuable
                     depositing = true; // return to deposit zone
                     MuseumRoom mr = (MuseumRoom) getWorld();

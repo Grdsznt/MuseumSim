@@ -8,7 +8,7 @@ import java.util.List;
  */
 public class Nighttime extends Effect
 {
-    private static SuperSound ambience; 
+    private static SuperSound ambience = new SuperSound("nightTimeAmbience.mp3", 1, 50);
     /**
      * Creates an effect that lasts for 1200 acts, and targets 100 transparency.
      */

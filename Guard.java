@@ -32,7 +32,7 @@ public class Guard extends Human
     
     //Get its direction
     private int direction; //0 is rest, 1 is right, 2 is up, 3 is left, 4 is down
-    private double walkSpeed = 0.5;
+    private double walkSpeed = 1;
     private double runSpeed = 2.5;
     
     //Store its own detector
