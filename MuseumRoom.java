@@ -11,7 +11,7 @@ import java.util.*;
 public class MuseumRoom extends Room
 {
 
-    private static GreenfootSound roomBGM = new GreenfootSound("Sneaky-Snitch.mp3");
+    private static GreenfootSound roomBGM = new GreenfootSound("SneakySnitch.mp3");
 
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
