@@ -65,7 +65,12 @@ public class Visitor extends Human
     Pair curTile;
     private ArrayList<Pair> path;
 
-    
+    /**
+     * Constructor for the visitor
+     * 
+     * @param time   The length of time the visitor stays in the world
+     * @param speed     How fast the visitor moves
+     */
     public Visitor(int time, int speed){
         visitDuration = time;
         numberOfVisitors++;
@@ -89,7 +94,11 @@ public class Visitor extends Human
         MuseumRoom mr = (MuseumRoom) getWorld();
         mr.setIncome(100);
     }
-   
+    /** 
+     * Constructor for visitor
+     * 
+     * @param time The length of time the visitor stays in the world
+     */
     public Visitor(int time){
         visitDuration = time;
         numberOfVisitors++;

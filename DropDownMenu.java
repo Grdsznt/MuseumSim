@@ -14,6 +14,12 @@ public class DropDownMenu extends SuperSmoothMover
     //height and width of the world the object is in
     private int width, height;
     private boolean isMoving;
+    /**
+     * Constructor for the drop down menu
+     * 
+     * @param w     The width of the menu
+     * @param h     The height of the menu
+     */
     public DropDownMenu(int w, int h){
         cover.scale(660, 550);
         setImage(cover);
@@ -47,7 +53,11 @@ public class DropDownMenu extends SuperSmoothMover
             actNum++;
         }
     }
-    //check if it is still moving
+    /**
+     * Checks if it is still moving
+     * 
+     * @return  If it is moving
+     */
     public boolean checkIfMoving(){
         //if actNum is <= 90 that means dropdownmenu is still moving
         return isMoving;

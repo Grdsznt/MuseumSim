@@ -97,6 +97,12 @@ public class MuseumRoom extends Room
     }
     /**
      * Constructor for objects of class MuseumRoom.
+     * 
+     * @param robbers   The maximum number of robbers in the museum room
+     * @param guards    The maximum number of guards in the museum room
+     * @param valuables     The number of valuables in the museum room
+     * @param robberSpawnRate    The spawn rate of robbers
+     * @param visitorSpawnRate   The spawn rate of visitors
      */
     public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate)
     { 

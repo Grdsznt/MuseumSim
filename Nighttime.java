@@ -29,7 +29,6 @@ public class Nighttime extends Effect
         
         // Center on screen.
         setLocation(w.getWidth()/2, w.getHeight()/2);
-
     }
     public void act() {
         super.act();
@@ -51,15 +50,19 @@ public class Nighttime extends Effect
      */
     public void startEffect() {
         ambience.play();
+        setRobberStats(true);
     }
     /**
      * Revert the effects
      */
     public void stopEffect() {
         ambience.pause();
+        setRobberStats(false);
     }
     /**
-     *  Changes stats for robbers 
+     *  Changes stats for robbers based on the time of day
+     *  
+     *  @param isNight  Input for whether it is night time or not
      */
     private void setRobberStats(boolean isNight) {
         world.setTime(isNight); 
