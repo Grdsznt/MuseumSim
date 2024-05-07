@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class DayCounter here.
  * 
- * @author (your name) 
+ * @author Jerry 
  * @version (a version number or a date)
  */
 public class DayCounter extends Actor
@@ -21,5 +21,9 @@ public class DayCounter extends Actor
      */
     public void incrementDayCount() {
         dayCount++;
+    }
+    
+    public int getDayCount() {
+        return dayCount;
     }
 }
