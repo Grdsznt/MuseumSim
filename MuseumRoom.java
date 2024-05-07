@@ -25,6 +25,7 @@ public class MuseumRoom extends Room
     private Obstacle statue2 = new Obstacle(44, 68); // (513, 414), (556, 346)
     private Obstacle pillar1 = new Obstacle(39, 100); // (69, 665), (108, 566)
     private Obstacle pillar2 = new Obstacle(39, 100); // (536, 665), (574, 566)
+    // Wall bounds
     private Obstacle leftWall = new Obstacle(62, 548);
     private Obstacle rightWall = new Obstacle(62, 548);
     private Obstacle topWall = new Obstacle(635, 92);
@@ -34,12 +35,15 @@ public class MuseumRoom extends Room
     private Obstacle rightBound = new Obstacle(4, 223);
     private Obstacle lowerBound = new Obstacle(663, 7);
     
+    // Where robbers and guards can spawn
     private List<Pair> robberSpawns;
     private List<Pair> guardSpawns;
     
+    // instance variables
     private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate;
     private int actCount;
     
+    // To count the days, and to display some text
     private static DayCounter dayCounter;
     private static Text museumText; 
     
@@ -53,18 +57,18 @@ public class MuseumRoom extends Room
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
     private GreenfootImage valuableImage = new GreenfootImage("valuable.png");
     private GreenfootImage robberImage = new GreenfootImage("robber.png");
+    private GreenfootImage potImage = new GreenfootImage("PinkPot.png");
+    private GreenfootImage silverPotImage = new GreenfootImage("SilverPot.png");
+    private GreenfootImage GoldPotImage = new GreenfootImage("GoldPot.png");
+    private GreenfootImage TallPotImage = new GreenfootImage("valuableArtPot.png");
+    private GreenfootImage ShortPotImage = new GreenfootImage("valuableArtPot2.png");
+    
     //Statistics
     private Statistic moneyEarned = new Statistic(moneyImage, money, "$");
     private Statistic valuablesStolen = new Statistic(valuableImage, valuablesStolenNumber);
     private Statistic robbersCatched = new Statistic(robberImage, robbersCatchedNumber);
     private Statistic museumIncome = new Statistic(moneyImage, income, "$");
     
-    //Images
-    private GreenfootImage potImage = new GreenfootImage("PinkPot.png");
-    private GreenfootImage silverPotImage = new GreenfootImage("SilverPot.png");
-    private GreenfootImage GoldPotImage = new GreenfootImage("GoldPot.png");
-    private GreenfootImage TallPotImage = new GreenfootImage("valuableArtPot.png");
-    private GreenfootImage ShortPotImage = new GreenfootImage("valuableArtPot2.png");
     //Price List
     private ValueList potPriceLabel = new ValueList(potImage, "$"+Pot.price);
     private ValueList silverPotPriceLabel = new ValueList(silverPotImage, "$"+SilverPot.price);
@@ -74,10 +78,8 @@ public class MuseumRoom extends Room
     
     private boolean isNight = false;
     
-    private int actNum = 0;
-        
+    // For robber location
     private boolean robberLoc[] = new boolean[3];
-    private int robIndx = 0;
     
     //Stores the possible locations of valuables
     private static int[][] valuableLocation = new int[6][2];
@@ -86,6 +88,7 @@ public class MuseumRoom extends Room
     //List of valuables that needs to be acted because it is removed from the world & needs to be spawned again
     ArrayList<Valuable> roomValuables = new ArrayList<Valuable>();
     
+    // Utility Pair class -- See Class "Human" for more info
     public class Pair {
         int x, y;
         public Pair(int x, int y) {
@@ -154,19 +157,23 @@ public class MuseumRoom extends Room
         
         addObject(lowerBound, 330, 850);
                 
-        // need to spawn robber in specific locations
         
+        // set instance variables
         this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate;
         
+        // initialize robber and guard spawns
         robberSpawns = new ArrayList<Pair>(3);
         guardSpawns = new ArrayList<Pair>(3);
         
+        // add the locations of the spawn
         robberSpawns.add(new Pair(330, 500));
         robberSpawns.add(new Pair(200, 350));
         robberSpawns.add(new Pair(450, 350));
         
+        // randomize the order of the spawns
         Collections.shuffle(robberSpawns);
         
+        // based on how many robbers chosen, spawn in random locations
         for (int i = 0;i<robbers;i++) {
             Pair p = robberSpawns.remove(0);
             if (p.x == 330 && p.y == 500) {
@@ -182,12 +189,15 @@ public class MuseumRoom extends Room
             }
         }
         
+        // add the spawn locations for the guard
         guardSpawns.add(new Pair(330, 770));
         guardSpawns.add(new Pair(420, 200));
         guardSpawns.add(new Pair(240, 200));
         
+        // randomize the order
         Collections.shuffle(guardSpawns);
         
+        // randomly spawn guards
         for (int i = 0;i<guards;i++) {
             Pair p = guardSpawns.remove(0);
             addObject(new Guard(1), p.x, p.y);
@@ -210,21 +220,30 @@ public class MuseumRoom extends Room
         addObject(tallPotPriceLabel, xPos, 685);
         addObject(shortPotPriceLabel, xPos, 745);
         
+        // add a day counter
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
         
+        // add some text
         museumText = new Text("Museum Stats");
         addObject(museumText, 830, 300);
         
         //Spawn all valuables randomly
         spawnValuables();
         
+        // Set the paint order (for Nighttime class)
         setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
     }
+    /**
+     *  Start music
+     */
     public void started() {
         roomBGM.playLoop();
         if(isNight) Nighttime.resumeAmbience();
     }
+    /**
+     *  Stop music
+     */
     public void stopped(){
         roomBGM.stop();
         if(isNight) Nighttime.pauseAmbience();
@@ -252,19 +271,22 @@ public class MuseumRoom extends Room
     }
     
     public void act() {  
-        if(actCount == 0){
+        // play music
+        if(actCount == 1){
             roomBGM.playLoop();
         }
         actCount++;
+        // get if it is night or not (every 1600 acts, night will activate, and the night duration is 600)
         isNight = (actCount % 1600) < 600;
-        if(actCount % 1600 == 0) {
+        if(actCount % 1600 == 0) { // spawn new night effect every 1600 acts
             Nighttime night = new Nighttime();
             addObject(night, 500, 408);
         }
-        if (actCount % (600/visitorSpawnRate) == 0 && !isNight) {
+        if (actCount % (600/visitorSpawnRate) == 0 && !isNight) { // every now and then based on visitor spawn rate, and also not night, spawn some visitors
             addObject(new Visitor(1000, 1), 20, 670);
         }
         // Randomly spawn robber if 2 stations are vacant, spawn robber at specific location if only 1 station is vacant
+        // set robberLoc of that station to true to prevent others from coming
         if (actCount % (600/robberSpawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
                 if (robberLoc[1] == true) {
@@ -433,11 +455,6 @@ public class MuseumRoom extends Room
     public void setRobbers(int change){
         robbersCatchedNumber += change;
         robbersCatched.updateValue(robbersCatchedNumber);
-        if (actNum % 1600 == 0) {
-            //Valuable v = new Valuable(200.50);
-            //addObject(v, 92, 119);
-        }
-        actNum++;
     }
     
     /**

@@ -86,7 +86,7 @@ public class Robber extends Human
         if (targetValuable != null && targetValuable.getWorld() == null){
             targetValuable = null;
         }
-        if(targetValuable == null && actNum % 1600 == 0){
+        if(targetValuable == null && actNum % 1600 == 0 && getWorld().getObjects(Valuable.class).size() != 0){
             getTargetValuable();
             target = null;
         }
