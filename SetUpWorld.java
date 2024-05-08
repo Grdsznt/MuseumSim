@@ -49,7 +49,7 @@ public class SetUpWorld extends World
         String[] guardTextContent = {"Number of Guards in World: " + 1};
         String[] robberTextContent = {"Number of Robbers in World: " + 1};
         String[] valuableTextContent = {"Number of Valuables in World: " + 1};
-        String[] spawnRateRobberTextContent = {"Spawn Rate of Robbers per 10s: " + 1};
+        String[] spawnRateRobberTextContent = {"Spawn Rate of Robbers per 20s: " + 1};
         String[] spawnRateVisitorTextContent = {"Spawn Rate of Visitors per 10s: " + 3};
         String[] dayLimitTextContent = {"Number of Days: " + 3};
         
@@ -94,7 +94,7 @@ public class SetUpWorld extends World
         // addObject(valuableSlider, getWidth()/2+100, getHeight()/10*4);
         
         //Set up the robber spawn rate slider
-        spawnRateRobberSlider = new Slider("Spawn Rate of Robbers per 10s: ", spawnRateRobberText, 2);
+        spawnRateRobberSlider = new Slider("Spawn Rate of Robbers per 20s: ", spawnRateRobberText, 2);
         spawnRateRobberSlider.showPercentage(false);
         spawnRateRobberSlider.setMaximumValue(5);
         spawnRateRobberSlider.setValue(0); //Set the value to the lower bound

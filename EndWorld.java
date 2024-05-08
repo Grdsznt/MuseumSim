@@ -3,7 +3,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class ruinedMuseum here.
  * abstract class for ending screen, includes a drop down menu that display the statistics
- * @author (your name) Nick
+ * @author (your name) Nick, Edwin
  * @version (a version number or a date)
  */
 public abstract class  EndWorld extends World
@@ -12,7 +12,7 @@ public abstract class  EndWorld extends World
     
     protected HomeButton homeButton;
     protected DropDownMenu dropDownMenu;
-    protected Image moneySymbol, moneyText, valuableSymbol, valuableText, robber, robberText;
+    protected Image moneySymbol, moneySymbolTwo, moneyText, valuableSymbol, valuableText, robber, robberText, incomeText;
     protected int moneyMade, robbersCatched, valuablesStolen;//there are the stats needed to be displayed
     /**
      * Constructor for objects of class ruinedMuseum.
@@ -29,20 +29,29 @@ public abstract class  EndWorld extends World
         homeButton = new HomeButton("home", 3, new StartWorld());
         addObject(homeButton, getWidth()/2, 0);
         //display money made, symbol plus text
+        
         moneySymbol = new Image(new GreenfootImage("money.png"));
         addObject(moneySymbol, getWidth()/2, 0);
-                                        moneyText = new Image("$Money$ Made : " + room.getMoney());//fill moneyMade here
+        moneyText = new Image("Money Robbed : " + room.getMoney()); //fill moneyMade here
         addObject(moneyText, getWidth()/2, 0);
+        
         //valuable stats
         valuableSymbol = new Image(new GreenfootImage("valuable.png"));
         addObject(valuableSymbol, getWidth()/2, 0);
-                                        valuableText = new Image("ValuablesStolen : " + room.getValuables());//fill valuable stollen here
+        valuableText = new Image("Valuables Stolen : " + room.getValuables());//fill valuable stollen here
         addObject(valuableText, getWidth()/2, 0);
+        
         //robber stats
         robber = new Image(new GreenfootImage("robber.png"));
         addObject(robber, getWidth()/2, 0);
-                                        robberText = new Image("RobbersCatched : " + room.getRobbers());//fill robbersCatched here
+        robberText = new Image("Robbers Caught : " + room.getRobbers());//fill robbersCatched here
         addObject(robberText, getWidth()/2, 0);
+        
+        // Museum income stats
+        moneySymbolTwo = new Image(new GreenfootImage("money.png"));
+        addObject(moneySymbolTwo, getWidth()/2, 0);
+        incomeText = new Image("Maximum Income : " + room.getMaxIncome());
+        addObject(incomeText, getWidth()/2, 0);
     }
     
     public void act() {
@@ -53,12 +62,14 @@ public abstract class  EndWorld extends World
         //let content inside menu follow the menu when dropping down
         
             homeButton.followActor(dropDownMenu, 0,100);
-            moneySymbol.followActor(dropDownMenu, -170, 30);
-            moneyText.followActor(dropDownMenu, 0, 30);
-            valuableSymbol.followActor(dropDownMenu, -170, -20);
-            valuableText.followActor(dropDownMenu, 0, -20);
-            robber.followActor(dropDownMenu, -170, -70);
-            robberText.followActor(dropDownMenu, 0, -70);
+            moneySymbol.followActor(dropDownMenu, -170, 10);
+            moneyText.followActor(dropDownMenu, 0, 10);
+            valuableSymbol.followActor(dropDownMenu, -170, -40);
+            valuableText.followActor(dropDownMenu, 0, -40);
+            robber.followActor(dropDownMenu, -170, -90);
+            robberText.followActor(dropDownMenu, 0, -90);
+            moneySymbolTwo.followActor(dropDownMenu, -170, 60);
+            incomeText.followActor(dropDownMenu, 0, 60);
         
     }
 }
