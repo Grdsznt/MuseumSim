@@ -9,7 +9,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 public class MonaLisa extends Art
 {
     public final static int indexInList = 0;
-    public static final int price = 1300;
+    public static final int price = 1000;
     
     /**
      * A constructor.
