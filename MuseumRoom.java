@@ -570,6 +570,8 @@ public class MuseumRoom extends Room
     }
     
     public void calculateEnding() {
+        roomBGM.stop();
+        Nighttime.pauseAmbience();
         if(maxIncome < 500) {
             Greenfoot.setWorld(new BadEnd(this));
         }
