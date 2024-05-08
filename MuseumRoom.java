@@ -90,7 +90,6 @@ public class MuseumRoom extends Room
     //Array of valuables that are in the world
     private Valuable[] roomValuables = new Valuable[valuableCount];
     
-    
     private static final int artCount = 2;
     //Stores the possible locations of arts
     private static int[][] artLocation = new int[artCount][2];
@@ -247,8 +246,7 @@ public class MuseumRoom extends Room
         // add a day counter
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
-        
-        
+
         // add some text
         museumText = new Text("Museum Stats");
         addObject(museumText, 830, 300);
