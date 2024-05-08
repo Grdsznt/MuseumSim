@@ -5,7 +5,7 @@ import java.util.*;
  * MuseumRoom is the room where all the action takes place. It is utter chaos in this newly opened museum
  * and thus highly suspectible to robbery despite the museums dreams to become one of the biggst.
  * 
- * @author Edwin, Jean
+ * @author Edwin, Jean, Jerry
  * @version May 2 2024
  */
 public class MuseumRoom extends Room
