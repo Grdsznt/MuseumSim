@@ -1,11 +1,11 @@
 import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 import java.util.List;
 /**
-
  * Write a description of class Effects here.
+ * Super class for effects.
  * 
  * @author David
- * @version (a version number or a date)
+ * @version May 2024
  */
 public abstract class Effect extends Actor
 {
