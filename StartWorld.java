@@ -2,7 +2,17 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 
 /**
  * The start screen that introduces us to the simulation
- * 
+ * Interactions:
+ * Robber steals valuables
+ * Guards catch robbers
+ *  If the robber is caught, the valuable goes back to it's original slot
+ * Valuables have special code to follow the robbers to seem like it's bringing it along
+ * Guards, visitors and robbers are stopped by obstacles - they cannot move through them
+ *  Robbers factor obstacles and guards in when calculating the path to steal the valuable
+ *  Guards move until they hit an obstacle then move in the other direction
+ *  Visitors randomly chose a tile to move to that is not covered by an obstacle
+ * The sliders transfer to instance variables in the room, and how these variables change will affect the type of endscreen
+ *
  * <h2>Images
  * <p>Antique Pot Short: https://www.christies.com/en/lot/lot-6084737
  * <p>Antique Pot Tall: https://www.cleveland.com/metro/2021/12/valuable-artifacts-considered-stolen-being-returned-to-italy-including-items-from-cleveland-museum-of-art.html
