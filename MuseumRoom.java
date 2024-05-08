@@ -89,7 +89,6 @@ public class MuseumRoom extends Room
     private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, AntiqueTeaPot}
     //Array of valuables that are in the world
     private Valuable[] roomValuables = new Valuable[valuableCount];
-    private boolean artInWorld = false;
     
     private static final int artCount = 2;
     //Stores the possible locations of arts
@@ -247,11 +246,7 @@ public class MuseumRoom extends Room
         // add a day counter
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
-        
-        Valuable valuable = new Art(520, 60);
-        addObject(valuable, 520, 60);
-        artInWorld = true;
-        
+                
         // add some text
         museumText = new Text("Museum Stats");
         addObject(museumText, 830, 300);
