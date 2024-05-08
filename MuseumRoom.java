@@ -91,6 +91,15 @@ public class MuseumRoom extends Room
     private Valuable[] roomValuables = new Valuable[valuableCount];
     private boolean artInWorld = false;
     
+    private static final int artCount = 2;
+    //Stores the possible locations of arts
+    private static int[][] artLocation = new int[artCount][2];
+    //Stores the boolean for each art
+    private boolean[] artInWorld = {false, false}; //{Mona Lisa, Painting Man}
+    //Array of valuables that are in the world
+    private Art[] roomArts = new Art[artCount];
+    
+    
     // Utility Pair class -- See Class "Human" for more info
     public class Pair {
         int x, y;
@@ -156,6 +165,11 @@ public class MuseumRoom extends Room
         addObject(rightWall, 626, 366);
         
         addObject(topWall, 326, 46);
+        //Add the location to the 2D array
+        artLocation[0][0] = 168;
+        artLocation[0][1] = 64;
+        artLocation[1][0] = 510;
+        artLocation[1][1] = 64;
         
         addObject(wallSegLeft, 125, 218);
         
@@ -244,6 +258,9 @@ public class MuseumRoom extends Room
         
         //Spawn all valuables randomly
         spawnValuables();
+        
+        //Spawn all arts randomly
+        spawnArts();
         
         // Set the paint order (for Nighttime class)
         setPaintOrder(Statistic.class, Text.class, DayCounter.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
@@ -375,6 +392,13 @@ public class MuseumRoom extends Room
                 roomValuables[i].prepareToSpawn();
             }
         }
+        
+        //Prepare to spawn each Art
+        for(int i=0; i<roomArts.length; i++){
+            if(roomArts[i].getWaiting()){
+                roomArts[i].prepareToSpawn();
+            }
+        }
     }
     
     /**
@@ -456,6 +480,56 @@ public class MuseumRoom extends Room
             // addObject(valuable, 520, 60);
             // artInWorld = true;
         // }    
+    }
+    
+    /**
+     * Randomly spawn different arts at different locations.
+     */
+    public void spawnArts(){
+        for(int i=0; i<artLocation.length; i++){
+            int x = artLocation[i][0];
+            int y = artLocation[i][1];
+            //If something is there, do not spawn any
+            if(getObjectsAt(x, y, Art.class).size()!=0){
+                continue;
+            }
+            
+            //For this location, find a valuable to be spawned
+            boolean hasFalse = false;
+            for(boolean value : artInWorld) {
+                if(!value) {
+                    hasFalse = true;
+                    break;
+                }
+            }
+            while(hasFalse){
+                //If something is false in the array, still ramdomly get number
+                int random = Greenfoot.getRandomNumber(artInWorld.length);
+                if(artInWorld[random]==true){
+                    continue;
+                }
+                //If this object at this index 'random' is not currently in world, then get the art coresponding to this index
+                Art art;
+                switch(random){
+                    case 0: {
+                        art = new MonaLisa(x,y);
+                        roomArts[0] = art;
+                        break;
+                    }
+                    default: {
+                        art = new PaintingMan(x,y);
+                        roomArts[1] = art;
+                        break;
+                    }
+                }
+                
+                //Spawn the valuable at x & y
+                addObject(art, x, y);
+                artInWorld[random] = true;
+                //Go to the next location
+                break;
+            }
+        }
     }
     
     /**
