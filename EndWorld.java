@@ -50,7 +50,7 @@ public abstract class  EndWorld extends World
         // Museum income stats
         moneySymbolTwo = new Image(new GreenfootImage("money.png"));
         addObject(moneySymbolTwo, getWidth()/2, 0);
-        incomeText = new Image("Maximum Income : " + room.getMaxIncome());
+        incomeText = new Image("Max Income : " + room.getMaxIncome());
         addObject(incomeText, getWidth()/2, 0);
     }
     

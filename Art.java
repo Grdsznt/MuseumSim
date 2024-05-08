@@ -3,15 +3,15 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * Write a description of class Art here.
  * 
- * @author Felix, Jerry
+ * @author Felix, Jerry, Jean
  * @version May 2 2024
  */
 public class Art extends Valuable
 {
     protected  Visitor[] visitors;
     private boolean isNew = false;
-    protected String spawnerType;
-    protected GreenfootImage image;
+    //protected String spawnerType;
+    //protected GreenfootImage image;
     protected int price;
     protected int actNumber;
     protected boolean willVibrate;
@@ -21,23 +21,19 @@ public class Art extends Valuable
     /** 
      * Constructor for art
      * 
-     * @param ART_IMAGE       The image of the art piece
+     * @param image     The image of the art piece
      * @param price     The value of the art piece
+     * @param index     The index of this valuable
      * @param x     The x-coordinate 
      * @param y     The y-coordinate 
      */
-    
-    public final static int indexInList = 4;
-    public Art(int x, int y){ 
-        super(new GreenfootImage("MonaLisa.png"), 10000, 6, x, y);
-        image = new GreenfootImage("MonaLisa.png");
-        this.price = price;
-        this.spawnerType = spawnerType;
-    }
-    
-    public void addedToWorld(World w){
+    public Art(GreenfootImage image, int index, int price, int x, int y){
+        //super(ART_IMAGE, price, -1, x, y);
+        //this.spawnerType = spawnerType;
+        super(image, index, price, x, y);
         actNumber = 0;
-        defaultX = getX(); defaultY = getY();
+        defaultX = x;
+        defaultY = y;
         willVibrate = false;
     }
     

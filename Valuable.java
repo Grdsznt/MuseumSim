@@ -27,6 +27,7 @@ public abstract class Valuable extends Actor
      * A simple constructor that sets Right the stolen state and the price of a valuable
      * 
      * @param image     The image of this valuable
+     * @param index     The index of this valuable
      * @param price     The price of this valuable
      * @param x         The x position of this valuable
      * @param y         The y position of this valuable

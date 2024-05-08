@@ -6,10 +6,10 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Jean
  * @version May 2024
  */
-public class MonaLisa extends Art
+public class PaintingMan extends Art
 {
-    public final static int indexInList = 0;
-    public static final int price = 1300;
+    public final static int indexInList = 1;
+    public static final int price = 1000;
     
     /**
      * A constructor.
@@ -17,7 +17,7 @@ public class MonaLisa extends Art
      * @param x     The x position
      * @param y     The y position
      */
-    public MonaLisa(int x, int y) {
-        super(new GreenfootImage("paintingArt2.png"), indexInList, price, x, y);
+    public PaintingMan(int x, int y) {
+        super(new GreenfootImage("paintingArt.png"), indexInList, price, x, y);
     }
 }
