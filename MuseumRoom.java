@@ -246,7 +246,7 @@ public class MuseumRoom extends Room
         // add a day counter
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
-                
+
         // add some text
         museumText = new Text("Museum Stats");
         addObject(museumText, 830, 300);
@@ -386,6 +386,19 @@ public class MuseumRoom extends Room
             if(roomValuables[i].getWaiting()){
                 roomValuables[i].prepareToSpawn();
             }
+        }
+        if (income == 0 && actCount > 1200) {
+            Greenfoot.setWorld(new BadEnd(this));
+        }
+        boolean hasLoc = false;
+        for(int i=0; i<valuableInWorld.length; i++){
+            if (valuableInWorld[i] == true) {
+                hasLoc = true;
+                break;
+            }
+        }
+        if (!hasLoc) {
+            Greenfoot.setWorld(new BadEnd(this));
         }
         
         //Prepare to spawn each Art
@@ -639,13 +652,13 @@ public class MuseumRoom extends Room
     }
     
     public void calculateEnding() {
-        if(maxIncome < 500) {
+        if(maxIncome < 800) {
             Greenfoot.setWorld(new BadEnd(this));
         }
-        else if(maxIncome > 500 && maxIncome < 1000) {
+        else if(maxIncome > 800 && maxIncome < 2000) {
             Greenfoot.setWorld(new MidEnd(this));
         }
-        else if (maxIncome > 100) {
+        else if (maxIncome > 2000) {
             Greenfoot.setWorld(new GoodEnd(this));
         }
     }
