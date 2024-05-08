@@ -47,11 +47,6 @@ public abstract class Button extends Actor
      */
     public void act()
     {
-        //Do not act if it is an instance of the Option Button!
-        if(this instanceof OptionButton) {
-            return;
-        }
-        
         if (Greenfoot.mouseMoved(this)) {
             hover = true;
             if (imageStates.length > 1) {
