@@ -25,7 +25,7 @@ public class SetUpWorld extends World
     //Set the Sliders for guards, robbers, valuables, spawnrates, and day limit
     private Slider guardSlider;
     private Slider robberSlider;
-    private Slider valuableSlider;
+    // private Slider valuableSlider;
     private Slider spawnRateRobberSlider;
     private Slider spawnRateVisitorSlider;
     private Slider dayLimitSlider;
@@ -57,7 +57,7 @@ public class SetUpWorld extends World
         
         robberText = new SuperTextBox(robberTextContent, Color.BLACK, Color.WHITE, boringFont, true, 350, 5, Color.WHITE);
         
-        valuableText = new SuperTextBox(valuableTextContent, Color.BLACK, Color.WHITE, boringFont, true, 350, 5, Color.WHITE);
+        // valuableText = new SuperTextBox(valuableTextContent, Color.BLACK, Color.WHITE, boringFont, true, 350, 5, Color.WHITE);
         
         spawnRateRobberText = new SuperTextBox(spawnRateRobberTextContent, Color.BLACK, Color.WHITE, boringFont, true, 350, 5, Color.WHITE);
         
@@ -84,14 +84,14 @@ public class SetUpWorld extends World
         robberText.update(); //Update the SuperTextBox
         addObject(robberSlider, getWidth()/2+100, getHeight()/10*3);
         
-        //Set up the valuable slider
-        valuableSlider = new Slider("Number of Valuables in World: ", valuableText, 1);
-        valuableSlider.showPercentage(false);
-        valuableSlider.setMaximumValue(6);
-        valuableSlider.setValue(0); //Set the value to the lower bound
-        valuableSlider.setMinorSections(3);
-        valuableText.update(); //Update the SuperTextBox
-        addObject(valuableSlider, getWidth()/2+100, getHeight()/10*4);
+        // //Set up the valuable slider
+        // valuableSlider = new Slider("Number of Valuables in World: ", valuableText, 1);
+        // valuableSlider.showPercentage(false);
+        // valuableSlider.setMaximumValue(5);
+        // valuableSlider.setValue(0); //Set the value to the lower bound
+        // valuableSlider.setMinorSections(3);
+        // valuableText.update(); //Update the SuperTextBox
+        // addObject(valuableSlider, getWidth()/2+100, getHeight()/10*4);
         
         //Set up the robber spawn rate slider
         spawnRateRobberSlider = new Slider("Spawn Rate of Robbers per 10s: ", spawnRateRobberText, 2);
@@ -100,7 +100,7 @@ public class SetUpWorld extends World
         spawnRateRobberSlider.setValue(0); //Set the value to the lower bound
         spawnRateRobberSlider.setMinorSections(0);
         spawnRateRobberText.update();
-        addObject(spawnRateRobberSlider, getWidth()/2+100, getHeight()/10*5);
+        addObject(spawnRateRobberSlider, getWidth()/2+100, getHeight()/10*4);
         
         //Set up the visitor spawn rate slider
         spawnRateVisitorSlider = new Slider("Spawn Rate of Visitors per 10s: ", spawnRateVisitorText, 3);
@@ -109,7 +109,7 @@ public class SetUpWorld extends World
         spawnRateVisitorSlider.setValue(0); //Set the value to the lower bound
         spawnRateVisitorSlider.setMinorSections(0);
         spawnRateVisitorText.update(); //Update the SuperTextBox
-        addObject(spawnRateVisitorSlider, getWidth()/2+100, getHeight()/10*6);
+        addObject(spawnRateVisitorSlider, getWidth()/2+100, getHeight()/10*5);
         
         //Set up the day limit slider
         dayLimitSlider = new Slider("Number of Days: ", dayLimitText, 3);
@@ -118,15 +118,15 @@ public class SetUpWorld extends World
         dayLimitSlider.setValue(0); //Set the value to the lower bound
         dayLimitSlider.setMinorSections(0);
         dayLimitText.update(); //Update the SuperTextBox
-        addObject(dayLimitSlider, getWidth()/2+100, getHeight()/10*7);
+        addObject(dayLimitSlider, getWidth()/2+100, getHeight()/10*6);
         
         //Add these SuperTextBoxes onto the world
         addObject(guardText, getWidth()/2-200, getHeight()/10*2);
         addObject(robberText, getWidth()/2-200, getHeight()/10*3);
-        addObject(valuableText, getWidth()/2-200, getHeight()/10*4);
-        addObject(spawnRateRobberText, getWidth()/2-200, getHeight()/10*5);
-        addObject (spawnRateVisitorText, getWidth()/2-200, getHeight()/10*6);
-        addObject(dayLimitText, getWidth()/2-200, getHeight()/10*7);
+        // addObject(valuableText, getWidth()/2-200, getHeight()/10*4);
+        addObject(spawnRateRobberText, getWidth()/2-200, getHeight()/10*4);
+        addObject (spawnRateVisitorText, getWidth()/2-200, getHeight()/10*5);
+        addObject(dayLimitText, getWidth()/2-200, getHeight()/10*6);
     }
     
     /**
@@ -146,9 +146,9 @@ public class SetUpWorld extends World
     /**
      * Return the number of valuables set by the user.
      */
-    public int getNumberOfValuables(){
-        return valuableSlider.getValue();
-    }
+    // public int getNumberOfValuables(){
+        // return valuableSlider.getValue();
+    // }
     
     /**
      * Return the spawnrate of Robbers set by the user.

@@ -63,4 +63,8 @@ public class Art extends Valuable
     public void stopVibrating(){
         willVibrate = false;
     }
+    
+    public void prepareToSpawn(){
+        
+    }
 }

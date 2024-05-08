@@ -20,9 +20,9 @@ public class StartWorld extends World
     //private GreenfootImage img = new GreenfootImage("");
     private int actNum;
     private boolean currentBGframe;//true is frame 1, false is frame 2
-    
+
     private SetUpWorld setup = new SetUpWorld(this);
-    
+
     /**
      * Constructor for objects of class StartWorld.
      * 
@@ -37,11 +37,12 @@ public class StartWorld extends World
         settings = new SettingsButton("settingsButton", 3, setup);
         addObject(settings, 500, 700);
         Button.init();
-        
+
         //Load the animation images for the Guard
         Guard.loadAnimationImages();
         //Set paint order to put the detector under the guard
         setPaintOrder(Detector.class, Guard.class);
+        prepare();
     }
 
     public void act(){
@@ -62,15 +63,23 @@ public class StartWorld extends World
         }
         actNum++;
     }
-    
+
     public SetUpWorld getSetUp() {
         return setup;
     }
+
     public void started(){
         music.playLoop();
     }
 
     public void stopped(){
         music.pause();
+    }
+    /**
+     * Prepare the world for the start of the program.
+     * That is: create the initial objects and add them to the world.
+     */
+    private void prepare()
+    {
     }
 }
