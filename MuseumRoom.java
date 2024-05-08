@@ -40,7 +40,7 @@ public class MuseumRoom extends Room
     private List<Pair> guardSpawns;
     
     // instance variables
-    private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate, dayLimit;
+    private int robbers, guards, robberSpawnRate, visitorSpawnRate, dayLimit;
     private int actCount;
     
     // To count the days, and to display some text
@@ -88,6 +88,7 @@ public class MuseumRoom extends Room
     private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, AntiqueTeaPot}
     //Array of valuables that are in the world
     private Valuable[] roomValuables = new Valuable[valuableCount];
+    private boolean artInWorld = false;
     
     // Utility Pair class -- See Class "Human" for more info
     public class Pair {
@@ -106,7 +107,7 @@ public class MuseumRoom extends Room
      * @param visitorSpawnRate   The spawn rate of visitors
      * @param dayLimit  The limit of the amount of days that the museum is active
      */
-    public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate, int dayLimit)
+    public MuseumRoom(int robbers, int guards, int robberSpawnRate, int visitorSpawnRate, int dayLimit)
     { 
         super(1000,816,0, 0);
         setBackground(worldImage);
@@ -167,7 +168,7 @@ public class MuseumRoom extends Room
                 
         
         // set instance variables
-        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate; this.dayLimit = dayLimit;
+        this.robbers = robbers; this.guards = guards; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate; this.dayLimit = dayLimit;
         
         // initialize robber and guard spawns
         robberSpawns = new ArrayList<Pair>(3);
@@ -231,6 +232,10 @@ public class MuseumRoom extends Room
         // add a day counter
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
+        
+        Valuable valuable = new Art(520, 60);
+        addObject(valuable, 520, 60);
+        artInWorld = true;
         
         // add some text
         museumText = new Text("Museum Stats");
@@ -377,6 +382,7 @@ public class MuseumRoom extends Room
         for(int i=0; i<valuableLocation.length; i++){
             int x = valuableLocation[i][0];
             int y = valuableLocation[i][1];
+            
             //If something is there, do not spawn any
             if(getObjectsAt(x, y, Valuable.class).size()!=0){
                 continue;
@@ -390,6 +396,8 @@ public class MuseumRoom extends Room
                     break;
                 }
             }
+            //If this object at this index 'random' is not currently in world, then get the valuable coresponding to this index
+            
             while(hasFalse){
                 //If something is false in the array, still ramdomly get number
                 int random = Greenfoot.getRandomNumber(valuableInWorld.length);
@@ -430,14 +438,22 @@ public class MuseumRoom extends Room
                         break;
                     }
                 }
-                
                 //Spawn the valuable at x & y
                 addObject(valuable, x, y);
                 valuableInWorld[random] = true;
                 //Go to the next location
                 break;
             }
-        }
+        } 
+        
+            
+        // if (i < 6) {
+        // }
+        // else {
+            // Valuable valuable = new Art(520, 60);
+            // addObject(valuable, 520, 60);
+            // artInWorld = true;
+        // }    
     }
     
     /**

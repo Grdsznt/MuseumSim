@@ -42,6 +42,10 @@ public abstract class Valuable extends Actor
         needsReturn = false;
         
         setImage(image);
+        if (this instanceof Art) {
+            image.scale(65, 86);
+            setImage(image);
+        }
     }
     
     public void addedToWorld(World w){
