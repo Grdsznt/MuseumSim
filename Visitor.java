@@ -92,7 +92,7 @@ public class Visitor extends Human
             isNew=true;
         }
         MuseumRoom mr = (MuseumRoom) getWorld();
-        mr.setIncome(40);
+        mr.setIncome(80);
     }
     /** 
      * Constructor for visitor
