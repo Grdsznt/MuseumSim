@@ -60,9 +60,12 @@ public class MuseumRoom extends Room
     private GreenfootImage robberImage = new GreenfootImage("robber.png");
     private GreenfootImage potImage = new GreenfootImage("PinkPot.png");
     private GreenfootImage silverPotImage = new GreenfootImage("SilverPot.png");
-    private GreenfootImage GoldPotImage = new GreenfootImage("GoldPot.png");
-    private GreenfootImage TallPotImage = new GreenfootImage("valuableArtPot.png");
-    private GreenfootImage ShortPotImage = new GreenfootImage("valuableArtPot2.png");
+    private GreenfootImage goldPotImage = new GreenfootImage("GoldPot.png");
+    private GreenfootImage tallPotImage = new GreenfootImage("valuableArtPot.png");
+    private GreenfootImage shortPotImage = new GreenfootImage("valuableArtPot2.png");
+    private GreenfootImage teaPotImage = new GreenfootImage("valuableTeaPot.png");
+    private GreenfootImage monaLisaImage = new GreenfootImage("paintingArt2.png");
+    private GreenfootImage paintingManImage = new GreenfootImage("paintingArt.png");
     
     //Statistics
     private Statistic moneyEarned = new Statistic(moneyImage, money, "$");
@@ -73,9 +76,12 @@ public class MuseumRoom extends Room
     //Price List
     private ValueList potPriceLabel = new ValueList(potImage, "$"+Pot.price);
     private ValueList silverPotPriceLabel = new ValueList(silverPotImage, "$"+SilverPot.price);
-    private ValueList goldPotPriceLabel = new ValueList(GoldPotImage, "$"+GoldPot.price);
-    private ValueList tallPotPriceLabel = new ValueList(TallPotImage, "$"+AntiquePotTall.price);
-    private ValueList shortPotPriceLabel = new ValueList(ShortPotImage, "$"+AntiquePotShort.price); 
+    private ValueList goldPotPriceLabel = new ValueList(goldPotImage, "$"+GoldPot.price);
+    private ValueList tallPotPriceLabel = new ValueList(tallPotImage, "$"+AntiquePotTall.price);
+    private ValueList shortPotPriceLabel = new ValueList(shortPotImage, "$"+AntiquePotShort.price);
+    private ValueList teaPotPriceLabel = new ValueList(teaPotImage, "$"+AntiqueTeaPot.price);
+    private ValueList monaLisaPriceLabel = new ValueList(monaLisaImage, "$"+MonaLisa.price);
+    private ValueList paintingManPriceLabel = new ValueList(paintingManImage, "$"+PaintingMan.price);
     
     private boolean isNight = false;
     
@@ -236,12 +242,16 @@ public class MuseumRoom extends Room
         addObject(museumIncome, xPos, 350);
         
         //Add the price list at the bottom right of the world
-        getBackground().drawImage(new GreenfootImage("Current Price", 24, Color.BLACK, Color.WHITE), xPos-5, 450);
-        addObject(potPriceLabel, xPos, 505);
-        addObject(silverPotPriceLabel, xPos, 565);
-        addObject(goldPotPriceLabel, xPos, 625);
-        addObject(tallPotPriceLabel, xPos, 685);
-        addObject(shortPotPriceLabel, xPos, 745);
+        int xPos1 = 703, xPos2 = 865;
+        getBackground().drawImage(new GreenfootImage("Current Price", 24, Color.BLACK, Color.WHITE), xPos-7, 450);
+        addObject(potPriceLabel, xPos1, 510);
+        addObject(silverPotPriceLabel, xPos2, 510);
+        addObject(goldPotPriceLabel, xPos1, 590);
+        addObject(tallPotPriceLabel, xPos2, 590);
+        addObject(shortPotPriceLabel, xPos1, 670);
+        addObject(teaPotPriceLabel, xPos2, 670);
+        addObject(monaLisaPriceLabel, xPos1, 750);
+        addObject(paintingManPriceLabel, xPos2, 750);
         
         // add a day counter
         dayCounter = new DayCounter();

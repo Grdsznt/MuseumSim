@@ -12,7 +12,7 @@ public class ValueList extends Actor
     private GreenfootImage image;
     //Value
     private int fontSize = 18;
-    private int width = 100;
+    private int width = 85;
     private SuperTextBox textLabel;
     private String value;    
     
@@ -42,7 +42,7 @@ public class ValueList extends Actor
             int middleY = getY();
             
             //The modified positions of text label
-            int textX = middleX+80;
+            int textX = middleX+75;
             int textY = middleY;
             
             //Add the text label
