@@ -6,7 +6,7 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
  * @author Felix, Jerry, Jean
  * @version May 2 2024
  */
-public abstract class Art extends Valuable
+public class Art extends Valuable
 {
     protected  Visitor[] visitors;
     private boolean isNew = false;
@@ -58,5 +58,9 @@ public abstract class Art extends Valuable
     }
     public void stopVibrating(){
         willVibrate = false;
+    }
+    
+    public void prepareToSpawn(){
+        
     }
 }

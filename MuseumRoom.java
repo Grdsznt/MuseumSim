@@ -11,7 +11,7 @@ import java.util.*;
 public class MuseumRoom extends Room
 {
 
-    private static GreenfootSound roomBGM = new GreenfootSound("Sneaky-Snitch.mp3");
+    private static GreenfootSound roomBGM = new GreenfootSound("SneakySnitch.mp3");
 
     // Obstacle Bounding Boxes
     private GreenfootImage worldImage = new GreenfootImage("room2.png");
@@ -40,7 +40,7 @@ public class MuseumRoom extends Room
     private List<Pair> guardSpawns;
     
     // instance variables
-    private int robbers, guards, valuables, robberSpawnRate, visitorSpawnRate;
+    private int robbers, guards, robberSpawnRate, visitorSpawnRate, dayLimit;
     private int actCount;
     
     // To count the days, and to display some text
@@ -52,6 +52,7 @@ public class MuseumRoom extends Room
     private int valuablesStolenNumber = 0;
     private int robbersCatchedNumber = 0;
     private int income = 0;
+    private int maxIncome = 0;
     
     //Images
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
@@ -88,6 +89,7 @@ public class MuseumRoom extends Room
     private boolean[] valuableInWorld = {false, false, false, false, false, false}; //{Pot, SilverPot, GoldPot, AntiquePotTall, AntiquePotShort, AntiqueTeaPot}
     //Array of valuables that are in the world
     private Valuable[] roomValuables = new Valuable[valuableCount];
+    private boolean artInWorld = false;
     
     private static final int artCount = 2;
     //Stores the possible locations of arts
@@ -113,8 +115,9 @@ public class MuseumRoom extends Room
      * @param valuables     The number of valuables in the museum room
      * @param robberSpawnRate    The spawn rate of robbers
      * @param visitorSpawnRate   The spawn rate of visitors
+     * @param dayLimit  The limit of the amount of days that the museum is active
      */
-    public MuseumRoom(int robbers, int guards, int valuables, int robberSpawnRate, int visitorSpawnRate)
+    public MuseumRoom(int robbers, int guards, int robberSpawnRate, int visitorSpawnRate, int dayLimit)
     { 
         super(1000,816,0, 0);
         setBackground(worldImage);
@@ -180,7 +183,7 @@ public class MuseumRoom extends Room
                 
         
         // set instance variables
-        this.robbers = robbers; this.guards = guards; this.valuables = valuables; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate;
+        this.robbers = robbers; this.guards = guards; this.robberSpawnRate = robberSpawnRate; this.visitorSpawnRate = visitorSpawnRate; this.dayLimit = dayLimit;
         
         // initialize robber and guard spawns
         robberSpawns = new ArrayList<Pair>(3);
@@ -245,6 +248,10 @@ public class MuseumRoom extends Room
         dayCounter = new DayCounter();
         addObject(dayCounter, 830, 50);
         
+        Valuable valuable = new Art(520, 60);
+        addObject(valuable, 520, 60);
+        artInWorld = true;
+        
         // add some text
         museumText = new Text("Museum Stats");
         addObject(museumText, 830, 300);
@@ -256,7 +263,8 @@ public class MuseumRoom extends Room
         spawnArts();
         
         // Set the paint order (for Nighttime class)
-        setPaintOrder(Statistic.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
+        setPaintOrder(Statistic.class, Text.class, DayCounter.class, ValueList.class, SuperTextBox.class, Nighttime.class, Robber.class);
+        Robber.init();
     }
     /**
      *  Start music
@@ -300,6 +308,10 @@ public class MuseumRoom extends Room
             roomBGM.playLoop();
         }
         actCount++;
+        if(dayCounter.getDayCount() > dayLimit) {
+            calculateEnding();
+        }
+        maxIncome = Math.max(income, maxIncome);
         // get if it is night or not (every 1600 acts, night will activate, and the night duration is 600)
         isNight = (actCount % 1600) < 600;
         if(actCount % 1600 == 0) { // spawn new night effect every 1600 acts
@@ -311,7 +323,7 @@ public class MuseumRoom extends Room
         }
         // Randomly spawn robber if 2 stations are vacant, spawn robber at specific location if only 1 station is vacant
         // set robberLoc of that station to true to prevent others from coming
-        if (actCount % (600/robberSpawnRate) == 0 && getObjects(Robber.class).size() < 3) {
+        if (actCount % (1200/robberSpawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
                 if (robberLoc[1] == true) {
                     addObject(new Robber(3, 600, 4, 2), 450, 350);
@@ -396,6 +408,7 @@ public class MuseumRoom extends Room
         for(int i=0; i<valuableLocation.length; i++){
             int x = valuableLocation[i][0];
             int y = valuableLocation[i][1];
+            
             //If something is there, do not spawn any
             if(getObjectsAt(x, y, Valuable.class).size()!=0){
                 continue;
@@ -409,6 +422,8 @@ public class MuseumRoom extends Room
                     break;
                 }
             }
+            //If this object at this index 'random' is not currently in world, then get the valuable coresponding to this index
+            
             while(hasFalse){
                 //If something is false in the array, still ramdomly get number
                 int random = Greenfoot.getRandomNumber(valuableInWorld.length);
@@ -449,14 +464,22 @@ public class MuseumRoom extends Room
                         break;
                     }
                 }
-                
                 //Spawn the valuable at x & y
                 addObject(valuable, x, y);
                 valuableInWorld[random] = true;
                 //Go to the next location
                 break;
             }
-        }
+        } 
+        
+            
+        // if (i < 6) {
+        // }
+        // else {
+            // Valuable valuable = new Art(520, 60);
+            // addObject(valuable, 520, 60);
+            // artInWorld = true;
+        // }    
     }
     
     /**
@@ -594,6 +617,10 @@ public class MuseumRoom extends Room
         robberLoc[stationNumber] = b;
     }
     
+    public int getMaxIncome() {
+        return maxIncome;
+    }
+    
     public int getStation() {
         if (robberLoc[0] == false) {
             return 0;
@@ -614,5 +641,17 @@ public class MuseumRoom extends Room
      */
     public boolean isNighttime(){
         return isNight;
+    }
+    
+    public void calculateEnding() {
+        if(maxIncome < 500) {
+            Greenfoot.setWorld(new BadEnd(this));
+        }
+        else if(maxIncome > 500 && maxIncome < 1000) {
+            Greenfoot.setWorld(new MidEnd(this));
+        }
+        else if (maxIncome > 100) {
+            Greenfoot.setWorld(new GoodEnd(this));
+        }
     }
 }
