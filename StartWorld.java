@@ -3,6 +3,13 @@ import greenfoot.*;  // (World, Actor, GreenfootImage, Greenfoot and MouseInfo)
 /**
  * The start screen that introduces us to the simulation
  * 
+ * <p>Images
+ * <p>Antique Pot Short: https://www.christies.com/en/lot/lot-6084737
+ * <p>Antique Pot Tall: https://www.cleveland.com/metro/2021/12/valuable-artifacts-considered-stolen-being-returned-to-italy-including-items-from-cleveland-museum-of-art.html
+ * <p>Antique Tea Pot: https://www.amazon.ca/Blossom-Antique-Handmade-Kung-fu-Drinkware/dp/B0C7TLPK4Y
+ * <p>Mona Lisa: https://www.arsmundi.de/en/service/our-art-report/the-secrets-behind-the-mona-lisa/
+ * <p>Painting Man: Lavoie, https://www.historymuseum.ca/collections/artifact/2269907
+ * 
  * @author Nick, Jean, Jerry, Edwin
  * @version May 2 2024
  */
