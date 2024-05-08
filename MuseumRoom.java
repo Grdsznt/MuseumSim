@@ -52,6 +52,7 @@ public class MuseumRoom extends Room
     private int valuablesStolenNumber = 0;
     private int robbersCatchedNumber = 0;
     private int income = 0;
+    private int maxIncome = 0;
     
     //Images
     private GreenfootImage moneyImage = new GreenfootImage("money.png");
@@ -293,6 +294,7 @@ public class MuseumRoom extends Room
         if(dayCounter.getDayCount() > dayLimit) {
             calculateEnding();
         }
+        maxIncome = Math.max(income, maxIncome);
         // get if it is night or not (every 1600 acts, night will activate, and the night duration is 600)
         isNight = (actCount % 1600) < 600;
         if(actCount % 1600 == 0) { // spawn new night effect every 1600 acts
@@ -304,7 +306,7 @@ public class MuseumRoom extends Room
         }
         // Randomly spawn robber if 2 stations are vacant, spawn robber at specific location if only 1 station is vacant
         // set robberLoc of that station to true to prevent others from coming
-        if (actCount % (600/robberSpawnRate) == 0 && getObjects(Robber.class).size() < 3) {
+        if (actCount % (1200/robberSpawnRate) == 0 && getObjects(Robber.class).size() < 3) {
             if (robberLoc[0] == true) {
                 if (robberLoc[1] == true) {
                     addObject(new Robber(3, 600, 4, 2), 450, 350);
@@ -541,6 +543,10 @@ public class MuseumRoom extends Room
         robberLoc[stationNumber] = b;
     }
     
+    public int getMaxIncome() {
+        return maxIncome;
+    }
+    
     public int getStation() {
         if (robberLoc[0] == false) {
             return 0;
@@ -564,13 +570,13 @@ public class MuseumRoom extends Room
     }
     
     public void calculateEnding() {
-        if(income < 2500) {
+        if(maxIncome < 500) {
             Greenfoot.setWorld(new BadEnd(this));
         }
-        else if(income > 2500 && income < 5000) {
+        else if(maxIncome > 500 && maxIncome < 1000) {
             Greenfoot.setWorld(new MidEnd(this));
         }
-        else if (income > 5000) {
+        else if (maxIncome > 100) {
             Greenfoot.setWorld(new GoodEnd(this));
         }
     }
