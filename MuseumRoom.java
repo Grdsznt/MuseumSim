@@ -398,7 +398,7 @@ public class MuseumRoom extends Room
             }
         }
         if (income == 0 && actCount > 1200) {
-            Greenfoot.setWorld(new BadEnd(this));
+            Greenfoot.setWorld(new BadEnd(this));  
         }
         boolean hasLoc = false;
         for(int i=0; i<valuableInWorld.length; i++){
